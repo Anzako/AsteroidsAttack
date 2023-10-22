@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class MarchingCubes : MonoBehaviour
 {
-    public int numberOfVerticesInAxis = 10;
-    public int distanceBetweenVertices = 1;
+    [SerializeField] private int numberOfVerticesInAxis;
+    [SerializeField] private float sphereRadius;
 
-    public List<List<List<int>>> _vertices;
-    //[SerializeField] private GameObject vertexPrefab;
-    //private GameObject _verticesParent;
+    public List<List<List<float>>> marchingCubePoints;
 
     [SerializeField] MeshCreator _creator;
 
@@ -25,39 +23,68 @@ public class MarchingCubes : MonoBehaviour
         _creator.CreateMesh(numberOfVerticesInAxis);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void CreateVertices()
     {
-        _vertices = new List<List<List<int>>>();
-        //_verticesParent = new GameObject("Vertices");
-        float startingX = 0;
-
+        marchingCubePoints = new List<List<List<float>>>();
 
         for (int i = 0; i < numberOfVerticesInAxis; i++)
         {
-            _vertices.Add(new List<List<int>>());
+            marchingCubePoints.Add(new List<List<float>>());
 
             for (int j = 0; j < numberOfVerticesInAxis; j++)
             {
-                _vertices[i].Add(new List<int>());
+                marchingCubePoints[i].Add(new List<float>());
 
                 for (int k = 0; k < numberOfVerticesInAxis; k++)
                 {
-                    int randomValue = Random.Range(-2, 30);
-                    _vertices[i][j].Add(randomValue);
+                    Vector3 point = new Vector3(i, j, k);
+                    float pointValue = CalculateMarchPointValue(point);
+                    marchingCubePoints[i][j].Add(pointValue);
                 }
             }
         }
     }
 
-    public int GetMarchValue(int x, int y, int z)
+    private Vector3 GetSphereCentrePoint()
     {
-        return _vertices[x][y][z];
+        int point = numberOfVerticesInAxis / 2;
+        Vector3 center = new Vector3(point, point, point);
+
+        return center;
+    }
+
+    private float DistanceBetweenPoints(Vector3 a, Vector3 b)
+    {
+        float distance = (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z);
+        distance = Mathf.Sqrt(distance);
+
+        return distance;
+    } 
+
+    private float CalculateMarchPointValue(Vector3 v)
+    {
+        float distance = DistanceBetweenPoints(v, GetSphereCentrePoint());
+        float value = 0;
+        if (distance > sphereRadius)
+        {
+            value = 1;
+            if (distance - sphereRadius < 1)
+            {
+                value = (distance - sphereRadius);
+            }
+        } 
+        else if (distance < sphereRadius)
+        {
+            value = (distance - sphereRadius);
+        }
+
+        return value;
+    }
+
+
+    public float GetMarchValue(int x, int y, int z)
+    {
+        return marchingCubePoints[x][y][z];
     }
 
 

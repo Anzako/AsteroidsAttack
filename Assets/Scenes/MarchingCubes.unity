@@ -191,7 +191,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: f167e8c68db367a499f22de8e29222c9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -451,9 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6364c18c7d3cdb14f9719a1fe97abf54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfVerticesInAxis: 10
-  distanceBetweenVertices: 1
-  vertexPrefab: {fileID: 8831604885323593961, guid: e4aa19f0549be0a4f96db7ab46074c5d, type: 3}
+  numberOfVerticesInAxis: 15
+  sphereRadius: 7
   _creator: {fileID: 329142867}
 --- !u!4 &2068330084
 Transform:
