@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9137944902074873459}
   - component: {fileID: 7735882323377540204}
   - component: {fileID: 8002269787417286213}
+  - component: {fileID: 3921581003203184282}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -163,16 +164,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cc3534ada173d418cbe7ec74efd0ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 10
+--- !u!114 &3921581003203184282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723290172944288094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b390e1f66a891e4ba55db058b3f112f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   playerControls:
     m_Name: Player Controls
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: b8b307e6-07e4-48bf-a41f-71bbaf5ce703
+    m_Id: 6f57d6e2-95e9-4c74-860f-4d1d4544614c
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: WASD
-      m_Id: 1f4da2a6-e668-4ae4-9e25-b0797190eac0
+    - m_Name: 2D Vector
+      m_Id: 8c984f0b-c19e-4758-8d0f-00070030b685
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
@@ -180,7 +194,7 @@ MonoBehaviour:
       m_Action: Player Controls
       m_Flags: 4
     - m_Name: up
-      m_Id: 0255f990-b077-4385-8f76-97ac54129159
+      m_Id: d66c4dea-341c-4ede-89c1-6143500814d0
       m_Path: <Keyboard>/w
       m_Interactions: 
       m_Processors: 
@@ -188,7 +202,7 @@ MonoBehaviour:
       m_Action: Player Controls
       m_Flags: 8
     - m_Name: down
-      m_Id: a3bd2190-10a7-4d8d-b50d-5bc9d417b288
+      m_Id: 257a9344-9037-4115-98c0-e9035cb8bd98
       m_Path: <Keyboard>/s
       m_Interactions: 
       m_Processors: 
@@ -196,7 +210,7 @@ MonoBehaviour:
       m_Action: Player Controls
       m_Flags: 8
     - m_Name: left
-      m_Id: 673d3ce1-60cc-461b-9a93-dd84d7465a60
+      m_Id: 2f3cef18-918f-4a77-b6d4-acf4f94c623f
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
@@ -204,7 +218,7 @@ MonoBehaviour:
       m_Action: Player Controls
       m_Flags: 8
     - m_Name: right
-      m_Id: 22076c99-9fbd-47fa-b173-8f54c07dd3c0
+      m_Id: f4e057f4-a4c3-4ad8-893e-2d4553aa1da9
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
@@ -212,7 +226,6 @@ MonoBehaviour:
       m_Action: Player Controls
       m_Flags: 8
     m_Flags: 0
-  moveSpeed: 10
 --- !u!1 &4380370046513096111
 GameObject:
   m_ObjectHideFlags: 0

@@ -427,72 +427,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1173375924 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1723290172944288094, guid: b86f1c05196a4044fb157d8b31621967, type: 3}
-  m_PrefabInstance: {fileID: 7566148103190372038}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1173375932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173375924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b390e1f66a891e4ba55db058b3f112f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerControls:
-    m_Name: Player Controls
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6f57d6e2-95e9-4c74-860f-4d1d4544614c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: 8c984f0b-c19e-4758-8d0f-00070030b685
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 4
-    - m_Name: up
-      m_Id: d66c4dea-341c-4ede-89c1-6143500814d0
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: down
-      m_Id: 257a9344-9037-4115-98c0-e9035cb8bd98
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 2f3cef18-918f-4a77-b6d4-acf4f94c623f
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: right
-      m_Id: f4e057f4-a4c3-4ad8-893e-2d4553aa1da9
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    m_Flags: 0
 --- !u!1001 &7566148103190372038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -548,10 +482,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1723290172944288094, guid: b86f1c05196a4044fb157d8b31621967, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1173375932}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b86f1c05196a4044fb157d8b31621967, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
