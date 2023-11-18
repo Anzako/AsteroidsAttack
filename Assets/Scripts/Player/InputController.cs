@@ -2,7 +2,6 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
@@ -10,6 +9,9 @@ public class InputController : MonoBehaviour
     public InputAction playerControls;
 
     public Vector2 moveDirection { get; private set; }
+
+    private Vector2 lastMousePos;
+    public Vector2 mousePos;
 
     private void OnEnable()
     {
@@ -21,15 +23,12 @@ public class InputController : MonoBehaviour
         playerControls.Disable();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         moveDirection = playerControls.ReadValue<Vector2>();
+
+        mousePos = Mouse.current.position.ReadValue() - lastMousePos;
+        lastMousePos = Mouse.current.position.ReadValue();
     }
 }

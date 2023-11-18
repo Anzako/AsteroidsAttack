@@ -9,7 +9,14 @@ public class MovementController : MonoBehaviour
     private InputController inputController;
     private Rigidbody rb;
     private RaycastHit groundHit;
+
     public float moveSpeed;
+    public float toGroundDistance;
+    public float interpolationSpeed;
+    public float rotationSpeed;
+
+    public float sensitivity;
+
 
     private void Awake()
     {
@@ -26,11 +33,12 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rotateToAngle();
+        RotateToMouse(inputController.mousePos);
     }
 
     private void FixedUpdate()
     {
+        RotateToAngle();
         Move(inputController.moveDirection);
     }
 
@@ -44,19 +52,37 @@ public class MovementController : MonoBehaviour
         rb.velocity = projectedVector * moveSpeed;
     }
 
-    private void rotateToAngle()
+    private void RotateToMouse(Vector2 mousePos)
     {
+        Quaternion targetRotation = Quaternion.AngleAxis(mousePos.x * sensitivity, transform.up);
+        transform.rotation = targetRotation * transform.rotation;
+    }
+
+    private void RotateToAngle()    {
         if (Physics.Raycast(transform.position, -transform.up, out groundHit))
         {
             Vector3 up = groundHit.normal;
-
-            // Obliczanie rotacji miedzy aktualna normalna gracza a groundHit.normal
-            // Dodanie tej rotacji do aktualnej rotacji gracza
             Quaternion targetRotation = Quaternion.FromToRotation(transform.up, up) * transform.rotation;
-            transform.rotation = targetRotation;
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            AddGravity();
         }
     }
 
-    
+    private void AddGravity() 
+    {
+        if (groundHit.distance > toGroundDistance)
+        {
+            float distance = groundHit.distance - toGroundDistance;
+            if (distance > 0.01)
+            {
+                Vector3 adjustVector = transform.up * distance;
+                
+                Vector3 targetPosition = transform.position - adjustVector;
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * interpolationSpeed);
+            }
+            
+        }
+    }
 
 }

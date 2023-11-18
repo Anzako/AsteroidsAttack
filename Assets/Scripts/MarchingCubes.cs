@@ -40,6 +40,10 @@ public class MarchingCubes : MonoBehaviour
                     Vector3 point = new Vector3(i, j, k);
                     float pointValue = CalculateMarchPointValue(point);
                     marchingCubePoints[i][j].Add(pointValue);
+                    Debug.Log(pointValue);
+
+                    //float random = Random.Range(-10, 100);
+                    //marchingCubePoints[i][j].Add(random / 100);
                 }
             }
         }
@@ -64,21 +68,30 @@ public class MarchingCubes : MonoBehaviour
     private float CalculateMarchPointValue(Vector3 v)
     {
         float distance = DistanceBetweenPoints(v, GetSphereCentrePoint());
-        float value = 0;
-        if (distance > sphereRadius)
+
+        if (distance == sphereRadius)
         {
-            value = 1;
-            if (distance - sphereRadius < 1)
+            return 0;
+        }
+        else if (distance > sphereRadius)
+        {
+            float value = distance - sphereRadius;
+            if (value > 1)
             {
-                value = (distance - sphereRadius);
+                value = 1;
             }
+            return value;
         } 
-        else if (distance < sphereRadius)
+        else 
         {
-            value = (distance - sphereRadius);
+            float value = distance - sphereRadius;
+            if (value < -1)
+            {
+                value = -1;
+            }
+            return value;
         }
 
-        return value;
     }
 
 

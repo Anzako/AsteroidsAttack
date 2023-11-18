@@ -63,6 +63,7 @@ public class MeshCreator : MonoBehaviour
         mesh.triangles = triangles.ToArray();
 
         GetComponent<MeshFilter>().mesh = mesh;
+        GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
     private void AddGridMesh(GridCell[] cells)
