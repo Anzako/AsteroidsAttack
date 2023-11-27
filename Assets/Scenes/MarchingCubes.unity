@@ -647,9 +647,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6364c18c7d3cdb14f9719a1fe97abf54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfVerticesInAxis: 32
-  sphereRadius: 15
+  numberOfVerticesInAxis: 30
   _creator: {fileID: 329142867}
+  sphereRadius1: 7
+  sphereRadius2: 7
 --- !u!4 &2068330084
 Transform:
   m_ObjectHideFlags: 0
@@ -671,6 +672,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1348764711}
   - {fileID: 684268068}
-  - {fileID: 2068330084}
   - {fileID: 329142868}
+  - {fileID: 2068330084}
   - {fileID: 350601685}

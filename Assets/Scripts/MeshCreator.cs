@@ -7,7 +7,7 @@ using UnityEngine.Timeline;
 
 public class MeshCreator : MonoBehaviour
 {
-    private Mesh mesh;
+    //private Mesh mesh;
     [SerializeField] MarchingCubes marchCube;
     private int[,] triangulation;
     private int[] cornerIndexFromEdgeA;
@@ -20,15 +20,29 @@ public class MeshCreator : MonoBehaviour
     private List<int> triangles = new List<int>();
     #endregion
 
+    public struct Vertex
+    {
+        public int x; 
+        public int y; 
+        public int z;
+
+        public Vertex(int x, int y, int z)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+    }
+
     public struct GridCell
     {
-        public Vector3 position;
+        public Vertex position;
         public float value;
     }
 
     private void Awake()
     {
-        mesh = new Mesh();
+        //mesh = new Mesh();
         triangulation = GetComponent<MarchingTables>().triangulation;
         cornerIndexFromEdgeA = GetComponent<MarchingTables>().cornerIndexAFromEdge;
         cornerIndexFromEdgeB = GetComponent<MarchingTables>().cornerIndexBFromEdge;
@@ -44,7 +58,7 @@ public class MeshCreator : MonoBehaviour
         
     }
 
-    public void CreateMesh(int numberOfVerticesInAxis)
+    public void CreateMesh(int numberOfVerticesInAxis, List<List<List<float>>> marchingCubePoints)
     {
         for (int i = 0; i < numberOfVerticesInAxis - 1; i++)
         {
@@ -52,18 +66,24 @@ public class MeshCreator : MonoBehaviour
             {
                 for (int k = 0; k < numberOfVerticesInAxis - 1; k++)
                 {
-                    GridCell[] cells = CreateGridBox(i, j, k);
+                    GridCell[] cells = CreateGridBox(i, j, k, marchingCubePoints);
                     AddGridMesh(cells);
                 }
             }
         }
 
+        Mesh mesh = new Mesh();
         mesh.vertices = _verticies.ToArray();
         mesh.uv = uv.ToArray();
         mesh.triangles = triangles.ToArray();
+        mesh.RecalculateNormals();
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
+
+        _verticies.Clear();
+        uv.Clear();
+        triangles.Clear();
     }
 
     private void AddGridMesh(GridCell[] cells)
@@ -103,11 +123,11 @@ public class MeshCreator : MonoBehaviour
             b = c;
         }
         if (Mathf.Abs(isolevel - a.value) < 0.00001)
-            return(a.position);
+            return new Vector3(a.position.x, a.position.y, a.position.z);
         if (Mathf.Abs(isolevel - b.value) < 0.00001)
-            return(b.position);
+            return new Vector3(b.position.x, b.position.y, b.position.z);
         if (Mathf.Abs(a.value - b.value) < 0.00001)
-            return(a.position);
+            return new Vector3(a.position.x, a.position.y, a.position.z);
         mu = (isolevel - a.value) / (b.value - a.value);
         p.x = a.position.x + mu * (b.position.x - a.position.x);
         p.y = a.position.y + mu * (b.position.y - a.position.y);
@@ -118,16 +138,16 @@ public class MeshCreator : MonoBehaviour
     
 
 
-    private GridCell[] CreateGridBox(int x, int y, int z)
+    private GridCell[] CreateGridBox(int x, int y, int z, List<List<List<float>>> marchingPoints)
     {
         GridCell[] gridBox = new GridCell[8];
-        Vector3[] cubeIndexes = GetCubeCorners(new Vector3(x, y, z));
+        Vertex[] cubeIndexes = GetCubeCorners(new Vertex(x, y, z));
 
         for (int i = 0; i < 8; i++)
         {
             GridCell cell = new GridCell();
             cell.position = cubeIndexes[i];
-            cell.value = marchCube.GetMarchValue((int)cell.position.x, (int)cell.position.y, (int)cell.position.z);
+            cell.value = marchingPoints[cell.position.x][cell.position.y][cell.position.z];
 
             gridBox[i] = cell;
         }
@@ -146,18 +166,18 @@ public class MeshCreator : MonoBehaviour
         return triangulationArray;
     }
 
-    private Vector3[] GetCubeCorners(Vector3 startVector)
+    private Vertex[] GetCubeCorners(Vertex startVector)
     {
-        Vector3[] cubeCorners =
+        Vertex[] cubeCorners =
         {
-            new Vector3 (startVector.x , startVector.y, startVector.z),
-            new Vector3 (startVector.x + 1, startVector.y, startVector.z),
-            new Vector3 (startVector.x + 1, startVector.y, startVector.z + 1),
-            new Vector3 (startVector.x, startVector.y, startVector.z + 1),
-            new Vector3 (startVector.x, startVector.y + 1, startVector.z),
-            new Vector3 (startVector.x + 1, startVector.y + 1, startVector.z),
-            new Vector3 (startVector.x + 1, startVector.y + 1, startVector.z + 1),
-            new Vector3 (startVector.x, startVector.y + 1, startVector.z + 1)
+            new Vertex (startVector.x , startVector.y, startVector.z),
+            new Vertex (startVector.x + 1, startVector.y, startVector.z),
+            new Vertex (startVector.x + 1, startVector.y, startVector.z + 1),
+            new Vertex (startVector.x, startVector.y, startVector.z + 1),
+            new Vertex (startVector.x, startVector.y + 1, startVector.z),
+            new Vertex (startVector.x + 1, startVector.y + 1, startVector.z),
+            new Vertex (startVector.x + 1, startVector.y + 1, startVector.z + 1),
+            new Vertex (startVector.x, startVector.y + 1, startVector.z + 1)
         };
 
         return cubeCorners;
@@ -179,9 +199,4 @@ public class MeshCreator : MonoBehaviour
         return cubeIndex;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

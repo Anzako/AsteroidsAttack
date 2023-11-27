@@ -27,7 +27,7 @@ public class MovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -61,10 +61,16 @@ public class MovementController : MonoBehaviour
     private void RotateToAngle()    {
         if (Physics.Raycast(transform.position, -transform.up, out groundHit))
         {
-            Vector3 up = groundHit.normal;
-            Quaternion targetRotation = Quaternion.FromToRotation(transform.up, up) * transform.rotation;
+            Debug.DrawRay(transform.position, groundHit.normal * 2, Color.green);  // Visualize ground normal
+            
+            if (transform.up != groundHit.normal)
+            {
+                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, groundHit.normal) * transform.rotation;
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                rb.angularVelocity = Vector3.zero;
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            }
+
             AddGravity();
         }
     }
