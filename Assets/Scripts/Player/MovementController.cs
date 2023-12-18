@@ -61,6 +61,7 @@ public class MovementController : MonoBehaviour
     private void RotateToAngle()    {
         if (Physics.Raycast(transform.position, -transform.up, out groundHit))
         {
+            
             Debug.DrawRay(transform.position, groundHit.normal * 2, Color.green);  // Visualize ground normal
             
             if (transform.up != groundHit.normal)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
- 
+
 
 public class MarchingCubes : MonoBehaviour
 {
@@ -15,10 +15,12 @@ public class MarchingCubes : MonoBehaviour
 
     [SerializeField] MeshCreator _creator;
 
-    Vector3 sphereCenter1 = new Vector3(7, 7, 7);
+    [SerializeField] Vector3 sphereCenter1 = new Vector3(7, 7, 7);
     [SerializeField] float sphereRadius1 = 4;
     Vector3 sphereCenter2 = new Vector3(12, 12, 11);
     [SerializeField] float sphereRadius2 = 4;
+
+    public float treshold = 2f;
 
     private void Awake()
     {
@@ -33,7 +35,13 @@ public class MarchingCubes : MonoBehaviour
 
     void Update()
     {
-        sphereCenter1.x += 2 * Time.deltaTime;
+        float sphereSpeed = 2;
+
+        /*if (sphereCenter1.x > 10)
+        {
+            sphereSpeed = -sphereSpeed;
+        }*/
+        //sphereCenter1.x += sphereSpeed * Time.deltaTime;
         CreateVertices();
         _creator.CreateMesh(numberOfVerticesInAxis, marchingCubePoints);
     }
@@ -67,18 +75,38 @@ public class MarchingCubes : MonoBehaviour
         distance = Mathf.Sqrt(distance);
 
         return distance;
-    } 
+    }
 
-    private float CalculateMarchPointsValue(Vector3 vector)
+    private float CalculateMarchPointsValue(Vector3 point)
     {
-        float marchValue = CalculateSpherePointValue(vector, sphereCenter1, sphereRadius1);
-        
-        if (marchValue > CalculateSpherePointValue(vector, sphereCenter2, sphereRadius2))
+
+        float distance = DistanceBetweenPoints(sphereCenter1, point);
+        double marchValue = 0;
+        if (distance > (sphereRadius1 + treshold))
         {
-            marchValue = CalculateSpherePointValue(vector, sphereCenter2, sphereRadius2);
+            marchValue = 0;
+        } else
+        {
+            marchValue += Math.Exp(-(distance * distance) / (sphereRadius1 * sphereRadius1));
+        }
+        
+        distance = DistanceBetweenPoints(sphereCenter2, point);
+        if (distance > (sphereRadius1 + treshold))
+        {
+            marchValue += 0;
+        } else
+        {
+            marchValue += Math.Exp(-(distance * distance) / (sphereRadius2 * sphereRadius2));
         }
 
-        return marchValue;
+        /*float marchValue = CalculateSpherePointValue(point, sphereCenter1, sphereRadius1);
+        
+        if (marchValue > CalculateSpherePointValue(point, sphereCenter2, sphereRadius2))
+        {
+            marchValue = CalculateSpherePointValue(point, sphereCenter2, sphereRadius2);
+        }*/
+
+        return (float)marchValue;
     }
 
     private float CalculateSpherePointValue(Vector3 vector, Vector3 sphereCenter, float sphereRadius)
@@ -92,20 +120,12 @@ public class MarchingCubes : MonoBehaviour
         {
             float value = distance - sphereRadius;
             value = (float)Math.Round(value, 2);
-            if (value > 1)
-            {
-                value = 1;
-            }
             return value;
         }
         else
         {
             float value = distance - sphereRadius;
             value = (float)Math.Round(value, 2);
-            if (value < -1)
-            {
-                value = -1;
-            }
             return value;
         }
     }

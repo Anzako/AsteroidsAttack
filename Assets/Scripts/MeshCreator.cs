@@ -12,7 +12,7 @@ public class MeshCreator : MonoBehaviour
     private int[,] triangulation;
     private int[] cornerIndexFromEdgeA;
     private int[] cornerIndexFromEdgeB;
-    private int isolevel = 0;
+    private float isolevel = 0.5f;
 
     #region Mesh Variables
     private List<Vector3> _verticies = new List<Vector3>();
@@ -74,9 +74,10 @@ public class MeshCreator : MonoBehaviour
 
         Mesh mesh = new Mesh();
         mesh.vertices = _verticies.ToArray();
-        mesh.uv = uv.ToArray();
+        //mesh.uv = uv.ToArray();
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
+
 
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
@@ -96,7 +97,7 @@ public class MeshCreator : MonoBehaviour
 
         for (int i = 0; grid[i] != -1; i += 3)
         {
-            for (int j = 0; j < 3; j++)
+            for (int j = 2; j >= 0; j--)
             {
                 int a = cornerIndexFromEdgeA[grid[i + j]];
                 int b = cornerIndexFromEdgeB[grid[i + j]];
@@ -111,7 +112,7 @@ public class MeshCreator : MonoBehaviour
 
 
 
-    Vector3 EdgeInterp(int isolevel, GridCell a, GridCell b)
+    Vector3 EdgeInterp(float isolevel, GridCell a, GridCell b)
     {
         float mu;
         Vector3 p;
@@ -135,7 +136,18 @@ public class MeshCreator : MonoBehaviour
 
         return(p);
     }
-    
+
+    Vector3 EdgeInterp2(float isolevel, GridCell b, GridCell a)
+    {
+        float mu = (isolevel - a.value) / (b.value - a.value);
+        Vector3 vectorA = new Vector3(a.position.x, a.position.y, a.position.z);
+        Vector3 vectorB = new Vector3(b.position.x, b.position.y, b.position.z);
+        Vector3 p = Vector3.Lerp(vectorA, vectorB, mu);
+        
+        return (p);
+    }
+
+
 
 
     private GridCell[] CreateGridBox(int x, int y, int z, List<List<List<float>>> marchingPoints)

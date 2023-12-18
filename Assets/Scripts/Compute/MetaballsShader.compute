@@ -1,0 +1,61 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel MetaBall
+
+StructuredBuffer<float3> offsets;
+RWStructuredBuffer<float4> points;
+int numPointsPerAxis;
+float spacing;
+float3 offset;
+static const int numThreads = 8;
+
+// Metaballs variables
+struct Metaball
+{
+    float3 centerPos;
+    float radius;
+};
+
+StructuredBuffer<Metaball> metaballs;
+int numberOfMetaballs;
+float treshold;
+
+static const float3 sphereCenter = float3(3, 3, 3);
+
+int indexFromCoord(int x, int y, int z)
+{
+    return z * numPointsPerAxis * numPointsPerAxis + y * numPointsPerAxis + x;
+}
+
+float distanceBetweenVectors(float3 a, float3 b)
+{
+    float distance = (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z);
+    
+    return sqrt(distance);
+}
+
+[numthreads(numThreads, numThreads, numThreads)]
+void MetaBall(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= numPointsPerAxis || id.y >= numPointsPerAxis || id.z >= numPointsPerAxis)
+    {
+        return;
+    }
+
+    float3 pos = offset + id * spacing;
+    float finalVal = 0;
+    
+    for (int i = 0; i < numberOfMetaballs; i++)
+    {
+        float distance = distanceBetweenVectors(pos, metaballs[i].centerPos);
+        if (distance <= metaballs[i].radius + treshold)
+        {
+            finalVal += exp(-(distance * distance) / (metaballs[i].radius * metaballs[i].radius));
+        }
+        
+    }
+        
+    
+    int index = indexFromCoord(id.x, id.y, id.z);
+    points[index] = float4(pos, finalVal);
+}
+
