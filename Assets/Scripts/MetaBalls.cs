@@ -6,18 +6,18 @@ public class MetaBalls : MonoBehaviour
 {
     const int threadGroupSize = 8;
     public ComputeShader metaballShader;
+    [SerializeField] private Metaball[] metaballs;
+    private int numberOfMetaballs;
 
-    public struct Metaball
+    public struct MetaballStruct
     {
         public Vector3 centrePos;
         public float radius;
     }
 
-    public Metaball[] metaballs;
+    public MetaballStruct[] metaballsStruct;
     ComputeBuffer metaballBuffer;
     public float treshold = 4;
-
-    public Vector3 vec = new Vector3(3, 3, 3);
 
     private void Start()
     {
@@ -26,31 +26,35 @@ public class MetaBalls : MonoBehaviour
 
     private void CreateMetaballs()
     {
-        int numberOfMetaballs = 2;
+        numberOfMetaballs = metaballs.Length;
 
-        metaballs = new Metaball[numberOfMetaballs];
+        metaballsStruct = new MetaballStruct[numberOfMetaballs];
         for (int i = 0; i < numberOfMetaballs; i++)
         {
-            metaballs[i] = new Metaball();
+            metaballsStruct[i] = new MetaballStruct();
         }
 
-        metaballs[0].centrePos = vec;
-        metaballs[0].radius = 3;
-
-        metaballs[1].centrePos = new Vector3(6, 6, 6);
-        metaballs[1].radius = 3;
+        UpdateMetaballsStruct();
     }
 
     private void UpdateMetaballs()
     {
-        metaballs[0].centrePos = vec;
-        metaballs[0].radius = 3;
-
-        metaballs[1].centrePos = new Vector3(6, 6, 6);
-        metaballs[1].radius = 3;
+        foreach (Metaball metaball in metaballs)
+        {
+            metaball.UpdatePosition(new Vector3(30, 30, 30));
+        }
+        UpdateMetaballsStruct();
     }
 
-    //protected List<ComputeBuffer> buffersToRelease;
+    private void UpdateMetaballsStruct()
+    {
+        for (int i = 0; i < numberOfMetaballs; i++)
+        {
+            metaballsStruct[i].centrePos = metaballs[i].position;
+            metaballsStruct[i].radius = metaballs[i].radius;
+        }
+    }
+
     // Start is called before the first frame update
     public ComputeBuffer Generate(ComputeBuffer pointsBuffer, int numPointsPerAxis, float spacing, Vector3 offset)
     {
@@ -78,10 +82,10 @@ public class MetaBalls : MonoBehaviour
 
     private void CreateBuffers()
     {
-        metaballBuffer = new ComputeBuffer(metaballs.Length, sizeof(float) * 4);
-        metaballBuffer.SetData(metaballs);
+        metaballBuffer = new ComputeBuffer(metaballsStruct.Length, sizeof(float) * 4);
+        metaballBuffer.SetData(metaballsStruct);
         metaballShader.SetBuffer(0, "metaballs", metaballBuffer);
-        metaballShader.SetInt("numberOfMetaballs", metaballs.Length);
+        metaballShader.SetInt("numberOfMetaballs", metaballsStruct.Length);
     }
 
 }

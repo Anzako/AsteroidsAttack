@@ -1,74 +1,85 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 
 public class MovementController : MonoBehaviour
 {
-    private InputController inputController;
+    [SerializeField] private LayerMask groundMask;
+    private int layerMask;
+    
     private Rigidbody rb;
     private RaycastHit groundHit;
+    private bool isGrounded;
+    public bool isMoving = true;
+    private float angle = 0f;
 
     public float moveSpeed;
     public float toGroundDistance;
     public float interpolationSpeed;
     public float rotationSpeed;
 
-    public float sensitivity;
-
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        inputController = GetComponent<InputController>();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
+        layerMask = 1 << 7;
     }
 
     // Update is called once per frame
-    void Update()
+    public void MovementUpdate(float horizontalRotationAngle)
     {
-        RotateToMouse(inputController.mousePos);
+        RotateHorizontal(horizontalRotationAngle);
     }
 
-    private void FixedUpdate()
+    public void MovementFixedUpdate(Vector2 moveDirection)
     {
-        RotateToAngle();
-        Move(inputController.moveDirection);
+        RotateToGround();
+        Move(moveDirection);
     }
 
     private void Move(Vector2 moveDirection)
     {
-        Vector3 horizontalVector = -Vector3.Cross(transform.forward, transform.up) * moveDirection.x;
-        Vector3 verticalVector = transform.forward * moveDirection.y;
-        Vector3 projectedVector = horizontalVector + verticalVector;
-        projectedVector.Normalize();
+        rb.velocity = Vector3.zero;
+        if (isGrounded && isMoving)
+        {
+            Vector3 horizontalVector = -Vector3.Cross(transform.forward, transform.up) * moveDirection.x;
+            Vector3 verticalVector = transform.forward * moveDirection.y;
+            Vector3 projectedVector = horizontalVector + verticalVector;
+            projectedVector.Normalize();
 
-        rb.velocity = projectedVector * moveSpeed;
+            transform.position += projectedVector * moveSpeed * Time.deltaTime;
+            //rb.velocity = projectedVector * moveSpeed;
+        }
     }
 
-    private void RotateToMouse(Vector2 mousePos)
+    private void RotateHorizontal(float rotationAngle)
     {
-        Quaternion targetRotation = Quaternion.AngleAxis(mousePos.x * sensitivity, transform.up);
+        Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
         transform.rotation = targetRotation * transform.rotation;
     }
 
-    private void RotateToAngle()    {
-        if (Physics.Raycast(transform.position, -transform.up, out groundHit))
+    private void RotateToGround()    
+    {
+        rb.angularVelocity = Vector3.zero;
+        isGrounded = false;
+
+        Vector3 axis = Vector3.Cross(-transform.up, transform.forward);
+        Quaternion rot = Quaternion.AngleAxis(angle, axis);
+
+        Vector3 tiltedVector = rot * -transform.up;
+
+        if (Physics.Raycast(transform.position, tiltedVector, out groundHit, layerMask) && isMoving)
         {
-            
-            Debug.DrawRay(transform.position, groundHit.normal * 2, Color.green);  // Visualize ground normal
-            
+            isGrounded = true;
+            Debug.DrawRay(transform.position, -transform.up, Color.green);  // Visualize ground normal
+
             if (transform.up != groundHit.normal)
             {
                 Quaternion targetRotation = Quaternion.FromToRotation(transform.up, groundHit.normal) * transform.rotation;
 
-                rb.angularVelocity = Vector3.zero;
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
             }
 
@@ -78,18 +89,24 @@ public class MovementController : MonoBehaviour
 
     private void AddGravity() 
     {
-        if (groundHit.distance > toGroundDistance)
+        float distance = groundHit.distance - toGroundDistance;
+
+        if (Math.Abs(distance) > 0.01)
         {
-            float distance = groundHit.distance - toGroundDistance;
-            if (distance > 0.01)
-            {
-                Vector3 adjustVector = transform.up * distance;
+            Vector3 adjustVector = transform.up * distance;
                 
-                Vector3 targetPosition = transform.position - adjustVector;
-                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * interpolationSpeed);
-            }
-            
+            Vector3 targetPosition = transform.position - adjustVector;
+            transform.position = targetPosition;
+            //transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * interpolationSpeed);
         }
+            
+        
     }
+
+    public RaycastHit GetGroundHit()
+    {
+        return groundHit;
+    }
+
 
 }

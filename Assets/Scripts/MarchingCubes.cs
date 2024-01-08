@@ -1,140 +1,125 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-
 
 public class MarchingCubes : MonoBehaviour
 {
-    [SerializeField] private int numberOfVerticesInAxis;
-    //[SerializeField] private float sphereRadius;
+    const int threadGroupSize = 8;
 
-    public List<List<List<float>>> marchingCubePoints;
+    public MetaBalls metaBallGenerator;
+    public ComputeShader shader;
+    public RenderTexture texture;
 
-    [SerializeField] MeshCreator _creator;
+    [Header("Voxel Settings")]
+    public float isoLevel;
+    public float spacing = 1;
+    public Vector3 offset = Vector3.zero;
 
-    [SerializeField] Vector3 sphereCenter1 = new Vector3(7, 7, 7);
-    [SerializeField] float sphereRadius1 = 4;
-    Vector3 sphereCenter2 = new Vector3(12, 12, 11);
-    [SerializeField] float sphereRadius2 = 4;
+    [Range(2, 100)]
+    public int numPointsPerAxis = 5;
 
-    public float treshold = 2f;
-
-    private void Awake()
-    {
-        CreateVertices();
-    }
+    // Buffers
+    ComputeBuffer triangleBuffer;
+    ComputeBuffer pointsBuffer;
+    ComputeBuffer triCountBuffer;
 
     // Start is called before the first frame update
     void Start()
     {
-        _creator.CreateMesh(numberOfVerticesInAxis, marchingCubePoints);
+        CreateBuffers();
     }
 
-    void Update()
+    private void Update()
     {
-        float sphereSpeed = 2;
-
-        /*if (sphereCenter1.x > 10)
-        {
-            sphereSpeed = -sphereSpeed;
-        }*/
-        //sphereCenter1.x += sphereSpeed * Time.deltaTime;
-        CreateVertices();
-        _creator.CreateMesh(numberOfVerticesInAxis, marchingCubePoints);
+        UpdateMesh();
     }
 
-    private void CreateVertices()
+    void CreateBuffers()
     {
-        marchingCubePoints = new List<List<List<float>>>();
+        int numPoints = numPointsPerAxis * numPointsPerAxis * numPointsPerAxis;
+        int numVoxelsPerAxis = numPointsPerAxis - 1;
+        int numVoxels = numVoxelsPerAxis * numVoxelsPerAxis * numVoxelsPerAxis;
+        int maxTriangleCount = numVoxels * 5;
 
-        for (int i = 0; i < numberOfVerticesInAxis; i++)
+        // Always create buffers in editor (since buffers are released immediately to prevent memory leak)
+        // Otherwise, only create if null or if size has changed
+        if (!Application.isPlaying || (pointsBuffer == null || numPoints != pointsBuffer.count))
         {
-            marchingCubePoints.Add(new List<List<float>>());
+            triangleBuffer = new ComputeBuffer(maxTriangleCount, sizeof(float) * 3 * 3, ComputeBufferType.Append);
+            pointsBuffer = new ComputeBuffer(numPoints, sizeof(float) * 4);
+            triCountBuffer = new ComputeBuffer(1, sizeof(int), ComputeBufferType.Raw);
+        }
+    }
 
-            for (int j = 0; j < numberOfVerticesInAxis; j++)
+    public void UpdateMesh()
+    {
+        int numVoxelsPerAxis = numPointsPerAxis - 1;
+        int numThreadsPerAxis = Mathf.CeilToInt(numVoxelsPerAxis / (float)threadGroupSize);
+
+        metaBallGenerator.Generate(pointsBuffer, numPointsPerAxis, spacing, offset);
+
+        triangleBuffer.SetCounterValue(0);
+        shader.SetBuffer(0, "points", pointsBuffer);
+        shader.SetBuffer(0, "triangles", triangleBuffer);
+        shader.SetInt("numPointsPerAxis", numPointsPerAxis);
+        shader.SetFloat("isoLevel", isoLevel);
+
+        shader.Dispatch(0, numThreadsPerAxis, numThreadsPerAxis, numThreadsPerAxis);
+
+        // Get number of triangles in the triangle buffer
+        ComputeBuffer.CopyCount(triangleBuffer, triCountBuffer, 0);
+        int[] triCountArray = { 0 };
+        triCountBuffer.GetData(triCountArray);
+        int numTris = triCountArray[0];
+
+        // Get triangle data from shader
+        Triangle[] tris = new Triangle[numTris];
+        triangleBuffer.GetData(tris, 0, 0, numTris);
+
+        Mesh mesh = new Mesh();
+        mesh.Clear();
+
+        var vertices = new Vector3[numTris * 3];
+        var meshTriangles = new int[numTris * 3];
+
+        for (int i = 0; i < numTris; i++)
+        {
+            for (int j = 0; j < 3; j++)
             {
-                marchingCubePoints[i].Add(new List<float>());
+                meshTriangles[i * 3 + j] = i * 3 + j;
+                vertices[i * 3 + j] = tris[i][j];
+            }
+        }
+        mesh.vertices = vertices;
+        mesh.triangles = meshTriangles;
 
-                for (int k = 0; k < numberOfVerticesInAxis; k++)
+        mesh.RecalculateNormals();
+
+        GetComponent<MeshFilter>().mesh = mesh;
+        GetComponent<MeshCollider>().sharedMesh = mesh;
+    }
+
+    struct Triangle
+    {
+        #pragma warning disable 649 // disable unassigned variable warning
+        public Vector3 a;
+        public Vector3 b;
+        public Vector3 c;
+
+        public Vector3 this[int i]
+        {
+            get
+            {
+                switch (i)
                 {
-                    Vector3 point = new Vector3(i, j, k);
-                    float pointValue = CalculateMarchPointsValue(point);
-                    marchingCubePoints[i][j].Add(pointValue);
+                    case 0:
+                        return a;
+                    case 1:
+                        return b;
+                    default:
+                        return c;
                 }
             }
         }
     }
-
-
-    private float DistanceBetweenPoints(Vector3 a, Vector3 b)
-    {
-        float distance = (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z);
-        distance = Mathf.Sqrt(distance);
-
-        return distance;
-    }
-
-    private float CalculateMarchPointsValue(Vector3 point)
-    {
-
-        float distance = DistanceBetweenPoints(sphereCenter1, point);
-        double marchValue = 0;
-        if (distance > (sphereRadius1 + treshold))
-        {
-            marchValue = 0;
-        } else
-        {
-            marchValue += Math.Exp(-(distance * distance) / (sphereRadius1 * sphereRadius1));
-        }
-        
-        distance = DistanceBetweenPoints(sphereCenter2, point);
-        if (distance > (sphereRadius1 + treshold))
-        {
-            marchValue += 0;
-        } else
-        {
-            marchValue += Math.Exp(-(distance * distance) / (sphereRadius2 * sphereRadius2));
-        }
-
-        /*float marchValue = CalculateSpherePointValue(point, sphereCenter1, sphereRadius1);
-        
-        if (marchValue > CalculateSpherePointValue(point, sphereCenter2, sphereRadius2))
-        {
-            marchValue = CalculateSpherePointValue(point, sphereCenter2, sphereRadius2);
-        }*/
-
-        return (float)marchValue;
-    }
-
-    private float CalculateSpherePointValue(Vector3 vector, Vector3 sphereCenter, float sphereRadius)
-    {
-        float distance = DistanceBetweenPoints(vector, sphereCenter);
-        if (distance == sphereRadius)
-        {
-            return 0;
-        }
-        else if (distance > sphereRadius)
-        {
-            float value = distance - sphereRadius;
-            value = (float)Math.Round(value, 2);
-            return value;
-        }
-        else
-        {
-            float value = distance - sphereRadius;
-            value = (float)Math.Round(value, 2);
-            return value;
-        }
-    }
-
-
-    public float GetMarchValue(int x, int y, int z)
-    {
-        return marchingCubePoints[x][y][z];
-    }
-
-
 }

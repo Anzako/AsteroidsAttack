@@ -8,7 +8,7 @@ using UnityEngine.Timeline;
 public class MeshCreator : MonoBehaviour
 {
     //private Mesh mesh;
-    [SerializeField] MarchingCubes marchCube;
+    [SerializeField] OldMarchingCubes marchCube;
     private int[,] triangulation;
     private int[] cornerIndexFromEdgeA;
     private int[] cornerIndexFromEdgeB;
