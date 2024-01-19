@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
     {
         if ((enemyLayer.value & (1 << collision.transform.gameObject.layer)) > 0)
         {
-            collision.gameObject.GetComponent<EnemyController>().TakeDamage(2);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(2);
             Destroy(this.gameObject);
         }
     }

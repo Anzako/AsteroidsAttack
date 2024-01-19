@@ -10,7 +10,6 @@ public class MovementController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     private int layerMask;
     
-    private Rigidbody rb;
     private RaycastHit groundHit;
     private bool isGrounded;
     public bool isMoving = true;
@@ -24,7 +23,6 @@ public class MovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         layerMask = 1 << 7;
     }
 
@@ -42,7 +40,6 @@ public class MovementController : MonoBehaviour
 
     private void Move(Vector2 moveDirection)
     {
-        rb.velocity = Vector3.zero;
         if (isGrounded && isMoving)
         {
             Vector3 horizontalVector = -Vector3.Cross(transform.forward, transform.up) * moveDirection.x;
@@ -51,7 +48,6 @@ public class MovementController : MonoBehaviour
             projectedVector.Normalize();
 
             transform.position += projectedVector * moveSpeed * Time.deltaTime;
-            //rb.velocity = projectedVector * moveSpeed;
         }
     }
 
@@ -63,7 +59,6 @@ public class MovementController : MonoBehaviour
 
     private void RotateToGround()    
     {
-        rb.angularVelocity = Vector3.zero;
         isGrounded = false;
 
         Vector3 axis = Vector3.Cross(-transform.up, transform.forward);
@@ -78,9 +73,11 @@ public class MovementController : MonoBehaviour
 
             if (transform.up != groundHit.normal)
             {
-                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, groundHit.normal) * transform.rotation;
+                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, groundHit.normal) 
+                    * transform.rotation;
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 
+                    Time.deltaTime * rotationSpeed);
             }
 
             AddGravity();
@@ -97,7 +94,7 @@ public class MovementController : MonoBehaviour
                 
             Vector3 targetPosition = transform.position - adjustVector;
             transform.position = targetPosition;
-            //transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * interpolationSpeed);
+            //transform.position = Vector3.Lerp(transform.position, targetPosition, interpolationSpeed * Time.deltaTime);
         }
             
         

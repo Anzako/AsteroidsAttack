@@ -7,7 +7,8 @@ public class MetaBalls : MonoBehaviour
     const int threadGroupSize = 8;
     public ComputeShader metaballShader;
     [SerializeField] private Metaball[] metaballs;
-    private int numberOfMetaballs;
+    public int numberOfMetaballs;
+    public int worldBounds;
 
     public struct MetaballStruct
     {
@@ -19,6 +20,11 @@ public class MetaBalls : MonoBehaviour
     ComputeBuffer metaballBuffer;
     public float treshold = 4;
 
+    private void Awake()
+    {
+        numberOfMetaballs = metaballs.Length;
+    }
+
     private void Start()
     {
         CreateMetaballs();
@@ -26,8 +32,6 @@ public class MetaBalls : MonoBehaviour
 
     private void CreateMetaballs()
     {
-        numberOfMetaballs = metaballs.Length;
-
         metaballsStruct = new MetaballStruct[numberOfMetaballs];
         for (int i = 0; i < numberOfMetaballs; i++)
         {
@@ -41,7 +45,7 @@ public class MetaBalls : MonoBehaviour
     {
         foreach (Metaball metaball in metaballs)
         {
-            metaball.UpdatePosition(new Vector3(30, 30, 30));
+            metaball.UpdatePosition(new Vector3(worldBounds, worldBounds, worldBounds));
         }
         UpdateMetaballsStruct();
     }
@@ -86,6 +90,16 @@ public class MetaBalls : MonoBehaviour
         metaballBuffer.SetData(metaballsStruct);
         metaballShader.SetBuffer(0, "metaballs", metaballBuffer);
         metaballShader.SetInt("numberOfMetaballs", metaballsStruct.Length);
+    }
+
+    public Vector3 Position(int ID)
+    {
+        return metaballs[ID].position;
+    }
+
+    public float Radius(int ID)
+    {
+        return metaballs[ID].radius;
     }
 
 }

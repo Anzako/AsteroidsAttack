@@ -19,8 +19,6 @@ StructuredBuffer<Metaball> metaballs;
 int numberOfMetaballs;
 float treshold;
 
-static const float3 sphereCenter = float3(3, 3, 3);
-
 int indexFromCoord(int x, int y, int z)
 {
     return z * numPointsPerAxis * numPointsPerAxis + y * numPointsPerAxis + x;

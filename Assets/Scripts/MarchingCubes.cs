@@ -27,6 +27,7 @@ public class MarchingCubes : MonoBehaviour
     void Start()
     {
         CreateBuffers();
+        metaBallGenerator.worldBounds = numPointsPerAxis;
     }
 
     private void Update()

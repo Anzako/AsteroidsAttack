@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
     public void ShootProjectile()
     {
         Vector3 spawnPosition = transform.position + transform.forward.normalized;
-        spawnPosition += transform.up.normalized * 1;
         Instantiate(projectile, spawnPosition, transform.rotation);
     }
 
