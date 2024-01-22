@@ -7,27 +7,31 @@ using static UnityEditor.PlayerSettings;
 public class EnemiesController : MonoBehaviour
 {
     [SerializeField] private MetaBalls metaballs;
-    public List<GameObject> enemies;
     [SerializeField] private GameObject enemyPrefab;
+
+    bool enemiesSpawned = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        enemies = new List<GameObject>();
-        SpawnEnemy(0);
-        SpawnEnemy(1);
-        SpawnEnemy(1);
-        SpawnEnemy(1);
-        SpawnEnemy(1);
-        SpawnEnemy(1);
-        SpawnEnemy(1);
-        SpawnEnemy(1);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (!enemiesSpawned)
+        {
+            SpawnEnemy(0);
+            SpawnEnemy(1);
+            SpawnEnemy(1);
+            SpawnEnemy(1);
+            SpawnEnemy(1);
+            SpawnEnemy(1);
+            SpawnEnemy(1);
+            SpawnEnemy(1);
+            enemiesSpawned = true;
+        }
     }
 
     private void SpawnEnemy(int metaballID)
@@ -40,14 +44,17 @@ public class EnemiesController : MonoBehaviour
         while(!CheckCanEnemySpawn(directionFromCenter, metaballID)) 
         {
             directionFromCenter = CalculateRandomVector3();
-            Debug.Log("DUPA");
         }
 
         Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + 1);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, rotation, gameObject.transform);
-        enemies.Add(newEnemy);
+        HealthController enemy = newEnemy.GetComponentInChildren<HealthController>();
+        if (enemy != null)
+        {
+            enemy.Killed += OnEnemyKill;
+        }
     }
 
     private Vector3 CalculateRandomVector3()
@@ -57,6 +64,12 @@ public class EnemiesController : MonoBehaviour
         float randZ = Random.Range(-1f, 1f);
 
         return new Vector3(randX, randY, randZ);
+    }
+
+    public void OnEnemyKill()
+    {
+        Debug.Log("DUPA");
+        SpawnEnemy(0);
     }
 
     private bool CheckCanEnemySpawn(Vector3 direction, int metaballID)

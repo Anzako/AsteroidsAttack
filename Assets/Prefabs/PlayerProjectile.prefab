@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3024518087597833371}
   - component: {fileID: 7498818321579366332}
   m_Layer: 8
-  m_Name: Projectile
+  m_Name: PlayerProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,6 +78,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  timeToDestroy: 5
+  damage: 2
 --- !u!114 &7498818321579366332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +97,7 @@ MonoBehaviour:
     m_Bits: 64
   isMoving: 1
   moveSpeed: 6
-  toGroundDistance: 0.4
+  toGroundDistance: 0.2
   interpolationSpeed: 4
   rotationSpeed: 4
 --- !u!1 &1480996374394146741

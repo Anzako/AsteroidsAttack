@@ -1,23 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // Movement
     [SerializeField] private MovementController mController;
-    public int health = 10;
-
-    private float lastShootTime = 0;
     public Vector2 moveDirection = Vector2.zero;
 
-    // Prefabs
+    // Shooting
     [SerializeField] private GameObject projectile;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float lastShootTime = 0;
 
     private void FixedUpdate()
     {
@@ -31,20 +25,9 @@ public class Enemy : MonoBehaviour
 
         if (lastShootTime > 2) 
         {
-            //ShootProjectile();
+            ShootProjectile();
             lastShootTime = 0;
         }
-    }
-
-    public void TakeDamage(int dmg)
-    {
-        health -= dmg;
-        if (health <= 0)
-        {
-            Debug.Log("Enemy dead");
-            Destroy(gameObject);
-        }
-        
     }
 
     public void ShootProjectile()

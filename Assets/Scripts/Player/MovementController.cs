@@ -70,14 +70,19 @@ public class MovementController : MonoBehaviour
         {
             isGrounded = true;
             Debug.DrawRay(transform.position, -transform.up, Color.green);  // Visualize ground normal
+            float angle = Vector3.Angle(transform.up, groundHit.normal);
 
             if (transform.up != groundHit.normal)
             {
-                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, groundHit.normal) 
+                if (angle > 5)
+                {
+                    Quaternion targetRotation = Quaternion.FromToRotation(transform.up, groundHit.normal)
                     * transform.rotation;
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 
-                    Time.deltaTime * rotationSpeed);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
+                        Time.deltaTime * rotationSpeed);
+                }
+                
             }
 
             AddGravity();
