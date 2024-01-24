@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private MovementController mController;
     [SerializeField] private InputController inputController;
-    
+    [SerializeField] private HealthController healthController;
+
     Vector2 direction = Vector2.zero;
     public float mouseSensitivity = 0.5f;
 

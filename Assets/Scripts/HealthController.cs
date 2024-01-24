@@ -8,31 +8,37 @@ public class HealthController : MonoBehaviour
     // Health
     public event Action<int> Damaged = delegate { };
     public event Action Killed = delegate { };
-    [SerializeField] private int health = 10;
+    public int maxHealth;
+    private int health;
     ParticleSystem onHitParticle;
 
     // Start is called before the first frame update
     void Start()
     {
         onHitParticle = GetComponentInChildren<ParticleSystem>();
+        health = maxHealth;
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Damaged.Invoke(damage);
-        onHitParticle.Play();
-
         if (health <= 0)
         {
             Kill();
         }
 
+        Damaged.Invoke(health);
+        onHitParticle.Play();
     }
 
     private void Kill()
     {
         Killed.Invoke();
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void SetHealthToMax()
+    {
+        health = maxHealth;
     }
 }

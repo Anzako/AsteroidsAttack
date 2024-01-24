@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mController: {fileID: 65366852103934307}
+  healthController: {fileID: 4237113239163134112}
   moveDirection: {x: 0, y: 0}
   projectile: {fileID: 694073047113383073, guid: 5fb9d53131ebfaa40833f8ba573672cb, type: 3}
 --- !u!114 &65366852103934307
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97add6a99481c1240b984c051d1ed3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  maxHealth: 10
 --- !u!1001 &2933968200508965560
 PrefabInstance:
   m_ObjectHideFlags: 0

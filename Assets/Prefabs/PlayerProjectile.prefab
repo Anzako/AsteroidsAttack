@@ -79,7 +79,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   timeToDestroy: 5
-  damage: 2
+  damage: 3
 --- !u!114 &7498818321579366332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isMoving: 1
-  moveSpeed: 6
+  moveSpeed: 10
   toGroundDistance: 0.2
   interpolationSpeed: 4
   rotationSpeed: 4
@@ -162,7 +162,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ec6526948ea31ff409a0a792af0ef21c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

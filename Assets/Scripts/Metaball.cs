@@ -19,19 +19,29 @@ public class Metaball : MonoBehaviour
 
     public void UpdatePosition(Vector3 worldBounds)
     {
-        if (position.x - radius < 0 || position.x + radius > worldBounds.x)
+        float distanceToBorder = radius + 5;
+        if (position.x - distanceToBorder < 0)
         {
-            direction.x = -direction.x;
+            direction.x = Mathf.Abs(direction.x);
+        } else if (position.x + distanceToBorder > worldBounds.x)
+        {
+            direction.x = -Mathf.Abs(direction.x);
         }
 
-        if (position.y - radius < 0 || position.y + radius > worldBounds.y)
+        if (position.y - distanceToBorder < 0)
         {
-            direction.y = -direction.y;
+            direction.y = Mathf.Abs(direction.y);
+        } else if (position.y + distanceToBorder > worldBounds.y)
+        {
+            direction.y = -Mathf.Abs(direction.y);
         }
 
-        if (position.z - radius < 0 || position.z + radius > worldBounds.z)
+        if (position.z - distanceToBorder < 0)
         {
-            direction.z = -direction.z;
+            direction.z = Mathf.Abs(direction.z);
+        } else if (position.z + distanceToBorder > worldBounds.z)
+        {
+            direction.z = -Mathf.Abs(direction.z);
         }
 
         position += direction * speed * Time.deltaTime;

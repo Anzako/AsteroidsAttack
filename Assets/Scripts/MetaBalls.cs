@@ -86,10 +86,10 @@ public class MetaBalls : MonoBehaviour
 
     private void CreateBuffers()
     {
-        metaballBuffer = new ComputeBuffer(metaballsStruct.Length, sizeof(float) * 4);
+        metaballBuffer = new ComputeBuffer(numberOfMetaballs, sizeof(float) * 4);
         metaballBuffer.SetData(metaballsStruct);
         metaballShader.SetBuffer(0, "metaballs", metaballBuffer);
-        metaballShader.SetInt("numberOfMetaballs", metaballsStruct.Length);
+        metaballShader.SetInt("numberOfMetaballs", numberOfMetaballs);
     }
 
     public Vector3 Position(int ID)

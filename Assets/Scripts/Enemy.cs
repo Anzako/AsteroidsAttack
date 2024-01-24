@@ -7,11 +7,17 @@ public class Enemy : MonoBehaviour
 {
     // Movement
     [SerializeField] private MovementController mController;
-    public Vector2 moveDirection = Vector2.zero;
+    [SerializeField] private HealthController healthController;
+    private Vector2 moveDirection = Vector2.zero;
 
     // Shooting
     [SerializeField] private GameObject projectile;
     private float lastShootTime = 0;
+
+    private void Start()
+    {
+        healthController.Killed += Destroy;
+    }
 
     private void FixedUpdate()
     {
@@ -33,7 +39,12 @@ public class Enemy : MonoBehaviour
     public void ShootProjectile()
     {
         Vector3 spawnPosition = transform.position + transform.forward.normalized;
-        spawnPosition += transform.up.normalized * 1;
+        spawnPosition += transform.up.normalized * 0.2f;
         Instantiate(projectile, spawnPosition, transform.rotation);
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

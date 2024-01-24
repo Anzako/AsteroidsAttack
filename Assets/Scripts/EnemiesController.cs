@@ -11,12 +11,6 @@ public class EnemiesController : MonoBehaviour
 
     bool enemiesSpawned = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -68,7 +62,6 @@ public class EnemiesController : MonoBehaviour
 
     public void OnEnemyKill()
     {
-        Debug.Log("DUPA");
         SpawnEnemy(0);
     }
 
