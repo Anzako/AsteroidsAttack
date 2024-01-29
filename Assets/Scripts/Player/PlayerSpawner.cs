@@ -8,15 +8,18 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private MetaBalls metaballs;
     [SerializeField] private GameObject player;
     [SerializeField] private Button restartButton;
-    [SerializeField] private GameObject healthBar;
+    [SerializeField] private Camera deadCamera;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Turn off camera
+        deadCamera.gameObject.SetActive(false);
+
         // Restart button
         restartButton.gameObject.SetActive(false);
         restartButton.onClick.AddListener(OnRestartButton);
-        player.GetComponent<HealthController>().Killed += OnPlayerDead;
+        player.GetComponent<PlayerHealth>().Killed += OnPlayerDead;
 
         // Spawn player
         SpawnPlayer(0);
@@ -34,7 +37,7 @@ public class PlayerSpawner : MonoBehaviour
 
         player.transform.position = spawnPosition;
         player.transform.rotation = rotation;
-        player.GetComponent<HealthBar>().SetHealthToMax();
+        player.GetComponent<UIController>().SetHealthToMax();
         player.gameObject.SetActive(true);
     }
 
@@ -49,14 +52,23 @@ public class PlayerSpawner : MonoBehaviour
 
     public void OnPlayerDead()
     {
+        deadCamera.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
-        healthBar.SetActive(false);
+        UIController uicontroller = player.GetComponent<UIController>();
+        uicontroller.SetActiveUI(false);
+        
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        playerController.ResetScore();
     }
 
     private void OnRestartButton()
     {
-        SpawnPlayer(0);
         restartButton.gameObject.SetActive(false);
-        healthBar.SetActive(true);
+        deadCamera.gameObject.SetActive(false);
+
+        UIController uicontroller = player.GetComponent<UIController>();
+        uicontroller.SetActiveUI(true);
+
+        SpawnPlayer(0);
     }
 }

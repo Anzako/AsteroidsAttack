@@ -8,6 +8,7 @@ public class EnemiesController : MonoBehaviour
 {
     [SerializeField] private MetaBalls metaballs;
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private PlayerController playerController;
 
     bool enemiesSpawned = false;
 
@@ -44,10 +45,11 @@ public class EnemiesController : MonoBehaviour
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, rotation, gameObject.transform);
-        HealthController enemy = newEnemy.GetComponentInChildren<HealthController>();
+        EnemyHealth enemy = newEnemy.GetComponentInChildren<EnemyHealth>();
         if (enemy != null)
         {
             enemy.Killed += OnEnemyKill;
+            enemy.Killed += playerController.AddScore;
         }
     }
 
@@ -60,7 +62,7 @@ public class EnemiesController : MonoBehaviour
         return new Vector3(randX, randY, randZ);
     }
 
-    public void OnEnemyKill()
+    public void OnEnemyKill(int score)
     {
         SpawnEnemy(0);
     }

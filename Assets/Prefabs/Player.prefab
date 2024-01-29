@@ -109,15 +109,15 @@ GameObject:
   - component: {fileID: 78416745642762997}
   - component: {fileID: -3009897901644091826}
   - component: {fileID: 5515491599423336599}
-  - component: {fileID: -3433610615269004335}
   - component: {fileID: 5476350350173624902}
+  - component: {fileID: 5691059295496667685}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8085797481541249609
 Transform:
   m_ObjectHideFlags: 0
@@ -248,8 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mController: {fileID: -3009897901644091826}
   inputController: {fileID: 78416745642762997}
-  healthController: {fileID: -3433610615269004335}
-  healthBar: {fileID: 5476350350173624902}
+  healthController: {fileID: 0}
   mouseSensitivity: 0.5
   projectile: {fileID: 694073047113383073, guid: ce9a478c1a323824cb2f5beab04df836, type: 3}
 --- !u!114 &78416745642762997
@@ -347,19 +346,6 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &-3433610615269004335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898362260430516467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97add6a99481c1240b984c051d1ed3cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
 --- !u!114 &5476350350173624902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +359,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
+  healthController: {fileID: 5691059295496667685}
+--- !u!114 &5691059295496667685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898362260430516467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  health: 0
+  onHitParticle: {fileID: 5831116862300029078, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
 --- !u!1001 &5451949770775907332
 PrefabInstance:
   m_ObjectHideFlags: 0

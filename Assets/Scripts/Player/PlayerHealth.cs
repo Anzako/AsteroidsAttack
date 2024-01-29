@@ -3,14 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthController : MonoBehaviour
+public class PlayerHealth : HealthController
 {
-    // Health
     public event Action<int> Damaged = delegate { };
     public event Action Killed = delegate { };
-    public int maxHealth;
-    private int health;
-    ParticleSystem onHitParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -19,26 +15,16 @@ public class HealthController : MonoBehaviour
         health = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
-        {
-            Kill();
-        }
-
+        base.TakeDamage(damage);
         Damaged.Invoke(health);
         onHitParticle.Play();
     }
 
-    private void Kill()
+    protected override void Kill()
     {
         Killed.Invoke();
-        gameObject.SetActive(false);
-    }
-
-    public void SetHealthToMax()
-    {
-        health = maxHealth;
+        base.Kill();
     }
 }

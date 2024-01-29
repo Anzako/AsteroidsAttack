@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1772722053079139149}
   - component: {fileID: 2477711259001314032}
   - component: {fileID: 65366852103934307}
-  - component: {fileID: 4237113239163134112}
+  - component: {fileID: -6091714098982788124}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -151,9 +151,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mController: {fileID: 65366852103934307}
-  healthController: {fileID: 4237113239163134112}
-  moveDirection: {x: 0, y: 0}
+  healthController: {fileID: -6091714098982788124}
   projectile: {fileID: 694073047113383073, guid: 5fb9d53131ebfaa40833f8ba573672cb, type: 3}
+  timeToShoot: 2
+  score: 10
 --- !u!114 &65366852103934307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ MonoBehaviour:
   toGroundDistance: 0.2
   interpolationSpeed: 4
   rotationSpeed: 4
---- !u!114 &4237113239163134112
+--- !u!114 &-6091714098982788124
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,10 +184,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1534234561323530830}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97add6a99481c1240b984c051d1ed3cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 51e80724ade876248a174b7f7ed8ab2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  onHitParticle: {fileID: 5831116862300029078, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
+  score: 10
 --- !u!1001 &2933968200508965560
 PrefabInstance:
   m_ObjectHideFlags: 0

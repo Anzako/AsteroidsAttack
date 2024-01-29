@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private MovementController mController;
     [SerializeField] private InputController inputController;
-    [SerializeField] private HealthController healthController;
+    [SerializeField] private UIController UIController;
+    public int actualScore = 0;
 
     Vector2 direction = Vector2.zero;
     public float mouseSensitivity = 0.5f;
@@ -35,5 +36,17 @@ public class PlayerController : MonoBehaviour
     public void SetDirection(Vector2 direction)
     {
         this.direction = direction;
+    }
+
+    public void AddScore(int score)
+    {
+        actualScore += score;
+        UIController.SetScore(actualScore);
+    }
+
+    public void ResetScore()
+    {
+        actualScore = 0;
+        UIController.SetScore(actualScore);
     }
 }
