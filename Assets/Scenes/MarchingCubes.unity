@@ -164,6 +164,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3719851685426429890, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: timeToShoot
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3719851685426429890, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: UIController
       value: 
       objectReference: {fileID: 654914593}
@@ -815,6 +819,7 @@ MonoBehaviour:
   player: {fileID: 654914592}
   restartButton: {fileID: 955811668}
   deadCamera: {fileID: 1348764710}
+  distanceFromGround: 0
 --- !u!4 &1219189829
 Transform:
   m_ObjectHideFlags: 0
@@ -1153,6 +1158,7 @@ MonoBehaviour:
   metaballs: {fileID: 1846323641}
   enemyPrefab: {fileID: 1534234561323530830, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
   playerController: {fileID: 654914598}
+  maxAngle: 60
 --- !u!4 &1574380768
 Transform:
   m_ObjectHideFlags: 0

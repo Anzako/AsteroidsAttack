@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // Player
+    public Transform playerTransform;
+
     // Movement
     [SerializeField] private MovementController mController;
     [SerializeField] private EnemyHealth healthController;
@@ -14,6 +17,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject projectile;
     private float lastShootTime = 0;
     public float timeToShoot = 2.0f;
+    public float shootRange;
 
     private void FixedUpdate()
     {
@@ -27,8 +31,11 @@ public class Enemy : MonoBehaviour
 
         if (lastShootTime > timeToShoot) 
         {
-            ShootProjectile();
-            lastShootTime = 0;
+            float distance = (transform.position - playerTransform.position).magnitude;
+            if (distance <= shootRange)
+            {
+                ShootProjectile();
+            }
         }
     }
 
@@ -37,5 +44,6 @@ public class Enemy : MonoBehaviour
         Vector3 spawnPosition = transform.position + transform.forward.normalized;
         spawnPosition += transform.up.normalized * 0.2f;
         Instantiate(projectile, spawnPosition, transform.rotation);
+        lastShootTime = 0;
     }
 }

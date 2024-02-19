@@ -150,11 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaab649fa4fc66d4dab6287eb5af06b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
   mController: {fileID: 65366852103934307}
   healthController: {fileID: -6091714098982788124}
   projectile: {fileID: 694073047113383073, guid: 5fb9d53131ebfaa40833f8ba573672cb, type: 3}
   timeToShoot: 2
-  score: 10
+  shootRange: 20
 --- !u!114 &65366852103934307
 MonoBehaviour:
   m_ObjectHideFlags: 0

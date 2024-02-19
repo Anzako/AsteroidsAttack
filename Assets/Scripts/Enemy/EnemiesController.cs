@@ -10,7 +10,8 @@ public class EnemiesController : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private PlayerController playerController;
 
-    bool enemiesSpawned = false;
+    private bool enemiesSpawned = false;
+    public float maxAngle;
 
     // Update is called once per frame
     void Update()
@@ -45,12 +46,16 @@ public class EnemiesController : MonoBehaviour
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, rotation, gameObject.transform);
-        EnemyHealth enemy = newEnemy.GetComponentInChildren<EnemyHealth>();
-        if (enemy != null)
+        EnemyHealth enemyHealth = newEnemy.GetComponentInChildren<EnemyHealth>();
+        
+        if (enemyHealth != null)
         {
-            enemy.Killed += OnEnemyKill;
-            enemy.Killed += playerController.AddScore;
+            enemyHealth.Killed += OnEnemyKill;
+            enemyHealth.Killed += playerController.AddScore;
         }
+
+        Enemy enemy = newEnemy.GetComponentInChildren<Enemy>();
+        enemy.playerTransform = playerController.transform;
     }
 
     private Vector3 CalculateRandomVector3()
@@ -82,7 +87,7 @@ public class EnemiesController : MonoBehaviour
             if (metaballsVector.magnitude < sumOfRadius + 8)
             {
                 float angle = Vector3.Angle(direction, metaballsVector);
-                if (angle <= 50)
+                if (angle <= maxAngle)
                 {
                     return false;
                 }

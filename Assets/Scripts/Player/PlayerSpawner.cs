@@ -10,6 +10,8 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private Camera deadCamera;
 
+    public float distanceFromGround;
+
     // Start is called before the first frame update
     void Start()
     {
