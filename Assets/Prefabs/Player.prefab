@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2869004363259944276}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2763015, y: -0, z: -0, w: 0.961071}
-  m_LocalPosition: {x: 0, y: 29.300001, z: -30.699999}
+  m_LocalPosition: {x: 0, y: 40, z: -35}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -248,7 +248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mController: {fileID: -3009897901644091826}
   inputController: {fileID: 78416745642762997}
-  healthController: {fileID: 0}
+  UIController: {fileID: 0}
+  actualScore: 0
   mouseSensitivity: 0.5
   projectile: {fileID: 694073047113383073, guid: ce9a478c1a323824cb2f5beab04df836, type: 3}
 --- !u!114 &78416745642762997
@@ -358,7 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a785faf0dcc3bad4da0ad45444669598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  healthSlider: {fileID: 0}
+  scoreText: {fileID: 0}
   healthController: {fileID: 5691059295496667685}
 --- !u!114 &5691059295496667685
 MonoBehaviour:
@@ -373,7 +375,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  health: 0
   onHitParticle: {fileID: 5831116862300029078, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
 --- !u!1001 &5451949770775907332
 PrefabInstance:

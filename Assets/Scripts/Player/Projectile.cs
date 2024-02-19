@@ -27,7 +27,12 @@ public class Projectile : MonoBehaviour
     {
         if ((enemyLayer.value & (1 << collision.transform.gameObject.layer)) > 0)
         {
-            collision.gameObject.GetComponent<HealthController>().TakeDamage(damage);
+            HealthController hController = collision.gameObject.GetComponent<HealthController>();
+            hController.TakeDamage(damage);
+
+            ParticleSystem hitPoint = collision.gameObject.GetComponentInChildren<ParticleSystem>();
+            hitPoint.transform.position = collision.GetContact(0).point;
+            
             Destroy(this.gameObject);
         }
     }
