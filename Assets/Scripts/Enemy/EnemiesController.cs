@@ -41,7 +41,7 @@ public class EnemiesController : MonoBehaviour
             directionFromCenter = CalculateRandomVector3();
         }
 
-        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + 1);
+        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + 4);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, rotation, gameObject.transform);
