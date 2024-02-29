@@ -20,6 +20,10 @@ public class MovementController : MonoBehaviour
     public float interpolationSpeed;
     public float rotationSpeed;
 
+    // Add checking when player raycast not hitting any surface
+    // - check if character is in the surface
+    // - detect closest surface and rotate character to it
+
     // Start is called before the first frame update
     void Start()
     {

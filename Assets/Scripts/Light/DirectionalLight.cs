@@ -5,7 +5,7 @@ using UnityEngine;
 public class DirectionalLight : MonoBehaviour
 {
     private Transform lightTransform;
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Transform playerTransform;
 
     void Start()
     {
@@ -20,6 +20,7 @@ public class DirectionalLight : MonoBehaviour
 
     private void SetDirectionToPlayerCamera()
     {
-        lightTransform.rotation = cameraTransform.rotation;
+        Quaternion rotatedQuat = Quaternion.Euler(-playerTransform.eulerAngles);
+        lightTransform.rotation = rotatedQuat;
     }
 }
