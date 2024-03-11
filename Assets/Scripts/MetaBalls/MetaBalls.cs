@@ -62,10 +62,7 @@ public class MetaBalls : MonoBehaviour
     // Start is called before the first frame update
     public ComputeBuffer Generate(ComputeBuffer pointsBuffer, int numPointsPerAxis, float spacing, Vector3 offset)
     {
-        int numPoints = numPointsPerAxis * numPointsPerAxis * numPointsPerAxis;
         int numThreadsPerAxis = Mathf.CeilToInt(numPointsPerAxis / (float)threadGroupSize);
-        // Points buffer is populated inside shader with pos (xyz) + density (w).
-        // Set paramaters
 
         UpdateMetaballs();
         CreateBuffers();
@@ -75,12 +72,10 @@ public class MetaBalls : MonoBehaviour
         metaballShader.SetVector("offset", offset);
         metaballShader.SetFloat("treshold", treshold);
 
-        // Dispatch shader
         metaballShader.Dispatch(0, numThreadsPerAxis, numThreadsPerAxis, numThreadsPerAxis);
 
         metaballBuffer.Release();
 
-        // Return voxel data buffer so it can be used to generate mesh
         return pointsBuffer;
     }
 

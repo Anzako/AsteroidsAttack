@@ -1,4 +1,3 @@
-// Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel MetaBall
 
 StructuredBuffer<float3> offsets;
@@ -49,9 +48,7 @@ void MetaBall(uint3 id : SV_DispatchThreadID)
         {
             finalVal += exp(-(distance * distance) / (metaballs[i].radius * metaballs[i].radius));
         }
-        
     }
-        
     
     int index = indexFromCoord(id.x, id.y, id.z);
     points[index] = float4(pos, finalVal);

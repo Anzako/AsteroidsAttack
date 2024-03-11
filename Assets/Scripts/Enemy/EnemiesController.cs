@@ -12,6 +12,7 @@ public class EnemiesController : MonoBehaviour
 
     private bool enemiesSpawned = false;
     public float maxAngle;
+    private float spawningDistance = 10f;
 
     // Update is called once per frame
     void Update()
@@ -42,7 +43,7 @@ public class EnemiesController : MonoBehaviour
             directionFromCenter = CalculateRandomVector3();
         }
 
-        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + 4);
+        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + spawningDistance);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, rotation, gameObject.transform);
