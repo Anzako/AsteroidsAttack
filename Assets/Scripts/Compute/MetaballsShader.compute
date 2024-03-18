@@ -31,6 +31,13 @@ float distanceBetweenVectors(float3 a, float3 b)
     return sqrt(distance);
 }
 
+float distanceBetweenVectorsSq(float3 a, float3 b)
+{
+    float distance = (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z);
+
+    return distance;
+}
+
 [numthreads(numThreads, numThreads, numThreads)]
 void MetaBall(uint3 id : SV_DispatchThreadID)
 {
@@ -44,11 +51,15 @@ void MetaBall(uint3 id : SV_DispatchThreadID)
     
     for (int i = 0; i < numberOfMetaballs; i++)
     {
-        float distance = distanceBetweenVectors(pos, metaballs[i].centerPos);
-        if (distance <= metaballs[i].radius + treshold)
-        {
-            finalVal += exp(-(distance * distance) / (metaballs[i].radius * metaballs[i].radius));
-        }
+        //float distance = distanceBetweenVectors(pos, metaballs[i].centerPos);
+        float distance = distanceBetweenVectorsSq(pos, metaballs[i].centerPos);
+        finalVal += metaballs[i].radius / (distance);
+        //if (distance <= metaballs[i].radius + treshold)
+        //{
+        //    finalVal += metaballs[i].radius / (distance);
+        //    //finalVal += metaballs[i].radius / (distance * distance);
+        //    //finalVal += exp(-(distance * distance) / (metaballs[i].radius * metaballs[i].radius));
+        //}
         
     }
         
