@@ -65,12 +65,12 @@ public class MovementController : MonoBehaviour
     {
         isGrounded = false;
 
-        Vector3 axis = Vector3.Cross(-transform.up, transform.forward);
-        Quaternion rot = Quaternion.AngleAxis(angle, axis);
+        //Vector3 axis = Vector3.Cross(-transform.up, transform.forward);
+        //Quaternion rot = Quaternion.AngleAxis(angle, axis);
 
-        Vector3 tiltedVector = rot * -transform.up;
+        //Vector3 tiltedVector = rot * -transform.up;
 
-        if (Physics.Raycast(transform.position, tiltedVector, out groundHit, layerMask) && isMoving)
+        if (Physics.Raycast(transform.position, -transform.up, out groundHit, layerMask) && isMoving)
         {
             isGrounded = true;
             Debug.DrawRay(transform.position, -transform.up, Color.green);  // Visualize ground normal

@@ -16,7 +16,7 @@ public class MarchingCubes : MonoBehaviour
     public Vector3 offset = Vector3.zero;
 
     [Range(2, 100)]
-    public int numPointsPerAxis = 5;
+    public int numPointsPerAxis;
 
     // Buffers
     ComputeBuffer triangleBuffer;
@@ -54,9 +54,6 @@ public class MarchingCubes : MonoBehaviour
 
     public void UpdateMesh()
     {
-        int numVoxelsPerAxis = numPointsPerAxis - 1;
-        int numThreadsPerAxis = Mathf.CeilToInt(numVoxelsPerAxis / (float)threadGroupSize);
-
         metaBallGenerator.Generate(pointsBuffer, numPointsPerAxis, spacing, offset);
 
         triangleBuffer.SetCounterValue(0);
@@ -64,6 +61,8 @@ public class MarchingCubes : MonoBehaviour
         shader.SetBuffer(0, "triangles", triangleBuffer);
         shader.SetInt("numPointsPerAxis", numPointsPerAxis);
         shader.SetFloat("isoLevel", isoLevel);
+        int numVoxelsPerAxis = numPointsPerAxis - 1;
+        int numThreadsPerAxis = Mathf.CeilToInt(numVoxelsPerAxis / (float)threadGroupSize);
 
         shader.Dispatch(0, numThreadsPerAxis, numThreadsPerAxis, numThreadsPerAxis);
 
