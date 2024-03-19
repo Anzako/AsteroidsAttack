@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3009897901644091826, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: metaballs
+      value: 
+      objectReference: {fileID: 1846323641}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: scoreText
       value: 

@@ -17,7 +17,6 @@ struct Metaball
 
 StructuredBuffer<Metaball> metaballs;
 int numberOfMetaballs;
-float treshold;
 
 int indexFromCoord(int x, int y, int z)
 {
@@ -51,16 +50,8 @@ void MetaBall(uint3 id : SV_DispatchThreadID)
     
     for (int i = 0; i < numberOfMetaballs; i++)
     {
-        //float distance = distanceBetweenVectors(pos, metaballs[i].centerPos);
         float distance = distanceBetweenVectorsSq(pos, metaballs[i].centerPos);
-        finalVal += metaballs[i].radius / (distance);
-        //if (distance <= metaballs[i].radius + treshold)
-        //{
-        //    finalVal += metaballs[i].radius / (distance);
-        //    //finalVal += metaballs[i].radius / (distance * distance);
-        //    //finalVal += exp(-(distance * distance) / (metaballs[i].radius * metaballs[i].radius));
-        //}
-        
+        finalVal += metaballs[i].radius / distance;
     }
         
     

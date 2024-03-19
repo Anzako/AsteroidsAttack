@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class MetaBalls : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class MetaBalls : MonoBehaviour
 
     public MetaballStruct[] metaballsStruct;
     ComputeBuffer metaballBuffer;
-    public float treshold = 4;
+    //public float treshold = 4;
 
     private void Awake()
     {
@@ -70,7 +71,7 @@ public class MetaBalls : MonoBehaviour
         metaballShader.SetInt("numPointsPerAxis", numPointsPerAxis);
         metaballShader.SetFloat("spacing", spacing);
         metaballShader.SetVector("offset", offset);
-        metaballShader.SetFloat("treshold", treshold);
+        //metaballShader.SetFloat("treshold", treshold);
 
         metaballShader.Dispatch(0, numThreadsPerAxis, numThreadsPerAxis, numThreadsPerAxis);
 
@@ -95,6 +96,37 @@ public class MetaBalls : MonoBehaviour
     public float Radius(int ID)
     {
         return metaballs[ID].radius;
+    }
+
+    public float CalculateScalarFieldValue(Vector3 position)
+    {
+        float scalarValue = 0.0f;
+
+        for (int i = 0; i < numberOfMetaballs; i++)
+        {
+            float distance = distanceBetweenVectorsSq(position, metaballs[i].position);
+            scalarValue += metaballs[i].radius / distance;
+        }
+        return scalarValue;
+    }
+
+    public Vector3 CalculateMetaballsNormal(Vector3 position)
+    {
+        Vector3 calculatedNormal = new Vector3();
+        for (int i = 0; i < numberOfMetaballs; i++)
+        {
+            Vector3 normal = position - metaballs[i].position;
+            normal = normal / metaballs[i].radius;
+            calculatedNormal += normal;
+        }
+        return calculatedNormal;
+    }
+
+    private float distanceBetweenVectorsSq(Vector3 a, Vector3 b)
+    {
+        float distance = (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z);
+
+        return distance;
     }
 
 }

@@ -8,7 +8,8 @@ public class MarchingCubes : MonoBehaviour
 
     public MetaBalls metaBallGenerator;
     public ComputeShader shader;
-    public RenderTexture texture;
+    private MeshFilter meshFilter;
+    private MeshCollider meshCollider;
 
     [Header("Voxel Settings")]
     public float isoLevel;
@@ -28,6 +29,9 @@ public class MarchingCubes : MonoBehaviour
     {
         CreateBuffers();
         metaBallGenerator.worldBounds = numPointsPerAxis;
+
+        meshFilter = GetComponent<MeshFilter>();
+        meshCollider = GetComponent<MeshCollider>();
     }
 
     private void Update()
@@ -76,6 +80,7 @@ public class MarchingCubes : MonoBehaviour
         Triangle[] tris = new Triangle[numTris];
         triangleBuffer.GetData(tris, 0, 0, numTris);
 
+        // Create mesh and set data
         Mesh mesh = new Mesh();
         mesh.Clear();
 
@@ -95,8 +100,19 @@ public class MarchingCubes : MonoBehaviour
 
         mesh.RecalculateNormals();
 
-        GetComponent<MeshFilter>().mesh = mesh;
-        GetComponent<MeshCollider>().sharedMesh = mesh;
+        // Destroy old meshes
+        if (meshFilter.mesh != null)
+        {
+            Destroy(meshFilter.mesh);
+        }
+        if (meshCollider.sharedMesh != null)
+        {
+            Destroy(meshCollider.sharedMesh);
+        }
+
+        // Set mesh to game
+        meshFilter.mesh = mesh;
+        meshCollider.sharedMesh = mesh;
     }
 
     struct Triangle
