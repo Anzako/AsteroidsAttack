@@ -9,11 +9,11 @@ public class MovementController : MonoBehaviour
 {
     [SerializeField] private LayerMask groundMask;
     private int layerMask;
-    
+    private MetaBalls metaballs;
+
     private RaycastHit groundHit;
     private bool isGrounded;
-    public bool isMoving = true;
-    private float angle = 0f;
+    private float maxAngle = 5f;
 
     public float moveSpeed;
     public float toGroundDistance;
@@ -28,6 +28,7 @@ public class MovementController : MonoBehaviour
     void Start()
     {
         layerMask = 1 << 7;
+        metaballs = MetaBalls.instance;
     }
 
     // Update is called once per frame
@@ -44,7 +45,7 @@ public class MovementController : MonoBehaviour
 
     private void Move(Vector2 moveDirection)
     {
-        if (isGrounded && isMoving)
+        if (isGrounded)
         {
             Vector3 horizontalVector = -Vector3.Cross(transform.forward, transform.up) * moveDirection.x;
             Vector3 verticalVector = transform.forward * moveDirection.y;
@@ -65,30 +66,30 @@ public class MovementController : MonoBehaviour
     {
         isGrounded = false;
 
-        //Vector3 axis = Vector3.Cross(-transform.up, transform.forward);
-        //Quaternion rot = Quaternion.AngleAxis(angle, axis);
+        if (IsInsideMetaballs())
+        {
+            Vector3 vector = metaballs.CalculateMetaballsNormal(transform.position);
+            Debug.Log("Zle");
+            Debug.DrawRay(transform.position, vector, Color.green);
+            transform.position += vector;
+            transform.up = vector.normalized;
+        } 
 
-        //Vector3 tiltedVector = rot * -transform.up;
-
-        if (Physics.Raycast(transform.position, -transform.up, out groundHit, layerMask) && isMoving)
+        if (Physics.Raycast(transform.position, -transform.up, out groundHit, layerMask))
         {
             isGrounded = true;
             Debug.DrawRay(transform.position, -transform.up, Color.green);  // Visualize ground normal
             float angle = Vector3.Angle(transform.up, groundHit.normal);
 
-            if (transform.up != groundHit.normal)
+            if (angle > maxAngle)
             {
-                if (angle > 5)
-                {
-                    Quaternion targetRotation = Quaternion.FromToRotation(transform.up, groundHit.normal)
-                    * transform.rotation;
+                Quaternion targetRotation = Quaternion.FromToRotation(transform.up, groundHit.normal)
+                * transform.rotation;
 
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
-                        Time.deltaTime * rotationSpeed);
-                }
-                
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
+                    Time.deltaTime * rotationSpeed);
             }
-
+     
             AddGravity();
         }
     }
@@ -103,16 +104,23 @@ public class MovementController : MonoBehaviour
                 
             Vector3 targetPosition = transform.position - adjustVector;
             transform.position = targetPosition;
-            //transform.position = Vector3.Lerp(transform.position, targetPosition, interpolationSpeed * Time.deltaTime);
         }
             
         
     }
 
-    public RaycastHit GetGroundHit()
+    private bool IsInsideMetaballs()
     {
-        return groundHit;
+        float scalarFieldValue = metaballs.CalculateScalarFieldValue(transform.position);
+
+        return scalarFieldValue > 0.5f;
     }
 
+    private void PushObjectFromGround()
+    {
+        Vector3 normal;
+
+        //for (int i = 0; i < 0)
+    }
 
 }

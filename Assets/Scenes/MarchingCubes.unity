@@ -471,9 +471,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 1, z: 0}
-  speed: 0
+  speed: 3
   position: {x: 40, y: 30, z: 15}
-  radius: 10
+  radius: 15
 --- !u!1 &654914592 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8898362260430516467, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
@@ -656,9 +656,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 0, z: 1}
-  speed: 0
+  speed: 2
   position: {x: 30, y: 30, z: 40}
-  radius: 15
+  radius: 25
 --- !u!1 &1189556665
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +896,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   metaBallGenerator: {fileID: 1846323641}
   shader: {fileID: 7200000, guid: 9754cd28fb9a08248ac15fa5d0f92d95, type: 3}
-  texture: {fileID: 0}
   isoLevel: 0.5
   spacing: 1
   offset: {x: 0, y: 0, z: 0}
@@ -1643,7 +1642,6 @@ MonoBehaviour:
   - {fileID: 1036682539}
   numberOfMetaballs: 0
   worldBounds: 0
-  treshold: 40
 --- !u!4 &1846323642
 Transform:
   m_ObjectHideFlags: 0

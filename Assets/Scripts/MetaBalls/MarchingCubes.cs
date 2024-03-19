@@ -27,7 +27,6 @@ public class MarchingCubes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CreateBuffers();
         metaBallGenerator.worldBounds = numPointsPerAxis;
 
         meshFilter = GetComponent<MeshFilter>();
@@ -36,7 +35,18 @@ public class MarchingCubes : MonoBehaviour
 
     private void Update()
     {
+        CreateBuffers();
         UpdateMesh();
+
+        if (!Application.isPlaying)
+        {
+            ReleaseBuffers();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        ReleaseBuffers();
     }
 
     void CreateBuffers()
@@ -50,6 +60,10 @@ public class MarchingCubes : MonoBehaviour
         // Otherwise, only create if null or if size has changed
         if (!Application.isPlaying || (pointsBuffer == null || numPoints != pointsBuffer.count))
         {
+            if (Application.isPlaying)
+            {
+                ReleaseBuffers();
+            }
             triangleBuffer = new ComputeBuffer(maxTriangleCount, sizeof(float) * 3 * 3, ComputeBufferType.Append);
             pointsBuffer = new ComputeBuffer(numPoints, sizeof(float) * 4);
             triCountBuffer = new ComputeBuffer(1, sizeof(int), ComputeBufferType.Raw);
@@ -113,6 +127,16 @@ public class MarchingCubes : MonoBehaviour
         // Set mesh to game
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
+    }
+
+    private void ReleaseBuffers()
+    {
+        if (triangleBuffer != null)
+        {
+            triangleBuffer.Release();
+            pointsBuffer.Release();
+            triCountBuffer.Release();
+        }
     }
 
     struct Triangle

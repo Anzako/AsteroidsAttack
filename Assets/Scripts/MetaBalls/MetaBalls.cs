@@ -5,11 +5,15 @@ using static UnityEditor.PlayerSettings;
 
 public class MetaBalls : MonoBehaviour
 {
+    public static MetaBalls instance { get; private set; }
+
     const int threadGroupSize = 8;
     public ComputeShader metaballShader;
     [SerializeField] private Metaball[] metaballs;
     public int numberOfMetaballs;
     public int worldBounds;
+
+    private bool buffersCreated = false;
 
     public struct MetaballStruct
     {
@@ -19,10 +23,13 @@ public class MetaBalls : MonoBehaviour
 
     public MetaballStruct[] metaballsStruct;
     ComputeBuffer metaballBuffer;
-    //public float treshold = 4;
 
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
         numberOfMetaballs = metaballs.Length;
     }
 
@@ -71,7 +78,6 @@ public class MetaBalls : MonoBehaviour
         metaballShader.SetInt("numPointsPerAxis", numPointsPerAxis);
         metaballShader.SetFloat("spacing", spacing);
         metaballShader.SetVector("offset", offset);
-        //metaballShader.SetFloat("treshold", treshold);
 
         metaballShader.Dispatch(0, numThreadsPerAxis, numThreadsPerAxis, numThreadsPerAxis);
 
@@ -104,9 +110,15 @@ public class MetaBalls : MonoBehaviour
 
         for (int i = 0; i < numberOfMetaballs; i++)
         {
-            float distance = distanceBetweenVectorsSq(position, metaballs[i].position);
-            scalarValue += metaballs[i].radius / distance;
+            scalarValue += CalculateMetaballScalarFieldValue(position, metaballs[i]);
         }
+        return scalarValue;
+    }
+
+    public float CalculateMetaballScalarFieldValue(Vector3 position, Metaball metaball)
+    {
+        float distance = distanceBetweenVectorsSq(position, metaball.position);
+        float scalarValue = metaball.radius / distance;
         return scalarValue;
     }
 
@@ -116,7 +128,7 @@ public class MetaBalls : MonoBehaviour
         for (int i = 0; i < numberOfMetaballs; i++)
         {
             Vector3 normal = position - metaballs[i].position;
-            normal = normal / metaballs[i].radius;
+            normal = normal.normalized * CalculateMetaballScalarFieldValue(position, metaballs[i]);
             calculatedNormal += normal;
         }
         return calculatedNormal;

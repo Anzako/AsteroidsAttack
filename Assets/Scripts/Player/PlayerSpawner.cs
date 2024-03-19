@@ -34,7 +34,14 @@ public class PlayerSpawner : MonoBehaviour
 
         Vector3 directionFromCenter = CalculateRandomVector3();
 
-        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + 5);
+        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius / 2);
+        if (metaballs.CalculateScalarFieldValue(spawnPosition) <= 0.5f)
+        {
+            Debug.Log("Dobrze");
+        } else
+        {
+            Debug.Log("Zle");
+        }
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);
 
         player.transform.position = spawnPosition;
