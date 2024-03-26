@@ -38,13 +38,15 @@ public class EnemiesController : MonoBehaviour
         float radius = metaballs.Radius(metaballID);
 
         Vector3 directionFromCenter = CalculateRandomVector3();
+        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + spawningDistance);
 
-        while(!CheckCanEnemySpawn(directionFromCenter, metaballID)) 
+        while (metaballs.CalculateScalarFieldValue(spawnPosition) > 0.5f)
         {
+            Debug.Log("Zle2");
             directionFromCenter = CalculateRandomVector3();
+            spawnPosition = pos + directionFromCenter.normalized * (radius / 2);
         }
 
-        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + spawningDistance);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);
 
         GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, rotation, gameObject.transform);
@@ -72,31 +74,6 @@ public class EnemiesController : MonoBehaviour
     public void OnEnemyKill(int score)
     {
         SpawnEnemy(0);
-    }
-
-    private bool CheckCanEnemySpawn(Vector3 direction, int metaballID)
-    {
-        for (int i = 0; i < metaballs.numberOfMetaballs; i++)
-        {
-            if (i == metaballID)
-            {
-                continue;
-            }
-
-            Vector3 metaballsVector = metaballs.Position(i) - metaballs.Position(metaballID);
-            float sumOfRadius = metaballs.Radius(i) + metaballs.Radius(metaballID);
-
-            if (metaballsVector.magnitude < sumOfRadius + 8)
-            {
-                float angle = Vector3.Angle(direction, metaballsVector);
-                if (angle <= maxAngle)
-                {
-                    return false;
-                }
-            }
-            
-        }
-        return true;
     }
 
 }

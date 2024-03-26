@@ -38,7 +38,6 @@ public class PlayerController : MonoBehaviour
             Instantiate(projectile, spawnPosition, transform.rotation);
             lastShootTime = 0f;
         }
-        
     }
 
     public void SetDirection(Vector2 direction)

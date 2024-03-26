@@ -23,13 +23,6 @@ int indexFromCoord(int x, int y, int z)
     return z * numPointsPerAxis * numPointsPerAxis + y * numPointsPerAxis + x;
 }
 
-float distanceBetweenVectors(float3 a, float3 b)
-{
-    float distance = (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z);
-    
-    return sqrt(distance);
-}
-
 float distanceBetweenVectorsSq(float3 a, float3 b)
 {
     float distance = (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z);

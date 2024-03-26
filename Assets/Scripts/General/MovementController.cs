@@ -20,10 +20,6 @@ public class MovementController : MonoBehaviour
     public float interpolationSpeed;
     public float rotationSpeed;
 
-    // Add checking when player raycast not hitting any surface
-    // - check if character is in the surface
-    // - detect closest surface and rotate character to it
-
     // Start is called before the first frame update
     void Start()
     {
@@ -68,11 +64,7 @@ public class MovementController : MonoBehaviour
 
         if (IsInsideMetaballs())
         {
-            Vector3 vector = metaballs.CalculateMetaballsNormal(transform.position);
-            Debug.Log("Zle");
-            Debug.DrawRay(transform.position, vector, Color.green);
-            transform.position += vector;
-            transform.up = vector.normalized;
+            PushObjectFromGround();
         } 
 
         if (Physics.Raycast(transform.position, -transform.up, out groundHit, layerMask))
@@ -105,8 +97,6 @@ public class MovementController : MonoBehaviour
             Vector3 targetPosition = transform.position - adjustVector;
             transform.position = targetPosition;
         }
-            
-        
     }
 
     private bool IsInsideMetaballs()
@@ -118,9 +108,10 @@ public class MovementController : MonoBehaviour
 
     private void PushObjectFromGround()
     {
-        Vector3 normal;
-
-        //for (int i = 0; i < 0)
+        Vector3 vector = metaballs.CalculateMetaballsNormal(transform.position);
+        Debug.DrawRay(transform.position, vector, Color.green);
+        transform.position += vector;
+        transform.up = vector.normalized;
     }
 
 }

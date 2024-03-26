@@ -13,8 +13,6 @@ public class MetaBalls : MonoBehaviour
     public int numberOfMetaballs;
     public int worldBounds;
 
-    private bool buffersCreated = false;
-
     public struct MetaballStruct
     {
         public Vector3 centrePos;

@@ -17,16 +17,6 @@ public class InputController : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
 
-    private void OnEnable()
-    {
-
-    }
-
-    private void OnDisable()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
