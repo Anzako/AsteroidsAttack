@@ -351,6 +351,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104529435}
   m_CullTransparentMesh: 1
+--- !u!1 &208411577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 208411578}
+  - component: {fileID: 208411579}
+  m_Layer: 0
+  m_Name: Asteroids
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &208411578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208411577}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 34.674248, y: 37.323666, z: 31.483139}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &208411579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208411577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7b650b5b4b9984b966685d76d92d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnObject: {fileID: 3956984001194437467, guid: 17b0689e965d31e4db9ecf942fc09da5, type: 3}
+  amount: 0
+  pController: {fileID: 654914598}
 --- !u!1 &366313690
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +839,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adf115293cae34782f2b742fe2e4a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metaballs: {fileID: 1846323641}
   player: {fileID: 654914592}
   restartButton: {fileID: 955811668}
   deadCamera: {fileID: 1348764710}
@@ -1123,7 +1169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1574380767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1673,3 +1719,4 @@ SceneRoots:
   - {fileID: 62318742}
   - {fileID: 1189556669}
   - {fileID: 1437685179}
+  - {fileID: 208411578}

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    [SerializeField] private MetaBalls metaballs;
     [SerializeField] private GameObject player;
     [SerializeField] private Button restartButton;
     [SerializeField] private Camera deadCamera;
@@ -29,6 +28,7 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnPlayer(int metaballID)
     {
+        MetaBalls metaballs = MetaBalls.instance;
         Vector3 pos = metaballs.Position(metaballID);
         float radius = metaballs.Radius(metaballID);
 
@@ -38,7 +38,6 @@ public class PlayerSpawner : MonoBehaviour
 
         while (metaballs.CalculateScalarFieldValue(spawnPosition) > 0.5f)
         {
-            Debug.Log("Zle2");
             directionFromCenter = CalculateRandomVector3();
             spawnPosition = pos + directionFromCenter.normalized * (radius / 2);
         }
@@ -57,7 +56,7 @@ public class PlayerSpawner : MonoBehaviour
         float randY = Random.Range(-1f, 1f);
         float randZ = Random.Range(-1f, 1f);
 
-        return new Vector3(randX, randY, randZ);
+        return new Vector3(randX, randY, randZ).normalized;
     }
 
     public void OnPlayerDead()

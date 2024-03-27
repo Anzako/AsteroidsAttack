@@ -1,26 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private MovementController mController;
+    private MovementController mController;
+    private ParticleSystem onHitParticle;
+    [SerializeField] private GameObject model;
+
     public LayerMask enemyLayer;
     public float timeToDestroy = 5f;
     public int damage = 2;
 
+    private bool isDestroyed = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        mController = GetComponent<MovementController>();
+        onHitParticle = GetComponentInChildren<ParticleSystem>();
         Destroy(this.gameObject, timeToDestroy);
     }
 
     private void FixedUpdate()
     {
-        //Debug.DrawRay(transform.position, transform.forward * 2, Color.green);
         Vector2 forwardVector = new Vector2(0, 1);
-        mController.MovementFixedUpdate(forwardVector);
+        if (!isDestroyed)
+        {
+            mController.MovementFixedUpdate(forwardVector);
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -30,11 +40,19 @@ public class Projectile : MonoBehaviour
             HealthController hController = collision.gameObject.GetComponent<HealthController>();
             hController.TakeDamage(damage);
 
-            ParticleSystem hitPoint = collision.gameObject.GetComponentInChildren<ParticleSystem>();
-            hitPoint.transform.position = collision.GetContact(0).point;
-            
-            Destroy(this.gameObject);
+            StartCoroutine(DestroyOnHit());
         }
+    }
+
+    IEnumerator DestroyOnHit()
+    {
+        model.SetActive(false);
+        isDestroyed = true;
+        GetComponent<Light>().enabled = false;
+        onHitParticle.Play();
+
+        yield return new WaitForSeconds(1.0f);
+        Destroy(this.gameObject);
     }
 
 }

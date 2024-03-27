@@ -9,7 +9,6 @@ public class MovementController : MonoBehaviour
 {
     [SerializeField] private LayerMask groundMask;
     private int layerMask;
-    private MetaBalls metaballs;
 
     private RaycastHit groundHit;
     private bool isGrounded;
@@ -24,7 +23,6 @@ public class MovementController : MonoBehaviour
     void Start()
     {
         layerMask = 1 << 7;
-        metaballs = MetaBalls.instance;
     }
 
     // Update is called once per frame
@@ -101,14 +99,14 @@ public class MovementController : MonoBehaviour
 
     private bool IsInsideMetaballs()
     {
-        float scalarFieldValue = metaballs.CalculateScalarFieldValue(transform.position);
+        float scalarFieldValue = MetaBalls.instance.CalculateScalarFieldValue(transform.position);
 
         return scalarFieldValue > 0.5f;
     }
 
     private void PushObjectFromGround()
     {
-        Vector3 vector = metaballs.CalculateMetaballsNormal(transform.position);
+        Vector3 vector = MetaBalls.instance.CalculateMetaballsNormal(transform.position);
         Debug.DrawRay(transform.position, vector, Color.green);
         transform.position += vector;
         transform.up = vector.normalized;

@@ -35,7 +35,7 @@ public class OldMarchingCubes : MonoBehaviour
 
     void Update()
     {
-        float sphereSpeed = 2;
+        //float sphereSpeed = 2;
 
         /*if (sphereCenter1.x > 10)
         {

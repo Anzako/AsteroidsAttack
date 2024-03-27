@@ -8,7 +8,7 @@ public class HealthController : MonoBehaviour
     // Health
     public int maxHealth;
     protected int health;
-    public ParticleSystem onHitParticle;
+    [SerializeField] protected ParticleSystem onHitParticle;
 
     public virtual void TakeDamage(int damage)
     {
