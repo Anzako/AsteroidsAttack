@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class Projectile : MonoBehaviour
 {
@@ -10,27 +8,34 @@ public class Projectile : MonoBehaviour
     [SerializeField] private GameObject model;
 
     public LayerMask enemyLayer;
-    public float timeToDestroy = 5f;
-    public int damage = 2;
+    public float timeToDestroy;
+    public int damage;
 
+    public bool selfDestroyable = true;
     private bool isDestroyed = false;
+
+    private Vector2 moveDirection;
 
     // Start is called before the first frame update
     void Start()
     {
         mController = GetComponent<MovementController>();
         onHitParticle = GetComponentInChildren<ParticleSystem>();
-        Destroy(this.gameObject, timeToDestroy);
+
+        // Setting forward direction
+        moveDirection = new Vector2(0, 1);
+
+        if (selfDestroyable)
+        {
+            Destroy(this.gameObject, timeToDestroy);
+        }
     }
 
     private void FixedUpdate()
     {
-        Vector2 forwardVector = new Vector2(0, 1);
-        if (!isDestroyed)
-        {
-            mController.MovementFixedUpdate(forwardVector);
-        }
-        
+        if (isDestroyed) return;
+
+        mController.MovementFixedUpdate(moveDirection);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -39,6 +44,7 @@ public class Projectile : MonoBehaviour
         {
             HealthController hController = collision.gameObject.GetComponent<HealthController>();
             hController.TakeDamage(damage);
+            onHitParticle.transform.position = collision.contacts[0].point;
 
             StartCoroutine(DestroyOnHit());
         }
@@ -48,7 +54,8 @@ public class Projectile : MonoBehaviour
     {
         model.SetActive(false);
         isDestroyed = true;
-        GetComponent<Light>().enabled = false;
+        Light lightComponent = GetComponent<Light>();
+        if (lightComponent != null) lightComponent.enabled = false;
         onHitParticle.Play();
 
         yield return new WaitForSeconds(1.0f);

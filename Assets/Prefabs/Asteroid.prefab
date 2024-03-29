@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9070406438099332232}
   - component: {fileID: 811607702904451531}
   - component: {fileID: 2700744181373941581}
-  - component: {fileID: 8685755260823366917}
   m_Layer: 7
   m_Name: AsteroidModel
   m_TagString: Untagged
@@ -106,21 +105,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8685755260823366917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174136619786486881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c034e5d36abd854aa49d3d819083f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 2
-  onHitParticle: {fileID: 6572493726703036355}
-  score: 1
 --- !u!1 &3956984001194437467
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +116,9 @@ GameObject:
   - component: {fileID: 2386394811317480481}
   - component: {fileID: 602070337361627755}
   - component: {fileID: 8978048823640300672}
+  - component: {fileID: 8369022312475286570}
+  - component: {fileID: 104533538355452490}
+  - component: {fileID: 4260933094689136237}
   m_Layer: 7
   m_Name: Asteroid
   m_TagString: Untagged
@@ -187,6 +174,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0fec5dd65f71a49bc5bcfa9bbf0377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8369022312475286570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956984001194437467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0f1869626860740a1243600ea0ad55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 174136619786486881}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  timeToDestroy: 5
+  damage: 2
+  selfDestroyable: 0
+--- !u!54 &104533538355452490
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956984001194437467}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &4260933094689136237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956984001194437467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c034e5d36abd854aa49d3d819083f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2
+  onHitParticle: {fileID: 6572493726703036355}
+  score: 1
 --- !u!1001 &854129067449984853
 PrefabInstance:
   m_ObjectHideFlags: 0

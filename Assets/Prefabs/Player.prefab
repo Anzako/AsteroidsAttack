@@ -117,13 +117,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6731209989152015075}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 30, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8085797481541249609}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!108 &7261430001349603068
 Light:
   m_ObjectHideFlags: 0
@@ -136,10 +136,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Intensity: 3
+  m_Range: 40
+  m_SpotAngle: 100
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -198,7 +198,6 @@ GameObject:
   - component: {fileID: 5159258671767397868}
   - component: {fileID: 6952899374919471398}
   - component: {fileID: 4406910324686894548}
-  - component: {fileID: 4364217626656006762}
   - component: {fileID: 3719851685426429890}
   - component: {fileID: 78416745642762997}
   - component: {fileID: -3009897901644091826}
@@ -302,33 +301,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 638523861631414334, guid: 7caaf0ba83e07254dbdff1638edd18d1, type: 3}
---- !u!54 &4364217626656006762
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898362260430516467}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &3719851685426429890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,7 +348,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  isMoving: 1
   moveSpeed: 5
   toGroundDistance: 0.2
   interpolationSpeed: 1
@@ -471,7 +442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  onHitParticle: {fileID: 5831116862300029078, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
 --- !u!1001 &5451949770775907332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -483,6 +453,10 @@ PrefabInstance:
     - target: {fileID: 6070491148927718762, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
       propertyPath: m_Name
       value: PlayerHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070491148927718762, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6070491148927718762, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
       propertyPath: m_IsActive

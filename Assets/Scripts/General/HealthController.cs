@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthController : MonoBehaviour
@@ -8,7 +5,6 @@ public class HealthController : MonoBehaviour
     // Health
     public int maxHealth;
     protected int health;
-    [SerializeField] protected ParticleSystem onHitParticle;
 
     public virtual void TakeDamage(int damage)
     {
@@ -21,7 +17,7 @@ public class HealthController : MonoBehaviour
 
     protected virtual void Kill()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void SetHealthToMax()

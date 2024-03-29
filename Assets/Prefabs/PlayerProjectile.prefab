@@ -82,6 +82,7 @@ MonoBehaviour:
     m_Bits: 128
   timeToDestroy: 5
   damage: 3
+  selfDestroyable: 1
 --- !u!114 &7498818321579366332
 MonoBehaviour:
   m_ObjectHideFlags: 0

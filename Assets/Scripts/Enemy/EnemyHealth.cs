@@ -12,7 +12,6 @@ public class EnemyHealth : HealthController
     // Start is called before the first frame update
     void Start()
     {
-        onHitParticle = GetComponentInChildren<ParticleSystem>();
         health = maxHealth;
     }
 
@@ -20,7 +19,6 @@ public class EnemyHealth : HealthController
     {
         base.TakeDamage(damage);
         Damaged.Invoke();
-        onHitParticle.Play();
     }
 
     protected override void Kill()

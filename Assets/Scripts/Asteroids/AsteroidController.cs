@@ -1,30 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XInput;
 using UnityEngine.InputSystem.XR;
 
-public class AsteroidController : MonoBehaviour
+public class AsteroidController : MonoBehaviour, IPooledObject
 {
     // Movement
     private MovementController mController;
     private Vector2 direction;
 
-    // Start is called before the first frame update
-    void Start()
+    // Pooled object
+    private string tag;
+    public string Tag
     {
-        mController = GetComponent<MovementController>();
-        direction = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+        get { return tag; }
+        set { tag = value; }
     }
 
-    // Update is called once per frame
-    void Update()
+    // Health Controller
+    private AsteroidsHealth hController;
+
+    private void Awake()
     {
-        
+        mController = GetComponent<MovementController>();
+        Tag = "asteroid";
     }
 
     private void FixedUpdate()
     {
         mController.MovementFixedUpdate(direction);
     }
+
+    public void OnObjectSpawn()
+    {
+        direction = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+    }
+
+    public void OnObjectPooled()
+    {
+        Debug.Log("Object Pooled");
+        ObjectPooler.instance.ReturnObjectToPool(this.gameObject);
+
+        AsteroidsSpawner.instance.SpawnAsteroidInTime(2);
+    }
+
 }

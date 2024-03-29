@@ -63,12 +63,14 @@ public class MovementController : MonoBehaviour
         if (IsInsideMetaballs())
         {
             PushObjectFromGround();
-        } 
+        }
+
+        DrawForceVector();
 
         if (Physics.Raycast(transform.position, -transform.up, out groundHit, layerMask))
         {
             isGrounded = true;
-            Debug.DrawRay(transform.position, -transform.up, Color.green);  // Visualize ground normal
+            //Debug.DrawRay(transform.position, -transform.up, Color.green);  // Visualize ground normal
             float angle = Vector3.Angle(transform.up, groundHit.normal);
 
             if (angle > maxAngle)
@@ -90,26 +92,32 @@ public class MovementController : MonoBehaviour
 
         if (Math.Abs(distance) > 0.01)
         {
-            Vector3 adjustVector = transform.up * distance;
-                
-            Vector3 targetPosition = transform.position - adjustVector;
-            transform.position = targetPosition;
+            transform.position = transform.position - transform.up * distance;
         }
     }
 
     private bool IsInsideMetaballs()
     {
-        float scalarFieldValue = MetaBalls.instance.CalculateScalarFieldValue(transform.position);
+        // change 0.5f on treshold variable
 
-        return scalarFieldValue > 0.5f;
+        return MetaBalls.instance.CalculateScalarFieldValue(transform.position) > 0.5f;
     }
 
     private void PushObjectFromGround()
     {
         Vector3 vector = MetaBalls.instance.CalculateMetaballsNormal(transform.position);
-        Debug.DrawRay(transform.position, vector, Color.green);
+        
         transform.position += vector;
         transform.up = vector.normalized;
+
+        //Debug.DrawRay(transform.position, vector, Color.green);
+    }
+
+    private void DrawForceVector()
+    {
+        Vector3 vector = MetaBalls.instance.CalculateMetaballsNormal(transform.position);
+
+        Debug.DrawRay(transform.position, vector, Color.green);
     }
 
 }

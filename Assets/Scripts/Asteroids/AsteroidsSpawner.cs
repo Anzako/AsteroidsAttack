@@ -1,39 +1,63 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class AsteroidsSpawner : Spawner
 {
-    public int amount;
     [SerializeField] private PlayerController pController;
-
+    
     private bool spawned = false;
+    public string objectTag = "asteroid";
 
-    // Start is called before the first frame update
-    void Start()
+    #region Singleton
+
+    public static AsteroidsSpawner instance { get; private set; }
+
+    private void Awake()
     {
-        
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
     }
+
+    #endregion
 
     void Update()
     {
         if (!spawned)
         {
-            SpawnAsteroid();
-            SpawnAsteroid();
-            SpawnAsteroid();
-            SpawnAsteroid();
-            SpawnAsteroid();
+            SpawnAsteroids(6);
             spawned = true;
+        }
+    }
+
+    private void SpawnAsteroids(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnAsteroid();
         }
     }
 
     private void SpawnAsteroid()
     {
-        GameObject asteroid = SpawnGameObject(0);
-        asteroid.GetComponentInChildren<AsteroidsHealth>().Killed += pController.AddScore;
+        GameObject obj = SpawnGameObject(Random.Range(0, MetaBalls.instance.numberOfMetaballs), objectTag);
     }
 
-    
+    public void SpawnAsteroidInTime(float time)
+    {
+        StartCoroutine(WaitAndSpawn(time));
+    }
+
+    public IEnumerator WaitAndSpawn(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        SpawnAsteroid();
+    }
+
 }
