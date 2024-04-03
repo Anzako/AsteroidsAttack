@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8898362260430516467, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -357,7 +361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 3956984001194437467, guid: 17b0689e965d31e4db9ecf942fc09da5, type: 3}
   pController: {fileID: 654914598}
-  objectTag: asteroid
 --- !u!1 &366313690
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 1, z: 0}
-  speed: 3
+  speed: 2
   position: {x: 40, y: 30, z: 15}
   radius: 15
 --- !u!1 &654914592 stripped

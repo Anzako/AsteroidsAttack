@@ -23,6 +23,7 @@ public class PlayerHealth : HealthController
     protected override void Kill()
     {
         Killed.Invoke();
+        gameObject.SetActive(false);
         base.Kill();
     }
 }

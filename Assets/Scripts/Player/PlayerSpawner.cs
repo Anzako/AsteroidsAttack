@@ -28,35 +28,13 @@ public class PlayerSpawner : MonoBehaviour
 
     private void SpawnPlayer(int metaballID)
     {
-        MetaBalls metaballs = MetaBalls.instance;
-        Vector3 pos = metaballs.Position(metaballID);
-        float radius = metaballs.Radius(metaballID);
-
-        Vector3 directionFromCenter = CalculateRandomVector3();
-
-        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius / 2);
-
-        while (metaballs.CalculateScalarFieldValue(spawnPosition) > 0.5f)
-        {
-            directionFromCenter = CalculateRandomVector3();
-            spawnPosition = pos + directionFromCenter.normalized * (radius / 2);
-        }
-        
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);
+        Vector3 spawnPosition = Spawner.SpawnPosition(metaballID);
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - MetaBalls.instance.Position(metaballID));
 
         player.transform.position = spawnPosition;
         player.transform.rotation = rotation;
         player.GetComponent<UIController>().SetHealthToMax();
         player.gameObject.SetActive(true);
-    }
-
-    private Vector3 CalculateRandomVector3()
-    {
-        float randX = Random.Range(-1f, 1f);
-        float randY = Random.Range(-1f, 1f);
-        float randZ = Random.Range(-1f, 1f);
-
-        return new Vector3(randX, randY, randZ).normalized;
     }
 
     public void OnPlayerDead()

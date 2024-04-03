@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 2386394811317480481}
   - component: {fileID: 602070337361627755}
   - component: {fileID: 8978048823640300672}
-  - component: {fileID: 8369022312475286570}
   - component: {fileID: 104533538355452490}
   - component: {fileID: 4260933094689136237}
   m_Layer: 7
@@ -174,25 +173,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0fec5dd65f71a49bc5bcfa9bbf0377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8369022312475286570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3956984001194437467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e0f1869626860740a1243600ea0ad55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 174136619786486881}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  timeToDestroy: 5
   damage: 2
-  selfDestroyable: 0
+  model: {fileID: 174136619786486881}
+  _size: 0
 --- !u!54 &104533538355452490
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -233,7 +219,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 2
-  onHitParticle: {fileID: 6572493726703036355}
   score: 1
 --- !u!1001 &854129067449984853
 PrefabInstance:
@@ -253,15 +238,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8184389651378682539, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.604496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8184389651378682539, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 28.80669
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8184389651378682539, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 43.6216
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8184389651378682539, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -296,11 +281,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
---- !u!198 &6572493726703036355 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5831116862300029078, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}
-  m_PrefabInstance: {fileID: 854129067449984853}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8813178174352268798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8184389651378682539, guid: cd84474b90d16234b8483c56b2d3cbd9, type: 3}

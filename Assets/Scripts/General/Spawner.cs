@@ -10,6 +10,12 @@ public class Spawner : MonoBehaviour
         pooler = ObjectPooler.instance;
     }
 
+    public GameObject SpawnGameObject(string objectTag, Vector3 position, Quaternion rotation)
+    {
+        GameObject obj = pooler.SpawnObject(objectTag, position, rotation);
+        return obj;
+    }
+
     public GameObject SpawnGameObject(int metaballID, string objectTag)
     {
         Vector3 spawnPosition = SpawnPosition(metaballID);
@@ -26,7 +32,7 @@ public class Spawner : MonoBehaviour
         return Instantiate(spawnObject, spawnPosition, rotation, this.gameObject.transform);
     }
 
-    public static Vector2 SpawnPosition(int metaballID)
+    public static Vector3 SpawnPosition(int metaballID)
     {
         MetaBalls metaballs = MetaBalls.instance;
 
@@ -43,7 +49,7 @@ public class Spawner : MonoBehaviour
         return spawnPosition;
     }
 
-    private static Vector3 CalculateRandomVector3()
+    public static Vector3 CalculateRandomVector3()
     {
         float randX = Random.Range(-1f, 1f);
         float randY = Random.Range(-1f, 1f);

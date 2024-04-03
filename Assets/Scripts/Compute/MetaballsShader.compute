@@ -46,7 +46,6 @@ void MetaBall(uint3 id : SV_DispatchThreadID)
         float distance = distanceBetweenVectorsSq(pos, metaballs[i].centerPos);
         finalVal += metaballs[i].radius / distance;
     }
-        
     
     int index = indexFromCoord(id.x, id.y, id.z);
     points[index] = float4(pos, finalVal);

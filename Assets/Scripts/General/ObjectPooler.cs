@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.UIElements;
 
 public class ObjectPooler : MonoBehaviour
 {
@@ -52,7 +50,7 @@ public class ObjectPooler : MonoBehaviour
 
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist. Creating new one");
+            //Debug.LogWarning("Pool with tag " + tag + " doesn't exist. Creating new one");
             poolDictionary.Add(tag, new List<GameObject>());
         }
 
@@ -70,6 +68,7 @@ public class ObjectPooler : MonoBehaviour
             spawnableObj.SetActive(true);
         }
 
+        spawnableObj.GetComponent<IPooledObject>().OnObjectSpawn();
         return spawnableObj;
     }
 
@@ -78,11 +77,12 @@ public class ObjectPooler : MonoBehaviour
         IPooledObject pooledObj = obj.GetComponent<IPooledObject>();
         if (pooledObj == null) 
         {
-            Debug.Log("Cycki");
+            Debug.LogWarning("Object don't have Pooled Object interface");
+            return;
         }
         string tag = pooledObj.Tag;
-        Pool pool = pools.Find(p => p.tag == tag);
 
+        Pool pool = pools.Find(p => p.tag == tag);
         if (pool == null)
         {
             Debug.LogWarning("Trying to release an object that is not pooled " + tag);

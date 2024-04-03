@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class AsteroidsHealth : HealthController
 {
@@ -15,7 +14,7 @@ public class AsteroidsHealth : HealthController
         SetHealthToMax();
         aController = GetComponent<AsteroidController>();
 
-        Killed += aController.OnObjectPooled;
+        Killed += aController.OnObjectDestroy;
     }
 
     public override void TakeDamage(int damage)

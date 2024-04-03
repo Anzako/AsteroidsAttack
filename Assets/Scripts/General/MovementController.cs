@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.HID;
 
 public class MovementController : MonoBehaviour
 {
@@ -34,7 +30,7 @@ public class MovementController : MonoBehaviour
     public void MovementFixedUpdate(Vector2 moveDirection)
     {
         RotateToGround();
-        Move(moveDirection);
+        Move(moveDirection.normalized);
     }
 
     private void Move(Vector2 moveDirection)
@@ -64,8 +60,6 @@ public class MovementController : MonoBehaviour
         {
             PushObjectFromGround();
         }
-
-        DrawForceVector();
 
         if (Physics.Raycast(transform.position, -transform.up, out groundHit, layerMask))
         {
@@ -111,13 +105,6 @@ public class MovementController : MonoBehaviour
         transform.up = vector.normalized;
 
         //Debug.DrawRay(transform.position, vector, Color.green);
-    }
-
-    private void DrawForceVector()
-    {
-        Vector3 vector = MetaBalls.instance.CalculateMetaballsNormal(transform.position);
-
-        Debug.DrawRay(transform.position, vector, Color.green);
     }
 
 }
