@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using static AsteroidController;
+using Random = UnityEngine.Random;
 
 public class AsteroidsSpawner : Spawner
 {
@@ -32,7 +34,7 @@ public class AsteroidsSpawner : Spawner
         // Spawn asteroids at game start
         if (!spawned)
         {
-            SpawnAsteroids(1);
+            SpawnAsteroids(4);
             spawned = true;
         }
     }
@@ -45,9 +47,19 @@ public class AsteroidsSpawner : Spawner
         }
     }
 
+    // Spawn new asteroid on random metaball
     private void SpawnAsteroidRandomOnMetaball()
     {
-        SpawnGameObject(Random.Range(0, MetaBalls.instance.numberOfMetaballs), objectTag);
+        // spawn asteroid on metaballs without start metaball
+        GameObject asteroid = SpawnGameObject(Random.Range(1, MetaBalls.instance.numberOfMetaballs), objectTag);
+
+        AsteroidController asteroidController = asteroid.GetComponent<AsteroidController>();
+
+        Array values = Enum.GetValues(typeof(AsteroidSize));
+        System.Random random = new System.Random();
+        AsteroidSize randomSize = (AsteroidSize)values.GetValue(random.Next(values.Length));
+
+        asteroidController.Size = randomSize;
     }
 
     // Spawn asteroid close to destroyed one
@@ -63,8 +75,7 @@ public class AsteroidsSpawner : Spawner
         AsteroidController asteroidController = spawnedAsteroid.GetComponent<AsteroidController>();
 
         // create setter and getter for _size
-        asteroidController._size = size;
-        asteroidController.UpdateAsteroidParameters();
+        asteroidController.Size = size;
     }
 
     public static GameObject SpawnAsteroid(Vector3 position, Quaternion rotation)

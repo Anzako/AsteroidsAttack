@@ -99,7 +99,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   moveSpeed: 16
-  toGroundDistance: 0.2
+  toGroundDistance: 0.3
   interpolationSpeed: 4
   rotationSpeed: 4
 --- !u!108 &5827067826266563569

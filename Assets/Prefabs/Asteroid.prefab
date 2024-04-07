@@ -179,6 +179,8 @@ MonoBehaviour:
   damage: 2
   model: {fileID: 174136619786486881}
   _size: 0
+  direction: {x: 0, y: 0}
+  _tag: asteroid
 --- !u!54 &104533538355452490
 Rigidbody:
   m_ObjectHideFlags: 0

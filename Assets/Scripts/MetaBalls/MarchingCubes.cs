@@ -24,6 +24,18 @@ public class MarchingCubes : MonoBehaviour
     ComputeBuffer pointsBuffer;
     ComputeBuffer triCountBuffer;
 
+    // sprobowaæ zrobiæ w tiku przyci¹ganie oraz tworzenie collidera
+    // sprobowaæ zmienic przyci¹ganie na si³y metacz¹stek 31
+    private void OnEnable()
+    {
+        //Ticker.OnTickAction += Tick;
+    }
+
+    private void OnDisable()
+    {
+        //Ticker.OnTickAction -= Tick;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -127,6 +139,16 @@ public class MarchingCubes : MonoBehaviour
         // Set mesh to game
         meshFilter.mesh = mesh;
         meshCollider.sharedMesh = mesh;
+    }
+
+    private void Tick()
+    {
+        Debug.Log("DUPA");
+        /*if (meshCollider.sharedMesh != null)
+        {
+            Destroy(meshCollider.sharedMesh);
+        }
+        meshCollider.sharedMesh = actualMesh;*/
     }
 
     private void ReleaseBuffers()

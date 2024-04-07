@@ -58,7 +58,7 @@ public class ObjectPooler : MonoBehaviour
 
         if (spawnableObj == null)
         {
-            spawnableObj = Instantiate(pool.prefab, position, rotation);
+            spawnableObj = Instantiate(pool.prefab, position, rotation, this.transform);
         }
         else
         {

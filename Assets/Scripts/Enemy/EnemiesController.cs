@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class EnemiesController : MonoBehaviour
 {
@@ -37,14 +35,11 @@ public class EnemiesController : MonoBehaviour
         Vector3 pos = metaballs.Position(metaballID);
         float radius = metaballs.Radius(metaballID);
 
-        Vector3 directionFromCenter = CalculateRandomVector3();
-        Vector3 spawnPosition = pos + directionFromCenter.normalized * (radius + spawningDistance);
+        Vector3 spawnPosition = pos + CalculateRandomVector3().normalized * (radius + spawningDistance);
 
         while (metaballs.CalculateScalarFieldValue(spawnPosition) > 0.5f)
         {
-            Debug.Log("Zle2");
-            directionFromCenter = CalculateRandomVector3();
-            spawnPosition = pos + directionFromCenter.normalized * (radius / 2);
+            spawnPosition = pos + CalculateRandomVector3().normalized * (radius / 2);
         }
 
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - pos);

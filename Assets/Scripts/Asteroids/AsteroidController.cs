@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class AsteroidController : MonoBehaviour, IPooledObject
 {
+    #region Variables
     // Projectile variables
     private ParticleSystem onHitParticle;
     public LayerMask enemyLayer;
@@ -18,25 +19,34 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         Small
     }
     public AsteroidSize _size;
+    public AsteroidSize Size
+    {
+        get { 
+            return _size; 
+        }
+        set { 
+            _size = value;
+            UpdateAsteroidParameters();
+        }
+    }
 
     // Movement
     private MovementController mController;
     public Vector2 direction;
 
     // Pooled object
-    private string _tag;
+    public string _tag;
     public string Tag
     {
         get { return _tag; }
         set { _tag = value; }
     }
+    #endregion
 
     private void Awake()
     {
         mController = GetComponent<MovementController>();
         onHitParticle = GetComponentInChildren<ParticleSystem>();
-        Tag = "asteroid";
-        _size = AsteroidSize.Big;
         direction = new Vector2(0f, 1f);
     }
 
@@ -45,9 +55,13 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         if (isDestroyed) return;
 
         mController.MovementFixedUpdate(direction);
+    }
 
-        Debug.DrawRay(transform.position, -transform.up, Color.green);
-        Debug.DrawRay(transform.position, -transform.forward, Color.red);
+    public void OnObjectSpawn()
+    {
+        UpdateAsteroidParameters();
+        model.SetActive(true);
+        isDestroyed = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -62,18 +76,13 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         }
     }
 
-    public void OnObjectSpawn()
-    {
-        UpdateAsteroidParameters();
-        model.SetActive(true);
-        isDestroyed = false;
-    }
-
     public void OnObjectDestroy()
     {
         StartCoroutine(AsteroidDestroy(this._size));
     }
 
+    // Turning off this object
+    // Particle effect end then return object to pool
     public IEnumerator AsteroidDestroy(AsteroidSize size)
     {
         model.SetActive(false);
@@ -102,10 +111,10 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         ObjectPooler.instance.ReturnObjectToPool(this.gameObject);
     }
 
-    public void UpdateAsteroidParameters()
+    // Update parameters when size changed
+    private void UpdateAsteroidParameters()
     {
         // update size and maybe hp
-
         switch (_size)
         {
             case AsteroidSize.Big:
