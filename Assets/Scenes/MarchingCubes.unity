@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3009897901644091826, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: interpolationSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: scoreText
       value: 
@@ -482,7 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 1, z: 0}
-  speed: 2
+  speed: 1
   position: {x: 50, y: 30, z: 40}
   radius: 22
 --- !u!1 &654914592 stripped
@@ -667,7 +671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 1, y: 0, z: 1}
-  speed: 2
+  speed: 1
   position: {x: 35, y: 50, z: 40}
   radius: 30
 --- !u!1 &1189556665
