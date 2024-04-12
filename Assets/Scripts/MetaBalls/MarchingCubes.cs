@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MarchingCubes : MonoBehaviour
@@ -9,7 +7,6 @@ public class MarchingCubes : MonoBehaviour
     public MetaBalls metaBallGenerator;
     public ComputeShader shader;
     private MeshFilter meshFilter;
-    private MeshCollider meshCollider;
 
     [Header("Voxel Settings")]
     public float isoLevel;
@@ -42,7 +39,6 @@ public class MarchingCubes : MonoBehaviour
         metaBallGenerator.worldBounds = numPointsPerAxis;
 
         meshFilter = GetComponent<MeshFilter>();
-        meshCollider = GetComponent<MeshCollider>();
     }
 
     private void Update()
@@ -131,14 +127,9 @@ public class MarchingCubes : MonoBehaviour
         {
             Destroy(meshFilter.mesh);
         }
-        if (meshCollider.sharedMesh != null)
-        {
-            Destroy(meshCollider.sharedMesh);
-        }
 
         // Set mesh to game
         meshFilter.mesh = mesh;
-        meshCollider.sharedMesh = mesh;
     }
 
     private void Tick()
