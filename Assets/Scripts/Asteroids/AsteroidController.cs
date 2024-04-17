@@ -68,7 +68,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     {
         if ((enemyLayer.value & (1 << collision.transform.gameObject.layer)) > 0)
         {
-            HealthController hController = collision.gameObject.GetComponent<HealthController>();
+            HealthController hController = collision.gameObject.GetComponentInParent<HealthController>();
             hController.TakeDamage(damage);
             onHitParticle.transform.position = collision.contacts[0].point;
 

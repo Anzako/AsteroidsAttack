@@ -21,13 +21,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        mController.MovementFixedUpdate(direction);
         mController.MovementUpdate(inputController.mousePos.x * mouseSensitivity);
         lastShootTime += Time.deltaTime;
     }
 
     private void FixedUpdate()
     {
-        mController.MovementFixedUpdate(direction);
+        if (mController != null)
+        {
+            //mController.MovementFixedUpdate(direction);
+        }
+        
     }
 
     public void ShootProjectile()
