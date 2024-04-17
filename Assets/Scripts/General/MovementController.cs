@@ -4,11 +4,9 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     private MetaBalls metaballs;
-    public static float toGroundPotential = 0.47f;
-    //private float maxAngle = 5f;
+    public static float toGroundPotential = 0.48f;
 
     public float moveSpeed;
-    //public float toGroundDistance;
     public static float gravityForce = 4f;
     public float rotationSpeed;
 
@@ -22,14 +20,12 @@ public class MovementController : MonoBehaviour
     public void MovementUpdate(float horizontalRotationAngle)
     {
         RotateAroundVerticalAxis(horizontalRotationAngle);
-
     }
 
     public void MovementFixedUpdate(Vector2 moveDirection)
     {
         RotateToSurface();
         Move(moveDirection.normalized);
-
     }
 
     private void Move(Vector2 moveDirection)
@@ -66,5 +62,3 @@ public class MovementController : MonoBehaviour
     }
 
 }
-
-
