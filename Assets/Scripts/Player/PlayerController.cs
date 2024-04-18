@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity = 1f;
 
     // Shooting
+    public string objectTag;
     [SerializeField] private GameObject projectile;
     private float lastShootTime = 0;
     public float timeToShoot;
@@ -40,7 +38,7 @@ public class PlayerController : MonoBehaviour
         if (lastShootTime >= timeToShoot)
         {
             Vector3 spawnPosition = transform.position + transform.forward.normalized;
-            Instantiate(projectile, spawnPosition, transform.rotation);
+            ObjectPooler.instance.SpawnObject(objectTag, spawnPosition, transform.rotation);
             lastShootTime = 0f;
         }
     }

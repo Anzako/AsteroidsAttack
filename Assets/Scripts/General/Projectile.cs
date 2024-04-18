@@ -1,13 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPooledObject
 {
     private MovementController mController;
     private ParticleSystem onHitParticle;
     [SerializeField] private GameObject model;
 
     public LayerMask enemyLayer;
+    public string objectTag;
     public float timeToDestroy;
     public int damage;
 
@@ -16,6 +17,13 @@ public class Projectile : MonoBehaviour
 
     private Vector2 moveDirection;
 
+    public string _tag;
+    public string Tag
+    {
+        get { return _tag; }
+        set { _tag = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +31,14 @@ public class Projectile : MonoBehaviour
         onHitParticle = GetComponentInChildren<ParticleSystem>();
 
         // Setting forward direction
-        moveDirection = new Vector2(0, 1);
+        moveDirection = new Vector2(0, 1); 
+    }
 
+    private void OnEnable()
+    {
         if (selfDestroyable)
         {
-            Destroy(this.gameObject, timeToDestroy);
+            StartCoroutine(DestroyOnSpawn());
         }
     }
 
@@ -50,6 +61,12 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    IEnumerator DestroyOnSpawn()
+    {
+        yield return new WaitForSeconds(timeToDestroy);
+        ObjectPooler.instance.ReturnObjectToPool(this.gameObject);
+    }
+
     IEnumerator DestroyOnHit()
     {
         model.SetActive(false);
@@ -59,7 +76,15 @@ public class Projectile : MonoBehaviour
         onHitParticle.Play();
 
         yield return new WaitForSeconds(1.0f);
-        Destroy(this.gameObject);
+        ObjectPooler.instance.ReturnObjectToPool(this.gameObject);
+    }
+
+    public void OnObjectSpawn()
+    {
+        model.SetActive(true);
+        isDestroyed = false;
+        Light lightComponent = GetComponent<Light>();
+        if (lightComponent != null) lightComponent.enabled = true;
     }
 
 }

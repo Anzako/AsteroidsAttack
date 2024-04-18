@@ -82,7 +82,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     }
 
     // Turning off this object
-    // Particle effect end then return object to pool
+    // Play particle effect end then return object to pool
     public IEnumerator AsteroidDestroy(AsteroidSize size)
     {
         model.SetActive(false);
@@ -114,17 +114,16 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     // Update parameters when size changed
     private void UpdateAsteroidParameters()
     {
-        // update size and maybe hp
         switch (_size)
         {
             case AsteroidSize.Big:
-                transform.localScale = Vector3.one;
+                transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
                 break;
             case AsteroidSize.Medium:
-                transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                transform.localScale = new Vector3(1f, 1f, 1f);
                 break;
             case AsteroidSize.Small:
-                transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                 break;
         }
     }

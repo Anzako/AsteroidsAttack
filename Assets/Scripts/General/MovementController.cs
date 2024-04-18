@@ -4,7 +4,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     private MetaBalls metaballs;
-    public static float toGroundPotential = 0.48f;
+    public static float toGroundPotential = 0.5f;
 
     public float moveSpeed;
     public static float gravityForce = 4f;

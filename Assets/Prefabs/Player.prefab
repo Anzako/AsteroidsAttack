@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 749628760865338145}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -349,6 +349,7 @@ MonoBehaviour:
   UIController: {fileID: 5476350350173624902}
   actualScore: 0
   mouseSensitivity: 0.5
+  objectTag: projectile
   projectile: {fileID: 694073047113383073, guid: ce9a478c1a323824cb2f5beab04df836, type: 3}
   timeToShoot: 0
 --- !u!114 &78416745642762997
