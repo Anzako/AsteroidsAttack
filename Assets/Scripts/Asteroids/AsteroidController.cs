@@ -89,7 +89,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         onHitParticle.Play();
 
         yield return new WaitForSeconds(1.0f);
-        ObjectPooler.instance.ReturnObjectToPool(this.gameObject);
+        AsteroidsSpawner.instance.ReturnToPool(this.gameObject);
     }
 
 

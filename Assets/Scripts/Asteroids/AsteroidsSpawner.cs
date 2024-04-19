@@ -1,12 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public class AsteroidsSpawner : Spawner
 {
     [SerializeField] private PlayerController pController;
-    
-    private bool spawned = false;
+
+    public List<GameObject> asteroids;
     public string[] asteroidSize;
 
     #region Singleton
@@ -22,22 +23,25 @@ public class AsteroidsSpawner : Spawner
         else
         {
             instance = this;
+            asteroids = new List<GameObject> ();
         }
     }
 
     #endregion
 
-    void Update()
+    private void OnEnable()
     {
-        // Spawn asteroids at game start
-        if (!spawned)
-        {
-            SpawnAsteroids(4);
-            spawned = true;
-        }
+        StartCoroutine(debugSth());
     }
 
-    private void SpawnAsteroids(int amount)
+    public IEnumerator debugSth()
+    {
+        Debug.Log(asteroids.Count);
+        yield return new WaitForSeconds(1f);
+        yield return debugSth();
+    }
+
+    public void SpawnAsteroids(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -48,8 +52,8 @@ public class AsteroidsSpawner : Spawner
     // Spawn new asteroid on random metaball
     private void SpawnAsteroidRandomOnMetaball()
     {
-        SpawnGameObject(Random.Range(1, MetaBalls.instance.numberOfMetaballs), 
-            asteroidSize[Random.Range(0, asteroidSize.Length)]);
+        asteroids.Add(SpawnGameObject(Random.Range(1, MetaBalls.instance.numberOfMetaballs), 
+            asteroidSize[Random.Range(0, asteroidSize.Length)]));
     }
 
     // Spawn asteroid close to destroyed one
@@ -67,7 +71,9 @@ public class AsteroidsSpawner : Spawner
 
     public GameObject SpawnAsteroid(string size, Vector3 position, Quaternion rotation)
     {
-        return instance.SpawnGameObject(size, position, rotation);
+        GameObject asteroid = instance.SpawnGameObject(size, position, rotation);
+        asteroids.Add(asteroid);
+        return asteroid;
     }
 
     public void SpawnAsteroidInTime(float time)
@@ -82,4 +88,19 @@ public class AsteroidsSpawner : Spawner
         SpawnAsteroidRandomOnMetaball();
     }
 
+    public void ReturnToPool(GameObject asteroid)
+    {
+        asteroids.Remove(asteroid);
+        ObjectPooler.instance.ReturnObjectToPool(asteroid);
+    }
+
+    public void ResetGame()
+    {
+        for(int i = asteroids.Count - 1; i >= 0; i--)
+        {
+            ReturnToPool(asteroids[i]);
+        }
+
+        SpawnAsteroids(5);
+    }
 }

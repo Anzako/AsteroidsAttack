@@ -9,53 +9,59 @@ public class PlayerSpawner : MonoBehaviour
 
     public float distanceFromGround;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        // Turn off camera
-        deadCamera.gameObject.SetActive(false);
-
-        // Restart button
-        restartButton.gameObject.SetActive(false);
         restartButton.onClick.AddListener(OnRestartButton);
-        player.GetComponent<PlayerHealth>().Killed += OnPlayerDead;
-
-        // Spawn player
-        SpawnPlayer(0);
     }
 
-    private void SpawnPlayer(int metaballID)
+    public void SpawnPlayer(int metaballID)
     {
         Vector3 spawnPosition = Spawner.SpawnPosition(metaballID);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - MetaBalls.instance.Position(metaballID));
 
         player.transform.position = spawnPosition;
         player.transform.rotation = rotation;
+
+        EnablePlayer();
+    }
+
+    private void EnablePlayer()
+    {
+        // Turn off camera
+        deadCamera.gameObject.SetActive(false);
+
+        // UI things
+        restartButton.gameObject.SetActive(false);
+        
         player.GetComponent<UIController>().SetHealthToMax();
         player.gameObject.SetActive(true);
-        Cursor.lockState = CursorLockMode.Locked;
 
+        // Locking cursor
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void DisablePlayer()
+    {
+        // Turn off camera
+        deadCamera.gameObject.SetActive(true);
+
+        // UI things
+        restartButton.gameObject.SetActive(true);
+        player.GetComponent<UIController>().SetActiveUI(false);
+        
+        // Locking cursor
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void OnPlayerDead()
     {
-        deadCamera.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(true);
-        UIController uicontroller = player.GetComponent<UIController>();
-        uicontroller.SetActiveUI(false);
-
-        Cursor.lockState = CursorLockMode.None;
+        DisablePlayer();
         ScoreManager.instance.ResetScore();
     }
 
     private void OnRestartButton()
     {
-        restartButton.gameObject.SetActive(false);
-        deadCamera.gameObject.SetActive(false);
-
-        UIController uicontroller = player.GetComponent<UIController>();
-        uicontroller.SetActiveUI(true);
-
         SpawnPlayer(0);
     }
+
 }

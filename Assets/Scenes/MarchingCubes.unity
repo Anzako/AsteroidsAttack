@@ -151,6 +151,10 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 1578304658}
+    - target: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: maxHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8085797481541249609, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -251,9 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d1e89c3676bbb4187a97da0dfacae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0, z: 0}
+  startDirection: {x: 0, y: 0, z: 0}
+  startPosition: {x: 30, y: 30, z: 30}
   speed: 0
-  position: {x: 30, y: 30, z: 30}
   radius: 25
 --- !u!1 &104529435
 GameObject:
@@ -599,9 +603,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d1e89c3676bbb4187a97da0dfacae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 1, z: 0}
+  startDirection: {x: 0, y: -1, z: 0.3}
+  startPosition: {x: 30, y: 60, z: 30}
   speed: 1
-  position: {x: 50, y: 30, z: 40}
   radius: 22
 --- !u!1 &654914592 stripped
 GameObject:
@@ -643,6 +647,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIController: {fileID: 654914600}
+--- !u!114 &654914606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+  m_PrefabInstance: {fileID: 62318742}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654914592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &955811666
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,9 +823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d1e89c3676bbb4187a97da0dfacae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0, z: 1}
-  speed: 1
-  position: {x: 35, y: 50, z: 40}
+  startDirection: {x: -1, y: -0.5, z: 0.4}
+  startPosition: {x: 60, y: 60, z: 60}
+  speed: 2
   radius: 30
 --- !u!1 &1189556665
 GameObject:
@@ -1220,6 +1235,7 @@ GameObject:
   - component: {fileID: 1374295980}
   - component: {fileID: 1374295982}
   - component: {fileID: 1374295983}
+  - component: {fileID: 1374295984}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1287,6 +1303,21 @@ MonoBehaviour:
   restartButton: {fileID: 955811668}
   deadCamera: {fileID: 1348764710}
   distanceFromGround: 0
+--- !u!114 &1374295984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374295979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb5c76031c2bf3541adeda1fcf656d9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pSpawner: {fileID: 1374295983}
+  aSpawner: {fileID: 1374295982}
+  pHealth: {fileID: 654914606}
 --- !u!1 &1437685176
 GameObject:
   m_ObjectHideFlags: 0

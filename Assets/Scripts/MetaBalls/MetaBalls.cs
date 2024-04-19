@@ -57,7 +57,7 @@ public class MetaBalls : MonoBehaviour
     {
         for (int i = 0; i < numberOfMetaballs; i++)
         {
-            metaballsStruct[i].centrePos = metaballs[i].position;
+            metaballsStruct[i].centrePos = metaballs[i].Position;
             metaballsStruct[i].radius = metaballs[i].radius;
         }
     }
@@ -91,7 +91,7 @@ public class MetaBalls : MonoBehaviour
 
     public Vector3 Position(int ID)
     {
-        return metaballs[ID].position;
+        return metaballs[ID].Position;
     }
 
     public float Radius(int ID)
@@ -112,7 +112,7 @@ public class MetaBalls : MonoBehaviour
 
     public float CalculateMetaballScalarFieldValue(Vector3 position, Metaball metaball)
     {
-        float distance = distanceBetweenVectorsSq(position, metaball.position);
+        float distance = distanceBetweenVectorsSq(position, metaball.Position);
         float scalarValue = metaball.radius / distance;
         return scalarValue;
     }
@@ -122,7 +122,7 @@ public class MetaBalls : MonoBehaviour
         Vector3 calculatedNormal = new Vector3();
         for (int i = 0; i < numberOfMetaballs; i++)
         {
-            Vector3 normal = position - metaballs[i].position;
+            Vector3 normal = position - Position(i);
             normal = normal.normalized * CalculateMetaballScalarFieldValue(position, metaballs[i]);
             calculatedNormal += normal;
         }
