@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] GameObject spawnObject;
     private ObjectPooler pooler;
 
     private void Start()
@@ -25,7 +24,7 @@ public class Spawner : MonoBehaviour
         return obj;
     }
 
-    public GameObject SpawnGameObject(int metaballID)
+    public GameObject SpawnGameObject(int metaballID, GameObject spawnObject)
     {
         Vector3 spawnPosition = SpawnPosition(metaballID);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - MetaBalls.instance.Position(metaballID));

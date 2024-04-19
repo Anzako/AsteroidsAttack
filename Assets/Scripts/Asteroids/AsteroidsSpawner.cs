@@ -1,15 +1,13 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using static AsteroidController;
-using Random = UnityEngine.Random;
+
 
 public class AsteroidsSpawner : Spawner
 {
     [SerializeField] private PlayerController pController;
     
     private bool spawned = false;
-    public static string objectTag = "asteroid";
+    public string[] asteroidSize;
 
     #region Singleton
 
@@ -50,20 +48,12 @@ public class AsteroidsSpawner : Spawner
     // Spawn new asteroid on random metaball
     private void SpawnAsteroidRandomOnMetaball()
     {
-        // spawn asteroid on metaballs without start metaball
-        GameObject asteroid = SpawnGameObject(Random.Range(1, MetaBalls.instance.numberOfMetaballs), objectTag);
-
-        AsteroidController asteroidController = asteroid.GetComponent<AsteroidController>();
-
-        Array values = Enum.GetValues(typeof(AsteroidSize));
-        System.Random random = new System.Random();
-        AsteroidSize randomSize = (AsteroidSize)values.GetValue(random.Next(values.Length));
-
-        asteroidController.Size = randomSize;
+        SpawnGameObject(Random.Range(1, MetaBalls.instance.numberOfMetaballs), 
+            asteroidSize[Random.Range(0, asteroidSize.Length)]);
     }
 
     // Spawn asteroid close to destroyed one
-    public static void SpawnAsteroidOnDestroy(AsteroidSize size, Transform transform)
+    public void SpawnAsteroidOnDestroy(string size, Transform transform)
     {
         float distanceOfSpawn = 0.5f;
         float randomAngle = Random.Range(0f, 360f);
@@ -71,16 +61,13 @@ public class AsteroidsSpawner : Spawner
         newTransform.RotateAround(newTransform.position, newTransform.up, randomAngle);
         newTransform.position += newTransform.forward * distanceOfSpawn;
 
-        GameObject spawnedAsteroid = SpawnAsteroid(newTransform.position, newTransform.rotation);
-        AsteroidController asteroidController = spawnedAsteroid.GetComponent<AsteroidController>();
-
-        // create setter and getter for _size
-        asteroidController.Size = size;
+        SpawnAsteroid(size, newTransform.position, newTransform.rotation);
     }
 
-    public static GameObject SpawnAsteroid(Vector3 position, Quaternion rotation)
+
+    public GameObject SpawnAsteroid(string size, Vector3 position, Quaternion rotation)
     {
-        return instance.SpawnGameObject(objectTag, position, rotation);
+        return instance.SpawnGameObject(size, position, rotation);
     }
 
     public void SpawnAsteroidInTime(float time)

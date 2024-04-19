@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour, IPooledObject
     {
         if (isDestroyed) return;
 
-        mController.MovementFixedUpdate(moveDirection);
+        mController.MovementUpdate(moveDirection);
     }
 
     private void OnCollisionEnter(Collision collision)

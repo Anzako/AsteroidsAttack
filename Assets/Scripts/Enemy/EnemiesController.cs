@@ -50,7 +50,6 @@ public class EnemiesController : MonoBehaviour
         if (enemyHealth != null)
         {
             enemyHealth.Killed += OnEnemyKill;
-            enemyHealth.Killed += playerController.AddScore;
         }
 
         Enemy enemy = newEnemy.GetComponentInChildren<Enemy>();

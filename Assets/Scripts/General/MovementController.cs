@@ -4,9 +4,9 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     private MetaBalls metaballs;
-    public static float toGroundPotential = 0.5f;
-
     public float moveSpeed;
+
+    public static float toGroundPotential = 0.47f;
     public static float gravityForce = 4f;
     public float rotationSpeed;
 
@@ -17,12 +17,12 @@ public class MovementController : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void MovementUpdate(float horizontalRotationAngle)
+    public void PlayerMouseUpdate(float horizontalRotationAngle)
     {
         RotateAroundVerticalAxis(horizontalRotationAngle);
     }
 
-    public void MovementFixedUpdate(Vector2 moveDirection)
+    public void MovementUpdate(Vector2 moveDirection)
     {
         RotateToSurface();
         Move(moveDirection.normalized);

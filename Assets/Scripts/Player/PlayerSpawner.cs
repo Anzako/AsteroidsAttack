@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +33,8 @@ public class PlayerSpawner : MonoBehaviour
         player.transform.rotation = rotation;
         player.GetComponent<UIController>().SetHealthToMax();
         player.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     public void OnPlayerDead()
@@ -43,9 +43,9 @@ public class PlayerSpawner : MonoBehaviour
         restartButton.gameObject.SetActive(true);
         UIController uicontroller = player.GetComponent<UIController>();
         uicontroller.SetActiveUI(false);
-        
-        PlayerController playerController = player.GetComponent<PlayerController>();
-        playerController.ResetScore();
+
+        Cursor.lockState = CursorLockMode.None;
+        ScoreManager.instance.ResetScore();
     }
 
     private void OnRestartButton()

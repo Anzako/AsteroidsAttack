@@ -4,33 +4,21 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private MovementController mController;
     [SerializeField] private InputController inputController;
-    [SerializeField] private UIController UIController;
     public int actualScore = 0;
 
     Vector2 direction = Vector2.zero;
-    public float mouseSensitivity = 1f;
 
     // Shooting
     public string objectTag;
-    [SerializeField] private GameObject projectile;
     private float lastShootTime = 0;
     public float timeToShoot;
 
     // Update is called once per frame
     void Update()
     {
-        mController.MovementFixedUpdate(direction);
-        mController.MovementUpdate(inputController.mousePos.x * mouseSensitivity);
+        mController.MovementUpdate(direction);
+        mController.PlayerMouseUpdate(inputController.mousePos);
         lastShootTime += Time.deltaTime;
-    }
-
-    private void FixedUpdate()
-    {
-        if (mController != null)
-        {
-            //mController.MovementFixedUpdate(direction);
-        }
-        
     }
 
     public void ShootProjectile()
@@ -48,15 +36,4 @@ public class PlayerController : MonoBehaviour
         this.direction = direction;
     }
 
-    public void AddScore(int score)
-    {
-        actualScore += score;
-        UIController.SetScore(actualScore);
-    }
-
-    public void ResetScore()
-    {
-        actualScore = 0;
-        UIController.SetScore(actualScore);
-    }
 }

@@ -9,8 +9,8 @@ public class InputController : MonoBehaviour
 {
     private PlayerController playerController;
 
-    private Vector2 lastMousePos;
-    public Vector2 mousePos;
+    public float mousePos;
+    public float sensitivity;
 
     private void Awake()
     {
@@ -20,8 +20,7 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePos = Mouse.current.position.ReadValue() - lastMousePos;
-        lastMousePos = Mouse.current.position.ReadValue();
+        mousePos = Input.GetAxis("Mouse X") * sensitivity;
     }
 
     public void OnLeftClick(InputAction.CallbackContext context)

@@ -1,38 +1,22 @@
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour, IPooledObject
 {
     #region Variables
-    // Projectile variables
+    private AsteroidsHealth healthCtr;
     private ParticleSystem onHitParticle;
+    private AsteroidsSpawner spawner;
+
     public LayerMask enemyLayer;
     public int damage;
     private bool isDestroyed = false;
     [SerializeField] private GameObject model;
 
-    // Asteroid variables
-    public enum AsteroidSize
-    {
-        Big,
-        Medium,
-        Small
-    }
-    public AsteroidSize _size;
-    public AsteroidSize Size
-    {
-        get { 
-            return _size; 
-        }
-        set { 
-            _size = value;
-            UpdateAsteroidParameters();
-        }
-    }
-
     // Movement
     private MovementController mController;
-    public Vector2 direction;
+    private Vector2 direction;
 
     // Pooled object
     public string _tag;
@@ -45,8 +29,10 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     private void Awake()
     {
+        healthCtr = GetComponent<AsteroidsHealth>();
         mController = GetComponent<MovementController>();
         onHitParticle = GetComponentInChildren<ParticleSystem>();
+        spawner = AsteroidsSpawner.instance;
         direction = new Vector2(0f, 1f);
     }
 
@@ -54,12 +40,11 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     {
         if (isDestroyed) return;
 
-        mController.MovementFixedUpdate(direction);
+        mController.MovementUpdate(direction);
     }
 
     public void OnObjectSpawn()
     {
-        UpdateAsteroidParameters();
         model.SetActive(true);
         isDestroyed = false;
     }
@@ -72,59 +57,40 @@ public class AsteroidController : MonoBehaviour, IPooledObject
             hController.TakeDamage(damage);
             onHitParticle.transform.position = collision.contacts[0].point;
 
-            OnObjectDestroy();
+            StartCoroutine(AsteroidDestroy(Tag));
         }
     }
 
-    public void OnObjectDestroy()
+    public void OnProjectileDestroy()
     {
-        StartCoroutine(AsteroidDestroy(this._size));
-    }
-
-    // Turning off this object
-    // Play particle effect end then return object to pool
-    public IEnumerator AsteroidDestroy(AsteroidSize size)
-    {
-        model.SetActive(false);
-        isDestroyed = true;
-        onHitParticle.Play();
-        
-        switch (size)
+        switch (Tag)
         {
-            case AsteroidSize.Big:
-                AsteroidsSpawner.SpawnAsteroidOnDestroy(AsteroidSize.Medium, this.transform);
-                AsteroidsSpawner.SpawnAsteroidOnDestroy(AsteroidSize.Medium, this.transform);
-                AsteroidsSpawner.SpawnAsteroidOnDestroy(AsteroidSize.Medium, this.transform);
+            case "bigAsteroid":
+                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
+                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
+                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
                 break;
-            case AsteroidSize.Medium:
-                AsteroidsSpawner.SpawnAsteroidOnDestroy(AsteroidSize.Small, this.transform);
-                AsteroidsSpawner.SpawnAsteroidOnDestroy(AsteroidSize.Small, this.transform);
-                break;
-            case AsteroidSize.Small:
-                Debug.Log("Asteroid destroyed");
+            case "mediumAsteroid":
+                spawner.SpawnAsteroidOnDestroy("smallAsteroid", this.transform);
+                spawner.SpawnAsteroidOnDestroy("smallAsteroid", this.transform);
                 break;
             default:
                 break;
         }
+        StartCoroutine(AsteroidDestroy(Tag));
+    }
+
+    // Turning off this object
+    // Play particle effect end then return object to pool
+    public IEnumerator AsteroidDestroy(string size)
+    {
+        model.SetActive(false);
+        isDestroyed = true;
+        onHitParticle.Play();
 
         yield return new WaitForSeconds(1.0f);
         ObjectPooler.instance.ReturnObjectToPool(this.gameObject);
     }
 
-    // Update parameters when size changed
-    private void UpdateAsteroidParameters()
-    {
-        switch (_size)
-        {
-            case AsteroidSize.Big:
-                transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                break;
-            case AsteroidSize.Medium:
-                transform.localScale = new Vector3(1f, 1f, 1f);
-                break;
-            case AsteroidSize.Small:
-                transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-                break;
-        }
-    }
+
 }

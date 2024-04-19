@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 8978048823640300672}
   - component: {fileID: 4260933094689136237}
   m_Layer: 7
-  m_Name: Asteroid
+  m_Name: BigAsteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8870954305031484303}
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cc3534ada173d418cbe7ec74efd0ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   rotationSpeed: 4
 --- !u!114 &8978048823640300672
 MonoBehaviour:
@@ -198,11 +198,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  damage: 2
+  damage: 4
   model: {fileID: 174136619786486881}
-  _size: 0
-  direction: {x: 0, y: 0}
-  _tag: asteroid
+  _tag: bigAsteroid
 --- !u!114 &4260933094689136237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 2
-  score: 1
+  score: 4
 --- !u!1001 &854129067449984853
 PrefabInstance:
   m_ObjectHideFlags: 0
