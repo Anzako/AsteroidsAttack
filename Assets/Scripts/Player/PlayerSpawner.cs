@@ -7,17 +7,13 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private Camera deadCamera;
 
+    private int spawnMetaballID = 0;
     public float distanceFromGround;
 
-    private void Start()
+    public void SpawnPlayer()
     {
-        restartButton.onClick.AddListener(OnRestartButton);
-    }
-
-    public void SpawnPlayer(int metaballID)
-    {
-        Vector3 spawnPosition = Spawner.SpawnPosition(metaballID);
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - MetaBalls.instance.Position(metaballID));
+        Vector3 spawnPosition = Spawner.RandomPositionOnMetaball(spawnMetaballID);
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - MetaBalls.instance.Position(spawnMetaballID));
 
         player.transform.position = spawnPosition;
         player.transform.rotation = rotation;
@@ -32,9 +28,10 @@ public class PlayerSpawner : MonoBehaviour
 
         // UI things
         restartButton.gameObject.SetActive(false);
-        
-        player.GetComponent<UIController>().SetHealthToMax();
+
         player.gameObject.SetActive(true);
+        player.GetComponent<UIController>().SetHealthToMax();
+        player.GetComponent<UIController>().SetActiveUI(true);
 
         // Locking cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -57,11 +54,6 @@ public class PlayerSpawner : MonoBehaviour
     {
         DisablePlayer();
         ScoreManager.instance.ResetScore();
-    }
-
-    private void OnRestartButton()
-    {
-        SpawnPlayer(0);
     }
 
 }

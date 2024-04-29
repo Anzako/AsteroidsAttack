@@ -6,8 +6,9 @@ using UnityEngine;
 public class AsteroidsSpawner : Spawner
 {
     [SerializeField] private PlayerController pController;
+    [SerializeField] private Camera pCamera;
 
-    public List<GameObject> asteroids;
+    private List<GameObject> asteroids;
     public string[] asteroidSize;
 
     #region Singleton
@@ -31,7 +32,7 @@ public class AsteroidsSpawner : Spawner
 
     private void OnEnable()
     {
-        StartCoroutine(debugSth());
+        //StartCoroutine(debugSth());
     }
 
     public IEnumerator debugSth()
@@ -45,15 +46,16 @@ public class AsteroidsSpawner : Spawner
     {
         for (int i = 0; i < amount; i++)
         {
-            SpawnAsteroidRandomOnMetaball();
+            SpawnRandomAsteroid();
         }
     }
 
     // Spawn new asteroid on random metaball
-    private void SpawnAsteroidRandomOnMetaball()
+    private void SpawnRandomAsteroid()
     {
-        asteroids.Add(SpawnGameObject(Random.Range(1, MetaBalls.instance.numberOfMetaballs), 
-            asteroidSize[Random.Range(0, asteroidSize.Length)]));
+        string randomAsteroidSize = asteroidSize[Random.Range(0, asteroidSize.Length)];
+
+        asteroids.Add(SpawnAwayFromPlayerView(randomAsteroidSize, pCamera.transform.forward));
     }
 
     // Spawn asteroid close to destroyed one
@@ -71,7 +73,7 @@ public class AsteroidsSpawner : Spawner
 
     public GameObject SpawnAsteroid(string size, Vector3 position, Quaternion rotation)
     {
-        GameObject asteroid = instance.SpawnGameObject(size, position, rotation);
+        GameObject asteroid = instance.SpawnPoolObjectOnPosition(size, position, rotation);
         asteroids.Add(asteroid);
         return asteroid;
     }
@@ -85,22 +87,20 @@ public class AsteroidsSpawner : Spawner
     {
         yield return new WaitForSeconds(time);
 
-        SpawnAsteroidRandomOnMetaball();
+        SpawnRandomAsteroid();
+    }
+
+    public void ReturnAsteroidsToPool()
+    {
+        for (int i = asteroids.Count - 1; i >= 0; i--)
+        {
+            ReturnToPool(asteroids[i]);
+        }
     }
 
     public void ReturnToPool(GameObject asteroid)
     {
         asteroids.Remove(asteroid);
         ObjectPooler.instance.ReturnObjectToPool(asteroid);
-    }
-
-    public void ResetGame()
-    {
-        for(int i = asteroids.Count - 1; i >= 0; i--)
-        {
-            ReturnToPool(asteroids[i]);
-        }
-
-        SpawnAsteroids(5);
     }
 }

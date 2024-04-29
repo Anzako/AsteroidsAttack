@@ -605,7 +605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startDirection: {x: 0, y: -1, z: 0.3}
   startPosition: {x: 30, y: 60, z: 30}
-  speed: 1
+  speed: 3
   radius: 22
 --- !u!1 &654914592 stripped
 GameObject:
@@ -825,7 +825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startDirection: {x: -1, y: -0.5, z: 0.4}
   startPosition: {x: 60, y: 60, z: 60}
-  speed: 2
+  speed: 0
   radius: 30
 --- !u!1 &1189556665
 GameObject:
@@ -1216,13 +1216,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348764708}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.66, y: 25.18, z: -10}
+  m_LocalRotation: {x: 0.056405257, y: 0, z: 0, w: 0.99840796}
+  m_LocalPosition: {x: 13.39, y: 60.55, z: 26.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.467, y: 0, z: 0}
 --- !u!1 &1374295979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,6 +1283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pController: {fileID: 654914598}
+  pCamera: {fileID: 1979869291}
   asteroidSize:
   - smallAsteroid
   - mediumAsteroid
@@ -1318,6 +1319,8 @@ MonoBehaviour:
   pSpawner: {fileID: 1374295983}
   aSpawner: {fileID: 1374295982}
   pHealth: {fileID: 654914606}
+  restartButton: {fileID: 955811668}
+  amount: 10
 --- !u!1 &1437685176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,6 +1952,11 @@ Transform:
   - {fileID: 1036682538}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1979869291 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8437133351225935583, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+  m_PrefabInstance: {fileID: 62318742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

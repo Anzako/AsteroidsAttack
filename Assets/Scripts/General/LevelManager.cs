@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,21 +8,33 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AsteroidsSpawner aSpawner;
     [SerializeField] private PlayerHealth pHealth;
     [SerializeField] private Button restartButton;
+    public int amount;
 
     // Start is called before the first frame update
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(0.1f);
 
-        pSpawner.SpawnPlayer(0);
         pHealth.Killed += GameOver;
-        aSpawner.SpawnAsteroids(5);
-        restartButton.onClick.AddListener(aSpawner.ResetGame);
+        restartButton.onClick.AddListener(RestartGame);
+
+        StartGame();
     }
 
+    private void StartGame()
+    {
+        pSpawner.SpawnPlayer();
+        aSpawner.SpawnAsteroids(amount);
+    }
 
     public void GameOver()
     {
         pSpawner.OnPlayerDead();
+    }
+
+    public void RestartGame()
+    {
+        aSpawner.ReturnAsteroidsToPool();
+        StartGame();
     }
 }

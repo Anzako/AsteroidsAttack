@@ -7,6 +7,7 @@ public class MarchingCubes : MonoBehaviour
     public MetaBalls metaBallGenerator;
     public ComputeShader shader;
     private MeshFilter meshFilter;
+    Mesh mesh;
 
     [Header("Voxel Settings")]
     public float isoLevel;
@@ -37,6 +38,7 @@ public class MarchingCubes : MonoBehaviour
     void Start()
     {
         metaBallGenerator.worldBounds = numPointsPerAxis;
+        mesh = new Mesh();
 
         meshFilter = GetComponent<MeshFilter>();
     }
@@ -102,8 +104,7 @@ public class MarchingCubes : MonoBehaviour
         Triangle[] tris = new Triangle[numTris];
         triangleBuffer.GetData(tris, 0, 0, numTris);
 
-        // Create mesh and set data
-        Mesh mesh = new Mesh();
+        // Clear mesh and set data
         mesh.Clear();
 
         var vertices = new Vector3[numTris * 3];
@@ -121,12 +122,6 @@ public class MarchingCubes : MonoBehaviour
         mesh.triangles = meshTriangles;
 
         mesh.RecalculateNormals();
-
-        // Destroy old meshes
-        if (meshFilter.mesh != null)
-        {
-            Destroy(meshFilter.mesh);
-        }
 
         // Set mesh to game
         meshFilter.mesh = mesh;

@@ -46,19 +46,14 @@ public class MovementController : MonoBehaviour
         Vector3 potentialVector = metaballs.CalculateMetaballsNormal(transform.position);
         Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
 
-        float scalarValue = metaballs.CalculateScalarFieldValue(transform.position);
-
         // Rotating object to new rotation depending on potential vector
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, potentialVector.normalized)
                 * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
             Time.deltaTime * rotationSpeed);
 
-        float val = toGroundPotential - scalarValue;
-        if (Math.Abs(val) > 0.01f)
-        {
-            transform.position -= potentialVector.normalized * val * gravityForce;
-        }
+        float val = toGroundPotential - metaballs.CalculateScalarFieldValue(transform.position);
+        transform.position -= potentialVector.normalized * val * gravityForce;
     }
 
 }
