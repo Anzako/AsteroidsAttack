@@ -1,20 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    public Slider healthSlider;
-    public TMP_Text scoreText;
-    [SerializeField] private PlayerHealth healthController;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private TMP_Text scoreText;
 
     private void Start()
     {
         scoreText.text = "Score: 0";
-        SetMaxHealth(healthController.maxHealth);
-        healthController.Damaged += SetHealth;
     }
 
     public void SetMaxHealth(int health)
@@ -28,11 +23,6 @@ public class UIController : MonoBehaviour
         healthSlider.value = health;
     }
 
-    public void SetHealthToMax()
-    {
-        healthController.SetHealthToMax();
-        healthSlider.value = healthController.maxHealth;
-    }
 
     public void SetScore(int score)
     {
@@ -45,8 +35,8 @@ public class UIController : MonoBehaviour
         return text;
     }
 
-    public void SetActiveUI(bool isActive) 
-    { 
+    public void SetActive(bool isActive) 
+    {
         scoreText.gameObject.SetActive(isActive);
         healthSlider.gameObject.SetActive(isActive);
     }

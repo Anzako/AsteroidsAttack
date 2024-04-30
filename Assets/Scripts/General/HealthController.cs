@@ -17,10 +17,10 @@ public class HealthController : MonoBehaviour
 
     protected virtual void Kill()
     {
-        //gameObject.SetActive(false);
+        
     }
 
-    public void SetHealthToMax()
+    public virtual void SetHealthToMax()
     {
         health = maxHealth;
     }

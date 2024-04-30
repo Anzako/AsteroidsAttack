@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 
 public class AsteroidsSpawner : Spawner
@@ -54,8 +55,9 @@ public class AsteroidsSpawner : Spawner
     private void SpawnRandomAsteroid()
     {
         string randomAsteroidSize = asteroidSize[Random.Range(0, asteroidSize.Length)];
-
-        asteroids.Add(SpawnAwayFromPlayerView(randomAsteroidSize, pCamera.transform.forward));
+        
+        asteroids.Add(SpawnAwayFromPlayerView(randomAsteroidSize, -pController.transform.up));
+        //asteroids.Add(SpawnAwayFromPlayerView(randomAsteroidSize, pCamera.transform.forward));
     }
 
     // Spawn asteroid close to destroyed one

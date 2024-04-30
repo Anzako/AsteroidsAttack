@@ -4,6 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private MovementController mController;
     [SerializeField] private InputController inputController;
+    [SerializeField] private PlayerHealth healthController;
     public int actualScore = 0;
 
     Vector2 direction = Vector2.zero;
@@ -19,6 +20,17 @@ public class PlayerController : MonoBehaviour
         mController.MovementUpdate(direction);
         mController.PlayerMouseUpdate(inputController.mousePos);
         lastShootTime += Time.deltaTime;
+    }
+
+    public void EnablePlayer()
+    {
+        gameObject.SetActive(true);
+        healthController.SetHealthToMax();
+    }
+
+    public void DisablePlayer()
+    {
+        gameObject.SetActive(false);
     }
 
     public void ShootProjectile()

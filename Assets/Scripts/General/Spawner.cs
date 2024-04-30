@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
 
     public GameObject SpawnAwayFromPlayerView(string objectTag, Vector3 cameraDir, int maxAttempts = 10)
     {
-        int randomMetaballID = Random.Range(1, metaballs.numberOfMetaballs);
+        int randomMetaballID = Random.Range(0, metaballs.numberOfMetaballs);
         Vector3 spawnPosition = RandomPositionOnMetaball(randomMetaballID);
         Vector3 forceVector = metaballs.CalculateMetaballsNormal(spawnPosition);
 

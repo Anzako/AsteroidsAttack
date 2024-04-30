@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerHealth : HealthController
 {
+    [SerializeField] private UIController playerHUD;
     public event Action<int> Damaged = delegate { };
     public event Action Killed = delegate { };
 
@@ -12,18 +13,26 @@ public class PlayerHealth : HealthController
     void Start()
     {
         health = maxHealth;
+        playerHUD.SetMaxHealth(maxHealth);
     }
 
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
+        playerHUD.SetHealth(health);
         Damaged.Invoke(health);
     }
 
     protected override void Kill()
     {
-        Killed.Invoke();
-        gameObject.SetActive(false);
         base.Kill();
+        Killed.Invoke();
+        GetComponent<PlayerController>().DisablePlayer();
+    }
+
+    public override void SetHealthToMax()
+    {
+        base.SetHealthToMax();
+        playerHUD.SetHealth(health);
     }
 }
