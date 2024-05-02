@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour, IPooledObject
 {
     #region Variables
-    private AsteroidsHealth healthCtr;
-    private ParticleSystem onHitParticle;
+    public static Action onDestroy;
+    private ParticleSystem hitParticle;
     private AsteroidsSpawner spawner;
 
     public LayerMask enemyLayer;
@@ -29,10 +31,9 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     private void Awake()
     {
-        healthCtr = GetComponent<AsteroidsHealth>();
         mController = GetComponent<MovementController>();
-        onHitParticle = GetComponentInChildren<ParticleSystem>();
-        spawner = AsteroidsSpawner.instance;
+        hitParticle = GetComponentInChildren<ParticleSystem>();
+        spawner = AsteroidsSpawner.Instance;
         direction = new Vector2(0f, 1f);
     }
 
@@ -55,7 +56,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         {
             HealthController hController = collision.gameObject.GetComponentInParent<HealthController>();
             hController.TakeDamage(damage);
-            onHitParticle.transform.position = collision.contacts[0].point;
+            hitParticle.transform.position = collision.contacts[0].point;
 
             StartCoroutine(AsteroidDestroy(Tag));
         }
@@ -86,10 +87,11 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     {
         model.SetActive(false);
         isDestroyed = true;
-        onHitParticle.Play();
+        hitParticle.Play();
 
         yield return new WaitForSeconds(1.0f);
-        AsteroidsSpawner.instance.ReturnToPool(this.gameObject);
+        AsteroidsSpawner.Instance.ReturnToPool(this.gameObject);
+        onDestroy?.Invoke();
     }
 
 

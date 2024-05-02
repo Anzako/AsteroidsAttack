@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerSpawner : MonoBehaviour
+public class PlayerSpawner : Singleton<PlayerSpawner>
 {
     [SerializeField] private GameObject player;
 
     private int spawnMetaballID = 0;
     public float distanceFromGround;
 
-    private void Awake()
+    private void Start()
     {
         GameManager.OnStateChanged += GameManagerOnStateChanged;
     }

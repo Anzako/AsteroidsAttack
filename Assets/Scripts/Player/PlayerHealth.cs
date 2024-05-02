@@ -14,6 +14,7 @@ public class PlayerHealth : HealthController
     {
         health = maxHealth;
         playerHUD.SetMaxHealth(maxHealth);
+        Killed += LevelManager.Instance.GameOver;
     }
 
     public override void TakeDamage(int damage)

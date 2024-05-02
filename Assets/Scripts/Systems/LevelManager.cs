@@ -1,24 +1,25 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
-    [SerializeField] private PlayerSpawner pSpawner;
-    [SerializeField] private AsteroidsSpawner aSpawner;
-    [SerializeField] private PlayerHealth pHealth;
+    private GameManager gameManager;
+    private PlayerSpawner pSpawner;
+    private AsteroidsSpawner aSpawner;
+
     [SerializeField] private Button restartButton;
+    private int actualRound = 0;
     public int amount;
+
+    public int[] asteroidsInRound;
 
     private void Start()
     {
-        pHealth.Killed += GameOver;
-        restartButton.onClick.AddListener(RestartGame);
-    }
-
-    private void Awake()
-    {
         GameManager.OnStateChanged += GameManagerOnStateChanged;
+        restartButton.onClick.AddListener(RestartGame);
+        pSpawner = PlayerSpawner.Instance;
+        aSpawner = AsteroidsSpawner.Instance;
+        gameManager = GameManager.Instance;
     }
 
     private void OnDestroy()
@@ -33,24 +34,42 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame()
     {
-        pSpawner.SpawnPlayer();
-        StartRound(0);
+        actualRound = 0;
+        pSpawner.SpawnPlayer(); 
+        StartRound(actualRound);
+    }
+
+    private void StartRound(int round)
+    {
+        aSpawner.SpawnAsteroids(asteroidsInRound[round]);
     }
 
     public void GameOver()
     {
         ScoreManager.instance.ResetScore();
-        GameManager.Instance.ChangeState(GameState.GameOver);
+        gameManager.ChangeState(GameState.GameOver);
     }
-
     public void RestartGame()
     {
         aSpawner.ReturnAsteroidsToPool();
-        GameManager.Instance.ChangeState(GameState.Game);
+        gameManager.ChangeState(GameState.Game);
     }
 
-    private void StartRound(int round)
+    public void EndRound()
     {
-        aSpawner.SpawnAsteroids(amount);
+        actualRound++;
+        if (actualRound >= asteroidsInRound.Length)
+        {
+            EndGame();
+            return;
+        } 
+
+        // Do as IEnumerator to wait for next round
+        StartRound(actualRound);
+    }
+
+    private void EndGame()
+    {
+        Debug.Log("Game ends");
     }
 }
