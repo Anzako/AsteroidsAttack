@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerSpawner : Singleton<PlayerSpawner>
 {
@@ -7,21 +6,6 @@ public class PlayerSpawner : Singleton<PlayerSpawner>
 
     private int spawnMetaballID = 0;
     public float distanceFromGround;
-
-    private void Start()
-    {
-        GameManager.OnStateChanged += GameManagerOnStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.OnStateChanged -= GameManagerOnStateChanged;
-    }
-
-    public void GameManagerOnStateChanged(GameState state)
-    {
-        player.GetComponent<UIController>().SetActive(state == GameState.Game);
-    }
 
     public void SpawnPlayer()
     {

@@ -344,13 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c428a9d84a927524ea641a616e286069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mController: {fileID: -3009897901644091826}
-  inputController: {fileID: 78416745642762997}
-  UIController: {fileID: 5476350350173624902}
   actualScore: 0
-  mouseSensitivity: 0.5
-  objectTag: projectile
-  projectile: {fileID: 694073047113383073, guid: ce9a478c1a323824cb2f5beab04df836, type: 3}
+  projectileTag: 
   timeToShoot: 0
 --- !u!114 &78416745642762997
 MonoBehaviour:
@@ -364,7 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b390e1f66a891e4ba55db058b3f112f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePos: {x: 0, y: 0}
+  mousePos: 0
+  sensitivity: 0
 --- !u!114 &-3009897901644091826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,7 +451,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
   scoreText: {fileID: 0}
-  healthController: {fileID: 5691059295496667685}
 --- !u!114 &5691059295496667685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,3 +464,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  <health>k__BackingField: 0

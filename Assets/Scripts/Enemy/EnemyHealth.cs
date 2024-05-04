@@ -12,12 +12,12 @@ public class EnemyHealth : HealthController
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        //health = maxHealth;
     }
 
-    public override void TakeDamage(int damage)
+    public override void Damage(int damage)
     {
-        base.TakeDamage(damage);
+        base.Damage(damage);
         Damaged.Invoke();
     }
 

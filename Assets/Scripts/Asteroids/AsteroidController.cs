@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour, IPooledObject
@@ -52,13 +50,13 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((enemyLayer.value & (1 << collision.transform.gameObject.layer)) > 0)
-        {
-            HealthController hController = collision.gameObject.GetComponentInParent<HealthController>();
-            hController.TakeDamage(damage);
-            hitParticle.transform.position = collision.contacts[0].point;
+        IDamagable damagable = collision.gameObject.GetComponentInParent<IDamagable>();
 
-            StartCoroutine(AsteroidDestroy(Tag));
+        if (damagable != null)
+        {
+            damagable.Damage(damage);
+            hitParticle.transform.position = collision.contacts[0].point;
+            StartCoroutine(DestroyOnTime());
         }
     }
 
@@ -78,12 +76,12 @@ public class AsteroidController : MonoBehaviour, IPooledObject
             default:
                 break;
         }
-        StartCoroutine(AsteroidDestroy(Tag));
+        StartCoroutine(DestroyOnTime());
     }
 
     // Turning off this object
     // Play particle effect end then return object to pool
-    public IEnumerator AsteroidDestroy(string size)
+    public IEnumerator DestroyOnTime()
     {
         model.SetActive(false);
         isDestroyed = true;

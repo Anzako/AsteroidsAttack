@@ -4,7 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour, IPooledObject
 {
     private MovementController mController;
-    private ParticleSystem onHitParticle;
+    private ParticleSystem hitParticle;
     [SerializeField] private GameObject model;
 
     public LayerMask enemyLayer;
@@ -28,7 +28,7 @@ public class Projectile : MonoBehaviour, IPooledObject
     void Start()
     {
         mController = GetComponent<MovementController>();
-        onHitParticle = GetComponentInChildren<ParticleSystem>();
+        hitParticle = GetComponentInChildren<ParticleSystem>();
 
         // Setting forward direction
         moveDirection = new Vector2(0, 1); 
@@ -51,12 +51,12 @@ public class Projectile : MonoBehaviour, IPooledObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((enemyLayer.value & (1 << collision.transform.gameObject.layer)) > 0)
-        {
-            HealthController hController = collision.gameObject.GetComponent<HealthController>();
-            hController.TakeDamage(damage);
-            onHitParticle.transform.position = collision.contacts[0].point;
+        IDamagable damagable = collision.gameObject.GetComponentInParent<IDamagable>();
 
+        if (damagable != null)
+        {
+            damagable.Damage(damage);
+            hitParticle.transform.position = collision.contacts[0].point;
             StartCoroutine(DestroyOnHit());
         }
     }
@@ -73,7 +73,7 @@ public class Projectile : MonoBehaviour, IPooledObject
         isDestroyed = true;
         Light lightComponent = GetComponent<Light>();
         if (lightComponent != null) lightComponent.enabled = false;
-        onHitParticle.Play();
+        hitParticle.Play();
 
         yield return new WaitForSeconds(1.0f);
         ObjectPooler.instance.ReturnObjectToPool(this.gameObject);

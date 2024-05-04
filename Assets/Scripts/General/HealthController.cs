@@ -1,14 +1,29 @@
+using System;
 using UnityEngine;
 
-public class HealthController : MonoBehaviour
+public class HealthController : MonoBehaviour, IDamagable
 {
-    // Health
-    public int maxHealth;
-    protected int health;
+    public event Action Damaged = delegate { };
+    public event Action Killed = delegate { };
 
-    public virtual void TakeDamage(int damage)
+    // Health
+    [SerializeField] private int maxHealth;
+    [field: SerializeField] public int health { get; private set; }
+
+    public void SetHealth(int healthAmount)
     {
-        health -= damage;
+        health = healthAmount;
+    }
+
+    public virtual void SetHealthToMax()
+    {
+        SetHealth(maxHealth);
+    }
+
+    public virtual void Damage(int damageAmount)
+    {
+        health -= damageAmount;
+        Damaged?.Invoke();
         if (health <= 0)
         {
             Kill();
@@ -17,11 +32,12 @@ public class HealthController : MonoBehaviour
 
     protected virtual void Kill()
     {
-        
+        Killed?.Invoke();
     }
+}
 
-    public virtual void SetHealthToMax()
-    {
-        health = maxHealth;
-    }
+
+public interface IDamagable
+{
+    public void Damage(int damageAmount);
 }
