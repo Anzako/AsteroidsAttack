@@ -65,7 +65,7 @@ public class EnemiesController : MonoBehaviour
         return new Vector3(randX, randY, randZ);
     }
 
-    public void OnEnemyKill(int score)
+    public void OnEnemyKill()
     {
         SpawnEnemy(0);
     }

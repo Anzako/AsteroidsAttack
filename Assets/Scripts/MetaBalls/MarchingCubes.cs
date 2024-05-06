@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class MarchingCubes : MonoBehaviour
+public class MarchingCubes : Singleton<MarchingCubes>
 {
     const int threadGroupSize = 8;
 
     public MetaBalls metaBallGenerator;
     public ComputeShader shader;
     private MeshFilter meshFilter;
-    Mesh mesh;
+    private Mesh mesh;
 
     [Header("Voxel Settings")]
     public float isoLevel;
@@ -21,18 +21,6 @@ public class MarchingCubes : MonoBehaviour
     ComputeBuffer triangleBuffer;
     ComputeBuffer pointsBuffer;
     ComputeBuffer triCountBuffer;
-
-    // sprobowaæ zrobiæ w tiku przyci¹ganie oraz tworzenie collidera
-    // sprobowaæ zmienic przyci¹ganie na si³y metacz¹stek 31
-    private void OnEnable()
-    {
-        //Ticker.OnTickAction += Tick;
-    }
-
-    private void OnDisable()
-    {
-        //Ticker.OnTickAction -= Tick;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -125,16 +113,6 @@ public class MarchingCubes : MonoBehaviour
 
         // Set mesh to game
         meshFilter.mesh = mesh;
-    }
-
-    private void Tick()
-    {
-        Debug.Log("DUPA");
-        /*if (meshCollider.sharedMesh != null)
-        {
-            Destroy(meshCollider.sharedMesh);
-        }
-        meshCollider.sharedMesh = actualMesh;*/
     }
 
     private void ReleaseBuffers()

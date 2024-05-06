@@ -13,7 +13,7 @@ public class MovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        metaballs = MetaBalls.instance;
+        metaballs = MetaBalls.Instance;
     }
 
     // Update is called once per frame

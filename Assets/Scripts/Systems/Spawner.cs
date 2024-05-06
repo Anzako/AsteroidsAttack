@@ -7,8 +7,8 @@ public class Spawner : Singleton<Spawner>
 
     private void Start()
     {
-        pooler = ObjectPooler.instance;
-        metaballs = MetaBalls.instance;
+        pooler = ObjectPooler.Instance;
+        metaballs = MetaBalls.Instance;
     }
 
     // Pool Objects
@@ -74,7 +74,7 @@ public class Spawner : Singleton<Spawner>
     // Calculate
     public static Vector3 RandomPositionOnMetaball(int metaballID, int maxAttempts = 10)
     {
-        MetaBalls metaballs = MetaBalls.instance;
+        MetaBalls metaballs = MetaBalls.Instance;
 
         Vector3 pos = metaballs.Position(metaballID);
         float radius = metaballs.Radius(metaballID);

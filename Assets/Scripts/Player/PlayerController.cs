@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         if (lastShootTime >= timeToShoot)
         {
             Vector3 spawnPosition = transform.position + transform.forward.normalized;
-            ObjectPooler.instance.SpawnObject(projectileTag, spawnPosition, transform.rotation);
+            ObjectPooler.Instance.SpawnObject(projectileTag, spawnPosition, transform.rotation);
             lastShootTime = 0f;
         }
     }

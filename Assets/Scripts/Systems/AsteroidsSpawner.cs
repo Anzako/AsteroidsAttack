@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 
 public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
@@ -17,12 +16,12 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     {
         asteroids = new List<GameObject>();
         spawner = Spawner.Instance;
-        AsteroidController.onDestroy += CheckIfAnyAsteroidsLeft;
+        AsteroidController.onDestroy += OnAsteroidDestroy;
     }
 
     private void OnDestroy()
     {
-        AsteroidController.onDestroy -= CheckIfAnyAsteroidsLeft;
+        AsteroidController.onDestroy -= OnAsteroidDestroy;
     }
 
     public IEnumerator debugSth()
@@ -32,9 +31,10 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         yield return debugSth();
     }
 
-    public void CheckIfAnyAsteroidsLeft()
+    public void OnAsteroidDestroy()
     {
         if (asteroids.Count == 0) { LevelManager.Instance.EndRound(); }
+
     }
 
     public void SpawnAsteroids(int amount)
@@ -86,17 +86,17 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         SpawnRandomAsteroid();
     }
 
-    public void ReturnAsteroidsToPool()
+    /*public void ReturnAsteroidsToPool()
     {
         for (int i = asteroids.Count - 1; i >= 0; i--)
         {
             ReturnToPool(asteroids[i]);
         }
     }
-
+    */
     public void ReturnToPool(GameObject asteroid)
     {
         asteroids.Remove(asteroid);
-        ObjectPooler.instance.ReturnObjectToPool(asteroid);
+        ObjectPooler.Instance.ReturnObjectToPool(asteroid);
     }
 }

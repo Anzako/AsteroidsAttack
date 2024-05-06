@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,10 @@ public class LevelManager : Singleton<LevelManager>
     private GameManager gameManager;
     private PlayerSpawner pSpawner;
     private AsteroidsSpawner aSpawner;
+    [SerializeField] private UIController HUDController;
 
     [SerializeField] private Button restartButton;
+
     private int actualRound = 0;
     public int amount;
 
@@ -42,6 +45,7 @@ public class LevelManager : Singleton<LevelManager>
     private void StartRound(int round)
     {
         aSpawner.SpawnAsteroids(asteroidsInRound[round]);
+        HUDController.SetWave(round + 1);
     }
 
     public void GameOver()
@@ -51,7 +55,10 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void RestartGame()
     {
-        aSpawner.ReturnAsteroidsToPool();
+        ObjectPooler.Instance.ReturnObjectsToPool("smallAsteroid");
+        ObjectPooler.Instance.ReturnObjectsToPool("mediumAsteroid");
+        ObjectPooler.Instance.ReturnObjectsToPool("bigAsteroid");
+        ObjectPooler.Instance.ReturnObjectsToPool("projectile");
         gameManager.ChangeState(GameState.Game);
     }
 

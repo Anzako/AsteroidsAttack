@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -32,7 +31,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         OnStateChanged?.Invoke(newState);
-        Debug.Log($"New state: {newState}");
+        //Debug.Log($"New state: {newState}");
     }
 
     private void HandleMenu()

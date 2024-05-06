@@ -7,10 +7,15 @@ public class PlayerSpawner : Singleton<PlayerSpawner>
     private int spawnMetaballID = 0;
     public float distanceFromGround;
 
+    private void Start()
+    {
+        player.GetComponent<UIController>().SetActive(false);
+    }
+
     public void SpawnPlayer()
     {
         Vector3 spawnPosition = Spawner.RandomPositionOnMetaball(spawnMetaballID);
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - MetaBalls.instance.Position(spawnMetaballID));
+        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - MetaBalls.Instance.Position(spawnMetaballID));
 
         Transform playerTransform = player.transform;
         playerTransform.position = spawnPosition;

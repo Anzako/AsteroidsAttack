@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class MetaBalls : MonoBehaviour
+public class MetaBalls : Singleton<MetaBalls>
 {
-    public static MetaBalls instance { get; private set; }
-
     const int threadGroupSize = 8;
     public ComputeShader metaballShader;
     [SerializeField] private Metaball[] metaballs;
@@ -19,17 +17,9 @@ public class MetaBalls : MonoBehaviour
     public MetaballStruct[] metaballsStruct;
     private ComputeBuffer metaballBuffer;
 
-    private void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        numberOfMetaballs = metaballs.Length;
-    }
-
     private void Start()
     {
+        numberOfMetaballs = metaballs.Length;
         CreateMetaballs();
     }
 

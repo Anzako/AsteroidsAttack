@@ -64,7 +64,7 @@ public class Projectile : MonoBehaviour, IPooledObject
     IEnumerator DestroyOnSpawn()
     {
         yield return new WaitForSeconds(timeToDestroy);
-        ObjectPooler.instance.ReturnObjectToPool(this.gameObject);
+        ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
     IEnumerator DestroyOnHit()
@@ -76,7 +76,7 @@ public class Projectile : MonoBehaviour, IPooledObject
         hitParticle.Play();
 
         yield return new WaitForSeconds(1.0f);
-        ObjectPooler.instance.ReturnObjectToPool(this.gameObject);
+        ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
     public void OnObjectSpawn()
