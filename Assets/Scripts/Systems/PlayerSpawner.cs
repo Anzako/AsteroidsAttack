@@ -24,4 +24,9 @@ public class PlayerSpawner : Singleton<PlayerSpawner>
         player.GetComponent<PlayerController>().EnablePlayer();
     }
 
+    public void DisablePlayer()
+    {
+        player.GetComponent<PlayerController>().DisablePlayer();
+    }
+
 }

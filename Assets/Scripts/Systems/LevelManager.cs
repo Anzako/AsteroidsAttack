@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,6 +76,9 @@ public class LevelManager : Singleton<LevelManager>
 
     private void EndGame()
     {
+        ScoreManager.instance.ResetScore();
+        pSpawner.DisablePlayer();
+        gameManager.ChangeState(GameState.GameOver);
         Debug.Log("Game ends");
     }
 }

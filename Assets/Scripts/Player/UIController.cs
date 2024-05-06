@@ -7,10 +7,16 @@ public class UIController : MonoBehaviour
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text waveText;
+    [SerializeField] private TMP_Text asteroidsAmountText;
 
     private void Start()
     {
         scoreText.text = "Score: 0";
+    }
+
+    public void SetAsteroidsAmountText(int amount)
+    {
+        asteroidsAmountText.text = "Asteroids: " + amount;
     }
 
     public void SetWave(int wave)
@@ -46,6 +52,7 @@ public class UIController : MonoBehaviour
         scoreText.gameObject.SetActive(isActive);
         healthSlider.gameObject.SetActive(isActive);
         waveText.gameObject.SetActive(isActive);
+        asteroidsAmountText.gameObject.SetActive(isActive);
     }
 
 

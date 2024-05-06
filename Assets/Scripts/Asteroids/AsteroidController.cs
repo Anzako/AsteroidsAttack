@@ -86,10 +86,10 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         model.SetActive(false);
         isDestroyed = true;
         hitParticle.Play();
+        onDestroy?.Invoke();
 
         yield return new WaitForSeconds(1.0f);
-        AsteroidsSpawner.Instance.ReturnToPool(this.gameObject);
-        onDestroy?.Invoke();
+        ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
 

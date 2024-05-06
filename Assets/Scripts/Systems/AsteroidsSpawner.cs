@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 {
@@ -9,12 +7,11 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     [SerializeField] private Camera pCamera;
     private Spawner spawner;
 
-    private List<GameObject> asteroids;
+    private int asteroidsAmount = 0;
     public string[] asteroidSize;
 
     private void Start()
     {
-        asteroids = new List<GameObject>();
         spawner = Spawner.Instance;
         AsteroidController.onDestroy += OnAsteroidDestroy;
     }
@@ -24,17 +21,10 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         AsteroidController.onDestroy -= OnAsteroidDestroy;
     }
 
-    public IEnumerator debugSth()
-    {
-        Debug.Log(asteroids.Count);
-        yield return new WaitForSeconds(1f);
-        yield return debugSth();
-    }
-
     public void OnAsteroidDestroy()
     {
-        if (asteroids.Count == 0) { LevelManager.Instance.EndRound(); }
-
+        SetAsteroidsAmount(asteroidsAmount - 1);
+        if (asteroidsAmount == 0) { LevelManager.Instance.EndRound(); }
     }
 
     public void SpawnAsteroids(int amount)
@@ -49,9 +39,10 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     private void SpawnRandomAsteroid()
     {
         string randomAsteroidSize = asteroidSize[Random.Range(0, asteroidSize.Length)];
-        
-        asteroids.Add(Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize, -pController.transform.up));
-        //asteroids.Add(SpawnAwayFromPlayerView(randomAsteroidSize, pCamera.transform.forward));
+        Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize, -pController.transform.up);
+
+        SetAsteroidsAmount(asteroidsAmount + 1);
+        //Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize, pCamera.transform.forward));
     }
 
     // Spawn asteroid close to destroyed one
@@ -70,8 +61,15 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     public GameObject SpawnAsteroid(string size, Vector3 position, Quaternion rotation)
     {
         GameObject asteroid = spawner.SpawnPoolObjectOnPosition(size, position, rotation);
-        asteroids.Add(asteroid);
+        SetAsteroidsAmount(asteroidsAmount + 1);
+
         return asteroid;
+    }
+
+    private void SetAsteroidsAmount(int amount)
+    {
+        asteroidsAmount = amount;
+        pController.GetComponent<UIController>().SetAsteroidsAmountText(amount);
     }
 
     public void SpawnAsteroidInTime(float time)
@@ -84,19 +82,5 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         yield return new WaitForSeconds(time);
 
         SpawnRandomAsteroid();
-    }
-
-    /*public void ReturnAsteroidsToPool()
-    {
-        for (int i = asteroids.Count - 1; i >= 0; i--)
-        {
-            ReturnToPool(asteroids[i]);
-        }
-    }
-    */
-    public void ReturnToPool(GameObject asteroid)
-    {
-        asteroids.Remove(asteroid);
-        ObjectPooler.Instance.ReturnObjectToPool(asteroid);
     }
 }
