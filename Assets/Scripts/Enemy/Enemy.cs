@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        mController.MovementFixedUpdate(moveDirection);
+        mController.MovementUpdate(moveDirection);
     }
 
     // Update is called once per frame

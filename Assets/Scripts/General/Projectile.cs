@@ -1,13 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPooledObject
 {
     private MovementController mController;
-    private ParticleSystem onHitParticle;
+    private ParticleSystem hitParticle;
     [SerializeField] private GameObject model;
 
     public LayerMask enemyLayer;
+    public string objectTag;
     public float timeToDestroy;
     public int damage;
 
@@ -16,18 +17,28 @@ public class Projectile : MonoBehaviour
 
     private Vector2 moveDirection;
 
+    public string _tag;
+    public string Tag
+    {
+        get { return _tag; }
+        set { _tag = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         mController = GetComponent<MovementController>();
-        onHitParticle = GetComponentInChildren<ParticleSystem>();
+        hitParticle = GetComponentInChildren<ParticleSystem>();
 
         // Setting forward direction
-        moveDirection = new Vector2(0, 1);
+        moveDirection = new Vector2(0, 1); 
+    }
 
+    private void OnEnable()
+    {
         if (selfDestroyable)
         {
-            Destroy(this.gameObject, timeToDestroy);
+            StartCoroutine(DestroyOnSpawn());
         }
     }
 
@@ -35,19 +46,25 @@ public class Projectile : MonoBehaviour
     {
         if (isDestroyed) return;
 
-        mController.MovementFixedUpdate(moveDirection);
+        mController.MovementUpdate(moveDirection);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((enemyLayer.value & (1 << collision.transform.gameObject.layer)) > 0)
-        {
-            HealthController hController = collision.gameObject.GetComponent<HealthController>();
-            hController.TakeDamage(damage);
-            onHitParticle.transform.position = collision.contacts[0].point;
+        IDamagable damagable = collision.gameObject.GetComponentInParent<IDamagable>();
 
+        if (damagable != null)
+        {
+            damagable.Damage(damage);
+            hitParticle.transform.position = collision.contacts[0].point;
             StartCoroutine(DestroyOnHit());
         }
+    }
+
+    IEnumerator DestroyOnSpawn()
+    {
+        yield return new WaitForSeconds(timeToDestroy);
+        ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
     IEnumerator DestroyOnHit()
@@ -56,10 +73,18 @@ public class Projectile : MonoBehaviour
         isDestroyed = true;
         Light lightComponent = GetComponent<Light>();
         if (lightComponent != null) lightComponent.enabled = false;
-        onHitParticle.Play();
+        hitParticle.Play();
 
         yield return new WaitForSeconds(1.0f);
-        Destroy(this.gameObject);
+        ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
+    }
+
+    public void OnObjectSpawn()
+    {
+        model.SetActive(true);
+        isDestroyed = false;
+        Light lightComponent = GetComponent<Light>();
+        if (lightComponent != null) lightComponent.enabled = true;
     }
 
 }

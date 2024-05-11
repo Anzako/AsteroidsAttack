@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MarchingCubes : MonoBehaviour
+public class MarchingCubes : Singleton<MarchingCubes>
 {
     const int threadGroupSize = 8;
 
     public MetaBalls metaBallGenerator;
     public ComputeShader shader;
     private MeshFilter meshFilter;
-    private MeshCollider meshCollider;
+    private Mesh mesh;
 
     [Header("Voxel Settings")]
     public float isoLevel;
@@ -24,25 +22,13 @@ public class MarchingCubes : MonoBehaviour
     ComputeBuffer pointsBuffer;
     ComputeBuffer triCountBuffer;
 
-    // sprobowaæ zrobiæ w tiku przyci¹ganie oraz tworzenie collidera
-    // sprobowaæ zmienic przyci¹ganie na si³y metacz¹stek 31
-    private void OnEnable()
-    {
-        //Ticker.OnTickAction += Tick;
-    }
-
-    private void OnDisable()
-    {
-        //Ticker.OnTickAction -= Tick;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         metaBallGenerator.worldBounds = numPointsPerAxis;
+        mesh = new Mesh();
 
         meshFilter = GetComponent<MeshFilter>();
-        meshCollider = GetComponent<MeshCollider>();
     }
 
     private void Update()
@@ -106,8 +92,7 @@ public class MarchingCubes : MonoBehaviour
         Triangle[] tris = new Triangle[numTris];
         triangleBuffer.GetData(tris, 0, 0, numTris);
 
-        // Create mesh and set data
-        Mesh mesh = new Mesh();
+        // Clear mesh and set data
         mesh.Clear();
 
         var vertices = new Vector3[numTris * 3];
@@ -126,29 +111,8 @@ public class MarchingCubes : MonoBehaviour
 
         mesh.RecalculateNormals();
 
-        // Destroy old meshes
-        if (meshFilter.mesh != null)
-        {
-            Destroy(meshFilter.mesh);
-        }
-        if (meshCollider.sharedMesh != null)
-        {
-            Destroy(meshCollider.sharedMesh);
-        }
-
         // Set mesh to game
         meshFilter.mesh = mesh;
-        meshCollider.sharedMesh = mesh;
-    }
-
-    private void Tick()
-    {
-        Debug.Log("DUPA");
-        /*if (meshCollider.sharedMesh != null)
-        {
-            Destroy(meshCollider.sharedMesh);
-        }
-        meshCollider.sharedMesh = actualMesh;*/
     }
 
     private void ReleaseBuffers()

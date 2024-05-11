@@ -1,20 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Metaball : MonoBehaviour
 {
-    [SerializeField] private Vector3 direction;
-    [SerializeField] private float speed;
-    public Vector3 position;
+    public Vector3 startDirection;
+    private Vector3 direction;
+    public Vector3 startPosition;
+    private Vector3 position;
+
+    public float speed;
     public float radius;
 
-    public Metaball(Vector3 startPos, float radius, Vector3 dir, float speed)
+    private void Start()
     {
-        this.position = startPos;
-        this.radius = radius;
-        this.direction = dir;
-        this.speed = speed;
+        direction = startDirection;
+        position = startPosition;
     }
 
     public void UpdatePosition(Vector3 worldBounds)
@@ -44,6 +43,11 @@ public class Metaball : MonoBehaviour
             direction.z = -Mathf.Abs(direction.z);
         }
 
-        position += direction * speed * Time.deltaTime;
+        position += speed * Time.deltaTime * direction;
+    }
+
+    public Vector3 Position 
+    { 
+        get { return position; } 
     }
 }

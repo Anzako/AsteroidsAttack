@@ -1,33 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private MovementController mController;
-    [SerializeField] private InputController inputController;
-    [SerializeField] private UIController UIController;
+    private MovementController mController;
+    private InputController inputController;
+    private PlayerHealth healthController;
+    private UIController HUDController;
     public int actualScore = 0;
 
     Vector2 direction = Vector2.zero;
-    public float mouseSensitivity = 1f;
 
     // Shooting
-    [SerializeField] private GameObject projectile;
+    public string projectileTag;
     private float lastShootTime = 0;
     public float timeToShoot;
+
+    private void Awake()
+    {
+        mController = GetComponent<MovementController>();
+        inputController = GetComponent<InputController>();
+        healthController = GetComponent<PlayerHealth>();
+        HUDController = GetComponent<UIController>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        mController.MovementUpdate(inputController.mousePos.x * mouseSensitivity);
+        mController.MovementUpdate(direction);
+        mController.PlayerMouseUpdate(inputController.mousePos);
         lastShootTime += Time.deltaTime;
     }
 
-    private void FixedUpdate()
+    public void EnablePlayer()
     {
-        mController.MovementFixedUpdate(direction);
+        gameObject.SetActive(true);
+        HUDController.SetActive(true);
+
+        healthController.SetHealthToMax();
+    }
+
+    public void DisablePlayer()
+    {
+        gameObject.SetActive(false);
+        HUDController.SetActive(false);
     }
 
     public void ShootProjectile()
@@ -35,7 +50,7 @@ public class PlayerController : MonoBehaviour
         if (lastShootTime >= timeToShoot)
         {
             Vector3 spawnPosition = transform.position + transform.forward.normalized;
-            Instantiate(projectile, spawnPosition, transform.rotation);
+            ObjectPooler.Instance.SpawnObject(projectileTag, spawnPosition, transform.rotation);
             lastShootTime = 0f;
         }
     }
@@ -45,15 +60,4 @@ public class PlayerController : MonoBehaviour
         this.direction = direction;
     }
 
-    public void AddScore(int score)
-    {
-        actualScore += score;
-        UIController.SetScore(actualScore);
-    }
-
-    public void ResetScore()
-    {
-        actualScore = 0;
-        UIController.SetScore(actualScore);
-    }
 }

@@ -3,7 +3,7 @@
 
 StructuredBuffer<float3> offsets;
 RWStructuredBuffer<float4> points;
-int numPointsPerAxis;
+uint numPointsPerAxis = 0;
 float spacing;
 float3 offset;
 static const int numThreads = 8;

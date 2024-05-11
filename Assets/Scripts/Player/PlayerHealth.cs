@@ -1,29 +1,35 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerHealth : HealthController
 {
-    public event Action<int> Damaged = delegate { };
-    public event Action Killed = delegate { };
+    private UIController playerHUD;
+
+    private void Awake()
+    {
+        playerHUD = GetComponent<UIController>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        SetHealthToMax();
+        Killed += LevelManager.Instance.GameOver;
     }
 
-    public override void TakeDamage(int damage)
+    public override void Damage(int damage)
     {
-        base.TakeDamage(damage);
-        Damaged.Invoke(health);
+        base.Damage(damage);
+        playerHUD.SetHealth(health);
     }
 
     protected override void Kill()
     {
-        Killed.Invoke();
-        gameObject.SetActive(false);
         base.Kill();
+        GetComponent<PlayerController>().DisablePlayer();
+    }
+
+    public override void SetHealthToMax()
+    {
+        base.SetHealthToMax();
+        playerHUD.SetMaxHealth(health);
     }
 }
