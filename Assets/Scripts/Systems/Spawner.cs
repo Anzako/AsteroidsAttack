@@ -18,15 +18,15 @@ public class Spawner : Singleton<Spawner>
         return pooler.SpawnObject(objectTag, position, rotation);
     }
 
-    public GameObject SpawnAwayFromPlayerView(string objectTag, Vector3 cameraDir, int maxAttempts = 10)
+    public GameObject SpawnAwayFromPlayerView(string objectTag, Vector3 dotVector, int maxAttempts = 10)
     {
         int randomMetaballID = Random.Range(0, metaballs.numberOfMetaballs);
         Vector3 spawnPosition = RandomPositionOnMetaball(randomMetaballID);
         Vector3 forceVector = metaballs.CalculateMetaballsNormal(spawnPosition);
 
-        if (Vector3.Dot(forceVector, cameraDir) < 0 && maxAttempts > 0)
+        if (Vector3.Dot(forceVector, dotVector) < 0 && maxAttempts > 0)
         {
-            return SpawnAwayFromPlayerView(objectTag, cameraDir, maxAttempts - 1);
+            return SpawnAwayFromPlayerView(objectTag, dotVector, maxAttempts - 1);
         }
 
         if (maxAttempts <= 0)
@@ -80,7 +80,7 @@ public class Spawner : Singleton<Spawner>
         float radius = metaballs.Radius(metaballID);
         Vector3 spawnPosition = pos + CalculateRandomVector3() * (radius / 2);
 
-        while (metaballs.CalculateScalarFieldValue(spawnPosition) > 0.5f && maxAttempts > 0)
+        if (metaballs.CalculateScalarFieldValue(spawnPosition) > 0.5f && maxAttempts > 0)
         {
             return RandomPositionOnMetaball(metaballID, maxAttempts - 1);
         }
