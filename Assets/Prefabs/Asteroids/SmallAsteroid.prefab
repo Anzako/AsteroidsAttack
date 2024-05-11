@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 123f5157f6507c148a40419c244ed906, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -200,7 +200,6 @@ MonoBehaviour:
     m_Bits: 8
   damage: 2
   model: {fileID: 174136619786486881}
-  direction: {x: 0, y: 0}
   _tag: smallAsteroid
 --- !u!114 &4260933094689136237
 MonoBehaviour:
@@ -215,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 2
+  <health>k__BackingField: 0
   score: 1
 --- !u!1001 &854129067449984853
 PrefabInstance:
