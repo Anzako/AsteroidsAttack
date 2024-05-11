@@ -208,6 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5560152246695251579}
   - component: {fileID: 7261430001349603068}
+  - component: {fileID: 285623954834506643}
   m_Layer: 3
   m_Name: Light
   m_TagString: Untagged
@@ -292,6 +293,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &285623954834506643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6731209989152015075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &8898362260430516467
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +475,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
   scoreText: {fileID: 0}
+  waveText: {fileID: 0}
+  asteroidsAmountText: {fileID: 0}
 --- !u!114 &5691059295496667685
 MonoBehaviour:
   m_ObjectHideFlags: 0
