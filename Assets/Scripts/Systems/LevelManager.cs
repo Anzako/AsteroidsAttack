@@ -54,9 +54,7 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void RestartGame()
     {
-        ObjectPooler.Instance.ReturnObjectsToPool("smallAsteroid");
-        ObjectPooler.Instance.ReturnObjectsToPool("mediumAsteroid");
-        ObjectPooler.Instance.ReturnObjectsToPool("bigAsteroid");
+        aSpawner.DestroyAllAsteroids();
         ObjectPooler.Instance.ReturnObjectsToPool("projectile");
         gameManager.ChangeState(GameState.Game);
     }

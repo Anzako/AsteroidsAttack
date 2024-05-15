@@ -72,6 +72,14 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         pController.GetComponent<UIController>().SetAsteroidsAmountText(amount);
     }
 
+    public void DestroyAllAsteroids()
+    {
+        ObjectPooler.Instance.ReturnObjectsToPool("smallAsteroid");
+        ObjectPooler.Instance.ReturnObjectsToPool("mediumAsteroid");
+        ObjectPooler.Instance.ReturnObjectsToPool("bigAsteroid");
+        SetAsteroidsAmount(0);
+    }
+
     public void SpawnAsteroidInTime(float time)
     {
         StartCoroutine(WaitAndSpawn(time));
