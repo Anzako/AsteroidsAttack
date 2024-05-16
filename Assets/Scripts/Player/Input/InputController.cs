@@ -2,7 +2,6 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
@@ -39,6 +38,14 @@ public class InputController : MonoBehaviour
         } else if (context.canceled)
         {
             playerController.SetDirection(context.ReadValue<Vector2>());
+        }
+    }
+
+    public void OnSpaceClicked(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            playerController.Dash();
         }
     }
 }

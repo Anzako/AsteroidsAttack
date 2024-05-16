@@ -1,44 +1,40 @@
-using System;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
     private MetaBalls metaballs;
     public float moveSpeed;
+    protected float actualSpeed;
 
+    protected Vector2 movementDirection;
+    protected Vector3 projectedDirection;
+
+    // Gravity variables
     public static float toGroundPotential = 0.47f;
     public static float gravityForce = 4f;
     public float rotationSpeed;
 
-    // Start is called before the first frame update
     void Start()
     {
         metaballs = MetaBalls.Instance;
-    }
-
-    // Update is called once per frame
-    public void PlayerMouseUpdate(float horizontalRotationAngle)
-    {
-        RotateAroundVerticalAxis(horizontalRotationAngle);
+        movementDirection = Vector2.zero;
+        projectedDirection = Vector3.zero;
+        actualSpeed = moveSpeed;
     }
 
     public void MovementUpdate(Vector2 moveDirection)
     {
+        SetMovementDirection(moveDirection);
         RotateToSurface();
-        Move(moveDirection.normalized);
+        Move();
     }
 
-    private void Move(Vector2 moveDirection)
+    private void Move()
     {
-        Vector3 projectedVector = transform.forward * moveDirection.y + transform.right * moveDirection.x;
+        projectedDirection = transform.forward * movementDirection.y + transform.right * movementDirection.x;
+        projectedDirection.Normalize();
 
-        transform.position += projectedVector.normalized * moveSpeed * Time.deltaTime;
-    }
-
-    private void RotateAroundVerticalAxis(float rotationAngle)
-    {
-        Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
-        transform.rotation = targetRotation * transform.rotation;
+        transform.position += actualSpeed * Time.deltaTime * projectedDirection;
     }
 
     private void RotateToSurface()    
@@ -56,4 +52,19 @@ public class MovementController : MonoBehaviour
         transform.position -= potentialVector.normalized * val * gravityForce;
     }
 
+    protected void RotateAroundVerticalAxis(float rotationAngle)
+    {
+        Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
+        transform.rotation = targetRotation * transform.rotation;
+    }
+
+    public void ResetActualSpeed()
+    {
+        actualSpeed = moveSpeed;
+    }
+
+    protected virtual void SetMovementDirection(Vector2 moveDirection)
+    {
+        movementDirection = moveDirection.normalized;
+    }
 }

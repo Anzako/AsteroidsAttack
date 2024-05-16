@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private MovementController mController;
+    private PlayerMovement mController;
     private InputController inputController;
     private PlayerHealth healthController;
     private UIController HUDController;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        mController = GetComponent<MovementController>();
+        mController = GetComponent<PlayerMovement>();
         inputController = GetComponent<InputController>();
         healthController = GetComponent<PlayerHealth>();
         HUDController = GetComponent<UIController>();
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         mController.MovementUpdate(direction);
-        mController.PlayerMouseUpdate(inputController.mousePos);
+        mController.MouseUpdate(inputController.mousePos);
         lastShootTime += Time.deltaTime;
     }
 
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.SetActive(false);
         HUDController.SetActive(false);
+        mController.ResetActualSpeed();
     }
 
     public void ShootProjectile()
@@ -58,6 +59,14 @@ public class PlayerController : MonoBehaviour
     public void SetDirection(Vector2 direction)
     {
         this.direction = direction;
+    }
+
+    public void Dash()
+    {
+        if (mController.canDash)
+        {
+            StartCoroutine(mController.Dash());
+        }
     }
 
 }

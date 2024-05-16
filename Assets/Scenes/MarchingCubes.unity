@@ -175,34 +175,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -3009897901644091826, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 2852529471193898715, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: dashSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852529471193898715, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: dashingTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2852529471193898715, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: dashingCooldown
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -3009897901644091826, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: interpolationSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 78416745642762997, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: sensitivity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3719851685426429890, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: timeToShoot
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3719851685426429890, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: HUDController
-      value: 
-      objectReference: {fileID: 654914600}
-    - target: {fileID: 3719851685426429890, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: projectileTag
-      value: projectile
-      objectReference: {fileID: 0}
-    - target: {fileID: 3719851685426429890, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: healthController
-      value: 
-      objectReference: {fileID: 654914606}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: waveText
       value: 
@@ -219,14 +203,46 @@ PrefabInstance:
       propertyPath: asteroidsAmountText
       value: 
       objectReference: {fileID: 780400218}
-    - target: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: maxHealth
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: 53dc97d9-56f6-416c-9f61-ea8b9701aa57
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: Gameplay/Dash[/Keyboard/space]
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: playerHUD
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 654914600}
+      objectReference: {fileID: 654914610}
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSpaceClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InputController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5515491599423336599, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8085797481541249609, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -271,17 +287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8898362260430516467, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8898362260430516467, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 654914605}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
 --- !u!1 &88915830
 GameObject:
@@ -974,28 +983,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a785faf0dcc3bad4da0ad45444669598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &654914605
+--- !u!114 &654914610 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654914592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be934353b825b80408d93a71d9621113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIController: {fileID: 654914600}
---- !u!114 &654914606 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+  m_CorrespondingSourceObject: {fileID: 78416745642762997, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
   m_PrefabInstance: {fileID: 62318742}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654914592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b390e1f66a891e4ba55db058b3f112f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &725121482
@@ -2755,7 +2751,7 @@ MonoBehaviour:
   HUDController: {fileID: 654914600}
   restartButton: {fileID: 955811668}
   amount: 1
-  asteroidsInRound: 0100000001000000
+  asteroidsInRound: 0500000001000000
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -303,17 +303,18 @@ GameObject:
   - component: {fileID: 8085797481541249609}
   - component: {fileID: 3719851685426429890}
   - component: {fileID: 78416745642762997}
-  - component: {fileID: -3009897901644091826}
   - component: {fileID: 5515491599423336599}
   - component: {fileID: 5476350350173624902}
   - component: {fileID: 5691059295496667685}
+  - component: {fileID: 4863980478013538662}
+  - component: {fileID: 2852529471193898715}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8085797481541249609
 Transform:
   m_ObjectHideFlags: 0
@@ -345,8 +346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actualScore: 0
-  projectileTag: 
-  timeToShoot: 0
+  projectileTag: projectile
+  timeToShoot: 0.5
 --- !u!114 &78416745642762997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,21 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mousePos: 0
-  sensitivity: 0
---- !u!114 &-3009897901644091826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898362260430516467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cc3534ada173d418cbe7ec74efd0ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 4
+  sensitivity: 5
 --- !u!114 &5515491599423336599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +438,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
   scoreText: {fileID: 0}
+  waveText: {fileID: 0}
+  asteroidsAmountText: {fileID: 0}
 --- !u!114 &5691059295496667685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,5 +452,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 1
   <health>k__BackingField: 0
+--- !u!114 &4863980478013538662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898362260430516467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be934353b825b80408d93a71d9621113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UIController: {fileID: 5476350350173624902}
+--- !u!114 &2852529471193898715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898362260430516467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710e15fb36f191a41af8c3f2e738bbdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 2
