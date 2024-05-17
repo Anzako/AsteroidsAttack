@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MarchingCubes : Singleton<MarchingCubes>
 {
-    const int threadGroupSize = 8;
+    private const int threadGroupSize = 8;
 
     public MetaBalls metaBallGenerator;
     public ComputeShader shader;
@@ -18,9 +18,9 @@ public class MarchingCubes : Singleton<MarchingCubes>
     public int numPointsPerAxis;
 
     // Buffers
-    ComputeBuffer triangleBuffer;
-    ComputeBuffer pointsBuffer;
-    ComputeBuffer triCountBuffer;
+    private ComputeBuffer triangleBuffer;
+    private ComputeBuffer pointsBuffer;
+    private ComputeBuffer triCountBuffer;
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +33,13 @@ public class MarchingCubes : Singleton<MarchingCubes>
 
     private void Update()
     {
-        CreateBuffers();
-        UpdateMesh();
-
         if (!Application.isPlaying)
         {
             ReleaseBuffers();
         }
+
+        CreateBuffers();
+        UpdateMesh();
     }
 
     private void OnDestroy()

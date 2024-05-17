@@ -306,7 +306,6 @@ GameObject:
   - component: {fileID: 5515491599423336599}
   - component: {fileID: 5476350350173624902}
   - component: {fileID: 5691059295496667685}
-  - component: {fileID: 4863980478013538662}
   - component: {fileID: 2852529471193898715}
   m_Layer: 3
   m_Name: Player
@@ -345,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c428a9d84a927524ea641a616e286069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualScore: 0
+  pCamera: {fileID: 0}
   projectileTag: projectile
   timeToShoot: 0.5
 --- !u!114 &78416745642762997
@@ -419,6 +418,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1cebc6f5-30b6-4cde-8839-006648f5a344
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 78416745642762997}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnSpaceClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 53dc97d9-56f6-416c-9f61-ea8b9701aa57
+    m_ActionName: Gameplay/Dash[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 78416745642762997}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnEscapeClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 71052f8a-3b9e-4dc1-bd1f-6ab56dfc1cc3
+    m_ActionName: Gameplay/Escape[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -454,19 +485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   <health>k__BackingField: 0
---- !u!114 &4863980478013538662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898362260430516467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be934353b825b80408d93a71d9621113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIController: {fileID: 5476350350173624902}
 --- !u!114 &2852529471193898715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,3 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSpeed: 2
+  canDash: 0
+  dashSpeed: 15
+  dashingTime: 0.2
+  dashingCooldown: 1

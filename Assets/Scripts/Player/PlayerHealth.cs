@@ -12,7 +12,7 @@ public class PlayerHealth : HealthController
     void Start()
     {
         SetHealthToMax();
-        Killed += LevelManager.Instance.GameOver;
+        Killed += LevelManager.Instance.EndGame;
     }
 
     public override void Damage(int damage)
@@ -24,7 +24,7 @@ public class PlayerHealth : HealthController
     protected override void Kill()
     {
         base.Kill();
-        GetComponent<PlayerController>().DisablePlayer();
+        //GetComponent<PlayerController>().DisablePlayer();
     }
 
     public override void SetHealthToMax()

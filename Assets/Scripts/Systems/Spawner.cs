@@ -18,7 +18,7 @@ public class Spawner : Singleton<Spawner>
         return pooler.SpawnObject(objectTag, position, rotation);
     }
 
-    public GameObject SpawnAwayFromPlayerView(string objectTag, Vector3 dotVector, int maxAttempts = 10)
+    public GameObject SpawnAwayFromPlayerView(string objectTag, Vector3 dotVector, int maxAttempts = 20)
     {
         int randomMetaballID = Random.Range(0, metaballs.numberOfMetaballs);
         Vector3 spawnPosition = RandomPositionOnMetaball(randomMetaballID);
@@ -72,7 +72,7 @@ public class Spawner : Singleton<Spawner>
     #endregion
 
     // Calculate
-    public static Vector3 RandomPositionOnMetaball(int metaballID, int maxAttempts = 10)
+    public static Vector3 RandomPositionOnMetaball(int metaballID, int maxAttempts = 20)
     {
         MetaBalls metaballs = MetaBalls.Instance;
 

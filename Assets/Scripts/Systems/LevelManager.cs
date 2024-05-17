@@ -1,14 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelManager : Singleton<LevelManager>
 {
     private GameManager gameManager;
     private PlayerSpawner pSpawner;
     private AsteroidsSpawner aSpawner;
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private UIController HUDController;
-
-    [SerializeField] private Button restartButton;
 
     private int actualRound = 0;
     public int amount;
@@ -17,25 +15,14 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        GameManager.OnStateChanged += GameManagerOnStateChanged;
-        restartButton.onClick.AddListener(RestartGame);
         pSpawner = PlayerSpawner.Instance;
         aSpawner = AsteroidsSpawner.Instance;
         gameManager = GameManager.Instance;
     }
 
-    private void OnDestroy()
-    {
-        GameManager.OnStateChanged -= GameManagerOnStateChanged;
-    }
-
-    public void GameManagerOnStateChanged(GameState state)
-    {
-        restartButton.gameObject.SetActive(state == GameState.GameOver);
-    }
-
     public void StartGame()
     {
+        CleanScene();
         actualRound = 0;
         pSpawner.SpawnPlayer(); 
         StartRound(actualRound);
@@ -47,16 +34,17 @@ public class LevelManager : Singleton<LevelManager>
         HUDController.SetWave(round + 1);
     }
 
-    public void GameOver()
-    {
-        ScoreManager.instance.ResetScore();
-        gameManager.ChangeState(GameState.GameOver);
-    }
     public void RestartGame()
+    {
+        CleanScene();
+        gameManager.ChangeState(GameState.StartGame);
+    }
+
+    public void CleanScene()
     {
         aSpawner.DestroyAllAsteroids();
         ObjectPooler.Instance.ReturnObjectsToPool("projectile");
-        gameManager.ChangeState(GameState.Game);
+        ScoreManager.Instance.ResetScore();
     }
 
     public void EndRound()
@@ -72,11 +60,20 @@ public class LevelManager : Singleton<LevelManager>
         StartRound(actualRound);
     }
 
-    private void EndGame()
+    public void EndGame()
     {
-        ScoreManager.instance.ResetScore();
-        pSpawner.DisablePlayer();
-        gameManager.ChangeState(GameState.GameOver);
-        Debug.Log("Game ends");
+        gameManager.ChangeState(GameState.EndGame);
+    }
+
+    public void FreezeGame()
+    {
+        Time.timeScale = 0;
+        playerController.Freeze(true);
+    }
+
+    public void UnFreezeGame()
+    {
+        Time.timeScale = 1;
+        playerController.Freeze(false);
     }
 }

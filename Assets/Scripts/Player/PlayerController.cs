@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerMovement mController;
+    [SerializeField] private Camera pCamera;
+    private PlayerMovement movementController;
     private InputController inputController;
     private PlayerHealth healthController;
     private UIController HUDController;
-    public int actualScore = 0;
 
-    Vector2 direction = Vector2.zero;
+    private bool isFreezed = false;
+    private Vector2 movementDirection = Vector2.zero;
 
     // Shooting
     public string projectileTag;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        mController = GetComponent<PlayerMovement>();
+        movementController = GetComponent<PlayerMovement>();
         inputController = GetComponent<InputController>();
         healthController = GetComponent<PlayerHealth>();
         HUDController = GetComponent<UIController>();
@@ -26,8 +27,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mController.MovementUpdate(direction);
-        mController.MouseUpdate(inputController.mousePos);
+        if (isFreezed) return;
+        
+        movementController.MovementUpdate(movementDirection);
+        movementController.MouseUpdate(inputController.mousePos);
         lastShootTime += Time.deltaTime;
     }
 
@@ -37,13 +40,19 @@ public class PlayerController : MonoBehaviour
         HUDController.SetActive(true);
 
         healthController.SetHealthToMax();
+        movementDirection = Vector2.zero;
     }
 
     public void DisablePlayer()
     {
         gameObject.SetActive(false);
         HUDController.SetActive(false);
-        mController.ResetActualSpeed();
+        movementController.ResetActualSpeed();
+    }
+
+    public void Freeze(bool isFreeze)
+    {
+        isFreezed = isFreeze;
     }
 
     public void ShootProjectile()
@@ -56,16 +65,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetDirection(Vector2 direction)
+    public void SetMovementDirection(Vector2 direction)
     {
-        this.direction = direction;
+        movementDirection = direction;
     }
 
     public void Dash()
     {
-        if (mController.canDash)
+        if (movementController.canDash)
         {
-            StartCoroutine(mController.Dash());
+            StartCoroutine(movementController.Dash());
         }
     }
 

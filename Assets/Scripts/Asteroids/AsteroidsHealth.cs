@@ -21,6 +21,6 @@ public class AsteroidsHealth : HealthController
     protected override void Kill()
     {
         base.Kill();
-        ScoreManager.instance.AddScore(score);;
+        ScoreManager.Instance.AddScore(score);;
     }
 }

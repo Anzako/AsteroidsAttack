@@ -4,6 +4,8 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private Camera menuCamera;
+    [SerializeField] private PlayerController playerController;
 
     public static event Action<GameState> OnStateChanged;
 
@@ -12,6 +14,20 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         ChangeState(GameState.Menu);
+        OnStateChanged += GameManagerOnStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        OnStateChanged -= GameManagerOnStateChanged;
+    }
+
+    public void GameManagerOnStateChanged(GameState state)
+    {
+        if (state == GameState.StartGame) 
+        {
+            ChangeState(GameState.Game);
+        }
     }
 
     public void ChangeState(GameState newState)
@@ -22,32 +38,55 @@ public class GameManager : Singleton<GameManager>
             case GameState.Menu:
                 HandleMenu();
                 break;
+            case GameState.StartGame:
+                HandleStartGame();
+                break;
             case GameState.Game:
                 HandleGame();
                 break;
-            case GameState.GameOver:
+            case GameState.EndGame:
                 HandleGameOver();
+                break;
+            case GameState.InGameMenu:
+                HandleInGameMenu();
                 break;
         }
 
         OnStateChanged?.Invoke(newState);
-        //Debug.Log($"New state: {newState}");
     }
 
     private void HandleMenu()
     {
+        Cursor.lockState = CursorLockMode.None;
+        playerController.DisablePlayer();
+        menuCamera.gameObject.SetActive(true);
+    }
+
+    private void HandleStartGame()
+    {
+        levelManager.StartGame();
+        menuCamera.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
     }
 
     private void HandleGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        levelManager.StartGame();
+        levelManager.UnFreezeGame();
     }
 
     private void HandleGameOver()
     {
         Cursor.lockState = CursorLockMode.None;
+        playerController.DisablePlayer();
+        menuCamera.gameObject.SetActive(true);
+    }
+
+    private void HandleInGameMenu()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        menuCamera.gameObject.SetActive(false);
+        levelManager.FreezeGame();
     }
 }
 
@@ -55,6 +94,8 @@ public class GameManager : Singleton<GameManager>
 public enum GameState
 {
     Menu = 0,
-    Game = 1,
-    GameOver = 2,
+    StartGame = 1,
+    Game = 2,
+    InGameMenu = 3,
+    EndGame = 4,
 }
