@@ -24,7 +24,6 @@ public class PlayerHealth : HealthController
     protected override void Kill()
     {
         base.Kill();
-        //GetComponent<PlayerController>().DisablePlayer();
     }
 
     public override void SetHealthToMax()

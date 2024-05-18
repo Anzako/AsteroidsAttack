@@ -9,9 +9,8 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [System.Serializable]
     public class Pool
     {
-        public string tag;
+        public poolTags tag;
         public GameObject prefab;
-        //public poolTags tager;
     }
 
     // Declares pool objects with tag
@@ -30,7 +29,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
     public GameObject SpawnObject(string tag, Vector3 position, Quaternion rotation)
     {
-        Pool pool = pools.Find(p => p.tag == tag);
+        Pool pool = pools.Find(p => p.tag.ToString() == tag);
 
         if (pool == null)
         {
@@ -40,7 +39,6 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
         if (!poolObjects.ContainsKey(tag))
         {
-            //Debug.LogWarning("Pool with tag " + tag + " doesn't exist. Creating new one");
             poolObjects.Add(tag, new List<GameObject>());
             activeObjects.Add(tag, new List<GameObject>());
         }
@@ -60,8 +58,6 @@ public class ObjectPooler : Singleton<ObjectPooler>
         }
 
         activeObjects[tag].Add(spawnableObj);
-/*        Debug.Log("Tag pool " + tag + " have active objects: " + activeObjects[tag].Count +
-            " and pool objects: " + poolObjects[tag].Count);*/
         spawnableObj.GetComponent<IPooledObject>().OnObjectSpawn();
         return spawnableObj;
     }
@@ -76,7 +72,7 @@ public class ObjectPooler : Singleton<ObjectPooler>
         }
         string tag = pooledObj.Tag;
 
-        Pool pool = pools.Find(p => p.tag == tag);
+        Pool pool = pools.Find(p => p.tag.ToString() == tag);
         if (pool == null)
         {
             Debug.LogWarning("Trying to release an object that is not pooled " + tag);
@@ -86,13 +82,11 @@ public class ObjectPooler : Singleton<ObjectPooler>
         obj.SetActive(false);
         poolObjects[tag].Add(obj);
         activeObjects[tag].Remove(obj);
-        /*Debug.Log("Tag pool " + tag + " have active objects: " + activeObjects[tag].Count +
-            " and pool objects: " + poolObjects[tag].Count);*/
     }
 
     public void ReturnObjectsToPool(string tagName)
     {
-        Pool pool = pools.Find(p => p.tag == tagName);
+        Pool pool = pools.Find(p => p.tag.ToString() == tagName);
         if (pool == null)
         {
             //Debug.LogWarning("Trying to return objects from pool " + tag + " but there is no pool");
@@ -118,10 +112,10 @@ public class ObjectPooler : Singleton<ObjectPooler>
 }
 
 
-/*public enum poolTags
+public enum poolTags
 {
-    projectile = 0,
+    playerProjectile = 0,
     smallAsteroid = 1,
     mediumAsteroid = 2,
     bigAsteroid = 3,
-}*/
+}

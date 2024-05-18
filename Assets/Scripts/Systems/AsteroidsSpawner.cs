@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
@@ -8,12 +9,19 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     private Spawner spawner;
 
     private int asteroidsAmount = 0;
-    public string[] asteroidSize;
+    private List<string> asteroidsTags;
 
     private void Start()
     {
         spawner = Spawner.Instance;
         AsteroidController.onDestroy += OnAsteroidDestroy;
+
+        asteroidsTags = new List<string>
+        {
+            poolTags.smallAsteroid.ToString(),
+            poolTags.mediumAsteroid.ToString(),
+            poolTags.bigAsteroid.ToString()
+        };
     }
 
     private void OnDestroy()
@@ -38,7 +46,7 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     // Spawn new asteroid on random metaball
     private void SpawnRandomAsteroid()
     {
-        string randomAsteroidSize = asteroidSize[Random.Range(0, asteroidSize.Length)];
+        string randomAsteroidSize = asteroidsTags[Random.Range(0, asteroidsTags.Count)];
         Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize, -pController.transform.up);
 
         SetAsteroidsAmount(asteroidsAmount + 1);

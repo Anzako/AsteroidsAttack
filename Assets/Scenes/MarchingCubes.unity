@@ -605,13 +605,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: smallAsteroid
+  - tag: 1
     prefab: {fileID: 3956984001194437467, guid: 17b0689e965d31e4db9ecf942fc09da5, type: 3}
-  - tag: mediumAsteroid
+  - tag: 2
     prefab: {fileID: 3956984001194437467, guid: 650280611e4afa245a68851277bc551e, type: 3}
-  - tag: bigAsteroid
+  - tag: 3
     prefab: {fileID: 3956984001194437467, guid: 70ec778af1069bc41be0902c8ce476c3, type: 3}
-  - tag: projectile
+  - tag: 0
     prefab: {fileID: 694073047113383073, guid: ce9a478c1a323824cb2f5beab04df836, type: 3}
 --- !u!4 &382138428
 Transform:
@@ -3655,10 +3655,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pController: {fileID: 654914598}
   pCamera: {fileID: 1979869291}
-  asteroidSize:
-  - smallAsteroid
-  - mediumAsteroid
-  - bigAsteroid
 --- !u!1 &2104519050
 GameObject:
   m_ObjectHideFlags: 0

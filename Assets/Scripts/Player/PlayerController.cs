@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementDirection = Vector2.zero;
 
     // Shooting
-    public string projectileTag;
+    private string projectileTag;
     private float lastShootTime = 0;
     public float timeToShoot;
 
@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
         inputController = GetComponent<InputController>();
         healthController = GetComponent<PlayerHealth>();
         HUDController = GetComponent<UIController>();
+    }
+    private void Start()
+    {
+        projectileTag = poolTags.playerProjectile.ToString();
     }
 
     // Update is called once per frame
