@@ -9,18 +9,18 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     private Spawner spawner;
 
     private int asteroidsAmount = 0;
-    private List<string> asteroidsTags;
+    private List<poolTags> asteroidsTags;
 
     private void Start()
     {
         spawner = Spawner.Instance;
         AsteroidController.onDestroy += OnAsteroidDestroy;
 
-        asteroidsTags = new List<string>
+        asteroidsTags = new List<poolTags>
         {
-            poolTags.smallAsteroid.ToString(),
-            poolTags.mediumAsteroid.ToString(),
-            poolTags.bigAsteroid.ToString()
+            poolTags.smallAsteroid,
+            poolTags.mediumAsteroid,
+            poolTags.bigAsteroid
         };
     }
 
@@ -46,15 +46,15 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     // Spawn new asteroid on random metaball
     private void SpawnRandomAsteroid()
     {
-        string randomAsteroidSize = asteroidsTags[Random.Range(0, asteroidsTags.Count)];
-        Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize, -pController.transform.up);
+        poolTags randomAsteroidSize = asteroidsTags[Random.Range(0, asteroidsTags.Count)];
+        Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize);
 
         SetAsteroidsAmount(asteroidsAmount + 1);
         //Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize, pCamera.transform.forward));
     }
 
     // Spawn asteroid close to destroyed one
-    public void SpawnAsteroidOnDestroy(string size, Transform transform)
+    public void SpawnAsteroidOnDestroy(poolTags size, Transform transform)
     {
         float distanceOfSpawn = 0.5f;
         float randomAngle = Random.Range(0f, 360f);
@@ -66,7 +66,7 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     }
 
 
-    public GameObject SpawnAsteroid(string size, Vector3 position, Quaternion rotation)
+    public GameObject SpawnAsteroid(poolTags size, Vector3 position, Quaternion rotation)
     {
         GameObject asteroid = spawner.SpawnPoolObjectOnPosition(size, position, rotation);
         SetAsteroidsAmount(asteroidsAmount + 1);
@@ -82,9 +82,9 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 
     public void DestroyAllAsteroids()
     {
-        ObjectPooler.Instance.ReturnObjectsToPool("smallAsteroid");
-        ObjectPooler.Instance.ReturnObjectsToPool("mediumAsteroid");
-        ObjectPooler.Instance.ReturnObjectsToPool("bigAsteroid");
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.smallAsteroid);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.mediumAsteroid);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.bigAsteroid);
         SetAsteroidsAmount(0);
     }
 

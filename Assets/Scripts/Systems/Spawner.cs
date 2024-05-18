@@ -4,6 +4,7 @@ public class Spawner : Singleton<Spawner>
 {
     private ObjectPooler pooler;
     private MetaBalls metaballs;
+    [SerializeField] private Transform playerTransform;
 
     private void Start()
     {
@@ -13,20 +14,20 @@ public class Spawner : Singleton<Spawner>
 
     // Pool Objects
     #region Pool Objects
-    public GameObject SpawnPoolObjectOnPosition(string objectTag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnPoolObjectOnPosition(poolTags objectTag, Vector3 position, Quaternion rotation)
     {
         return pooler.SpawnObject(objectTag, position, rotation);
     }
 
-    public GameObject SpawnAwayFromPlayerView(string objectTag, Vector3 dotVector, int maxAttempts = 20)
+    public GameObject SpawnAwayFromPlayerView(poolTags objectTag, int maxAttempts = 20)
     {
         int randomMetaballID = Random.Range(0, metaballs.numberOfMetaballs);
         Vector3 spawnPosition = RandomPositionOnMetaball(randomMetaballID);
         Vector3 forceVector = metaballs.CalculateMetaballsNormal(spawnPosition);
 
-        if (Vector3.Dot(forceVector, dotVector) < 0 && maxAttempts > 0)
+        if (Vector3.Dot(forceVector, -playerTransform.up) < 0 && maxAttempts > 0)
         {
-            return SpawnAwayFromPlayerView(objectTag, dotVector, maxAttempts - 1);
+            return SpawnAwayFromPlayerView(objectTag, maxAttempts - 1);
         }
 
         if (maxAttempts <= 0)
@@ -41,7 +42,7 @@ public class Spawner : Singleton<Spawner>
         return obj;
     }
 
-    public GameObject SpawnPoolObject(string objectTag)
+    public GameObject SpawnPoolObject(poolTags objectTag)
     {
         int randomMetaballID = Random.Range(0, metaballs.numberOfMetaballs);
         Vector3 spawnPosition = RandomPositionOnMetaball(randomMetaballID);
@@ -51,7 +52,7 @@ public class Spawner : Singleton<Spawner>
         return obj;
     }
 
-    public GameObject SpawnPoolObjectOnMetaball(string objectTag, int metaballID)
+    public GameObject SpawnPoolObjectOnMetaball(poolTags objectTag, int metaballID)
     {
         Vector3 spawnPosition = RandomPositionOnMetaball(metaballID);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - metaballs.Position(metaballID));

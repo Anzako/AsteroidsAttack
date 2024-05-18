@@ -200,7 +200,7 @@ MonoBehaviour:
     m_Bits: 8
   damage: 4
   model: {fileID: 174136619786486881}
-  _tag: bigAsteroid
+  _tag: 3
 --- !u!114 &4260933094689136237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 2
+  <health>k__BackingField: 0
   score: 4
 --- !u!1001 &854129067449984853
 PrefabInstance:

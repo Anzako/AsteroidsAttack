@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementDirection = Vector2.zero;
 
     // Shooting
-    private string projectileTag;
     private float lastShootTime = 0;
     public float timeToShoot;
 
@@ -22,10 +21,6 @@ public class PlayerController : MonoBehaviour
         inputController = GetComponent<InputController>();
         healthController = GetComponent<PlayerHealth>();
         HUDController = GetComponent<UIController>();
-    }
-    private void Start()
-    {
-        projectileTag = poolTags.playerProjectile.ToString();
     }
 
     // Update is called once per frame
@@ -64,7 +59,7 @@ public class PlayerController : MonoBehaviour
         if (lastShootTime >= timeToShoot)
         {
             Vector3 spawnPosition = transform.position + transform.forward.normalized;
-            ObjectPooler.Instance.SpawnObject(projectileTag, spawnPosition, transform.rotation);
+            ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, spawnPosition, transform.rotation);
             lastShootTime = 0f;
         }
     }

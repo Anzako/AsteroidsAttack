@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22bb4e68e34695a488e7342baf566fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 654914601}
 --- !u!1001 &62318742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -605,13 +606,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: 1
+  - poolTag: 1
     prefab: {fileID: 3956984001194437467, guid: 17b0689e965d31e4db9ecf942fc09da5, type: 3}
-  - tag: 2
+  - poolTag: 2
     prefab: {fileID: 3956984001194437467, guid: 650280611e4afa245a68851277bc551e, type: 3}
-  - tag: 3
+  - poolTag: 3
     prefab: {fileID: 3956984001194437467, guid: 70ec778af1069bc41be0902c8ce476c3, type: 3}
-  - tag: 0
+  - poolTag: 0
     prefab: {fileID: 694073047113383073, guid: ce9a478c1a323824cb2f5beab04df836, type: 3}
 --- !u!4 &382138428
 Transform:
@@ -1202,6 +1203,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a785faf0dcc3bad4da0ad45444669598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &654914601 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8085797481541249609, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+  m_PrefabInstance: {fileID: 62318742}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &725121482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2537,7 +2543,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 654914592}
-  distanceFromGround: 0
 --- !u!1 &1574380766
 GameObject:
   m_ObjectHideFlags: 0

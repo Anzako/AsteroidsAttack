@@ -8,7 +8,6 @@ public class Projectile : MonoBehaviour, IPooledObject
     [SerializeField] private GameObject model;
 
     public LayerMask enemyLayer;
-    public string objectTag;
     public float timeToDestroy;
     public int damage;
 
@@ -17,8 +16,8 @@ public class Projectile : MonoBehaviour, IPooledObject
 
     private Vector2 moveDirection;
 
-    public string _tag;
-    public string Tag
+    public poolTags _tag;
+    public poolTags Tag
     {
         get { return _tag; }
         set { _tag = value; }

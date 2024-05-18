@@ -5,7 +5,6 @@ public class PlayerSpawner : Singleton<PlayerSpawner>
     [SerializeField] private GameObject player;
 
     private int spawnMetaballID = 0;
-    public float distanceFromGround;
 
     private void Start()
     {

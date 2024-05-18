@@ -72,7 +72,7 @@ public class GameManager : Singleton<GameManager>
     private void HandleGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        levelManager.UnFreezeGame();
+        UnFreezeGame();
     }
 
     private void HandleGameOver()
@@ -86,9 +86,23 @@ public class GameManager : Singleton<GameManager>
     {
         Cursor.lockState = CursorLockMode.None;
         menuCamera.gameObject.SetActive(false);
-        levelManager.FreezeGame();
+        FreezeGame();
+    }
+
+    public void FreezeGame()
+    {
+        Time.timeScale = 0;
+        playerController.Freeze(true);
+    }
+
+    public void UnFreezeGame()
+    {
+        Time.timeScale = 1;
+        playerController.Freeze(false);
     }
 }
+
+
 
 [Serializable]
 public enum GameState

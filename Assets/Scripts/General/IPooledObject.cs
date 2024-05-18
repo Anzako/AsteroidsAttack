@@ -2,9 +2,9 @@ using UnityEngine;
 
 public interface IPooledObject
 {
-    string Tag
+    poolTags Tag
     {
-        get; set;
+        get;
     }
 
     void OnObjectSpawn();

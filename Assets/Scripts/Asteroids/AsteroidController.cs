@@ -19,11 +19,10 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     private Vector2 direction;
 
     // Pooled object
-    public string _tag;
-    public string Tag
+    public poolTags _tag;
+    public poolTags Tag
     {
         get { return _tag; }
-        set { _tag = value; }
     }
     #endregion
 
@@ -64,14 +63,14 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     {
         switch (Tag)
         {
-            case "bigAsteroid":
-                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
-                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
-                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
+            case poolTags.bigAsteroid:
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
                 break;
-            case "mediumAsteroid":
-                spawner.SpawnAsteroidOnDestroy("smallAsteroid", this.transform);
-                spawner.SpawnAsteroidOnDestroy("smallAsteroid", this.transform);
+            case poolTags.mediumAsteroid:
+                spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid, this.transform);
                 break;
             default:
                 break;

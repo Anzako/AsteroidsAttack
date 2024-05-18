@@ -43,7 +43,7 @@ public class LevelManager : Singleton<LevelManager>
     public void CleanScene()
     {
         aSpawner.DestroyAllAsteroids();
-        ObjectPooler.Instance.ReturnObjectsToPool("projectile");
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.playerProjectile);
         ScoreManager.Instance.ResetScore();
     }
 
@@ -65,15 +65,8 @@ public class LevelManager : Singleton<LevelManager>
         gameManager.ChangeState(GameState.EndGame);
     }
 
-    public void FreezeGame()
+    private void SpawnEnemy()
     {
-        Time.timeScale = 0;
-        playerController.Freeze(true);
-    }
 
-    public void UnFreezeGame()
-    {
-        Time.timeScale = 1;
-        playerController.Freeze(false);
     }
 }
