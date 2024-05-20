@@ -14,7 +14,6 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     private void Start()
     {
         spawner = Spawner.Instance;
-        AsteroidController.onDestroy += OnAsteroidDestroy;
 
         asteroidsTags = new List<poolTags>
         {
@@ -22,11 +21,6 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
             poolTags.mediumAsteroid,
             poolTags.bigAsteroid
         };
-    }
-
-    private void OnDestroy()
-    {
-        AsteroidController.onDestroy -= OnAsteroidDestroy;
     }
 
     public void OnAsteroidDestroy()

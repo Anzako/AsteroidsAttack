@@ -119,4 +119,5 @@ public enum poolTags
     bigAsteroid = 3,
     enemy = 4,
     enemyProjectile = 5,
+    playerProjectileParticle = 6,
 }

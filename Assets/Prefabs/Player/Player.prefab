@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 6
   <health>k__BackingField: 0
   playerHUD: {fileID: 5476350350173624902}
 --- !u!114 &2852529471193898715

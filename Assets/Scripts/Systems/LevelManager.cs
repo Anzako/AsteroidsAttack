@@ -8,7 +8,6 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private PlayerController playerController;
     [SerializeField] private UIController HUDController;
 
-
     private bool gameStarted = false;
     private int actualRound = 0;
     private float elapsedTime = 0;

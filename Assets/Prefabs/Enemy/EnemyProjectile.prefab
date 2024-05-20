@@ -76,10 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0f1869626860740a1243600ea0ad55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 1480996374394146741}
   timeToDestroy: 5
-  damage: 2
-  selfDestroyable: 1
+  damageAmount: 2
+  particleTag: 6
   _tag: 5
 --- !u!114 &7498818321579366332
 MonoBehaviour:

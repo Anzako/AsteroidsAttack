@@ -1,18 +1,13 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour, IPooledObject
 {
     #region Variables
-    public static Action onDestroy;
-    private ParticleSystem hitParticle;
+    //public static Action onDestroy;
     private AsteroidsSpawner spawner;
     private AsteroidsHealth healthController;
 
-    public int damage;
-    private bool isDestroyed = false;
-    [SerializeField] private GameObject model;
+    public int damageAmount;
 
     // Movement
     private MovementController mController;
@@ -30,24 +25,22 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     {
         mController = GetComponent<MovementController>();
         healthController = GetComponent<AsteroidsHealth>();
-        hitParticle = GetComponentInChildren<ParticleSystem>();
         spawner = AsteroidsSpawner.Instance;
         direction = new Vector2(0f, 1f);
 
         healthController.Killed += OnProjectileDestroy;
+        healthController.Killed += spawner.OnAsteroidDestroy;
+    }
+
+    private void OnDestroy()
+    {
+        healthController.Killed -= OnProjectileDestroy;
+        healthController.Killed -= spawner.OnAsteroidDestroy;
     }
 
     private void FixedUpdate()
     {
-        if (isDestroyed) return;
-
         mController.MovementUpdate(direction);
-    }
-
-    public void OnObjectSpawn()
-    {
-        model.SetActive(true);
-        isDestroyed = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -56,9 +49,8 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
         if (damagable != null)
         {
-            damagable.Damage(damage);
-            hitParticle.transform.position = collision.contacts[0].point;
-            StartCoroutine(DestroyOnTime());
+            damagable.Damage(damageAmount);
+            Destroy();
         }
     }
 
@@ -78,21 +70,18 @@ public class AsteroidController : MonoBehaviour, IPooledObject
             default:
                 break;
         }
-        StartCoroutine(DestroyOnTime());
+        Destroy();
     }
 
-    // Turning off this object
-    // Play particle effect end then return object to pool
-    public IEnumerator DestroyOnTime()
+    private void Destroy()
     {
-        model.SetActive(false);
-        isDestroyed = true;
-        hitParticle.Play();
-        onDestroy?.Invoke();
-
-        yield return new WaitForSeconds(1.0f);
+        // Here spawn particle system
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
+    public void OnObjectSpawn()
+    {
+
+    }
 
 }
