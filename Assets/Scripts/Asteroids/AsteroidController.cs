@@ -8,8 +8,8 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     public static Action onDestroy;
     private ParticleSystem hitParticle;
     private AsteroidsSpawner spawner;
+    private AsteroidsHealth healthController;
 
-    public LayerMask enemyLayer;
     public int damage;
     private bool isDestroyed = false;
     [SerializeField] private GameObject model;
@@ -29,9 +29,12 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     private void Awake()
     {
         mController = GetComponent<MovementController>();
+        healthController = GetComponent<AsteroidsHealth>();
         hitParticle = GetComponentInChildren<ParticleSystem>();
         spawner = AsteroidsSpawner.Instance;
         direction = new Vector2(0f, 1f);
+
+        healthController.Killed += OnProjectileDestroy;
     }
 
     private void FixedUpdate()

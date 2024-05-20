@@ -1,17 +1,13 @@
 
+using UnityEngine;
+
 public class PlayerHealth : HealthController
 {
-    private UIController playerHUD;
-
-    private void Awake()
-    {
-        playerHUD = GetComponent<UIController>();
-    }
+    [SerializeField] private UIController playerHUD;
 
     // Start is called before the first frame update
     void Start()
     {
-        SetHealthToMax();
         Killed += LevelManager.Instance.EndGame;
     }
 

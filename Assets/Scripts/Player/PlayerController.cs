@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Camera pCamera;
     private PlayerMovement movementController;
     private InputController inputController;
     private PlayerHealth healthController;
     private UIController HUDController;
+    [SerializeField] private Transform projectileSpawnPoint;
 
     private bool isFreezed = false;
     private Vector2 movementDirection = Vector2.zero;
@@ -58,8 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         if (lastShootTime >= timeToShoot)
         {
-            Vector3 spawnPosition = transform.position + transform.forward.normalized;
-            ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, spawnPosition, transform.rotation);
+            ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
             lastShootTime = 0f;
         }
     }

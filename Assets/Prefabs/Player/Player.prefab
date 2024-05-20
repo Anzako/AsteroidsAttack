@@ -198,6 +198,37 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2869004363259944276}
   m_Enabled: 1
+--- !u!1 &4595731166817769556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8569031791132758089}
+  m_Layer: 0
+  m_Name: ProjectileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8569031791132758089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4595731166817769556}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.19, z: 13.34}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8085797481541249609}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6731209989152015075
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8085797481541249609
 Transform:
   m_ObjectHideFlags: 0
@@ -330,6 +361,7 @@ Transform:
   - {fileID: 747172440884740140}
   - {fileID: 5560152246695251579}
   - {fileID: 4378790141663063128}
+  - {fileID: 8569031791132758089}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3719851685426429890
@@ -344,8 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c428a9d84a927524ea641a616e286069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pCamera: {fileID: 0}
-  projectileTag: projectile
+  projectileSpawnPoint: {fileID: 8569031791132758089}
   timeToShoot: 0.5
 --- !u!114 &78416745642762997
 MonoBehaviour:
@@ -485,6 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   <health>k__BackingField: 0
+  playerHUD: {fileID: 5476350350173624902}
 --- !u!114 &2852529471193898715
 MonoBehaviour:
   m_ObjectHideFlags: 0

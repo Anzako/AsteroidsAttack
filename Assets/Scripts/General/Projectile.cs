@@ -7,7 +7,6 @@ public class Projectile : MonoBehaviour, IPooledObject
     private ParticleSystem hitParticle;
     [SerializeField] private GameObject model;
 
-    public LayerMask enemyLayer;
     public float timeToDestroy;
     public int damage;
 

@@ -8,8 +8,10 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private PlayerController playerController;
     [SerializeField] private UIController HUDController;
 
+
+    private bool gameStarted = false;
     private int actualRound = 0;
-    public int amount;
+    private float elapsedTime = 0;
 
     public int[] asteroidsInRound;
 
@@ -20,10 +22,25 @@ public class LevelManager : Singleton<LevelManager>
         gameManager = GameManager.Instance;
     }
 
+    private void Update()
+    {
+        if (!gameStarted) return;
+
+        elapsedTime += Time.deltaTime;
+        if (elapsedTime >= 30f)
+        {
+            SpawnEnemy();
+        }
+    }
+
+    #region Game Logic
     public void StartGame()
     {
         CleanScene();
         actualRound = 0;
+        elapsedTime = 0;
+        gameStarted = true;
+
         pSpawner.SpawnPlayer(); 
         StartRound(actualRound);
     }
@@ -63,7 +80,9 @@ public class LevelManager : Singleton<LevelManager>
     public void EndGame()
     {
         gameManager.ChangeState(GameState.EndGame);
+        gameStarted = false;
     }
+    #endregion
 
     private void SpawnEnemy()
     {

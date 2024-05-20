@@ -117,4 +117,6 @@ public enum poolTags
     smallAsteroid = 1,
     mediumAsteroid = 2,
     bigAsteroid = 3,
+    enemy = 4,
+    enemyProjectile = 5,
 }

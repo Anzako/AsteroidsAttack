@@ -1,24 +1,33 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPooledObject
 {
-    // Player
-    public Transform playerTransform;
-
     // Movement
-    [SerializeField] private MovementController mController;
-    [SerializeField] private EnemyHealth healthController;
+    [SerializeField] private Transform projectileSpawnPoint;
+    private MovementController movementController;
+    private EnemyHealth healthController;
     private Vector2 moveDirection = Vector2.zero;
 
     // Shooting
-    [SerializeField] private GameObject projectile;
     private float lastShootTime = 0;
     public float timeToShoot = 2.0f;
     public float shootRange;
 
+    [SerializeField] private poolTags _tag;
+    public poolTags Tag
+    {
+        get { return _tag; }
+    }
+
+    private void Start()
+    {
+        movementController = GetComponent<MovementController>();
+        healthController = GetComponent<EnemyHealth>();
+    }
+
     private void FixedUpdate()
     {
-        mController.MovementUpdate(moveDirection);
+        movementController.MovementUpdate(moveDirection);
     }
 
     // Update is called once per frame
@@ -28,19 +37,18 @@ public class Enemy : MonoBehaviour
 
         if (lastShootTime > timeToShoot) 
         {
-            float distance = (transform.position - playerTransform.position).magnitude;
-            if (distance <= shootRange)
-            {
-                ShootProjectile();
-            }
+            ShootProjectile();
         }
     }
 
     public void ShootProjectile()
     {
-        Vector3 spawnPosition = transform.position + transform.forward.normalized;
-        spawnPosition += transform.up.normalized * 0.2f;
-        Instantiate(projectile, spawnPosition, transform.rotation);
+        ObjectPooler.Instance.SpawnObject(poolTags.enemyProjectile, projectileSpawnPoint.position, transform.rotation);
         lastShootTime = 0;
+    }
+
+    public void OnObjectSpawn()
+    {
+        throw new System.NotImplementedException();
     }
 }
