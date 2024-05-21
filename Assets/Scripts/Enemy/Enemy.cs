@@ -49,6 +49,6 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

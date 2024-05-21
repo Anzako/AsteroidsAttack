@@ -3,22 +3,27 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
     private GameManager gameManager;
-    private PlayerSpawner pSpawner;
-    private AsteroidsSpawner aSpawner;
+    private PlayerSpawner playerSpawner;
+    private AsteroidsSpawner asteroidsSpawner;
+    private EnemySpawner enemySpawner;
+
     [SerializeField] private PlayerController playerController;
     [SerializeField] private UIController HUDController;
 
     private bool gameStarted = false;
     private int actualRound = 0;
     private float elapsedTime = 0;
+    private float elapsedRoundTime = 0;
+    public float timeToSpawnEnemy;
 
     public int[] asteroidsInRound;
 
     private void Start()
     {
-        pSpawner = PlayerSpawner.Instance;
-        aSpawner = AsteroidsSpawner.Instance;
+        playerSpawner = PlayerSpawner.Instance;
+        asteroidsSpawner = AsteroidsSpawner.Instance;
         gameManager = GameManager.Instance;
+        enemySpawner = EnemySpawner.Instance;
     }
 
     private void Update()
@@ -26,9 +31,12 @@ public class LevelManager : Singleton<LevelManager>
         if (!gameStarted) return;
 
         elapsedTime += Time.deltaTime;
-        if (elapsedTime >= 30f)
+        elapsedRoundTime += Time.deltaTime;
+
+        if (elapsedRoundTime >= timeToSpawnEnemy)
         {
             SpawnEnemy();
+            elapsedRoundTime = 0;
         }
     }
 
@@ -36,29 +44,29 @@ public class LevelManager : Singleton<LevelManager>
     public void StartGame()
     {
         CleanScene();
+        gameStarted = true;
         actualRound = 0;
         elapsedTime = 0;
-        gameStarted = true;
 
-        pSpawner.SpawnPlayer(); 
+        playerSpawner.SpawnPlayer(); 
         StartRound(actualRound);
     }
 
     private void StartRound(int round)
     {
-        aSpawner.SpawnAsteroids(asteroidsInRound[round]);
+        elapsedRoundTime = 0;
+        asteroidsSpawner.SpawnAsteroids(asteroidsInRound[round]);
         HUDController.SetWave(round + 1);
     }
 
     public void RestartGame()
     {
-        CleanScene();
         gameManager.ChangeState(GameState.StartGame);
     }
 
     public void CleanScene()
     {
-        aSpawner.DestroyAllAsteroids();
+        asteroidsSpawner.DestroyAllAsteroids();
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.playerProjectile);
         ScoreManager.Instance.ResetScore();
     }
@@ -85,6 +93,6 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnEnemy()
     {
-
+        enemySpawner.SpawnEnemy();
     }
 }

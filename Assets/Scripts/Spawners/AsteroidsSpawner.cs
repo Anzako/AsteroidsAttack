@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ObjectPooler;
 
 public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 {
     [SerializeField] private PlayerController pController;
     [SerializeField] private Camera pCamera;
     private Spawner spawner;
+    private ObjectPooler pooler;
 
     private int asteroidsAmount = 0;
     private List<poolTags> asteroidsTags;
@@ -14,6 +16,7 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     private void Start()
     {
         spawner = Spawner.Instance;
+        pooler = ObjectPooler.Instance;
 
         asteroidsTags = new List<poolTags>
         {
@@ -41,7 +44,7 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     private void SpawnRandomAsteroid()
     {
         poolTags randomAsteroidSize = asteroidsTags[Random.Range(0, asteroidsTags.Count)];
-        Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize);
+        spawner.SpawnAwayFromPlayerView(randomAsteroidSize);
 
         SetAsteroidsAmount(asteroidsAmount + 1);
         //Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize, pCamera.transform.forward));
@@ -76,9 +79,9 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 
     public void DestroyAllAsteroids()
     {
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.smallAsteroid);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.mediumAsteroid);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.bigAsteroid);
+        pooler.ReturnObjectsToPool(poolTags.smallAsteroid);
+        pooler.ReturnObjectsToPool(poolTags.mediumAsteroid);
+        pooler.ReturnObjectsToPool(poolTags.bigAsteroid);
         SetAsteroidsAmount(0);
     }
 

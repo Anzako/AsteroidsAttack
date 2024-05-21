@@ -3,7 +3,6 @@ using UnityEngine;
 public class AsteroidController : MonoBehaviour, IPooledObject
 {
     #region Variables
-    //public static Action onDestroy;
     private AsteroidsSpawner spawner;
     private AsteroidsHealth healthController;
 
