@@ -6,25 +6,23 @@ public class MovementController : MonoBehaviour
     public float moveSpeed;
     protected float actualSpeed;
 
-    protected Vector2 movementDirection;
-    protected Vector3 projectedDirection;
+    protected Vector2 movementDirection = new Vector2(0, 1);
+    protected Vector3 projectedDirection = Vector2.zero;
 
     // Gravity variables
     public static float toGroundPotential = 0.47f;
     public static float gravityForce = 4f;
     public float rotationSpeed;
 
-    void Start()
+    protected virtual void Start()
     {
         metaballs = MetaBalls.Instance;
-        movementDirection = Vector2.zero;
-        projectedDirection = Vector3.zero;
         actualSpeed = moveSpeed;
     }
 
-    public void MovementUpdate(Vector2 moveDirection)
+    public virtual void MovementUpdate()
     {
-        SetMovementDirection(moveDirection);
+        //SetMovementDirection(moveDirection);
         RotateToSurface();
         Move();
     }
@@ -63,8 +61,4 @@ public class MovementController : MonoBehaviour
         actualSpeed = moveSpeed;
     }
 
-    protected virtual void SetMovementDirection(Vector2 moveDirection)
-    {
-        movementDirection = moveDirection.normalized;
-    }
 }

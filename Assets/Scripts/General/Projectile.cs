@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour, IPooledObject
 
     private void FixedUpdate()
     {
-        movementController.MovementUpdate(moveDirection);
+        movementController.MovementUpdate();
     }
 
     private void OnCollisionEnter(Collision collision)

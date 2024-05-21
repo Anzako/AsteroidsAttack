@@ -95,4 +95,9 @@ public class LevelManager : Singleton<LevelManager>
     {
         enemySpawner.SpawnEnemy();
     }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return playerController.transform.position;
+    }
 }

@@ -5,12 +5,9 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     #region Variables
     private AsteroidsSpawner spawner;
     private AsteroidsHealth healthController;
+    private MovementController movementController;
 
     public int damageAmount;
-
-    // Movement
-    private MovementController mController;
-    private Vector2 direction;
 
     // Pooled object
     public poolTags _tag;
@@ -22,10 +19,9 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     private void Awake()
     {
-        mController = GetComponent<MovementController>();
+        movementController = GetComponent<MovementController>();
         healthController = GetComponent<AsteroidsHealth>();
         spawner = AsteroidsSpawner.Instance;
-        direction = new Vector2(0f, 1f);
 
         healthController.Killed += OnProjectileDestroy;
         healthController.Killed += spawner.OnAsteroidDestroy;
@@ -39,7 +35,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     private void FixedUpdate()
     {
-        mController.MovementUpdate(direction);
+        movementController.MovementUpdate();
     }
 
     private void OnCollisionEnter(Collision collision)

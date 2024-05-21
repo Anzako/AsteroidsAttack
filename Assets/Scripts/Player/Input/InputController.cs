@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class InputController : MonoBehaviour
 {
     private PlayerController playerController;
+    private PlayerMovement movementController;
 
     public float mousePos;
     [SerializeField] private float sensitivity;
@@ -11,6 +12,7 @@ public class InputController : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        movementController = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -36,11 +38,11 @@ public class InputController : MonoBehaviour
         {
             if (context.performed)
             {
-                playerController.SetMovementDirection(context.ReadValue<Vector2>());
+                movementController.SetMovementDirection(context.ReadValue<Vector2>());
             }
             else if (context.canceled)
             {
-                playerController.SetMovementDirection(context.ReadValue<Vector2>());
+                movementController.SetMovementDirection(context.ReadValue<Vector2>());
             }
         }
     }
@@ -51,7 +53,7 @@ public class InputController : MonoBehaviour
         {
             if (GameManager.Instance.State == GameState.Game)
             {
-                playerController.Dash();
+                movementController.DashPressed();
             }
         }
     }

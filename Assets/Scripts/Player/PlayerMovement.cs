@@ -3,32 +3,50 @@ using UnityEngine;
 
 public class PlayerMovement : MovementController
 {
+    private InputController inputController;
+
     public bool canDash;
     private bool isDashing;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashingTime;
     [SerializeField] private float dashingCooldown;
 
+    protected override void Start()
+    {
+        base.Start();
+        inputController = GetComponent<InputController>();
+    }
+
     private void OnEnable()
     {
         canDash = true;
         isDashing = false;
+        movementDirection = Vector2.zero;
     }
 
-    public void MouseUpdate(float horizontalRotationAngle)
+    public override void MovementUpdate()
     {
-        RotateAroundVerticalAxis(horizontalRotationAngle);
+        base.MovementUpdate();
+        RotateAroundVerticalAxis(inputController.mousePos);
     }
 
-    protected override void SetMovementDirection(Vector2 moveDirection)
+    public void SetMovementDirection(Vector2 moveDirection)
     {
         if (!isDashing)
         {
-            base.SetMovementDirection(moveDirection);
+            movementDirection = moveDirection.normalized;
         }
     }
 
-    public IEnumerator Dash()
+    public void DashPressed()
+    {
+        if (canDash)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;

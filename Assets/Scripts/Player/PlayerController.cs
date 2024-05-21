@@ -3,13 +3,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerMovement movementController;
-    private InputController inputController;
     private PlayerHealth healthController;
     private UIController HUDController;
     [SerializeField] private Transform projectileSpawnPoint;
 
     private bool isFreezed = false;
-    private Vector2 movementDirection = Vector2.zero;
 
     // Shooting
     private float lastShootTime = 0;
@@ -18,7 +16,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         movementController = GetComponent<PlayerMovement>();
-        inputController = GetComponent<InputController>();
         healthController = GetComponent<PlayerHealth>();
         HUDController = GetComponent<UIController>();
     }
@@ -28,8 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isFreezed) return;
         
-        movementController.MovementUpdate(movementDirection);
-        movementController.MouseUpdate(inputController.mousePos);
+        movementController.MovementUpdate();
         lastShootTime += Time.deltaTime;
     }
 
@@ -39,7 +35,6 @@ public class PlayerController : MonoBehaviour
         HUDController.SetActive(true);
 
         healthController.SetHealthToMax();
-        movementDirection = Vector2.zero;
     }
 
     public void DisablePlayer()
@@ -60,19 +55,6 @@ public class PlayerController : MonoBehaviour
         {
             ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
             lastShootTime = 0f;
-        }
-    }
-
-    public void SetMovementDirection(Vector2 direction)
-    {
-        movementDirection = direction;
-    }
-
-    public void Dash()
-    {
-        if (movementController.canDash)
-        {
-            StartCoroutine(movementController.Dash());
         }
     }
 

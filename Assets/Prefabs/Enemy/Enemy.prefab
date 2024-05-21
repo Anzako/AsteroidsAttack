@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2162117705239404788}
   - component: {fileID: 2477711259001314032}
-  - component: {fileID: 65366852103934307}
   - component: {fileID: -6091714098982788124}
+  - component: {fileID: 840131932104424735}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -53,20 +53,6 @@ MonoBehaviour:
   timeToShoot: 2
   shootRange: 20
   _tag: 4
---- !u!114 &65366852103934307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534234561323530830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cc3534ada173d418cbe7ec74efd0ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  rotationSpeed: 4
 --- !u!114 &-6091714098982788124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +68,21 @@ MonoBehaviour:
   maxHealth: 10
   <health>k__BackingField: 0
   score: 10
+--- !u!114 &840131932104424735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534234561323530830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c60a28a8248d6c468cefd0917913cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  rotationSpeed: 2
+  toPlayerDistance: 6
 --- !u!1 &9136702216752856124
 GameObject:
   m_ObjectHideFlags: 0

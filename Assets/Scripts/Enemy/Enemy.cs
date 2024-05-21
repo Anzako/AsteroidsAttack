@@ -1,12 +1,11 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Enemy : MonoBehaviour, IPooledObject
 {
-    // Movement
     [SerializeField] private Transform projectileSpawnPoint;
-    private MovementController movementController;
+    private EnemyMovement movementController;
     private EnemyHealth healthController;
-    private Vector2 moveDirection = Vector2.zero;
 
     // Shooting
     private float lastShootTime = 0;
@@ -21,13 +20,13 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     private void Start()
     {
-        movementController = GetComponent<MovementController>();
+        movementController = GetComponent<EnemyMovement>();
         healthController = GetComponent<EnemyHealth>();
     }
 
     private void FixedUpdate()
     {
-        movementController.MovementUpdate(moveDirection);
+        movementController.MovementUpdate();
     }
 
     // Update is called once per frame
@@ -40,6 +39,8 @@ public class Enemy : MonoBehaviour, IPooledObject
             ShootProjectile();
         }
     }
+
+
 
     public void ShootProjectile()
     {
