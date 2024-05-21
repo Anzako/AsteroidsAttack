@@ -4,7 +4,7 @@ public class MetaBalls : Singleton<MetaBalls>
 {
     const int threadGroupSize = 8;
     public ComputeShader metaballShader;
-    [SerializeField] private Metaball[] metaballs;
+    [SerializeField] public Metaball[] metaballs;
     public int numberOfMetaballs;
     public int worldBounds;
 
@@ -16,10 +16,13 @@ public class MetaBalls : Singleton<MetaBalls>
 
     public MetaballStruct[] metaballsStruct;
     private ComputeBuffer metaballBuffer;
+    private MarchingCubes marchingCubes;
+    public int samplePoints = 10;
 
     private void Start()
     {
         numberOfMetaballs = metaballs.Length;
+        marchingCubes = MarchingCubes.Instance;
         CreateMetaballs();
     }
 
@@ -117,6 +120,48 @@ public class MetaBalls : Singleton<MetaBalls>
             calculatedNormal += normal;
         }
         return calculatedNormal;
+    }
+
+    public Metaball GetContainingMetaball(Vector3 pos)
+    {
+        Metaball containingMetaball = null;
+        float maxValue = float.MinValue;
+
+        foreach (var metaball in metaballs)
+        {
+            float distanceSq = distanceBetweenVectorsSq(metaball.Position, pos);
+            if (distanceSq > 0)
+            {
+                float value = metaball.radius / distanceSq;
+                if (value > maxValue)
+                {
+                    maxValue = value;
+                    containingMetaball = metaball;
+                }
+            }
+        }
+
+        return containingMetaball;
+    }
+
+    public bool AreMetaballsConnected(Metaball m1, Metaball m2)
+    {
+        Vector3 direction = (m2.Position - m1.Position).normalized;
+        float distance = Vector3.Distance(m1.Position, m2.Position);
+
+        for (int i = 1; i < samplePoints; i++)
+        {
+            float t = (float)i / samplePoints;
+            Vector3 samplePoint = Vector3.Lerp(m1.Position, m2.Position, t);
+            float valueAtSample = CalculateScalarFieldValue(samplePoint);
+
+            if (valueAtSample < marchingCubes.isoLevel)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private float distanceBetweenVectorsSq(Vector3 a, Vector3 b)

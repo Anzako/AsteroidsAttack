@@ -412,7 +412,7 @@ Transform:
   m_GameObject: {fileID: 88915830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 30, y: 30, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -431,7 +431,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDirection: {x: 0, y: 0, z: 0}
-  startPosition: {x: 30, y: 30, z: 30}
   speed: 0
   radius: 25
 --- !u!1 &104529435
@@ -936,7 +935,7 @@ Transform:
   m_GameObject: {fileID: 462185632}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 30, y: 60, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -955,8 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDirection: {x: 0, y: -1, z: 0.3}
-  startPosition: {x: 30, y: 60, z: 30}
-  speed: 2
+  speed: 0
   radius: 22
 --- !u!1 &472310979
 GameObject:
@@ -1779,7 +1777,7 @@ Transform:
   m_GameObject: {fileID: 1036682537}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 60, y: 60, z: 60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1798,8 +1796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDirection: {x: -1, y: -0.5, z: 0.4}
-  startPosition: {x: 60, y: 60, z: 60}
-  speed: 1
+  speed: 0
   radius: 30
 --- !u!1 &1189556665
 GameObject:
@@ -3885,8 +3882,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 654914598}
   HUDController: {fileID: 654914600}
-  timeToSpawnEnemy: 10
-  asteroidsInRound: 0300000005000000
+  timeToSpawnEnemy: 200
+  asteroidsInRound: 0000000005000000
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

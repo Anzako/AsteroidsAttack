@@ -4,8 +4,7 @@ public class Metaball : MonoBehaviour
 {
     public Vector3 startDirection;
     private Vector3 direction;
-    public Vector3 startPosition;
-    private Vector3 position;
+    private Vector3 startPosition;
 
     public float speed;
     public float radius;
@@ -13,12 +12,14 @@ public class Metaball : MonoBehaviour
     private void Start()
     {
         direction = startDirection;
-        position = startPosition;
+        startPosition = transform.position;
     }
 
     public void UpdatePosition(Vector3 worldBounds)
     {
         float distanceToBorder = radius + 5;
+        Vector3 position = transform.position;
+
         if (position.x - distanceToBorder < 0)
         {
             direction.x = Mathf.Abs(direction.x);
@@ -43,11 +44,11 @@ public class Metaball : MonoBehaviour
             direction.z = -Mathf.Abs(direction.z);
         }
 
-        position += speed * Time.deltaTime * direction;
+        transform.position += speed * Time.deltaTime * direction;
     }
 
     public Vector3 Position 
     { 
-        get { return position; } 
+        get { return transform.position; } 
     }
 }
