@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Enemy : MonoBehaviour, IPooledObject
 {
     [SerializeField] private Transform projectileSpawnPoint;
     private EnemyMovement movementController;
     private EnemyHealth healthController;
+    private Spawner spawner;
 
     // Shooting
     private float lastShootTime = 0;
@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     private void Start()
     {
+        spawner = Spawner.Instance;
         movementController = GetComponent<EnemyMovement>();
         healthController = GetComponent<EnemyHealth>();
     }
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour, IPooledObject
     {
         lastShootTime += Time.deltaTime;
 
-        if (lastShootTime > timeToShoot) 
+        if (lastShootTime > timeToShoot && movementController.isEnemyOnPlayerMetaball) 
         {
             ShootProjectile();
         }
@@ -44,7 +45,7 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     public void ShootProjectile()
     {
-        ObjectPooler.Instance.SpawnObject(poolTags.enemyProjectile, projectileSpawnPoint.position, transform.rotation);
+        spawner.SpawnPoolObjectOnPosition(poolTags.enemyProjectile, projectileSpawnPoint.position, transform.rotation);
         lastShootTime = 0;
     }
 

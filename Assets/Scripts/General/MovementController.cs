@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    private MetaBalls metaballs;
+    protected MetaBalls metaballs;
     public float moveSpeed;
     protected float actualSpeed;
 
@@ -22,7 +22,6 @@ public class MovementController : MonoBehaviour
 
     public virtual void MovementUpdate()
     {
-        //SetMovementDirection(moveDirection);
         RotateToSurface();
         Move();
     }
