@@ -1,4 +1,5 @@
 using UnityEngine;
+using static ObjectPooler;
 
 public class EnemySpawner : Singleton<EnemySpawner>
 {
@@ -14,4 +15,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
     {
         spawner.SpawnAwayFromPlayerView(enemyTag);
     }
+
+    public void DestroyAllEnemies()
+    {
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.enemy);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.enemyProjectile);
+    }
+
 }

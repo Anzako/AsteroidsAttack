@@ -67,6 +67,7 @@ public class LevelManager : Singleton<LevelManager>
     public void CleanScene()
     {
         asteroidsSpawner.DestroyAllAsteroids();
+        enemySpawner.DestroyAllEnemies();
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.playerProjectile);
         ScoreManager.Instance.ResetScore();
     }

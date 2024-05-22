@@ -15,7 +15,8 @@ public class MenuManager : Singleton<MenuManager>
     
     // End game menu
     [SerializeField] private Button restartButton;
-    
+    [SerializeField] private Button mainMenuButton2;
+    [SerializeField] private TMP_Text scoreText;
 
     private void Awake()
     {
@@ -40,6 +41,12 @@ public class MenuManager : Singleton<MenuManager>
 
         // End game menu
         restartButton.gameObject.SetActive(state == GameState.EndGame);
+        mainMenuButton2.gameObject.SetActive(state == GameState.EndGame);
+        scoreText.gameObject.SetActive(state == GameState.EndGame);
+        if (state == GameState.EndGame) 
+        {
+            SetScore();
+        }
     }
 
     public void StartPressed()
@@ -60,6 +67,11 @@ public class MenuManager : Singleton<MenuManager>
     public void MainMenuButtonPressed()
     {
         GameManager.Instance.ChangeState(GameState.Menu);
+    }
+
+    public void SetScore()
+    {
+        scoreText.text = "Your Score: " + ScoreManager.Instance.GetScore();
     }
 
 }
