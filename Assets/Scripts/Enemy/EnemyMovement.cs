@@ -15,10 +15,10 @@ public class EnemyMovement : MovementController
 
     private void FixedUpdate()
     {
-        Metaball playerMetaball = metaballs.GetContainingMetaball(levelManager.GetPlayerPosition());
-        Metaball enemyMetaball = metaballs.GetContainingMetaball(transform.position);
+        Metaball playerMetaball = MetaBalls.GetContainingMetaball(levelManager.GetPlayerPosition());
+        Metaball enemyMetaball = MetaBalls.GetContainingMetaball(transform.position);
 
-        isEnemyOnPlayerMetaball = metaballs.AreMetaballsConnected(playerMetaball, enemyMetaball);
+        isEnemyOnPlayerMetaball = MetaBalls.AreMetaballsConnected(playerMetaball, enemyMetaball);
     }
 
     public override void MovementUpdate()

@@ -21,9 +21,9 @@ public class Spawner : Singleton<Spawner>
 
     public GameObject SpawnAwayFromPlayerView(poolTags objectTag, int maxAttempts = 20)
     {
-        int randomMetaballID = Random.Range(0, metaballs.numberOfMetaballs);
+        int randomMetaballID = Random.Range(0, MetaBalls.numberOfMetaballs);
         Vector3 spawnPosition = RandomPositionOnMetaball(randomMetaballID);
-        Vector3 forceVector = metaballs.CalculateMetaballsNormal(spawnPosition);
+        Vector3 forceVector = MetaBalls.CalculateMetaballsNormal(spawnPosition);
 
         if (Vector3.Dot(forceVector, -playerTransform.up) < 0 && maxAttempts > 0)
         {
@@ -44,7 +44,7 @@ public class Spawner : Singleton<Spawner>
 
     public GameObject SpawnPoolObject(poolTags objectTag)
     {
-        int randomMetaballID = Random.Range(0, metaballs.numberOfMetaballs);
+        int randomMetaballID = Random.Range(0, MetaBalls.numberOfMetaballs);
         Vector3 spawnPosition = RandomPositionOnMetaball(randomMetaballID);
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - metaballs.Position(randomMetaballID));
 
@@ -77,11 +77,11 @@ public class Spawner : Singleton<Spawner>
     {
         MetaBalls metaballs = MetaBalls.Instance;
 
-        Vector3 pos = metaballs.Position(metaballID);
-        float radius = metaballs.Radius(metaballID);
-        Vector3 spawnPosition = pos + CalculateRandomVector3() * (radius / 2);
+        float spawningDistance = 1f;
+        Vector3 spawnPosition = metaballs.Position(metaballID) + CalculateRandomVector3() 
+            * (MetaBalls.CalculateActualRadius(metaballs.metaballs[metaballID]) + spawningDistance);
 
-        if (metaballs.CalculateScalarFieldValue(spawnPosition) > 0.5f && maxAttempts > 0)
+        if (MetaBalls.CalculateScalarFieldValue(spawnPosition) > MarchingCubes.isoLevel && maxAttempts > 0)
         {
             return RandomPositionOnMetaball(metaballID, maxAttempts - 1);
         }

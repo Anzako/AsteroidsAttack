@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    protected MetaBalls metaballs;
     public float moveSpeed;
     protected float actualSpeed;
 
@@ -16,7 +15,6 @@ public class MovementController : MonoBehaviour
 
     protected virtual void Start()
     {
-        metaballs = MetaBalls.Instance;
         actualSpeed = moveSpeed;
     }
 
@@ -36,7 +34,7 @@ public class MovementController : MonoBehaviour
 
     private void RotateToSurface()    
     {
-        Vector3 potentialVector = metaballs.CalculateMetaballsNormal(transform.position);
+        Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
         Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
 
         // Rotating object to new rotation depending on potential vector
@@ -45,7 +43,7 @@ public class MovementController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
             Time.deltaTime * rotationSpeed);
 
-        float val = toGroundPotential - metaballs.CalculateScalarFieldValue(transform.position);
+        float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
         transform.position -= potentialVector.normalized * val * gravityForce;
     }
 

@@ -47,6 +47,14 @@ public class Metaball : MonoBehaviour
         transform.position += speed * Time.deltaTime * direction;
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        float actualRadius = MetaBalls.CalculateActualRadius(this);
+        Gizmos.DrawWireSphere(transform.position, actualRadius);
+    }
+
     public Vector3 Position 
     { 
         get { return transform.position; } 
