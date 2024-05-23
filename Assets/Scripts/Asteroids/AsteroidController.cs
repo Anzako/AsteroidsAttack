@@ -24,13 +24,11 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         spawner = AsteroidsSpawner.Instance;
 
         healthController.Killed += OnProjectileDestroy;
-        healthController.Killed += spawner.OnAsteroidDestroy;
     }
 
     private void OnDestroy()
     {
         healthController.Killed -= OnProjectileDestroy;
-        healthController.Killed -= spawner.OnAsteroidDestroy;
     }
 
     private void FixedUpdate()
@@ -71,6 +69,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     private void Destroy()
     {
         // Here spawn particle system
+        spawner.OnAsteroidDestroy();
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 

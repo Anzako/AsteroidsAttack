@@ -18,11 +18,17 @@ public class Enemy : MonoBehaviour, IPooledObject
         get { return _tag; }
     }
 
+    private void OnDestroy()
+    {
+        healthController.Killed -= Destroy;
+    }
+
     private void Start()
     {
         spawner = Spawner.Instance;
         movementController = GetComponent<EnemyMovement>();
         healthController = GetComponent<EnemyHealth>();
+        healthController.Killed += Destroy;
     }
 
     private void FixedUpdate()
@@ -41,7 +47,10 @@ public class Enemy : MonoBehaviour, IPooledObject
         }
     }
 
-
+    public void Destroy()
+    {
+        ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
+    }
 
     public void ShootProjectile()
     {
