@@ -77,7 +77,7 @@ public class Spawner : Singleton<Spawner>
     {
         MetaBalls metaballs = MetaBalls.Instance;
 
-        float spawningDistance = 1f;
+        float spawningDistance = 1.5f;
         Vector3 spawnPosition = metaballs.Position(metaballID) + CalculateRandomVector3() 
             * (MetaBalls.CalculateActualRadius(metaballs.metaballs[metaballID]) + spawningDistance);
 

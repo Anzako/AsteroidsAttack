@@ -5,17 +5,13 @@ using TMPro;
 public class MenuManager : Singleton<MenuManager>
 {
     // Main menu
-    [SerializeField] private GameObject startButton;
-    [SerializeField] private TMP_Text mainMenuText;
+    [SerializeField] private GameObject mainMenu;
 
     // In game menu
-    [SerializeField] private TMP_Text pauseText;
-    [SerializeField] private Button resumeGameButton;
-    [SerializeField] private Button mainMenuButton; 
-    
+    [SerializeField] private GameObject inGameMenu;
+
     // End game menu
-    [SerializeField] private Button restartButton;
-    [SerializeField] private Button mainMenuButton2;
+    [SerializeField] private GameObject endGameUI;
     [SerializeField] private TMP_Text scoreText;
 
     private void Awake()
@@ -31,17 +27,13 @@ public class MenuManager : Singleton<MenuManager>
     private void GameManagerOnStateChanged(GameState state)
     {
         // Menu
-        startButton.SetActive(state == GameState.Menu);
-        mainMenuText.gameObject.SetActive(state == GameState.Menu);
+        mainMenu.SetActive(state == GameState.Menu);
 
         // In game menu
-        resumeGameButton.gameObject.SetActive(state == GameState.InGameMenu);
-        mainMenuButton.gameObject.SetActive(state == GameState.InGameMenu);
-        pauseText.gameObject.SetActive(state == GameState.InGameMenu);
+        inGameMenu.SetActive(state == GameState.InGameMenu);
 
         // End game menu
-        restartButton.gameObject.SetActive(state == GameState.EndGame);
-        mainMenuButton2.gameObject.SetActive(state == GameState.EndGame);
+        endGameUI.SetActive(state == GameState.EndGame);
         scoreText.gameObject.SetActive(state == GameState.EndGame);
         if (state == GameState.EndGame) 
         {
