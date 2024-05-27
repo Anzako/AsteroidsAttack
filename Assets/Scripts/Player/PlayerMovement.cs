@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class PlayerMovement : MovementController
 {
-    private InputController inputController;
+    [SerializeField] private InputController inputController;
 
+    private bool isFreezed;
     public bool canDash;
     private bool isDashing;
+
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashingTime;
     [SerializeField] private float dashingCooldown;
@@ -14,7 +16,6 @@ public class PlayerMovement : MovementController
     protected override void Start()
     {
         base.Start();
-        inputController = GetComponent<InputController>();
     }
 
     private void OnEnable()
@@ -24,9 +25,11 @@ public class PlayerMovement : MovementController
         movementDirection = Vector2.zero;
     }
 
-    public override void MovementUpdate()
+    protected override void Update()
     {
-        base.MovementUpdate();
+        if (isFreezed) return;
+
+        base.Update();
         RotateAroundVerticalAxis(inputController.mousePos);
     }
 
@@ -58,6 +61,11 @@ public class PlayerMovement : MovementController
 
         yield return new WaitForSeconds(dashingCooldown);
         canDash = true;
+    }
+
+    public void Freeze(bool isFreeze)
+    {
+        isFreezed = isFreeze;
     }
 
 }

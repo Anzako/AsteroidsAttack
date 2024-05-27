@@ -21,10 +21,10 @@ public class EnemyMovement : MovementController
         isEnemyOnPlayerMetaball = MetaBalls.AreMetaballsConnected(playerMetaball, enemyMetaball);
     }
 
-    public override void MovementUpdate()
+    protected override void Update()
     {
         UpdateMovementDirection();
-        base.MovementUpdate();
+        base.Update();
     }
 
     private void UpdateMovementDirection()

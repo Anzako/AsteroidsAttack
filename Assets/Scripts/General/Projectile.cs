@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IPooledObject
 {
-    private MovementController movementController;
-    private Vector2 moveDirection;
-
     public float timeToDestroy;
     public int damageAmount;
 
@@ -18,22 +15,9 @@ public class Projectile : MonoBehaviour, IPooledObject
         set { _tag = value; }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        movementController = GetComponent<MovementController>();
-
-        moveDirection = new Vector2(0, 1); 
-    }
-
     private void OnEnable()
     {
         StartCoroutine(DestroyOnSpawn());
-    }
-
-    private void FixedUpdate()
-    {
-        movementController.MovementUpdate();
     }
 
     private void OnCollisionEnter(Collision collision)

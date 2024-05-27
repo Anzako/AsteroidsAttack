@@ -3,8 +3,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IPooledObject
 {
     [SerializeField] private Transform projectileSpawnPoint;
-    private EnemyMovement movementController;
-    private EnemyHealth healthController;
+    [SerializeField] private EnemyMovement movementController;
+    [SerializeField] private EnemyHealth healthController;
     private Spawner spawner;
 
     // Shooting
@@ -26,14 +26,7 @@ public class Enemy : MonoBehaviour, IPooledObject
     private void Start()
     {
         spawner = Spawner.Instance;
-        movementController = GetComponent<EnemyMovement>();
-        healthController = GetComponent<EnemyHealth>();
         healthController.Killed += Destroy;
-    }
-
-    private void FixedUpdate()
-    {
-        movementController.MovementUpdate();
     }
 
     // Update is called once per frame
@@ -60,6 +53,6 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
-        
+        healthController.SetHealthToMax();
     }
 }

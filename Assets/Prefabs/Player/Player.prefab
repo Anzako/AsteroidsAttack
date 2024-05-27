@@ -376,6 +376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c428a9d84a927524ea641a616e286069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementController: {fileID: 2852529471193898715}
+  healthController: {fileID: 5691059295496667685}
+  HUDController: {fileID: 5476350350173624902}
   projectileSpawnPoint: {fileID: 8569031791132758089}
   timeToShoot: 0.5
 --- !u!114 &78416745642762997
@@ -530,7 +533,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  movementDirection: {x: 0, y: 1}
   rotationSpeed: 2
+  inputController: {fileID: 78416745642762997}
   canDash: 0
   dashSpeed: 15
   dashingTime: 0.2

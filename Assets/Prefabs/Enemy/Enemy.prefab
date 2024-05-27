@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpawnPoint: {fileID: 7268516291731420452}
+  movementController: {fileID: 840131932104424735}
+  healthController: {fileID: -6091714098982788124}
   timeToShoot: 2
   shootRange: 20
   _tag: 4
@@ -80,6 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  movementDirection: {x: 0, y: 1}
   rotationSpeed: 2
   toPlayerDistance: 6
   isEnemyOnPlayerMetaball: 0
@@ -165,6 +168,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 22b55f5ce070449449237adc96616905, type: 3}
       propertyPath: m_Name
       value: SM_ufo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 22b55f5ce070449449237adc96616905, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

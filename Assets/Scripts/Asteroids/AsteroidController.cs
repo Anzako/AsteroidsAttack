@@ -4,8 +4,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 {
     #region Variables
     private AsteroidsSpawner spawner;
-    private AsteroidsHealth healthController;
-    private MovementController movementController;
+    [SerializeField] private AsteroidsHealth healthController;
 
     public int damageAmount;
 
@@ -19,8 +18,6 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     private void Awake()
     {
-        movementController = GetComponent<MovementController>();
-        healthController = GetComponent<AsteroidsHealth>();
         spawner = AsteroidsSpawner.Instance;
 
         healthController.Killed += OnProjectileDestroy;
@@ -29,11 +26,6 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     private void OnDestroy()
     {
         healthController.Killed -= OnProjectileDestroy;
-    }
-
-    private void FixedUpdate()
-    {
-        movementController.MovementUpdate();
     }
 
     private void OnCollisionEnter(Collision collision)

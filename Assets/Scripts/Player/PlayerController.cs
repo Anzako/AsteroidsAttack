@@ -2,30 +2,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerMovement movementController;
-    private PlayerHealth healthController;
-    private UIController HUDController;
+    [SerializeField] private PlayerMovement movementController;
+    [SerializeField] private PlayerHealth healthController;
+    [SerializeField] private UIController HUDController;
     [SerializeField] private Transform projectileSpawnPoint;
-
-    private bool isFreezed = false;
 
     // Shooting
     private float lastShootTime = 0;
     public float timeToShoot;
 
-    private void Awake()
-    {
-        movementController = GetComponent<PlayerMovement>();
-        healthController = GetComponent<PlayerHealth>();
-        HUDController = GetComponent<UIController>();
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (isFreezed) return;
-        
-        movementController.MovementUpdate();
         lastShootTime += Time.deltaTime;
     }
 
@@ -46,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze(bool isFreeze)
     {
-        isFreezed = isFreeze;
+        movementController.Freeze(isFreeze);
     }
 
     public void ShootProjectile()

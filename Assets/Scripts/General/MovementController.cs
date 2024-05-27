@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
@@ -5,7 +6,7 @@ public class MovementController : MonoBehaviour
     public float moveSpeed;
     protected float actualSpeed;
 
-    protected Vector2 movementDirection = new Vector2(0, 1);
+    [SerializeField] protected Vector2 movementDirection = new(0, 1);
     protected Vector3 projectedDirection = Vector2.zero;
 
     // Gravity variables
@@ -18,7 +19,7 @@ public class MovementController : MonoBehaviour
         actualSpeed = moveSpeed;
     }
 
-    public virtual void MovementUpdate()
+    protected virtual void Update()
     {
         RotateToSurface();
         Move();
