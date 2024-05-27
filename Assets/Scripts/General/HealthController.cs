@@ -8,7 +8,7 @@ public class HealthController : MonoBehaviour, IDamagable
 
     // Health
     [SerializeField] private int maxHealth;
-    [field: SerializeField] public int health { get; private set; }
+    [field: SerializeField] public int Health { get; private set; }
 
     private void Awake()
     {
@@ -17,7 +17,7 @@ public class HealthController : MonoBehaviour, IDamagable
 
     public void SetHealth(int healthAmount)
     {
-        health = healthAmount;
+        Health = healthAmount;
     }
 
     public virtual void SetHealthToMax()
@@ -25,11 +25,21 @@ public class HealthController : MonoBehaviour, IDamagable
         SetHealth(maxHealth);
     }
 
+    protected void AddHealth(int healthAmount)
+    {
+        Health += healthAmount;
+
+        if (Health > maxHealth)
+        {
+            SetHealthToMax();
+        }
+    }
+
     public virtual void Damage(int damageAmount)
     {
-        health -= damageAmount;
+        Health -= damageAmount;
         Damaged?.Invoke();
-        if (health <= 0)
+        if (Health <= 0)
         {
             Kill();
         }

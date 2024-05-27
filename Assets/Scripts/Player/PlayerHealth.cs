@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class PlayerHealth : HealthController
+public class PlayerHealth : HealthController, IHealable
 {
     [SerializeField] private UIController playerHUD;
 
@@ -14,7 +14,7 @@ public class PlayerHealth : HealthController
     public override void Damage(int damage)
     {
         base.Damage(damage);
-        playerHUD.SetHealth(health);
+        playerHUD.SetHealth(Health);
     }
 
     protected override void Kill()
@@ -25,6 +25,12 @@ public class PlayerHealth : HealthController
     public override void SetHealthToMax()
     {
         base.SetHealthToMax();
-        playerHUD.SetMaxHealth(health);
+        playerHUD.SetMaxHealth(Health);
+    }
+
+    public void Heal(int healAmount)
+    {
+        AddHealth(healAmount);
+        playerHUD.SetHealth(Health);
     }
 }
