@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerMovement : MovementController
 {
@@ -12,6 +13,11 @@ public class PlayerMovement : MovementController
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashingTime;
     [SerializeField] private float dashingCooldown;
+
+    // Smoothing movement
+    private Vector2 currentInputVector;
+    private Vector2 smoothInputVelocity;
+    [SerializeField] private float smoothInputSpeed = .2f;
 
     protected override void Start()
     {
@@ -33,11 +39,28 @@ public class PlayerMovement : MovementController
         RotateAroundVerticalAxis(inputController.mousePos);
     }
 
+    protected override void Move()
+    {
+        currentInputVector = Vector2.SmoothDamp(currentInputVector, movementDirection, ref smoothInputVelocity, smoothInputSpeed);
+        
+        if (isDashing)
+        {
+            projectedDirection = transform.forward * movementDirection.y + transform.right * movementDirection.x;
+        } 
+        else
+        {
+            projectedDirection = transform.forward * currentInputVector.y + transform.right * currentInputVector.x;
+        }
+        Debug.Log(projectedDirection.magnitude);
+
+        transform.position += actualSpeed * Time.deltaTime * projectedDirection;
+    }
+
     public void SetMovementDirection(Vector2 moveDirection)
     {
         if (!isDashing)
         {
-            movementDirection = moveDirection.normalized;
+            movementDirection = moveDirection;
         }
     }
 

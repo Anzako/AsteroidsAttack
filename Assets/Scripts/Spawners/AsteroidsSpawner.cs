@@ -81,6 +81,7 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         pooler.ReturnObjectsToPool(poolTags.smallAsteroid);
         pooler.ReturnObjectsToPool(poolTags.mediumAsteroid);
         pooler.ReturnObjectsToPool(poolTags.bigAsteroid);
+        pooler.ReturnObjectsToPool(poolTags.healUpAsteroid);
         SetAsteroidsAmount(0);
     }
 

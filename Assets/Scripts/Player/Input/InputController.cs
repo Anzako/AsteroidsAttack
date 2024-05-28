@@ -5,6 +5,10 @@ public class InputController : MonoBehaviour
 {
     private PlayerController playerController;
     private PlayerMovement movementController;
+    private GameManager gameManager;
+
+    private PlayerInput playerInput;
+    private InputAction moveAction;
 
     public float mousePos;
     [SerializeField] private float sensitivity;
@@ -13,48 +17,41 @@ public class InputController : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         movementController = GetComponent<PlayerMovement>();
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.actions["Movement"];
+    }
+
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.State != GameState.Game) return;
+
         mousePos = Input.GetAxis("Mouse X") * sensitivity;
+        movementController.SetMovementDirection(moveAction.ReadValue<Vector2>());
     }
 
     public void OnLeftClick(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance.State == GameState.Game)
+        if (gameManager.State != GameState.Game) return;
+        
+        if (context.performed)
         {
-            if (context.performed)
-            {
-                playerController.ShootProjectile();
-            }
-        }
-    }
-
-    public void OnMovement(InputAction.CallbackContext context)
-    {
-        if (GameManager.Instance.State == GameState.Game)
-        {
-            if (context.performed)
-            {
-                movementController.SetMovementDirection(context.ReadValue<Vector2>());
-            }
-            else if (context.canceled)
-            {
-                movementController.SetMovementDirection(context.ReadValue<Vector2>());
-            }
+            playerController.ShootProjectile();
         }
     }
 
     public void OnSpaceClicked(InputAction.CallbackContext context)
     {
+        if (gameManager.State != GameState.Game) return;
+
         if (context.performed)
         {
-            if (GameManager.Instance.State == GameState.Game)
-            {
-                movementController.DashPressed();
-            }
+            movementController.DashPressed();
         }
     }
 
@@ -62,12 +59,13 @@ public class InputController : MonoBehaviour
     {
         if (context.performed)
         {
-            if (GameManager.Instance.State == GameState.Game)
+            if (gameManager.State == GameState.Game)
             {
-                GameManager.Instance.ChangeState(GameState.InGameMenu);
-            } else if (GameManager.Instance.State == GameState.InGameMenu)
+                gameManager.ChangeState(GameState.InGameMenu);
+            } 
+            else if (gameManager.State == GameState.InGameMenu)
             {
-                GameManager.Instance.ChangeState(GameState.Game);
+                gameManager.ChangeState(GameState.Game);
             }
         }
     }

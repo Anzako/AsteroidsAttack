@@ -25,10 +25,9 @@ public class MovementController : MonoBehaviour
         Move();
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         projectedDirection = transform.forward * movementDirection.y + transform.right * movementDirection.x;
-        projectedDirection.Normalize();
 
         transform.position += actualSpeed * Time.deltaTime * projectedDirection;
     }
