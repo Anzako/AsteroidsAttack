@@ -49,7 +49,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
                 spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
                 break;
             case poolTags.mediumAsteroid:
-                spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.healUpAsteroid, this.transform);
                 spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid, this.transform);
                 break;
             default:
@@ -58,10 +58,10 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         Destroy();
     }
 
-    private void Destroy()
+    protected virtual void Destroy()
     {
         // Here spawn particle system
-        spawner.OnAsteroidDestroy();
+        AsteroidsSpawner.Instance.OnAsteroidDestroy();
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
