@@ -61,6 +61,11 @@ public class MenuManager : Singleton<MenuManager>
         GameManager.Instance.ChangeState(GameState.Menu);
     }
 
+    public void QuitButtonPressed()
+    {
+        Application.Quit();
+    }
+
     public void SetScore()
     {
         scoreText.text = "Your Score: " + ScoreManager.Instance.GetScore();
