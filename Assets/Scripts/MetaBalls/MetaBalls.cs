@@ -6,7 +6,6 @@ public class MetaBalls : Singleton<MetaBalls>
     public ComputeShader metaballShader;
     [SerializeField] public Metaball[] metaballs;
     public static int numberOfMetaballs;
-    public int worldBounds;
 
     public struct MetaballStruct
     {
@@ -38,7 +37,7 @@ public class MetaBalls : Singleton<MetaBalls>
     {
         foreach (Metaball metaball in metaballs)
         {
-            metaball.UpdatePosition(new Vector3(worldBounds, worldBounds, worldBounds));
+            metaball.UpdatePosition();
         }
         UpdateMetaballsStruct();
     }
@@ -87,6 +86,14 @@ public class MetaBalls : Singleton<MetaBalls>
     public float Radius(int ID)
     {
         return metaballs[ID].radius;
+    }
+
+    public void ResetMetaballsParameters()
+    {
+        foreach (Metaball metaball in metaballs)
+        {
+            metaball.ResetParameters();
+        }
     }
 
     #region Calculations

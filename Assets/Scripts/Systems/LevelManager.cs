@@ -44,6 +44,7 @@ public class LevelManager : Singleton<LevelManager>
     public void StartGame()
     {
         CleanScene();
+        MetaBalls.Instance.ResetMetaballsParameters();
         gameStarted = true;
         actualRound = 0;
         elapsedTime = 0;

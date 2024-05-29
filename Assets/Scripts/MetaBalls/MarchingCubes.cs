@@ -25,7 +25,6 @@ public class MarchingCubes : Singleton<MarchingCubes>
     // Start is called before the first frame update
     void Start()
     {
-        metaBallGenerator.worldBounds = numPointsPerAxis;
         mesh = new Mesh();
 
         meshFilter = GetComponent<MeshFilter>();

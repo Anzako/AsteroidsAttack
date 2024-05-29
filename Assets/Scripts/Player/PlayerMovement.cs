@@ -51,7 +51,6 @@ public class PlayerMovement : MovementController
         {
             projectedDirection = transform.forward * currentInputVector.y + transform.right * currentInputVector.x;
         }
-        Debug.Log(projectedDirection.magnitude);
 
         transform.position += actualSpeed * Time.deltaTime * projectedDirection;
     }
