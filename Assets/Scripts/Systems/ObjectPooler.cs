@@ -9,43 +9,41 @@ public class ObjectPooler : Singleton<ObjectPooler>
     [System.Serializable]
     public class Pool
     {
-        public string tag;
+        public poolTags poolTag;
         public GameObject prefab;
-        //public poolTags tager;
     }
 
     // Declares pool objects with tag
     public List<Pool> pools;
     // Store pooled objects
-    public static Dictionary<string, List<GameObject>> poolObjects;
-    public static Dictionary<string, List<GameObject>> activeObjects;
+    public static Dictionary<poolTags, List<GameObject>> poolObjects;
+    public static Dictionary<poolTags, List<GameObject>> activeObjects;
 
     // Start is called before the first frame update
     void Start()
     {
         parent = gameObject.transform;
-        poolObjects = new Dictionary<string, List<GameObject>>();
-        activeObjects = new Dictionary<string, List<GameObject>>();
+        poolObjects = new Dictionary<poolTags, List<GameObject>>();
+        activeObjects = new Dictionary<poolTags, List<GameObject>>();
     }
 
-    public GameObject SpawnObject(string tag, Vector3 position, Quaternion rotation)
+    public GameObject SpawnObject(poolTags objectTag, Vector3 position, Quaternion rotation)
     {
-        Pool pool = pools.Find(p => p.tag == tag);
+        Pool pool = pools.Find(p => p.poolTag == objectTag);
 
         if (pool == null)
         {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist. There is no prefab to create new pool");
+            Debug.LogWarning("Pool with tag " + objectTag.ToString() + " doesn't exist. There is no prefab to create new pool");
             return null;
         }
 
-        if (!poolObjects.ContainsKey(tag))
+        if (!poolObjects.ContainsKey(objectTag))
         {
-            //Debug.LogWarning("Pool with tag " + tag + " doesn't exist. Creating new one");
-            poolObjects.Add(tag, new List<GameObject>());
-            activeObjects.Add(tag, new List<GameObject>());
+            poolObjects.Add(objectTag, new List<GameObject>());
+            activeObjects.Add(objectTag, new List<GameObject>());
         }
 
-        GameObject spawnableObj = poolObjects[tag].FirstOrDefault();
+        GameObject spawnableObj = poolObjects[objectTag].FirstOrDefault();
 
         if (spawnableObj == null)
         {
@@ -55,62 +53,57 @@ public class ObjectPooler : Singleton<ObjectPooler>
         {
             Transform obj = spawnableObj.transform;
             obj.SetPositionAndRotation(position, rotation);
-            poolObjects[tag].Remove(spawnableObj);
+            poolObjects[objectTag].Remove(spawnableObj);
             spawnableObj.SetActive(true);
         }
 
-        activeObjects[tag].Add(spawnableObj);
-/*        Debug.Log("Tag pool " + tag + " have active objects: " + activeObjects[tag].Count +
-            " and pool objects: " + poolObjects[tag].Count);*/
+        activeObjects[objectTag].Add(spawnableObj);
         spawnableObj.GetComponent<IPooledObject>().OnObjectSpawn();
         return spawnableObj;
     }
 
     public void ReturnObjectToPool(GameObject obj)
     {
-        IPooledObject pooledObj = obj.GetComponent<IPooledObject>();
-        if (pooledObj == null) 
+        IPooledObject pooledObject = obj.GetComponent<IPooledObject>();
+        if (pooledObject == null) 
         {
             Debug.LogWarning("Object don't have Pooled Object interface");
             return;
         }
-        string tag = pooledObj.Tag;
 
-        Pool pool = pools.Find(p => p.tag == tag);
+        Pool pool = pools.Find(p => p.poolTag == pooledObject.Tag);
         if (pool == null)
         {
-            Debug.LogWarning("Trying to release an object that is not pooled " + tag);
+            Debug.LogWarning("Trying to release an object that is not pooled " + pooledObject.Tag.ToString());
             return;
         }
         
         obj.SetActive(false);
-        poolObjects[tag].Add(obj);
-        activeObjects[tag].Remove(obj);
-        /*Debug.Log("Tag pool " + tag + " have active objects: " + activeObjects[tag].Count +
-            " and pool objects: " + poolObjects[tag].Count);*/
+        poolObjects[pool.poolTag].Add(obj);
+        activeObjects[pool.poolTag].Remove(obj);
     }
 
-    public void ReturnObjectsToPool(string tagName)
+    public void ReturnObjectsToPool(poolTags objectTag)
     {
-        Pool pool = pools.Find(p => p.tag == tagName);
+        Pool pool = pools.Find(p => p.poolTag == objectTag);
         if (pool == null)
         {
             //Debug.LogWarning("Trying to return objects from pool " + tag + " but there is no pool");
             return;
         } 
 
-        if (!activeObjects.ContainsKey(tagName))
+        if (!activeObjects.ContainsKey(objectTag))
         {
             //Debug.Log("There is no created pool for objects " + tagName);
             return;
         }
 
-        for (int i = activeObjects[tagName].Count - 1; i >= 0; i--)
+        for (int i = activeObjects[objectTag].Count - 1; i >= 0; i--)
         {
-            GameObject obj = activeObjects[tagName][i];
+            GameObject obj = activeObjects[objectTag][i];
             obj.SetActive(false);
-            activeObjects[tagName].Remove(obj);
-            poolObjects[tagName].Add(obj);
+            activeObjects[objectTag].Remove(obj);
+            poolObjects[objectTag].Add(obj);
         }
 
     }
@@ -118,10 +111,14 @@ public class ObjectPooler : Singleton<ObjectPooler>
 }
 
 
-/*public enum poolTags
+public enum poolTags
 {
-    projectile = 0,
+    playerProjectile = 0,
     smallAsteroid = 1,
     mediumAsteroid = 2,
     bigAsteroid = 3,
-}*/
+    enemy = 4,
+    enemyProjectile = 5,
+    playerProjectileParticle = 6,
+    healUpAsteroid = 7,
+}

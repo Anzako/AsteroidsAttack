@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MarchingCubes : Singleton<MarchingCubes>
 {
-    const int threadGroupSize = 8;
+    private const int threadGroupSize = 8;
 
     public MetaBalls metaBallGenerator;
     public ComputeShader shader;
@@ -10,7 +10,7 @@ public class MarchingCubes : Singleton<MarchingCubes>
     private Mesh mesh;
 
     [Header("Voxel Settings")]
-    public float isoLevel;
+    public static float isoLevel = 0.5f;
     public float spacing = 1;
     public Vector3 offset = Vector3.zero;
 
@@ -18,14 +18,13 @@ public class MarchingCubes : Singleton<MarchingCubes>
     public int numPointsPerAxis;
 
     // Buffers
-    ComputeBuffer triangleBuffer;
-    ComputeBuffer pointsBuffer;
-    ComputeBuffer triCountBuffer;
+    private ComputeBuffer triangleBuffer;
+    private ComputeBuffer pointsBuffer;
+    private ComputeBuffer triCountBuffer;
 
     // Start is called before the first frame update
     void Start()
     {
-        metaBallGenerator.worldBounds = numPointsPerAxis;
         mesh = new Mesh();
 
         meshFilter = GetComponent<MeshFilter>();
@@ -33,13 +32,13 @@ public class MarchingCubes : Singleton<MarchingCubes>
 
     private void Update()
     {
-        CreateBuffers();
-        UpdateMesh();
-
         if (!Application.isPlaying)
         {
             ReleaseBuffers();
         }
+
+        CreateBuffers();
+        UpdateMesh();
     }
 
     private void OnDestroy()
@@ -123,6 +122,16 @@ public class MarchingCubes : Singleton<MarchingCubes>
             pointsBuffer.Release();
             triCountBuffer.Release();
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        float size = (numPointsPerAxis - 1) * spacing;
+        float center = size / 2;
+
+        Vector3 centerPos = offset + new Vector3(center, center, center);
+        Gizmos.DrawWireCube(centerPos, new Vector3(size, size, size));
     }
 
     struct Triangle

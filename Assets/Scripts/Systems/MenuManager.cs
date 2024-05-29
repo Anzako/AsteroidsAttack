@@ -1,9 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : Singleton<MenuManager>
 {
-    [SerializeField] private GameObject startButton;
-    [SerializeField] private Camera menuCamera;
+    // Main menu
+    [SerializeField] private GameObject mainMenu;
+
+    // In game menu
+    [SerializeField] private GameObject inGameMenu;
+
+    // End game menu
+    [SerializeField] private GameObject endGameUI;
+    [SerializeField] private TMP_Text scoreText;
 
     private void Awake()
     {
@@ -17,13 +26,49 @@ public class MenuManager : Singleton<MenuManager>
 
     private void GameManagerOnStateChanged(GameState state)
     {
-        startButton.SetActive(state == GameState.Menu);
-        menuCamera.gameObject.SetActive(state != GameState.Game);
+        // Menu
+        mainMenu.SetActive(state == GameState.Menu);
+
+        // In game menu
+        inGameMenu.SetActive(state == GameState.InGameMenu);
+
+        // End game menu
+        endGameUI.SetActive(state == GameState.EndGame);
+        scoreText.gameObject.SetActive(state == GameState.EndGame);
+        if (state == GameState.EndGame) 
+        {
+            SetScore();
+        }
     }
 
     public void StartPressed()
     {
+        GameManager.Instance.ChangeState(GameState.StartGame);
+    }
+
+    public void RestartButtonPressed()
+    {
+        LevelManager.Instance.RestartGame();
+    }
+
+    public void ResumeGameButtonPressed()
+    {
         GameManager.Instance.ChangeState(GameState.Game);
+    }
+
+    public void MainMenuButtonPressed()
+    {
+        GameManager.Instance.ChangeState(GameState.Menu);
+    }
+
+    public void QuitButtonPressed()
+    {
+        Application.Quit();
+    }
+
+    public void SetScore()
+    {
+        scoreText.text = "Your Score: " + ScoreManager.Instance.GetScore();
     }
 
 }

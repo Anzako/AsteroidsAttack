@@ -3,51 +3,74 @@ using UnityEngine;
 public class Metaball : MonoBehaviour
 {
     public Vector3 startDirection;
-    private Vector3 direction;
-    public Vector3 startPosition;
-    private Vector3 position;
+    public Vector3 direction;
+    private Vector3 startPosition;
 
     public float speed;
     public float radius;
 
+    private float marchingCubesSize;
+    private static float marchingCubesInnerBoxDistance = 4f;
+
     private void Start()
     {
         direction = startDirection;
-        position = startPosition;
+        startPosition = transform.position;
+        marchingCubesSize = MarchingCubes.Instance.numPointsPerAxis;
     }
 
-    public void UpdatePosition(Vector3 worldBounds)
+    public void UpdatePosition()
     {
-        float distanceToBorder = radius + 5;
+        float actualRadius = MetaBalls.CalculateActualRadius(this);
+        float distanceToBorder = actualRadius + marchingCubesInnerBoxDistance;
+        Vector3 position = transform.position;
+        
+        // X axis
         if (position.x - distanceToBorder < 0)
         {
             direction.x = Mathf.Abs(direction.x);
-        } else if (position.x + distanceToBorder > worldBounds.x)
+        } else if (position.x + distanceToBorder > marchingCubesSize)
         {
             direction.x = -Mathf.Abs(direction.x);
         }
 
+        // Y axis
         if (position.y - distanceToBorder < 0)
         {
             direction.y = Mathf.Abs(direction.y);
-        } else if (position.y + distanceToBorder > worldBounds.y)
+        } else if (position.y + distanceToBorder > marchingCubesSize)
         {
             direction.y = -Mathf.Abs(direction.y);
         }
 
+        // Z axis
         if (position.z - distanceToBorder < 0)
         {
             direction.z = Mathf.Abs(direction.z);
-        } else if (position.z + distanceToBorder > worldBounds.z)
+        } else if (position.z + distanceToBorder > marchingCubesSize)
         {
             direction.z = -Mathf.Abs(direction.z);
         }
 
-        position += speed * Time.deltaTime * direction;
+        transform.position += speed * Time.deltaTime * direction;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+
+        float actualRadius = MetaBalls.CalculateActualRadius(this);
+        Gizmos.DrawWireSphere(transform.position, actualRadius);
+    }
+
+    public void ResetParameters()
+    {
+        transform.position = startPosition;
+        direction = startDirection;
     }
 
     public Vector3 Position 
     { 
-        get { return position; } 
+        get { return transform.position; } 
     }
 }

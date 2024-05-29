@@ -3,50 +3,21 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IPooledObject
 {
-    private MovementController mController;
-    private ParticleSystem hitParticle;
-    [SerializeField] private GameObject model;
-
-    public LayerMask enemyLayer;
-    public string objectTag;
     public float timeToDestroy;
-    public int damage;
+    public int damageAmount;
 
-    public bool selfDestroyable = true;
-    private bool isDestroyed = false;
+    [SerializeField] private poolTags particleTag;
 
-    private Vector2 moveDirection;
-
-    public string _tag;
-    public string Tag
+    public poolTags _tag;
+    public poolTags Tag
     {
         get { return _tag; }
         set { _tag = value; }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        mController = GetComponent<MovementController>();
-        hitParticle = GetComponentInChildren<ParticleSystem>();
-
-        // Setting forward direction
-        moveDirection = new Vector2(0, 1); 
-    }
-
     private void OnEnable()
     {
-        if (selfDestroyable)
-        {
-            StartCoroutine(DestroyOnSpawn());
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        if (isDestroyed) return;
-
-        mController.MovementUpdate(moveDirection);
+        StartCoroutine(DestroyOnSpawn());
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,36 +26,26 @@ public class Projectile : MonoBehaviour, IPooledObject
 
         if (damagable != null)
         {
-            damagable.Damage(damage);
-            hitParticle.transform.position = collision.contacts[0].point;
-            StartCoroutine(DestroyOnHit());
+            damagable.Damage(damageAmount);
+            Destroy(collision.contacts[0].point);
         }
     }
 
     IEnumerator DestroyOnSpawn()
     {
         yield return new WaitForSeconds(timeToDestroy);
-        ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
+        Destroy(transform.position);
     }
 
-    IEnumerator DestroyOnHit()
+    private void Destroy(Vector3 position)
     {
-        model.SetActive(false);
-        isDestroyed = true;
-        Light lightComponent = GetComponent<Light>();
-        if (lightComponent != null) lightComponent.enabled = false;
-        hitParticle.Play();
-
-        yield return new WaitForSeconds(1.0f);
+        ObjectPooler.Instance.SpawnObject(particleTag, position, transform.rotation);
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
     public void OnObjectSpawn()
     {
-        model.SetActive(true);
-        isDestroyed = false;
-        Light lightComponent = GetComponent<Light>();
-        if (lightComponent != null) lightComponent.enabled = true;
+        
     }
 
 }

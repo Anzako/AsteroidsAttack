@@ -1,49 +1,40 @@
-using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    private MetaBalls metaballs;
     public float moveSpeed;
+    protected float actualSpeed;
 
+    [SerializeField] protected Vector2 movementDirection = new(0, 1);
+    protected Vector3 projectedDirection = Vector2.zero;
+
+    // Gravity variables
     public static float toGroundPotential = 0.47f;
     public static float gravityForce = 4f;
     public float rotationSpeed;
 
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-        metaballs = MetaBalls.Instance;
+        actualSpeed = moveSpeed;
     }
 
-    // Update is called once per frame
-    public void PlayerMouseUpdate(float horizontalRotationAngle)
-    {
-        RotateAroundVerticalAxis(horizontalRotationAngle);
-    }
-
-    public void MovementUpdate(Vector2 moveDirection)
+    protected virtual void Update()
     {
         RotateToSurface();
-        Move(moveDirection.normalized);
+        Move();
     }
 
-    private void Move(Vector2 moveDirection)
+    protected virtual void Move()
     {
-        Vector3 projectedVector = transform.forward * moveDirection.y + transform.right * moveDirection.x;
+        projectedDirection = transform.forward * movementDirection.y + transform.right * movementDirection.x;
 
-        transform.position += projectedVector.normalized * moveSpeed * Time.deltaTime;
-    }
-
-    private void RotateAroundVerticalAxis(float rotationAngle)
-    {
-        Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
-        transform.rotation = targetRotation * transform.rotation;
+        transform.position += actualSpeed * Time.deltaTime * projectedDirection;
     }
 
     private void RotateToSurface()    
     {
-        Vector3 potentialVector = metaballs.CalculateMetaballsNormal(transform.position);
+        Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
         Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
 
         // Rotating object to new rotation depending on potential vector
@@ -52,8 +43,19 @@ public class MovementController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
             Time.deltaTime * rotationSpeed);
 
-        float val = toGroundPotential - metaballs.CalculateScalarFieldValue(transform.position);
+        float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
         transform.position -= potentialVector.normalized * val * gravityForce;
+    }
+
+    protected void RotateAroundVerticalAxis(float rotationAngle)
+    {
+        Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
+        transform.rotation = targetRotation * transform.rotation;
+    }
+
+    public void ResetActualSpeed()
+    {
+        actualSpeed = moveSpeed;
     }
 
 }

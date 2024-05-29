@@ -13,10 +13,10 @@ TagManager:
   - UI
   - Ground
   - Enemy
-  - Projectile
+  - PlayerProjectile
   - Asteroid
-  - 
-  - 
+  - EnemyProjectile
+  - Item
   - 
   - 
   - 

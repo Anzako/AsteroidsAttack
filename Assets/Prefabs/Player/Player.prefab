@@ -198,6 +198,37 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2869004363259944276}
   m_Enabled: 1
+--- !u!1 &4595731166817769556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8569031791132758089}
+  m_Layer: 0
+  m_Name: ProjectileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8569031791132758089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4595731166817769556}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.19, z: 13.34}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8085797481541249609}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6731209989152015075
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,10 +358,10 @@ GameObject:
   - component: {fileID: 8085797481541249609}
   - component: {fileID: 3719851685426429890}
   - component: {fileID: 78416745642762997}
-  - component: {fileID: -3009897901644091826}
   - component: {fileID: 5515491599423336599}
   - component: {fileID: 5476350350173624902}
   - component: {fileID: 5691059295496667685}
+  - component: {fileID: 2852529471193898715}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -354,6 +385,7 @@ Transform:
   - {fileID: 747172440884740140}
   - {fileID: 5560152246695251579}
   - {fileID: 4378790141663063128}
+  - {fileID: 8569031791132758089}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3719851685426429890
@@ -368,9 +400,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c428a9d84a927524ea641a616e286069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualScore: 0
-  projectileTag: 
-  timeToShoot: 0
+  movementController: {fileID: 2852529471193898715}
+  healthController: {fileID: 5691059295496667685}
+  HUDController: {fileID: 5476350350173624902}
+  projectileSpawnPoint: {fileID: 8569031791132758089}
+  timeToShoot: 0.5
 --- !u!114 &78416745642762997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,21 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mousePos: 0
-  sensitivity: 0
---- !u!114 &-3009897901644091826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8898362260430516467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cc3534ada173d418cbe7ec74efd0ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 4
+  sensitivity: 5
 --- !u!114 &5515491599423336599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +476,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1cebc6f5-30b6-4cde-8839-006648f5a344
     m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 78416745642762997}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnSpaceClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 53dc97d9-56f6-416c-9f61-ea8b9701aa57
+    m_ActionName: Gameplay/Dash[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 78416745642762997}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnEscapeClicked
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 71052f8a-3b9e-4dc1-bd1f-6ab56dfc1cc3
+    m_ActionName: Gameplay/Escape[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -489,5 +541,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 6
   <health>k__BackingField: 0
+  playerHUD: {fileID: 5476350350173624902}
+--- !u!114 &2852529471193898715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898362260430516467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710e15fb36f191a41af8c3f2e738bbdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  movementDirection: {x: 0, y: 1}
+  rotationSpeed: 2
+  inputController: {fileID: 78416745642762997}
+  canDash: 0
+  dashSpeed: 15
+  dashingTime: 0.2
+  dashingCooldown: 1

@@ -1,51 +1,31 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour, IPooledObject
 {
     #region Variables
-    public static Action onDestroy;
-    private ParticleSystem hitParticle;
     private AsteroidsSpawner spawner;
+    [SerializeField] private AsteroidsHealth healthController;
 
-    public LayerMask enemyLayer;
-    public int damage;
-    private bool isDestroyed = false;
-    [SerializeField] private GameObject model;
-
-    // Movement
-    private MovementController mController;
-    private Vector2 direction;
+    public int damageAmount;
 
     // Pooled object
-    public string _tag;
-    public string Tag
+    public poolTags _tag;
+    public poolTags Tag
     {
         get { return _tag; }
-        set { _tag = value; }
     }
     #endregion
 
     private void Awake()
     {
-        mController = GetComponent<MovementController>();
-        hitParticle = GetComponentInChildren<ParticleSystem>();
         spawner = AsteroidsSpawner.Instance;
-        direction = new Vector2(0f, 1f);
+
+        healthController.Killed += OnProjectileDestroy;
     }
 
-    private void FixedUpdate()
+    private void OnDestroy()
     {
-        if (isDestroyed) return;
-
-        mController.MovementUpdate(direction);
-    }
-
-    public void OnObjectSpawn()
-    {
-        model.SetActive(true);
-        isDestroyed = false;
+        healthController.Killed -= OnProjectileDestroy;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -54,9 +34,8 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
         if (damagable != null)
         {
-            damagable.Damage(damage);
-            hitParticle.transform.position = collision.contacts[0].point;
-            StartCoroutine(DestroyOnTime());
+            damagable.Damage(damageAmount);
+            Destroy();
         }
     }
 
@@ -64,33 +43,31 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     {
         switch (Tag)
         {
-            case "bigAsteroid":
-                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
-                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
-                spawner.SpawnAsteroidOnDestroy("mediumAsteroid", this.transform);
+            case poolTags.bigAsteroid:
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
                 break;
-            case "mediumAsteroid":
-                spawner.SpawnAsteroidOnDestroy("smallAsteroid", this.transform);
-                spawner.SpawnAsteroidOnDestroy("smallAsteroid", this.transform);
+            case poolTags.mediumAsteroid:
+                spawner.SpawnAsteroidOnDestroy(poolTags.healUpAsteroid, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid, this.transform);
                 break;
             default:
                 break;
         }
-        StartCoroutine(DestroyOnTime());
+        Destroy();
     }
 
-    // Turning off this object
-    // Play particle effect end then return object to pool
-    public IEnumerator DestroyOnTime()
+    protected virtual void Destroy()
     {
-        model.SetActive(false);
-        isDestroyed = true;
-        hitParticle.Play();
-        onDestroy?.Invoke();
-
-        yield return new WaitForSeconds(1.0f);
+        // Here spawn particle system
+        AsteroidsSpawner.Instance.OnAsteroidDestroy();
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
+    public void OnObjectSpawn()
+    {
+
+    }
 
 }

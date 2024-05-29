@@ -1,64 +1,76 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LevelManager : Singleton<LevelManager>
 {
     private GameManager gameManager;
-    private PlayerSpawner pSpawner;
-    private AsteroidsSpawner aSpawner;
+    private PlayerSpawner playerSpawner;
+    private AsteroidsSpawner asteroidsSpawner;
+    private EnemySpawner enemySpawner;
+
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private UIController HUDController;
 
-    [SerializeField] private Button restartButton;
-
+    private bool gameStarted = false;
     private int actualRound = 0;
-    public int amount;
+    private float elapsedTime = 0;
+    private float elapsedRoundTime = 0;
+    public float timeToSpawnEnemy;
 
     public int[] asteroidsInRound;
 
     private void Start()
     {
-        GameManager.OnStateChanged += GameManagerOnStateChanged;
-        restartButton.onClick.AddListener(RestartGame);
-        pSpawner = PlayerSpawner.Instance;
-        aSpawner = AsteroidsSpawner.Instance;
+        playerSpawner = PlayerSpawner.Instance;
+        asteroidsSpawner = AsteroidsSpawner.Instance;
         gameManager = GameManager.Instance;
+        enemySpawner = EnemySpawner.Instance;
     }
 
-    private void OnDestroy()
+    private void Update()
     {
-        GameManager.OnStateChanged -= GameManagerOnStateChanged;
+        if (!gameStarted) return;
+
+        elapsedTime += Time.deltaTime;
+        elapsedRoundTime += Time.deltaTime;
+
+        if (elapsedRoundTime >= timeToSpawnEnemy)
+        {
+            SpawnEnemy();
+            elapsedRoundTime = 0;
+        }
     }
 
-    public void GameManagerOnStateChanged(GameState state)
-    {
-        restartButton.gameObject.SetActive(state == GameState.GameOver);
-    }
-
+    #region Game Logic
     public void StartGame()
     {
+        CleanScene();
+        MetaBalls.Instance.ResetMetaballsParameters();
+        gameStarted = true;
         actualRound = 0;
-        pSpawner.SpawnPlayer(); 
+        elapsedTime = 0;
+
+        playerSpawner.SpawnPlayer(); 
         StartRound(actualRound);
     }
 
     private void StartRound(int round)
     {
-        aSpawner.SpawnAsteroids(asteroidsInRound[round]);
+        elapsedRoundTime = 0;
+        asteroidsSpawner.SpawnAsteroids(asteroidsInRound[round]);
         HUDController.SetWave(round + 1);
     }
 
-    public void GameOver()
-    {
-        ScoreManager.instance.ResetScore();
-        gameManager.ChangeState(GameState.GameOver);
-    }
     public void RestartGame()
     {
-        ObjectPooler.Instance.ReturnObjectsToPool("smallAsteroid");
-        ObjectPooler.Instance.ReturnObjectsToPool("mediumAsteroid");
-        ObjectPooler.Instance.ReturnObjectsToPool("bigAsteroid");
-        ObjectPooler.Instance.ReturnObjectsToPool("projectile");
-        gameManager.ChangeState(GameState.Game);
+        gameManager.ChangeState(GameState.StartGame);
+    }
+
+    public void CleanScene()
+    {
+        asteroidsSpawner.DestroyAllAsteroids();
+        enemySpawner.DestroyAllEnemies();
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.playerProjectile);
+        ScoreManager.Instance.ResetScore();
     }
 
     public void EndRound()
@@ -74,11 +86,20 @@ public class LevelManager : Singleton<LevelManager>
         StartRound(actualRound);
     }
 
-    private void EndGame()
+    public void EndGame()
     {
-        ScoreManager.instance.ResetScore();
-        pSpawner.DisablePlayer();
-        gameManager.ChangeState(GameState.GameOver);
-        Debug.Log("Game ends");
+        gameManager.ChangeState(GameState.EndGame);
+        gameStarted = false;
+    }
+    #endregion
+
+    private void SpawnEnemy()
+    {
+        enemySpawner.SpawnEnemy();
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        return playerController.transform.position;
     }
 }

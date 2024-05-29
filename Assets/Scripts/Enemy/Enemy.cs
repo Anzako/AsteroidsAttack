@@ -1,27 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPooledObject
 {
-    // Player
-    public Transform playerTransform;
-
-    // Movement
-    [SerializeField] private MovementController mController;
+    [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private EnemyMovement movementController;
     [SerializeField] private EnemyHealth healthController;
-    private Vector2 moveDirection = Vector2.zero;
+    private Spawner spawner;
 
     // Shooting
-    [SerializeField] private GameObject projectile;
     private float lastShootTime = 0;
     public float timeToShoot = 2.0f;
     public float shootRange;
 
-    private void FixedUpdate()
+    [SerializeField] private poolTags _tag;
+    public poolTags Tag
     {
-        mController.MovementUpdate(moveDirection);
+        get { return _tag; }
+    }
+
+    private void OnDestroy()
+    {
+        healthController.Killed -= Destroy;
+    }
+
+    private void Start()
+    {
+        spawner = Spawner.Instance;
+        healthController.Killed += Destroy;
     }
 
     // Update is called once per frame
@@ -29,21 +34,25 @@ public class Enemy : MonoBehaviour
     {
         lastShootTime += Time.deltaTime;
 
-        if (lastShootTime > timeToShoot) 
+        if (lastShootTime > timeToShoot && movementController.isEnemyOnPlayerMetaball) 
         {
-            float distance = (transform.position - playerTransform.position).magnitude;
-            if (distance <= shootRange)
-            {
-                ShootProjectile();
-            }
+            ShootProjectile();
         }
+    }
+
+    public void Destroy()
+    {
+        ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
     public void ShootProjectile()
     {
-        Vector3 spawnPosition = transform.position + transform.forward.normalized;
-        spawnPosition += transform.up.normalized * 0.2f;
-        Instantiate(projectile, spawnPosition, transform.rotation);
+        spawner.SpawnPoolObjectOnPosition(poolTags.enemyProjectile, projectileSpawnPoint.position, transform.rotation);
         lastShootTime = 0;
+    }
+
+    public void OnObjectSpawn()
+    {
+        healthController.SetHealthToMax();
     }
 }

@@ -2,32 +2,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private MovementController mController;
-    private InputController inputController;
-    private PlayerHealth healthController;
-    private UIController HUDController;
-    public int actualScore = 0;
-
-    Vector2 direction = Vector2.zero;
+    [SerializeField] private PlayerMovement movementController;
+    [SerializeField] private PlayerHealth healthController;
+    [SerializeField] private UIController HUDController;
+    [SerializeField] private Transform projectileSpawnPoint;
 
     // Shooting
-    public string projectileTag;
     private float lastShootTime = 0;
     public float timeToShoot;
-
-    private void Awake()
-    {
-        mController = GetComponent<MovementController>();
-        inputController = GetComponent<InputController>();
-        healthController = GetComponent<PlayerHealth>();
-        HUDController = GetComponent<UIController>();
-    }
 
     // Update is called once per frame
     void Update()
     {
-        mController.MovementUpdate(direction);
-        mController.PlayerMouseUpdate(inputController.mousePos);
         lastShootTime += Time.deltaTime;
     }
 
@@ -43,21 +29,21 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.SetActive(false);
         HUDController.SetActive(false);
+        movementController.ResetActualSpeed();
+    }
+
+    public void Freeze(bool isFreeze)
+    {
+        movementController.Freeze(isFreeze);
     }
 
     public void ShootProjectile()
     {
         if (lastShootTime >= timeToShoot)
         {
-            Vector3 spawnPosition = transform.position + transform.forward.normalized;
-            ObjectPooler.Instance.SpawnObject(projectileTag, spawnPosition, transform.rotation);
+            ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
             lastShootTime = 0f;
         }
-    }
-
-    public void SetDirection(Vector2 direction)
-    {
-        this.direction = direction;
     }
 
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyHealth : HealthController
 {
-    [SerializeField] int score;
+    public int score;
 
     public override void Damage(int damage)
     {
@@ -12,6 +12,6 @@ public class EnemyHealth : HealthController
     protected override void Kill()
     {
         base.Kill();
-        Destroy(gameObject);
+        ScoreManager.Instance.AddScore(score);
     }
 }
