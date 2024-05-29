@@ -172,7 +172,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b516b284d2d114e42baeb9b2bb6340e6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ca47b2203f87b694bb4874f02bf71ac4, type: 2}
+      objectReference: {fileID: 2100000, guid: 492444d5fe192df48bb581ee76510ffb, type: 2}
     - target: {fileID: 919132149155446097, guid: b516b284d2d114e42baeb9b2bb6340e6, type: 3}
       propertyPath: m_Name
       value: SM_asteroida_mala
