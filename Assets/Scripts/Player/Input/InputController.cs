@@ -45,6 +45,16 @@ public class InputController : MonoBehaviour
         }
     }
 
+    public void OnRightClick(InputAction.CallbackContext context)
+    {
+        if (gameManager.State != GameState.Game) return;
+
+        if (context.performed)
+        {
+            playerController.ShootLaser();
+        }
+    }
+
     public void OnSpaceClicked(InputAction.CallbackContext context)
     {
         if (gameManager.State != GameState.Game) return;

@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerHealth healthController;
     [SerializeField] private UIController HUDController;
     [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private GameObject laser;
 
     // Shooting
     private float lastShootTime = 0;
@@ -42,6 +43,15 @@ public class PlayerController : MonoBehaviour
         if (lastShootTime >= timeToShoot)
         {
             ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+            lastShootTime = 0f;
+        }
+    }
+
+    public void ShootLaser()
+    {
+        if (lastShootTime >= timeToShoot)
+        {
+            Instantiate(laser, projectileSpawnPoint.position, transform.rotation);
             lastShootTime = 0f;
         }
     }

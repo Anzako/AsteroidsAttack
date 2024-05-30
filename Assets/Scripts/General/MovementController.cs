@@ -32,7 +32,7 @@ public class MovementController : MonoBehaviour
         transform.position += actualSpeed * Time.deltaTime * projectedDirection;
     }
 
-    private void RotateToSurface()    
+    protected void RotateToSurface()    
     {
         Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
         Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
@@ -47,10 +47,30 @@ public class MovementController : MonoBehaviour
         transform.position -= potentialVector.normalized * val * gravityForce;
     }
 
+    protected void RotateToSurface2()
+    {
+        Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
+        Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
+
+        // Rotating object to new rotation depending on potential vector
+        transform.rotation = Quaternion.FromToRotation(transform.up, potentialVector.normalized)
+                * transform.rotation; 
+
+        float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
+        transform.position -= potentialVector.normalized * val * gravityForce;
+    }
+
     protected void RotateAroundVerticalAxis(float rotationAngle)
     {
         Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
         transform.rotation = targetRotation * transform.rotation;
+    }
+
+    protected void Move(float distance)
+    {
+        Vector3 projectedDirection = transform.forward * movementDirection.y + transform.right * movementDirection.x;
+
+        transform.position += distance * projectedDirection;
     }
 
     public void ResetActualSpeed()
