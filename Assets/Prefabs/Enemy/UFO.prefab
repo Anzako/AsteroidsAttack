@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6091714098982788124}
   - component: {fileID: 840131932104424735}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: UFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  <health>k__BackingField: 0
+  <Health>k__BackingField: 0
   score: 10
 --- !u!114 &840131932104424735
 MonoBehaviour:
@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 9136702216752856124}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0.6}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,7 +131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22b55f5ce070449449237adc96616905, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22b55f5ce070449449237adc96616905, type: 3}
       propertyPath: m_LocalPosition.z
