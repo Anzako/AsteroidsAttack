@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e80724ade876248a174b7f7ed8ab2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 4
   <Health>k__BackingField: 0
   score: 10
 --- !u!114 &840131932104424735
@@ -83,6 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   movementDirection: {x: 0, y: 1}
+  toGroundPotential: 0.47
+  aboveGroundDistance: 0
   rotationSpeed: 2
   toPlayerDistance: 6
   isEnemyOnPlayerMetaball: 0

@@ -10,7 +10,8 @@ public class MovementController : MonoBehaviour
     protected Vector3 projectedDirection = Vector2.zero;
 
     // Gravity variables
-    public static float toGroundPotential = 0.47f;
+    public float toGroundPotential = 0.47f;
+    public float aboveGroundDistance = 0;
     public static float gravityForce = 4f;
     public float rotationSpeed;
 
@@ -32,6 +33,7 @@ public class MovementController : MonoBehaviour
         transform.position += actualSpeed * Time.deltaTime * projectedDirection;
     }
 
+    // Slerp rotation
     protected void RotateToSurface()    
     {
         Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
@@ -44,9 +46,10 @@ public class MovementController : MonoBehaviour
             Time.deltaTime * rotationSpeed);
 
         float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
-        transform.position -= potentialVector.normalized * val * gravityForce;
+        transform.position -= gravityForce * val * potentialVector.normalized;
     }
 
+    // No slerp rotation
     protected void RotateToSurface2()
     {
         Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
@@ -57,7 +60,8 @@ public class MovementController : MonoBehaviour
                 * transform.rotation; 
 
         float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
-        transform.position -= potentialVector.normalized * val * gravityForce;
+        transform.position -= gravityForce * val * potentialVector.normalized 
+            - potentialVector.normalized * aboveGroundDistance;
     }
 
     protected void RotateAroundVerticalAxis(float rotationAngle)

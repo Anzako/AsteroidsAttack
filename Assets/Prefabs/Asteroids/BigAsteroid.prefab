@@ -77,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   movementDirection: {x: 0, y: 1}
+  toGroundPotential: 0.47
+  aboveGroundDistance: 0
   rotationSpeed: 4
 --- !u!114 &8978048823640300672
 MonoBehaviour:
@@ -106,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 2
-  <health>k__BackingField: 0
+  <Health>k__BackingField: 0
   score: 4
 --- !u!1001 &8786135018950688961
 PrefabInstance:

@@ -207,7 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8569031791132758089}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
+  maxHealth: 10
   <Health>k__BackingField: 0
   playerHUD: {fileID: 5476350350173624902}
 --- !u!114 &2852529471193898715
@@ -551,6 +551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   movementDirection: {x: 0, y: 1}
+  toGroundPotential: 0.47
+  aboveGroundDistance: 0
   rotationSpeed: 2
   inputController: {fileID: 78416745642762997}
   canDash: 0
