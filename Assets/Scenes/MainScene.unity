@@ -1354,15 +1354,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: pools.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: pools.Array.data[7].prefab
       value: 
       objectReference: {fileID: 3956984001194437467, guid: c4cc335462705fe4e96946a79b53d20d, type: 3}
     - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[8].prefab
+      value: 
+      objectReference: {fileID: 6070491148927718762, guid: 93eacc0583283c64297c6644c2332d70, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: pools.Array.data[7].poolTag
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[8].poolTag
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3760291266479619236, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: m_LocalPosition.x

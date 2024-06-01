@@ -121,4 +121,5 @@ public enum poolTags
     enemyProjectile = 5,
     playerProjectileParticle = 6,
     healUpAsteroid = 7,
+    explosionParticle = 8,
 }

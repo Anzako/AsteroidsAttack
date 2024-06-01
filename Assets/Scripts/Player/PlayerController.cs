@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UIController HUDController;
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private GameObject laser;
+    [SerializeField] private GameObject rocket;
 
     // Shooting
     private float lastShootTime = 0;
@@ -51,7 +52,8 @@ public class PlayerController : MonoBehaviour
     {
         if (lastShootTime >= timeToShoot)
         {
-            Instantiate(laser, projectileSpawnPoint.position, transform.rotation);
+            //Instantiate(laser, projectileSpawnPoint.position, transform.rotation);
+            Instantiate(rocket, projectileSpawnPoint.position, transform.rotation);
             lastShootTime = 0f;
         }
     }

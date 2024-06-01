@@ -46,7 +46,8 @@ public class MovementController : MonoBehaviour
             Time.deltaTime * rotationSpeed);
 
         float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
-        transform.position -= gravityForce * val * potentialVector.normalized;
+        transform.position -= gravityForce * val * potentialVector.normalized 
+            - potentialVector.normalized * aboveGroundDistance;
     }
 
     // No slerp rotation

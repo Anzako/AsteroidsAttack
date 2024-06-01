@@ -67,7 +67,7 @@ public class Laser : MovementController
 
                 damagedObjects.Add(damagable);
                 damagable.Damage(damageAmount);
-                Debug.Log(hit.transform.gameObject.name);
+                //Debug.Log(hit.transform.gameObject.name);
             }
         }
     }

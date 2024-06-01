@@ -381,6 +381,7 @@ MonoBehaviour:
   HUDController: {fileID: 5476350350173624902}
   projectileSpawnPoint: {fileID: 8569031791132758089}
   laser: {fileID: 1333237105907193973, guid: 8ad069c933fcc4a479f275c9389f066e, type: 3}
+  rocket: {fileID: 4925610653135132815, guid: d9992c30409cb9e479f551817b922d40, type: 3}
   timeToShoot: 0.5
 --- !u!114 &78416745642762997
 MonoBehaviour:
