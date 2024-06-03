@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour, IPooledObject
@@ -9,7 +11,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     public int damageAmount;
 
     // Pooled object
-    public poolTags _tag;
+    [SerializeField] private poolTags _tag;
     public poolTags Tag
     {
         get { return _tag; }
@@ -67,7 +69,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
-
+        healthController.SetHealthToMax();
     }
 
 }

@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthController: {fileID: 4260933094689136237}
   damageAmount: 3
-  _tag: 3
+  _tag: 2
 --- !u!114 &4260933094689136237
 MonoBehaviour:
   m_ObjectHideFlags: 0

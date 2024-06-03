@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2796201782897372547}
   - component: {fileID: 8331418654215733097}
   - component: {fileID: 1826992044693861448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +54,8 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 640
+  damageAmount: 2
+  _tag: 11
 --- !u!120 &1826992044693861448
 LineRenderer:
   serializedVersion: 2

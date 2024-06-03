@@ -78,7 +78,7 @@ MonoBehaviour:
   timeToDestroy: 5
   damageAmount: 2
   particleTag: 6
-  _tag: 0
+  _tag: 7
 --- !u!114 &7498818321579366332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 16
   movementDirection: {x: 0, y: 1}
+  toGroundPotential: 0.47
+  aboveGroundDistance: 0
   rotationSpeed: 4
 --- !u!108 &5827067826266563569
 Light:

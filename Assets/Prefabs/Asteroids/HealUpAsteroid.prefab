@@ -77,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   movementDirection: {x: 0, y: 1}
+  toGroundPotential: 0.47
+  aboveGroundDistance: 0
   rotationSpeed: 4
 --- !u!114 &4260933094689136237
 MonoBehaviour:
@@ -107,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthController: {fileID: 4260933094689136237}
   damageAmount: 2
-  _tag: 7
+  _tag: 3
   dropableObject: {fileID: 6605728360196588728, guid: d8ace25cd07b1da4b8768ba9dc83f1ed, type: 3}
 --- !u!1001 &5577728037427488893
 PrefabInstance:

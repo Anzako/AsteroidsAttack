@@ -332,12 +332,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8085797481541249609}
+  - component: {fileID: 715397722984348473}
   - component: {fileID: 3719851685426429890}
   - component: {fileID: 78416745642762997}
   - component: {fileID: 5515491599423336599}
   - component: {fileID: 5476350350173624902}
   - component: {fileID: 5691059295496667685}
   - component: {fileID: 2852529471193898715}
+  - component: {fileID: 5372409946133155427}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -364,6 +366,33 @@ Transform:
   - {fileID: 8569031791132758089}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &715397722984348473
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898362260430516467}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &3719851685426429890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,10 +408,9 @@ MonoBehaviour:
   movementController: {fileID: 2852529471193898715}
   healthController: {fileID: 5691059295496667685}
   HUDController: {fileID: 5476350350173624902}
-  projectileSpawnPoint: {fileID: 8569031791132758089}
+  weaponController: {fileID: 5372409946133155427}
   laser: {fileID: 1333237105907193973, guid: 8ad069c933fcc4a479f275c9389f066e, type: 3}
   rocket: {fileID: 4925610653135132815, guid: d9992c30409cb9e479f551817b922d40, type: 3}
-  timeToShoot: 0.5
 --- !u!114 &78416745642762997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,3 +589,17 @@ MonoBehaviour:
   dashingTime: 0.2
   dashingCooldown: 1
   smoothInputSpeed: 0.2
+--- !u!114 &5372409946133155427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898362260430516467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b1153674845fb44ab1890096fa6096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpawnPoint: {fileID: 8569031791132758089}
+  timeToShoot: 0.5

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rocket : MonoBehaviour 
+public class Rocket : MonoBehaviour, IPooledObject
 {
     public float timeToDestroy;
     public int hitDamageAmount;
@@ -10,8 +10,14 @@ public class Rocket : MonoBehaviour
     public float explosionRadius;
 
     [SerializeField] private LayerMask enemyLayers;
-    [SerializeField] private ParticleSystem exposionParticles;
     [SerializeField] private poolTags particleTag;
+
+    // Pooled object
+    [SerializeField] private poolTags _tag;
+    public poolTags Tag
+    {
+        get { return _tag; }
+    }
 
     private void OnEnable()
     {
@@ -37,9 +43,12 @@ public class Rocket : MonoBehaviour
 
     private void Destroy(Vector3 position)
     {
+        // Explosion particles and damage
         ObjectPooler.Instance.SpawnObject(particleTag, position, transform.rotation);
         Explode(position);
-        Destroy(this.gameObject);
+
+        // Returning object to pool
+        ObjectPooler.Instance.ReturnObjectToPool(gameObject);
     }
 
     private void Explode(Vector3 position)
@@ -57,4 +66,8 @@ public class Rocket : MonoBehaviour
         }
     }
 
+    public void OnObjectSpawn()
+    {
+        
+    }
 }

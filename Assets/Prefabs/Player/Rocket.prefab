@@ -179,7 +179,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   exposionParticles: {fileID: 5831116862300029078, guid: 93eacc0583283c64297c6644c2332d70, type: 3}
-  particleTag: 8
+  particleTag: 10
+  _tag: 9
 --- !u!54 &3398642301283125387
 Rigidbody:
   m_ObjectHideFlags: 0

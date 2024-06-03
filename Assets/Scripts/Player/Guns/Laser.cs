@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MovementController
+public class Laser : MovementController, IPooledObject
 {
     [SerializeField] private int numberOfPoints = 10;
     [SerializeField] private LayerMask enemyMask;
     public int damageAmount = 2;
 
-    private float delayedTime = 0;
+    private float delayedTime = 0f;
     private float collisionCheckTime = 0.1f;
     private List<IDamagable> damagedObjects;
 
     private LineRenderer lineRenderer;
+
+    // Pooled object
+    [SerializeField] private poolTags _tag;
+    public poolTags Tag
+    {
+        get { return _tag; }
+    }
 
     private void Awake()
     {
@@ -33,8 +40,13 @@ public class Laser : MovementController
 
     protected override void Start()
     {
-        ShootLaser();
         
+    }
+
+    private void OnEnable()
+    {
+        ShootLaser();
+
         StartCoroutine(DestroyAfterSpawn());
     }
 
@@ -67,7 +79,7 @@ public class Laser : MovementController
 
                 damagedObjects.Add(damagable);
                 damagable.Damage(damageAmount);
-                //Debug.Log(hit.transform.gameObject.name);
+                Debug.Log(hit.transform.gameObject.name);
             }
         }
     }
@@ -75,6 +87,12 @@ public class Laser : MovementController
     private IEnumerator DestroyAfterSpawn()
     {
         yield return new WaitForSeconds(0.3f);
-        Destroy(this.gameObject);
+        ObjectPooler.Instance.ReturnObjectToPool(gameObject);
+    }
+
+    public void OnObjectSpawn()
+    {
+        delayedTime = 0f;
+        damagedObjects = new List<IDamagable>();
     }
 }
