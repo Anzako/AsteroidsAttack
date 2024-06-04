@@ -71,15 +71,13 @@ public class Laser : MovementController, IPooledObject
     {
         for (int i = 0; i < numberOfPoints - 1; i++) 
         {
-            RaycastHit hit;
-            if (Physics.Linecast(lineRenderer.GetPosition(i), lineRenderer.GetPosition(i + 1), out hit, enemyMask))
+            if (Physics.Linecast(lineRenderer.GetPosition(i), lineRenderer.GetPosition(i + 1), out RaycastHit hit, enemyMask))
             {
                 IDamagable damagable = hit.collider.gameObject.GetComponentInParent<IDamagable>();
                 if (damagedObjects.Contains(damagable)) return;
 
                 damagedObjects.Add(damagable);
                 damagable.Damage(damageAmount);
-                Debug.Log(hit.transform.gameObject.name);
             }
         }
     }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 602070337361627755}
   - component: {fileID: 8978048823640300672}
   - component: {fileID: 4260933094689136237}
+  - component: {fileID: 4089710259088589386}
   m_Layer: 9
   m_Name: SmallAsteroid
   m_TagString: Untagged
@@ -93,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthController: {fileID: 4260933094689136237}
+  dropItems: {fileID: 4089710259088589386}
   damageAmount: 1
   _tag: 0
 --- !u!114 &4260933094689136237
@@ -110,6 +112,19 @@ MonoBehaviour:
   maxHealth: 2
   <Health>k__BackingField: 0
   score: 1
+--- !u!114 &4089710259088589386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956984001194437467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 419e1e8299f63da49ac2deb0490df477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropableItems: []
 --- !u!1001 &5577728037427488893
 PrefabInstance:
   m_ObjectHideFlags: 0

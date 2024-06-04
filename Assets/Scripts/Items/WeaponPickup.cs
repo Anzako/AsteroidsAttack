@@ -2,20 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponPickup : MonoBehaviour
+public class WeaponPickup : MonoBehaviour, IPooledObject
 {
+    [SerializeField] private poolTags _tag;
+    public poolTags Tag { get { return _tag; } }
+
     [SerializeField] private poolTags weaponTag;
     [SerializeField] private float weaponTime;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        WeaponController playerWeapon = collision.gameObject.GetComponentInParent<WeaponController>();
+
+        if (playerWeapon != null )
+        {
+            playerWeapon.ChangeWeapon(weaponTag);
+            ObjectPooler.Instance.ReturnObjectToPool(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnObjectSpawn()
     {
-        
+
     }
 }

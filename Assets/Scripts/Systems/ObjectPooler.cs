@@ -125,4 +125,7 @@ public enum poolTags
     rocket,
     rocketParticle,
     laser,
+    healUpItem,
+    rocketItem,
+    laserItem,
 }

@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AsteroidController : MonoBehaviour, IPooledObject
+[RequireComponent(typeof(DropItems))]
+public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
 {
     #region Variables
     private AsteroidsSpawner spawner;
     [SerializeField] private AsteroidsHealth healthController;
+    [SerializeField] private DropItems dropItems;
 
     public int damageAmount;
 
@@ -63,6 +65,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     protected virtual void Destroy()
     {
         // Here spawn particle system
+        Drop();
         AsteroidsSpawner.Instance.OnAsteroidDestroy();
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
@@ -72,4 +75,8 @@ public class AsteroidController : MonoBehaviour, IPooledObject
         healthController.SetHealthToMax();
     }
 
+    public void Drop()
+    {
+        dropItems.DropItem();
+    }
 }

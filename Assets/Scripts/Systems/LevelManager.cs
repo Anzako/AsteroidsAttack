@@ -70,6 +70,10 @@ public class LevelManager : Singleton<LevelManager>
         asteroidsSpawner.DestroyAllAsteroids();
         enemySpawner.DestroyAllEnemies();
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.playerProjectile);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.rocket);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.laser);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.healUpItem);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.rocketItem);
         ScoreManager.Instance.ResetScore();
     }
 

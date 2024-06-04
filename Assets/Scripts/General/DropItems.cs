@@ -7,15 +7,7 @@ public class DropItems : MonoBehaviour
     [SerializeField] private List<ItemDropChance> dropableItems;
     private int totalWeight = 100;
 
-    private void Start()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            GetDropItem();
-        }
-    }
-
-    public GameObject GetDropItem()
+    public void DropItem()
     {
         int randomValue = Random.Range(0, totalWeight);
         int cumulativeWeight = 0;
@@ -25,12 +17,10 @@ public class DropItems : MonoBehaviour
             cumulativeWeight += obj.droppingChance;
             if (randomValue <= cumulativeWeight)
             {
-                Debug.Log(randomValue + " wylosowano " + obj.dropableObject.name);
-                return obj.dropableObject;
+                ObjectPooler.Instance.SpawnObject(obj.dropableObject, transform.position, transform.rotation);
+                return;
             }
         }
-        Debug.Log(randomValue + " wylosowano nic");
-        return null;
     }
 
 }
@@ -38,6 +28,6 @@ public class DropItems : MonoBehaviour
 [System.Serializable]
 public class ItemDropChance
 {
-    public GameObject dropableObject;
+    public poolTags dropableObject;
     [Range(0, 100)] public int droppingChance;
 }

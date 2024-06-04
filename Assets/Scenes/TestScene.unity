@@ -1052,55 +1052,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &1717593665
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1717593667}
-  - component: {fileID: 1717593666}
-  m_Layer: 0
-  m_Name: PickupItem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1717593666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717593665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cc3534ada173d418cbe7ec74efd0ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 0
-  movementDirection: {x: 0, y: 0}
-  toGroundPotential: 0.47
-  aboveGroundDistance: 0.2
-  rotationSpeed: 2
---- !u!4 &1717593667
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717593665}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.370266, y: 22.668245, z: 12.815662}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1759861397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9f9a44fdc76517346bcf34a7d574b842, type: 3}
@@ -1397,6 +1348,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPooler
       objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[14].prefab
+      value: 
+      objectReference: {fileID: 3571121717751638878, guid: bf240067ba9a444499d6d680dd662f4c, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[15].prefab
+      value: 
+      objectReference: {fileID: 3571121717751638878, guid: c66250a5102a644429793c609f430fb2, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[14].poolTag
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[15].poolTag
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 3760291266479619236, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1476,7 +1447,7 @@ PrefabInstance:
       objectReference: {fileID: 654914598}
     - target: {fileID: 4077314485361388170, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
       propertyPath: timeToSpawnEnemy
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4077314485361388170, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
       propertyPath: asteroidsInRound.Array.size
@@ -1484,7 +1455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077314485361388170, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
       propertyPath: asteroidsInRound.Array.data[0]
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4077314485361388170, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
       propertyPath: asteroidsInRound.Array.data[1]
@@ -1690,4 +1661,3 @@ SceneRoots:
   - {fileID: 2083742929}
   - {fileID: 1007361073}
   - {fileID: 544646906}
-  - {fileID: 1717593667}

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 104533538355452490}
   - component: {fileID: 602070337361627755}
   - component: {fileID: 4260933094689136237}
-  - component: {fileID: 4641232188941825571}
+  - component: {fileID: 8387716561909860571}
+  - component: {fileID: 8943950093217362736}
   m_Layer: 9
   m_Name: HealUpAsteroid
   m_TagString: Untagged
@@ -95,7 +96,7 @@ MonoBehaviour:
   maxHealth: 2
   <Health>k__BackingField: 0
   score: 1
---- !u!114 &4641232188941825571
+--- !u!114 &8387716561909860571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,13 +105,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 3956984001194437467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e65b91a619066bb4abee6d1b96f55bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 419e1e8299f63da49ac2deb0490df477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropableItems:
+  - dropableObject: 12
+    droppingChance: 100
+--- !u!114 &8943950093217362736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3956984001194437467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a0fec5dd65f71a49bc5bcfa9bbf0377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthController: {fileID: 4260933094689136237}
+  dropItems: {fileID: 8387716561909860571}
   damageAmount: 2
   _tag: 3
-  dropableObject: {fileID: 6605728360196588728, guid: d8ace25cd07b1da4b8768ba9dc83f1ed, type: 3}
 --- !u!1001 &5577728037427488893
 PrefabInstance:
   m_ObjectHideFlags: 0

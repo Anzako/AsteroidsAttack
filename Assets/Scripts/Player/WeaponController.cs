@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,30 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     private poolTags projectileTag = poolTags.playerProjectile;
-    private poolTags actualWeaponTag = poolTags.laser;
+    private poolTags actualWeaponTag = poolTags.playerProjectile;
 
-    [SerializeField] private Transform projectileSpawnPoint;
+    private float bonusWeaponLifeTime = 10f;
+    private float bonusWeaponElapsedTime = 0f;
+    private bool bonusWeaponEquiped = false;
 
     // Shooting
+    [SerializeField] private Transform projectileSpawnPoint;
+
     private float lastShootTime = 0;
     public float timeToShoot = 0.5f;
 
     private void Update()
     {
         lastShootTime += Time.deltaTime;
+
+        if (!bonusWeaponEquiped) return;
+
+        bonusWeaponElapsedTime += Time.deltaTime;
+        if (bonusWeaponElapsedTime >= bonusWeaponLifeTime)
+        {
+            bonusWeaponEquiped = false;
+            actualWeaponTag = projectileTag;
+        }
     }
 
     public void Shoot()
@@ -27,5 +41,11 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    public void ChangeWeapon(poolTags weaponTag)
+    {
+        actualWeaponTag = weaponTag;
+        bonusWeaponElapsedTime = 0f;
+        bonusWeaponEquiped = true;
+    }
 
 }
