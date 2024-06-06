@@ -10,7 +10,7 @@ public class MovementController : MonoBehaviour
     protected Vector3 projectedDirection = Vector2.zero;
 
     // Gravity variables
-    private float toGroundPotential;
+    protected float toGroundPotential;
     public float aboveGroundDistance = 0;
     public static float gravityForce = 4f;
     public float rotationSpeed;
@@ -51,32 +51,33 @@ public class MovementController : MonoBehaviour
             - potentialVector.normalized * aboveGroundDistance;
     }
 
+    #region Static Functions
     // No slerp rotation
-    protected void RotateToSurface2()
+    public static void RotateToSurface(Transform transform, float aboveGroundDistance)
     {
         Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
         Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
 
         // Rotating object to new rotation depending on potential vector
         transform.rotation = Quaternion.FromToRotation(transform.up, potentialVector.normalized)
-                * transform.rotation; 
-
-        float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
+                * transform.rotation;
+        
+        float val = MarchingCubes.isoLevel - MetaBalls.CalculateScalarFieldValue(transform.position);
         transform.position -= gravityForce * val * potentialVector.normalized 
             - potentialVector.normalized * aboveGroundDistance;
     }
 
-    protected void RotateAroundVerticalAxis(float rotationAngle)
-    {
-        Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
-        transform.rotation = targetRotation * transform.rotation;
-    }
-
-    protected void Move(float distance)
+    public static void Move(Transform transform, Vector2 movementDirection, float distance)
     {
         Vector3 projectedDirection = transform.forward * movementDirection.y + transform.right * movementDirection.x;
 
         transform.position += distance * projectedDirection;
+    }
+    #endregion
+    protected void RotateAroundVerticalAxis(float rotationAngle)
+    {
+        Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
+        transform.rotation = targetRotation * transform.rotation;
     }
 
     public void ResetActualSpeed()

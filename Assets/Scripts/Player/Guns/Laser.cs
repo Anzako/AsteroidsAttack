@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MovementController, IPooledObject
+public class Laser : MonoBehaviour, IPooledObject
 {
     [SerializeField] private int numberOfPoints = 10;
+    public float aboveGroundDistance = 0;
+    private Vector2 directionVector = new Vector2(0, 1);
     [SerializeField] private LayerMask enemyMask;
     public int damageAmount = 2;
 
@@ -23,22 +25,17 @@ public class Laser : MovementController, IPooledObject
 
     private void Awake()
     {
-        lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
         damagedObjects = new List<IDamagable>();
     }
 
-    protected override void Update()
+    private void Update()
     {
         delayedTime += Time.deltaTime;
         if (delayedTime < collisionCheckTime) 
         {
             CheckCollision();
         }
-    }
-
-    protected override void Start()
-    {
-        
     }
 
     private void OnEnable()
@@ -56,10 +53,10 @@ public class Laser : MovementController, IPooledObject
 
         for (int i = 1; i < numberOfPoints; i++)
         {
-            Move(moveDistance);
+            MovementController.Move(transform, directionVector, moveDistance);
             for (int j = 0; j < 3; j++)
             {
-                RotateToSurface2();
+                MovementController.RotateToSurface(transform, aboveGroundDistance);
             }
             lineRenderer.SetPosition(i, transform.position);
         }
