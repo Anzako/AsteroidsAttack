@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1163623735426748991}
   - component: {fileID: 6804673296646724619}
   - component: {fileID: 7610340804924091600}
+  - component: {fileID: 7762124191497007131}
   m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 749628760865338145}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -106,6 +107,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 638523861631414334, guid: 7caaf0ba83e07254dbdff1638edd18d1, type: 3}
+--- !u!95 &7762124191497007131
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749628760865338145}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d120eea1c72469c4f994cd7cfaa921e4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2869004363259944276
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,8 +431,6 @@ MonoBehaviour:
   healthController: {fileID: 5691059295496667685}
   HUDController: {fileID: 5476350350173624902}
   weaponController: {fileID: 5372409946133155427}
-  laser: {fileID: 1333237105907193973, guid: 8ad069c933fcc4a479f275c9389f066e, type: 3}
-  rocket: {fileID: 4925610653135132815, guid: d9992c30409cb9e479f551817b922d40, type: 3}
 --- !u!114 &78416745642762997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,8 +600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   movementDirection: {x: 0, y: 1}
-  toGroundPotential: 0.47
-  aboveGroundDistance: 0
+  toGroundPotential: 0.5
+  aboveGroundDistance: 0.15
   rotationSpeed: 2
   inputController: {fileID: 78416745642762997}
   canDash: 0

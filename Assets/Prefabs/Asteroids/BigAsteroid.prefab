@@ -78,8 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   movementDirection: {x: 0, y: 1}
-  toGroundPotential: 0.47
-  aboveGroundDistance: 0
+  aboveGroundDistance: 0.25
   rotationSpeed: 4
 --- !u!114 &8978048823640300672
 MonoBehaviour:
@@ -126,9 +125,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropableItems:
   - dropableObject: 13
-    droppingChance: 20
+    droppingChance: 50
   - dropableObject: 14
-    droppingChance: 20
+    droppingChance: 50
 --- !u!1001 &8786135018950688961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -155,7 +154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9858252223de88a44b2ff8cb7c7f9f39, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9858252223de88a44b2ff8cb7c7f9f39, type: 3}
       propertyPath: m_LocalPosition.z

@@ -78,8 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   movementDirection: {x: 0, y: 1}
-  toGroundPotential: 0.47
-  aboveGroundDistance: 0
+  aboveGroundDistance: 0.2
   rotationSpeed: 4
 --- !u!114 &4260933094689136237
 MonoBehaviour:
@@ -153,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b516b284d2d114e42baeb9b2bb6340e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b516b284d2d114e42baeb9b2bb6340e6, type: 3}
       propertyPath: m_LocalPosition.z

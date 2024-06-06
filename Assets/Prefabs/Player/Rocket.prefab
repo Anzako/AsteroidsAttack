@@ -157,7 +157,7 @@ MonoBehaviour:
   moveSpeed: 6
   movementDirection: {x: 0, y: 1}
   toGroundPotential: 0.5
-  aboveGroundDistance: 0.3
+  aboveGroundDistance: 0.2
   rotationSpeed: 2
 --- !u!114 &1144355545191158385
 MonoBehaviour:
@@ -178,7 +178,6 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 640
-  exposionParticles: {fileID: 5831116862300029078, guid: 93eacc0583283c64297c6644c2332d70, type: 3}
   particleTag: 10
   _tag: 9
 --- !u!54 &3398642301283125387

@@ -18,6 +18,13 @@ public class WeaponController : MonoBehaviour
     private float lastShootTime = 0;
     public float timeToShoot = 0.5f;
 
+    private Animator pAnimator;
+
+    private void Start()
+    {
+        pAnimator = GetComponentInChildren<Animator>();
+    }
+
     private void Update()
     {
         lastShootTime += Time.deltaTime;
@@ -38,6 +45,11 @@ public class WeaponController : MonoBehaviour
         {
             ObjectPooler.Instance.SpawnObject(actualWeaponTag, projectileSpawnPoint.position, transform.rotation);
             lastShootTime = 0f;
+
+            if (pAnimator != null)
+            {
+                pAnimator.SetTrigger("TrShoot");
+            }
         }
     }
 

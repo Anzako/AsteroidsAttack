@@ -10,7 +10,7 @@ public class MovementController : MonoBehaviour
     protected Vector3 projectedDirection = Vector2.zero;
 
     // Gravity variables
-    public float toGroundPotential = 0.47f;
+    private float toGroundPotential;
     public float aboveGroundDistance = 0;
     public static float gravityForce = 4f;
     public float rotationSpeed;
@@ -18,6 +18,7 @@ public class MovementController : MonoBehaviour
     protected virtual void Start()
     {
         actualSpeed = moveSpeed;
+        toGroundPotential = MarchingCubes.isoLevel;
     }
 
     protected virtual void Update()

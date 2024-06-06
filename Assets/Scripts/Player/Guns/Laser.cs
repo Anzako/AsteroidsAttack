@@ -25,8 +25,6 @@ public class Laser : MovementController, IPooledObject
     {
         lineRenderer = GetComponentInChildren<LineRenderer>();
         damagedObjects = new List<IDamagable>();
-        toGroundPotential = 0.5f;
-        aboveGroundDistance = 0.3f;
     }
 
     protected override void Update()

@@ -1348,26 +1348,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPooler
       objectReference: {fileID: 0}
-    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
-      propertyPath: pools.Array.size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
-      propertyPath: pools.Array.data[14].prefab
-      value: 
-      objectReference: {fileID: 3571121717751638878, guid: bf240067ba9a444499d6d680dd662f4c, type: 3}
-    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
-      propertyPath: pools.Array.data[15].prefab
-      value: 
-      objectReference: {fileID: 3571121717751638878, guid: c66250a5102a644429793c609f430fb2, type: 3}
-    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
-      propertyPath: pools.Array.data[14].poolTag
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
-      propertyPath: pools.Array.data[15].poolTag
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 3760291266479619236, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
