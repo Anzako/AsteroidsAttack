@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class EnemyHealth : HealthController
 {
-    public int score;
-
     public override void Damage(int damage)
     {
         base.Damage(damage);
@@ -12,6 +10,5 @@ public class EnemyHealth : HealthController
     protected override void Kill()
     {
         base.Kill();
-        ScoreManager.Instance.AddScore(score);
     }
 }

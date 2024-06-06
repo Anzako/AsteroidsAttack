@@ -95,6 +95,7 @@ MonoBehaviour:
   healthController: {fileID: 4260933094689136237}
   dropItems: {fileID: 4089710259088589386}
   damageAmount: 1
+  score: 1
   _tag: 0
 --- !u!114 &4260933094689136237
 MonoBehaviour:
@@ -110,7 +111,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   <Health>k__BackingField: 0
-  score: 1
 --- !u!114 &4089710259088589386
 MonoBehaviour:
   m_ObjectHideFlags: 0

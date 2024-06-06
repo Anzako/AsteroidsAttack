@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour, IPooledObject
     public float timeToShoot = 2.0f;
     public float shootRange;
 
+    public int score;
+    public int crashDamage;
+
     [SerializeField] private poolTags _tag;
     public poolTags Tag
     {
@@ -40,9 +43,21 @@ public class Enemy : MonoBehaviour, IPooledObject
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        IDamagable damagable = collision.gameObject.GetComponentInParent<IDamagable>();
+
+        if (damagable != null)
+        {
+            damagable.Damage(crashDamage);
+            Destroy();
+        }
+    }
+
     public void Destroy()
     {
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
+        ScoreManager.Instance.AddScore(score);
     }
 
     public void ShootProjectile()

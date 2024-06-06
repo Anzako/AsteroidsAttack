@@ -6,6 +6,7 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text comboText;
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text asteroidsAmountText;
 
@@ -39,6 +40,11 @@ public class UIController : MonoBehaviour
     public void SetScore(int score)
     {
         scoreText.text = GetScoreText(score);
+    }
+
+    public void SetCombo(int value)
+    {
+        comboText.text = "x" + value;
     }
 
     private string GetScoreText(int score)

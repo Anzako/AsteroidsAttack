@@ -136,6 +136,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1991552421}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: comboText
+      value: 
+      objectReference: {fileID: 1530830076}
+    - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1812343802}
@@ -722,6 +726,17 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &1530830076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3650137960695365155, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
+  m_PrefabInstance: {fileID: 2310002048628244791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1551930658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,14 +1234,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 725121484}
-    - target: {fileID: 4297444195570778973, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
-      propertyPath: m_text
-      value: Asteroids Attack
-      objectReference: {fileID: 0}
-    - target: {fileID: 4297444195570778973, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
-      propertyPath: m_margin.z
-      value: -348.8816
-      objectReference: {fileID: 0}
     - target: {fileID: 5452396850600255007, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1331,10 +1338,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 725121484}
-    - target: {fileID: 8587153316706308617, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -155
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

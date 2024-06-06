@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(DropItems))]
@@ -11,6 +9,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
     [SerializeField] private DropItems dropItems;
 
     public int damageAmount;
+    public int score;
 
     // Pooled object
     [SerializeField] private poolTags _tag;
@@ -68,6 +67,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
         Drop();
         AsteroidsSpawner.Instance.OnAsteroidDestroy();
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
+        ScoreManager.Instance.AddScore(score);
     }
 
     public void OnObjectSpawn()
