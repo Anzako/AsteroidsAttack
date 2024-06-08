@@ -12,6 +12,10 @@ public class Rocket : MonoBehaviour, IPooledObject
     [SerializeField] private LayerMask enemyLayers;
     [SerializeField] private poolTags particleTag;
 
+    // Sounds
+    [SerializeField] private AudioClip hitSoundClip;
+    [SerializeField] private AudioClip rocketShootSoundClip;
+
     // Pooled object
     [SerializeField] private poolTags _tag;
     public poolTags Tag
@@ -22,6 +26,7 @@ public class Rocket : MonoBehaviour, IPooledObject
     private void OnEnable()
     {
         StartCoroutine(DestroyOnSpawn());
+        SoundFXManager.Instance.PlaySoundFXClip(rocketShootSoundClip, transform, 1f);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,6 +36,7 @@ public class Rocket : MonoBehaviour, IPooledObject
         if (damagable != null)
         {
             damagable.Damage(hitDamageAmount);
+            SoundFXManager.Instance.PlaySoundFXClip(hitSoundClip, transform, 1f);
             Destroy(collision.contacts[0].point);
         }
     }

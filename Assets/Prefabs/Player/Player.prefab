@@ -569,6 +569,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
   scoreText: {fileID: 0}
+  scoreOnComboText: {fileID: 0}
+  comboText: {fileID: 0}
   waveText: {fileID: 0}
   asteroidsAmountText: {fileID: 0}
 --- !u!114 &5691059295496667685
@@ -583,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 4
   <Health>k__BackingField: 0
   playerHUD: {fileID: 5476350350173624902}
 --- !u!114 &2852529471193898715
@@ -622,3 +624,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpawnPoint: {fileID: 8569031791132758089}
   timeToShoot: 0.5
+  projectileShootSoundClip: {fileID: 8300000, guid: 87f7b7537b9b6a144952a77b130c01d3, type: 3}

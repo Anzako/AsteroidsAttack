@@ -78,6 +78,8 @@ MonoBehaviour:
   timeToDestroy: 5
   damageAmount: 2
   particleTag: 6
+  hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
+  projectileShootSoundClip: {fileID: 8300000, guid: 87f7b7537b9b6a144952a77b130c01d3, type: 3}
   _tag: 7
 --- !u!114 &7498818321579366332
 MonoBehaviour:
@@ -93,7 +95,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 16
   movementDirection: {x: 0, y: 1}
-  toGroundPotential: 0.5
   aboveGroundDistance: 0.2
   rotationSpeed: 4
 --- !u!108 &5827067826266563569

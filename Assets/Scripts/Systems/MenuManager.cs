@@ -37,6 +37,7 @@ public class MenuManager : Singleton<MenuManager>
         scoreText.gameObject.SetActive(state == GameState.EndGame);
         if (state == GameState.EndGame) 
         {
+            ScoreManager.Instance.ResetCombo();
             SetScore();
         }
     }

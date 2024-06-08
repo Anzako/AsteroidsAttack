@@ -4,7 +4,7 @@ public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField] private UIController UIController;
 
-    private int Score;
+    public int Score;
     private int scoreOnCombo;
 
     public float comboDuration = 4f;
@@ -13,6 +13,8 @@ public class ScoreManager : Singleton<ScoreManager>
     private int currentCombo = 1;
     public float comboTimer = 0f;
     private int enemiesKilled = 0;
+
+
 
     private void Update()
     {
@@ -41,7 +43,7 @@ public class ScoreManager : Singleton<ScoreManager>
         }
     }
 
-    private void ResetCombo()
+    public void ResetCombo()
     {
         // Reseting combo variables
         currentCombo = 1;
@@ -69,6 +71,8 @@ public class ScoreManager : Singleton<ScoreManager>
 
     public void ResetScore()
     {
+        ResetCombo();
+
         Score = 0;
         UIController.SetScore(Score);
     }

@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour, IPooledObject
 {
+    // Visualise things
+    private LineRenderer lineRenderer;
     [SerializeField] private int numberOfPoints = 10;
     public float aboveGroundDistance = 0;
     private Vector2 directionVector = new Vector2(0, 1);
-    [SerializeField] private LayerMask enemyMask;
+
+    // Laser variables
     public int damageAmount = 2;
+    [SerializeField] private LayerMask enemyMask;
 
     private float delayedTime = 0f;
     private float collisionCheckTime = 0.1f;
     private List<IDamagable> damagedObjects;
 
-    private LineRenderer lineRenderer;
+    // Sounds
+    [SerializeField] private AudioClip hitSoundClip;
+    [SerializeField] private AudioClip laserShootSoundClip;
 
     // Pooled object
     [SerializeField] private poolTags _tag;
@@ -60,6 +66,8 @@ public class Laser : MonoBehaviour, IPooledObject
             }
             lineRenderer.SetPosition(i, transform.position);
         }
+
+        SoundFXManager.Instance.PlaySoundFXClip(laserShootSoundClip, transform, 1f);
     }
 
     private void CheckCollision()
@@ -72,6 +80,7 @@ public class Laser : MonoBehaviour, IPooledObject
                 if (damagedObjects.Contains(damagable)) return;
 
                 damagedObjects.Add(damagable);
+                SoundFXManager.Instance.PlaySoundFXClip(hitSoundClip, transform, 1f);
                 damagable.Damage(damageAmount);
             }
         }

@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    // Weapons
     private poolTags projectileTag = poolTags.playerProjectile;
-    private poolTags actualWeaponTag = poolTags.playerProjectile;
+    private poolTags actualWeaponTag = poolTags.laser;
 
     private float bonusWeaponLifeTime = 10f;
     private float bonusWeaponElapsedTime = 0f;
@@ -18,6 +19,7 @@ public class WeaponController : MonoBehaviour
     private float lastShootTime = 0;
     public float timeToShoot = 0.5f;
 
+    // Animation
     private Animator pAnimator;
 
     private void Start()
@@ -44,12 +46,13 @@ public class WeaponController : MonoBehaviour
         if (lastShootTime >= timeToShoot)
         {
             ObjectPooler.Instance.SpawnObject(actualWeaponTag, projectileSpawnPoint.position, transform.rotation);
-            lastShootTime = 0f;
 
             if (pAnimator != null)
             {
                 pAnimator.SetTrigger("TrShoot");
             }
+
+            lastShootTime = 0f;
         }
     }
 

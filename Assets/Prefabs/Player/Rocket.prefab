@@ -156,7 +156,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   movementDirection: {x: 0, y: 1}
-  toGroundPotential: 0.5
   aboveGroundDistance: 0.2
   rotationSpeed: 2
 --- !u!114 &1144355545191158385
@@ -179,6 +178,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   particleTag: 10
+  hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
+  rocketShootSoundClip: {fileID: 8300000, guid: 21ba8c29196e5b24eb0ef790dfb082f0, type: 3}
   _tag: 9
 --- !u!54 &3398642301283125387
 Rigidbody:

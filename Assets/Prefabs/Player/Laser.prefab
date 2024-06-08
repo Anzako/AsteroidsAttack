@@ -45,15 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375306ee2f782854595f8d548ce4fd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  movementDirection: {x: 0, y: 1}
-  aboveGroundDistance: 0.2
-  rotationSpeed: 4
   numberOfPoints: 10
+  aboveGroundDistance: 0.2
+  damageAmount: 2
   enemyMask:
     serializedVersion: 2
     m_Bits: 640
-  damageAmount: 2
+  hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
+  laserShootSoundClip: {fileID: 8300000, guid: c1b985daa53c5c343a2d981b59396c8c, type: 3}
   _tag: 11
 --- !u!120 &1826992044693861448
 LineRenderer:

@@ -19,6 +19,9 @@ public class PlayerMovement : MovementController
     private Vector2 smoothInputVelocity;
     [SerializeField] private float smoothInputSpeed = .2f;
 
+    // Sounds
+    [SerializeField] private AudioClip dashSoundClip;
+
     protected override void Start()
     {
         base.Start();
@@ -76,6 +79,7 @@ public class PlayerMovement : MovementController
         canDash = false;
         isDashing = true;
         actualSpeed = dashSpeed;
+        SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, transform, 1f);
 
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;

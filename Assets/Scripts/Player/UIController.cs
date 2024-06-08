@@ -65,6 +65,8 @@ public class UIController : MonoBehaviour
         healthSlider.gameObject.SetActive(isActive);
         waveText.gameObject.SetActive(isActive);
         asteroidsAmountText.gameObject.SetActive(isActive);
+        //comboText.gameObject.SetActive(isActive);
+        //scoreOnComboText.gameObject.SetActive(isActive);
     }
 
 
