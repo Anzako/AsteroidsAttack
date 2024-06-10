@@ -41,9 +41,19 @@ public class InputController : MonoBehaviour
         
         if (context.performed)
         {
-            playerController.ShootProjectile();
+            playerController.Shoot();
         }
     }
+
+    /*public void OnRightClick(InputAction.CallbackContext context)
+    {
+        if (gameManager.State != GameState.Game) return;
+
+        if (context.performed)
+        {
+            playerController.Shoot();
+        }
+    }*/
 
     public void OnSpaceClicked(InputAction.CallbackContext context)
     {

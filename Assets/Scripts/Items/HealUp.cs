@@ -2,9 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealUp : MonoBehaviour
+public class HealUp : MonoBehaviour, IPooledObject
 {
     public int healAmount;
+
+    // Sounds
+    [SerializeField] private AudioClip healUpSoundClip;
+
+    [SerializeField] private poolTags _tag;
+    public poolTags Tag { get { return _tag; } }
+
+    public void OnObjectSpawn()
+    {
+        
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -13,7 +24,8 @@ public class HealUp : MonoBehaviour
         if (healable != null )
         {
             healable.Heal(healAmount);
-            Destroy(gameObject);
+            SoundFXManager.Instance.PlaySoundFXClip(healUpSoundClip, transform, 1f);
+            ObjectPooler.Instance.ReturnObjectToPool(gameObject);
         }
     }
 }

@@ -5,17 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerMovement movementController;
     [SerializeField] private PlayerHealth healthController;
     [SerializeField] private UIController HUDController;
-    [SerializeField] private Transform projectileSpawnPoint;
-
-    // Shooting
-    private float lastShootTime = 0;
-    public float timeToShoot;
-
-    // Update is called once per frame
-    void Update()
-    {
-        lastShootTime += Time.deltaTime;
-    }
+    [SerializeField] private WeaponController weaponController;
 
     public void EnablePlayer()
     {
@@ -37,13 +27,9 @@ public class PlayerController : MonoBehaviour
         movementController.Freeze(isFreeze);
     }
 
-    public void ShootProjectile()
+    public void Shoot()
     {
-        if (lastShootTime >= timeToShoot)
-        {
-            ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
-            lastShootTime = 0f;
-        }
+        weaponController.Shoot();
     }
 
 }

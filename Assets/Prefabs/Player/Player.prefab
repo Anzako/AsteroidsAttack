@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4378790141663063128}
   - component: {fileID: 1163623735426748991}
   - component: {fileID: 6804673296646724619}
-  - component: {fileID: 2565990827357378473}
+  - component: {fileID: 7610340804924091600}
+  - component: {fileID: 7762124191497007131}
   m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 749628760865338145}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8085797481541249609}
@@ -84,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2565990827357378473
+--- !u!64 &7610340804924091600
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,6 +107,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 638523861631414334, guid: 7caaf0ba83e07254dbdff1638edd18d1, type: 3}
+--- !u!95 &7762124191497007131
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749628760865338145}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d120eea1c72469c4f994cd7cfaa921e4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2869004363259944276
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,13 +154,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2869004363259944276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2763015, y: -0, z: -0, w: 0.961071}
-  m_LocalPosition: {x: 0, y: 40, z: -40}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
+  m_LocalPosition: {x: 0, y: 5, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8085797481541249609}
-  m_LocalEulerAnglesHint: {x: 32.079, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!20 &8437133351225935583
 Camera:
   m_ObjectHideFlags: 0
@@ -207,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8569031791132758089}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,8 +245,8 @@ Transform:
   m_GameObject: {fileID: 4595731166817769556}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.19, z: 13.34}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 0, y: 0.069, z: 1.354}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8085797481541249609}
@@ -256,7 +278,7 @@ Transform:
   m_GameObject: {fileID: 6731209989152015075}
   serializedVersion: 2
   m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 30, z: -40}
+  m_LocalPosition: {x: 0, y: 3, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,9 +296,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 40
-  m_SpotAngle: 100
+  m_Intensity: 2
+  m_Range: 60
+  m_SpotAngle: 90
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -356,12 +378,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8085797481541249609}
+  - component: {fileID: 715397722984348473}
   - component: {fileID: 3719851685426429890}
   - component: {fileID: 78416745642762997}
   - component: {fileID: 5515491599423336599}
   - component: {fileID: 5476350350173624902}
   - component: {fileID: 5691059295496667685}
   - component: {fileID: 2852529471193898715}
+  - component: {fileID: 5372409946133155427}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -379,7 +403,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 747172440884740140}
@@ -388,6 +412,33 @@ Transform:
   - {fileID: 8569031791132758089}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &715397722984348473
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898362260430516467}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &3719851685426429890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,8 +454,7 @@ MonoBehaviour:
   movementController: {fileID: 2852529471193898715}
   healthController: {fileID: 5691059295496667685}
   HUDController: {fileID: 5476350350173624902}
-  projectileSpawnPoint: {fileID: 8569031791132758089}
-  timeToShoot: 0.5
+  weaponController: {fileID: 5372409946133155427}
 --- !u!114 &78416745642762997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,6 +558,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 71052f8a-3b9e-4dc1-bd1f-6ab56dfc1cc3
     m_ActionName: Gameplay/Escape[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 78416745642762997}
+        m_TargetAssemblyTypeName: InputController, Assembly-CSharp
+        m_MethodName: OnRightClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7b86cec4-ef2f-4917-96bf-24cd68f6c081
+    m_ActionName: Gameplay/SpecialAttack[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -527,6 +593,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
   scoreText: {fileID: 0}
+  scoreOnComboText: {fileID: 0}
+  comboText: {fileID: 0}
   waveText: {fileID: 0}
   asteroidsAmountText: {fileID: 0}
 --- !u!114 &5691059295496667685
@@ -541,8 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
-  <health>k__BackingField: 0
+  maxHealth: 4
+  <Health>k__BackingField: 0
   playerHUD: {fileID: 5476350350173624902}
 --- !u!114 &2852529471193898715
 MonoBehaviour:
@@ -558,9 +626,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   movementDirection: {x: 0, y: 1}
+  aboveGroundDistance: 0.15
   rotationSpeed: 2
   inputController: {fileID: 78416745642762997}
   canDash: 0
   dashSpeed: 15
   dashingTime: 0.2
   dashingCooldown: 1
+  smoothInputSpeed: 0.2
+--- !u!114 &5372409946133155427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898362260430516467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b1153674845fb44ab1890096fa6096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpawnPoint: {fileID: 8569031791132758089}
+  timeToShoot: 0.5
+  projectileShootSoundClip: {fileID: 8300000, guid: 87f7b7537b9b6a144952a77b130c01d3, type: 3}

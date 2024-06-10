@@ -5,6 +5,9 @@ public class PlayerHealth : HealthController, IHealable
 {
     [SerializeField] private UIController playerHUD;
 
+    // Sounds
+    [SerializeField] private AudioClip gettingHitSoundClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +17,7 @@ public class PlayerHealth : HealthController, IHealable
     public override void Damage(int damage)
     {
         base.Damage(damage);
+        SoundFXManager.Instance.PlaySoundFXClip(gettingHitSoundClip, transform, 1f);
         playerHUD.SetHealth(Health);
     }
 

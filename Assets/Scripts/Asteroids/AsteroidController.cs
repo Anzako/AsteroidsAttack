@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class AsteroidController : MonoBehaviour, IPooledObject
+[RequireComponent(typeof(DropItems))]
+public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
 {
     #region Variables
     private AsteroidsSpawner spawner;
     [SerializeField] private AsteroidsHealth healthController;
+    [SerializeField] private DropItems dropItems;
 
     public int damageAmount;
+    public int score;
 
     // Pooled object
-    public poolTags _tag;
+    [SerializeField] private poolTags _tag;
     public poolTags Tag
     {
         get { return _tag; }
@@ -61,13 +64,19 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     protected virtual void Destroy()
     {
         // Here spawn particle system
+        Drop();
         AsteroidsSpawner.Instance.OnAsteroidDestroy();
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
+        ScoreManager.Instance.AddScore(score);
     }
 
     public void OnObjectSpawn()
     {
-
+        healthController.SetHealthToMax();
     }
 
+    public void Drop()
+    {
+        dropItems.DropItem();
+    }
 }

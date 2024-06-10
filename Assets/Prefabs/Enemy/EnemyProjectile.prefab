@@ -75,8 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0f1869626860740a1243600ea0ad55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 5
-  damageAmount: 2
+  timeToDestroy: 3
+  damageAmount: 1
   particleTag: 6
   _tag: 5
 --- !u!114 &7498818321579366332
@@ -92,6 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 16
+  movementDirection: {x: 0, y: 1}
+  toGroundPotential: 0.5
+  aboveGroundDistance: 0.2
   rotationSpeed: 4
 --- !u!1 &1480996374394146741
 GameObject:
@@ -106,7 +109,7 @@ GameObject:
   - component: {fileID: 1830674271540492214}
   - component: {fileID: 6633750707919631844}
   m_Layer: 10
-  m_Name: Sphere
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

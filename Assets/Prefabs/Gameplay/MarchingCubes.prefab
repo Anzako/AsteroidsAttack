@@ -52,10 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   metaBallGenerator: {fileID: 7039112786599587029}
   shader: {fileID: 7200000, guid: 9754cd28fb9a08248ac15fa5d0f92d95, type: 3}
-  isoLevel: 0.5
   spacing: 1
   offset: {x: 0, y: 0, z: 0}
-  numPointsPerAxis: 80
+  numPointsPerAxis: 50
 --- !u!114 &7039112786599587029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,9 +72,6 @@ MonoBehaviour:
   - {fileID: 7831322339785052789}
   - {fileID: 3735640425888004039}
   - {fileID: 1311063499515149068}
-  numberOfMetaballs: 0
-  worldBounds: 0
-  samplePoints: 10
 --- !u!33 &2657919632617604516
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -152,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 2309671071300274456}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30, y: 60, z: 30}
+  m_LocalPosition: {x: 30, y: 25.7, z: 38.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,7 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDirection: {x: 0, y: -1, z: 0.3}
-  speed: 0
+  direction: {x: 0, y: 0, z: 0}
+  speed: 1
   radius: 22
 --- !u!1 &3308127082964116905
 GameObject:
@@ -199,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 3308127082964116905}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 60, y: 60, z: 60}
+  m_LocalPosition: {x: 36.2, y: 36.26, z: 13.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -218,7 +215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDirection: {x: -1, y: -0.5, z: 0.4}
-  speed: 0
+  direction: {x: 0, y: 0, z: 0}
+  speed: 2
   radius: 30
 --- !u!1 &5560111237499080466
 GameObject:
@@ -246,7 +244,7 @@ Transform:
   m_GameObject: {fileID: 5560111237499080466}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30, y: 30, z: 30}
+  m_LocalPosition: {x: 18.1, y: 13.02, z: 21.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -265,5 +263,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDirection: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
   speed: 0
   radius: 25

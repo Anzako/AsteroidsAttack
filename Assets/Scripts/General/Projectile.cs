@@ -8,6 +8,10 @@ public class Projectile : MonoBehaviour, IPooledObject
 
     [SerializeField] private poolTags particleTag;
 
+    // Sounds
+    [SerializeField] private AudioClip hitSoundClip;
+    [SerializeField] private AudioClip projectileShootSoundClip;
+
     public poolTags _tag;
     public poolTags Tag
     {
@@ -18,6 +22,10 @@ public class Projectile : MonoBehaviour, IPooledObject
     private void OnEnable()
     {
         StartCoroutine(DestroyOnSpawn());
+        if (projectileShootSoundClip != null)
+        {
+            SoundFXManager.Instance.PlaySoundFXClip(projectileShootSoundClip, transform, 1f);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -27,6 +35,11 @@ public class Projectile : MonoBehaviour, IPooledObject
         if (damagable != null)
         {
             damagable.Damage(damageAmount);
+            if (hitSoundClip != null)
+            {
+                SoundFXManager.Instance.PlaySoundFXClip(hitSoundClip, transform, 1f);
+            }
+            
             Destroy(collision.contacts[0].point);
         }
     }

@@ -10,13 +10,15 @@ public class MovementController : MonoBehaviour
     protected Vector3 projectedDirection = Vector2.zero;
 
     // Gravity variables
-    public static float toGroundPotential = 0.47f;
+    protected float toGroundPotential;
+    public float aboveGroundDistance = 0;
     public static float gravityForce = 4f;
     public float rotationSpeed;
 
     protected virtual void Start()
     {
         actualSpeed = moveSpeed;
+        toGroundPotential = MarchingCubes.isoLevel;
     }
 
     protected virtual void Update()
@@ -32,7 +34,8 @@ public class MovementController : MonoBehaviour
         transform.position += actualSpeed * Time.deltaTime * projectedDirection;
     }
 
-    private void RotateToSurface()    
+    // Slerp rotation
+    protected void RotateToSurface()    
     {
         Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
         Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
@@ -44,9 +47,33 @@ public class MovementController : MonoBehaviour
             Time.deltaTime * rotationSpeed);
 
         float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
-        transform.position -= potentialVector.normalized * val * gravityForce;
+        transform.position -= gravityForce * val * potentialVector.normalized 
+            - potentialVector.normalized * aboveGroundDistance;
     }
 
+    #region Static Functions
+    // No slerp rotation
+    public static void RotateToSurface(Transform transform, float aboveGroundDistance)
+    {
+        Vector3 potentialVector = MetaBalls.CalculateMetaballsNormal(transform.position);
+        Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
+
+        // Rotating object to new rotation depending on potential vector
+        transform.rotation = Quaternion.FromToRotation(transform.up, potentialVector.normalized)
+                * transform.rotation;
+        
+        float val = MarchingCubes.isoLevel - MetaBalls.CalculateScalarFieldValue(transform.position);
+        transform.position -= gravityForce * val * potentialVector.normalized 
+            - potentialVector.normalized * aboveGroundDistance;
+    }
+
+    public static void Move(Transform transform, Vector2 movementDirection, float distance)
+    {
+        Vector3 projectedDirection = transform.forward * movementDirection.y + transform.right * movementDirection.x;
+
+        transform.position += distance * projectedDirection;
+    }
+    #endregion
     protected void RotateAroundVerticalAxis(float rotationAngle)
     {
         Quaternion targetRotation = Quaternion.AngleAxis(rotationAngle, transform.up);
