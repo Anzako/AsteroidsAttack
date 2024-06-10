@@ -55,7 +55,7 @@ MonoBehaviour:
   timeToShoot: 2
   shootRange: 20
   score: 5
-  crashDamage: 2
+  crashDamage: 4
   _tag: 4
 --- !u!114 &-6091714098982788124
 MonoBehaviour:

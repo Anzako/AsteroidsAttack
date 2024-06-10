@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   movementDirection: {x: 0, y: 1}
-  aboveGroundDistance: 0.25
+  aboveGroundDistance: 0.3
   rotationSpeed: 4
 --- !u!114 &8978048823640300672
 MonoBehaviour:
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthController: {fileID: 4260933094689136237}
   dropItems: {fileID: 4089710259088589386}
-  damageAmount: 3
+  damageAmount: 5
   score: 5
   _tag: 2
 --- !u!114 &4260933094689136237

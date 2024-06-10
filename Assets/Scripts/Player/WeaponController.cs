@@ -7,7 +7,7 @@ public class WeaponController : MonoBehaviour
 {
     // Weapons
     private poolTags projectileTag = poolTags.playerProjectile;
-    private poolTags actualWeaponTag = poolTags.laser;
+    private poolTags actualWeaponTag = poolTags.playerProjectile;
     [SerializeField] private GameObject laser;
 
     private float bonusWeaponLifeTime = 10f;

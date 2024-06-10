@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Projectile : MonoBehaviour, IPooledObject
 {
@@ -39,26 +40,23 @@ public class Projectile : MonoBehaviour, IPooledObject
             {
                 SoundFXManager.Instance.PlaySoundFXClip(hitSoundClip, transform, 1f);
             }
-            
-            Destroy(collision.contacts[0].point);
+
+            ObjectPooler.Instance.SpawnObject(particleTag, transform.position, transform.rotation);
+            ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
         }
     }
 
     IEnumerator DestroyOnSpawn()
     {
         yield return new WaitForSeconds(timeToDestroy);
-        Destroy(transform.position);
-    }
-
-    private void Destroy(Vector3 position)
-    {
-        ObjectPooler.Instance.SpawnObject(particleTag, position, transform.rotation);
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);
     }
 
     public void OnObjectSpawn()
     {
-        
+        TrailRenderer trailRenderer = GetComponentInChildren<TrailRenderer>();
+
+        if (trailRenderer != null) trailRenderer.Clear();
     }
 
 }

@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   movementDirection: {x: 0, y: 1}
-  toGroundPotential: 0.5
   aboveGroundDistance: 0.2
   rotationSpeed: 2
 --- !u!114 &1146696613984319307
@@ -157,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7f2abcda77ce754408e744c42e47f477, type: 2}
+  - {fileID: 2100000, guid: 615a0bf9a1763de498cb82169bb82597, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

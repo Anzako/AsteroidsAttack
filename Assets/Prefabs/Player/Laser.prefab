@@ -155,5 +155,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 640
   hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
-  laserShootSoundClip: {fileID: 8300000, guid: c1b985daa53c5c343a2d981b59396c8c, type: 3}
+  laserShootSoundClip: {fileID: 8300000, guid: ae2095fdd7df26e48903154f7b289ca8, type: 3}
   _tag: 11
