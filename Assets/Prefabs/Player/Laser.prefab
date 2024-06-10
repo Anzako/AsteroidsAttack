@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2796201782897372547}
-  - component: {fileID: 8331418654215733097}
   - component: {fileID: 1826992044693861448}
+  - component: {fileID: 5920121249597433444}
   m_Layer: 8
   m_Name: Laser
   m_TagString: Untagged
@@ -33,27 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8331418654215733097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333237105907193973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375306ee2f782854595f8d548ce4fd6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfPoints: 10
-  aboveGroundDistance: 0.2
-  damageAmount: 2
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 640
-  hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
-  laserShootSoundClip: {fileID: 8300000, guid: c1b985daa53c5c343a2d981b59396c8c, type: 3}
-  _tag: 11
 --- !u!120 &1826992044693861448
 LineRenderer:
   serializedVersion: 2
@@ -75,7 +54,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7f2abcda77ce754408e744c42e47f477, type: 2}
+  - {fileID: 2100000, guid: 2769c9941543a3d4d9b5d3991bfeefc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,8 +83,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.019737244
-        value: 0.23484802
+        time: 0
+        value: 0.098487854
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -148,7 +127,7 @@ LineRenderer:
     numCornerVertices: 8
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
@@ -156,3 +135,24 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &5920121249597433444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333237105907193973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375306ee2f782854595f8d548ce4fd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfPoints: 10
+  aboveGroundDistance: 0.2
+  damageAmount: 2
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 640
+  hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
+  laserShootSoundClip: {fileID: 8300000, guid: c1b985daa53c5c343a2d981b59396c8c, type: 3}
+  _tag: 11

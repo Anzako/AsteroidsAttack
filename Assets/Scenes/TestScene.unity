@@ -136,6 +136,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1991552421}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: comboText
+      value: 
+      objectReference: {fileID: 2310002048628244792}
+    - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 1812343802}
@@ -143,6 +147,10 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 1578304658}
+    - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: scoreOnComboText
+      value: 
+      objectReference: {fileID: 2310002048628244793}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: asteroidsAmountText
       value: 
@@ -728,6 +736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1551930660}
   - component: {fileID: 1551930659}
+  - component: {fileID: 1551930661}
   m_Layer: 0
   m_Name: DirectionalLight2
   m_TagString: Untagged
@@ -812,6 +821,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1551930661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551930658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!114 &1578304658 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8365489457067653146, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
@@ -968,6 +1000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1654144990}
   - component: {fileID: 1654144992}
+  - component: {fileID: 1654144993}
   m_Layer: 0
   m_Name: DirectionalLight
   m_TagString: Untagged
@@ -1052,6 +1085,29 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1654144993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654144989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!4 &1759861397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9f9a44fdc76517346bcf34a7d574b842, type: 3}
@@ -1336,6 +1392,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
+--- !u!114 &2310002048628244792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3650137960695365155, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
+  m_PrefabInstance: {fileID: 2310002048628244791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2310002048628244793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5259568692172948430, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
+  m_PrefabInstance: {fileID: 2310002048628244791}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2318857866788675300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1574,6 +1652,10 @@ PrefabInstance:
       propertyPath: speed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5267554780387433435, guid: f5c171056ba080447a4cdb08adbf4b6f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 82925cc824ed43042a05d3efb9a9cf53, type: 2}
     - target: {fileID: 6962079452254069715, guid: f5c171056ba080447a4cdb08adbf4b6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
