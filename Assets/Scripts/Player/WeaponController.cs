@@ -8,6 +8,7 @@ public class WeaponController : MonoBehaviour
     // Weapons
     private poolTags projectileTag = poolTags.playerProjectile;
     private poolTags actualWeaponTag = poolTags.laser;
+    [SerializeField] private GameObject laser;
 
     private float bonusWeaponLifeTime = 10f;
     private float bonusWeaponElapsedTime = 0f;
@@ -45,7 +46,14 @@ public class WeaponController : MonoBehaviour
     {
         if (lastShootTime >= timeToShoot)
         {
-            ObjectPooler.Instance.SpawnObject(actualWeaponTag, projectileSpawnPoint.position, transform.rotation);
+            if (actualWeaponTag == poolTags.laser)
+            {
+                Instantiate(laser, projectileSpawnPoint);
+            } else
+            {
+                ObjectPooler.Instance.SpawnObject(actualWeaponTag, projectileSpawnPoint.position, transform.rotation);
+            }
+            
 
             if (pAnimator != null)
             {

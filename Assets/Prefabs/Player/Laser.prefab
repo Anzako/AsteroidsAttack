@@ -83,8 +83,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.098487854
+        time: 0.17155075
+        value: 0.2584839
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -147,8 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375306ee2f782854595f8d548ce4fd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPoints: 10
+  numberOfPoints: 15
   aboveGroundDistance: 0.2
+  dissolveTime: 0.2
   damageAmount: 2
   enemyMask:
     serializedVersion: 2

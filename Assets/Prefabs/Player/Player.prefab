@@ -244,7 +244,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -341,10 +341,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 120
   m_Range: 60
-  m_SpotAngle: 90
-  m_InnerSpotAngle: 1
+  m_SpotAngle: 100
+  m_InnerSpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -693,5 +693,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b1153674845fb44ab1890096fa6096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laser: {fileID: 1333237105907193973, guid: 8ad069c933fcc4a479f275c9389f066e, type: 3}
   projectileSpawnPoint: {fileID: 8569031791132758089}
   timeToShoot: 0.5
