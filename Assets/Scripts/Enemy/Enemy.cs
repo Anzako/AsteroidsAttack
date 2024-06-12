@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour, IPooledObject
     {
         lastShootTime += Time.deltaTime;
 
-        if (lastShootTime > timeToShoot && movementController.isEnemyOnPlayerMetaball) 
+        if (lastShootTime > timeToShoot && movementController.canShoot) 
         {
             ShootProjectile();
         }

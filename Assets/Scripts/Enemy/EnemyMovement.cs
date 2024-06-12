@@ -4,8 +4,10 @@ using UnityEngine;
 public class EnemyMovement : MovementController
 {
     private LevelManager levelManager;
-    [SerializeField] private float toPlayerDistance;
+    [SerializeField] private float toMinPlayerDistance;
+    [SerializeField] private float toMaxPlayerDistance;
     public bool isEnemyOnPlayerMetaball;
+    public bool canShoot;
 
     protected override void Start()
     {
@@ -23,22 +25,40 @@ public class EnemyMovement : MovementController
 
     protected override void Update()
     {
-        UpdateMovementDirection();
+        if (isEnemyOnPlayerMetaball)
+        {
+            UpdateMovementDirection();
+        }
+        
         base.Update();
     }
 
     private void UpdateMovementDirection()
     {
-        if (!isEnemyOnPlayerMetaball) return;
-
         Vector3 toPlayerVector = levelManager.GetPlayerPosition() - transform.position;
-        movementDirection = new Vector2(0, 1);
 
-        // If enemy is close then it stop moving
-        if (toPlayerVector.magnitude <= toPlayerDistance)
+        actualSpeed = moveSpeed;
+
+        // Enemy moving from player
+        if (toPlayerVector.magnitude <= toMinPlayerDistance)
         {
-            movementDirection = Vector2.zero;
+            movementDirection = new Vector2(0, -1);
+            canShoot = true;
+        } 
+        // Enemy moving to player
+        else if (toPlayerVector.magnitude >= toMaxPlayerDistance)
+        {
+            movementDirection = new Vector2(0, 1);
+            canShoot = false;
+        } 
+        // Enemy in player range moving around player
+        else
+        {
+            movementDirection = new Vector2(1, 0);
+            actualSpeed = moveSpeed / 2;
+            canShoot = true;
         }
+
 
         Vector3 projectedVector = Vector3.ProjectOnPlane(toPlayerVector.normalized, transform.up);
 

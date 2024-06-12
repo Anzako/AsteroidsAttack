@@ -83,11 +83,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c60a28a8248d6c468cefd0917913cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 3
   movementDirection: {x: 0, y: 1}
-  aboveGroundDistance: 0.2
+  aboveGroundDistance: 0.3
   rotationSpeed: 2
-  toPlayerDistance: 6
+  toMinPlayerDistance: 5
+  toMaxPlayerDistance: 6
   isEnemyOnPlayerMetaball: 0
 --- !u!54 &5956442592941039845
 Rigidbody:

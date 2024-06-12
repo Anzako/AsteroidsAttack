@@ -172,7 +172,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 10
   <Health>k__BackingField: 0
   playerHUD: {fileID: 5476350350173624902}
   gettingHitSoundClip: {fileID: 8300000, guid: 52d296bf62142c248b1814f181732126, type: 3}
@@ -680,7 +680,7 @@ MonoBehaviour:
   dashingTime: 0.2
   dashingCooldown: 1
   smoothInputSpeed: 0.2
-  dashSoundClip: {fileID: 8300000, guid: e75c81d1957a3be46ab74a7343fe3eae, type: 3}
+  dashSoundClip: {fileID: 8300000, guid: 25202a8e3a37b24439889082153bccc2, type: 3}
 --- !u!114 &5372409946133155427
 MonoBehaviour:
   m_ObjectHideFlags: 0

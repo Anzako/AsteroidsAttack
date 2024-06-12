@@ -131,10 +131,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2852529471193898715, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: dashSoundClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 25202a8e3a37b24439889082153bccc2, type: 3}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: waveText
       value: 
@@ -159,10 +155,6 @@ PrefabInstance:
       propertyPath: asteroidsAmountText
       value: 
       objectReference: {fileID: 780400218}
-    - target: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: maxHealth
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8085797481541249609, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -201,22 +193,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8085797481541249609, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8437133351225935583, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8437133351225935583, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8437133351225935583, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8437133351225935583, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8898362260430516467, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
