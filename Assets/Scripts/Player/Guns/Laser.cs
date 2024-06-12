@@ -6,16 +6,16 @@ public class Laser : MonoBehaviour, IPooledObject
 {
     // Visualise things
     private LineRenderer lineRenderer;
+    private Material material;
     [SerializeField] private int numberOfPoints = 10;
-    public float aboveGroundDistance = 0;
+    public float aboveGroundDistance = 0.2f;
     private Vector2 directionVector = new Vector2(0, 1);
+    private int dissolveAmount = Shader.PropertyToID("_DissolveAmount");
+    [SerializeField] private float dissolveTime = .2f;
 
     // Laser variables
     public int damageAmount = 2;
     [SerializeField] private LayerMask enemyMask;
-
-    private float delayedTime = 0f;
-    private float collisionCheckTime = 0.1f;
     private List<IDamagable> damagedObjects;
 
     // Sounds
@@ -33,27 +33,34 @@ public class Laser : MonoBehaviour, IPooledObject
     {
         lineRenderer = GetComponent<LineRenderer>();
         damagedObjects = new List<IDamagable>();
+        material = lineRenderer.materials[0];
     }
 
     private void Update()
     {
-        delayedTime += Time.deltaTime;
-        if (delayedTime < collisionCheckTime) 
-        {
-            CheckCollision();
-        }
+        RenderLaser();
     }
 
     private void OnEnable()
     {
+        RenderLaser();
         ShootLaser();
-
-        StartCoroutine(DestroyAfterSpawn());
     }
 
     private void ShootLaser()
     {
+        CheckCollision();
+        SoundFXManager.Instance.PlaySoundFXClip(laserShootSoundClip, transform, 1f);
+
+        StartCoroutine(DestroyAfterSpawn());
+    }
+
+    private void RenderLaser()
+    {
         float moveDistance = 1f;
+        transform.position = transform.parent.position;
+        transform.rotation = transform.parent.rotation;
+
         lineRenderer.positionCount = numberOfPoints;
         lineRenderer.SetPosition(0, transform.position);
 
@@ -66,8 +73,6 @@ public class Laser : MonoBehaviour, IPooledObject
             }
             lineRenderer.SetPosition(i, transform.position);
         }
-
-        SoundFXManager.Instance.PlaySoundFXClip(laserShootSoundClip, transform, 1f);
     }
 
     private void CheckCollision()
@@ -88,13 +93,25 @@ public class Laser : MonoBehaviour, IPooledObject
 
     private IEnumerator DestroyAfterSpawn()
     {
-        yield return new WaitForSeconds(0.3f);
-        ObjectPooler.Instance.ReturnObjectToPool(gameObject);
+        float elapsedTime = 0f;
+        
+
+        while (elapsedTime < dissolveTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            float lerpedDissolve = Mathf.Lerp(0, 1, (elapsedTime / dissolveTime));
+
+            material.SetFloat(dissolveAmount, lerpedDissolve);
+
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 
     public void OnObjectSpawn()
     {
-        delayedTime = 0f;
         damagedObjects = new List<IDamagable>();
     }
 }

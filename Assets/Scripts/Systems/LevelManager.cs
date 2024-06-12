@@ -16,7 +16,8 @@ public class LevelManager : Singleton<LevelManager>
     private float elapsedRoundTime = 0;
     public float timeToSpawnEnemy;
 
-    public int[] asteroidsInRound;
+    // Testing
+    public bool spawnAsteroids = true;
 
     private void Start()
     {
@@ -56,7 +57,12 @@ public class LevelManager : Singleton<LevelManager>
     private void StartRound(int round)
     {
         elapsedRoundTime = 0;
-        asteroidsSpawner.SpawnAsteroids(asteroidsInRound[round]);
+
+        if (spawnAsteroids)
+        {
+            asteroidsSpawner.SpawnAsteroids((actualRound + 1) * 2);
+        }
+        
         HUDController.SetWave(round + 1);
     }
 
@@ -80,11 +86,6 @@ public class LevelManager : Singleton<LevelManager>
     public void EndRound()
     {
         actualRound++;
-        if (actualRound >= asteroidsInRound.Length)
-        {
-            EndGame();
-            return;
-        } 
 
         // Do as IEnumerator to wait for next round
         StartRound(actualRound);
