@@ -7,7 +7,7 @@ public class HealthController : MonoBehaviour, IDamagable
     public event Action Killed = delegate { };
 
     // Health
-    [SerializeField] private int maxHealth;
+    [SerializeField] protected int maxHealth;
     [field: SerializeField] public int Health { get; private set; }
 
     protected virtual void Awake()

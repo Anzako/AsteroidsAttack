@@ -6,8 +6,10 @@ public class PlayerMovement : MovementController
 {
     [SerializeField] private InputController inputController;
 
+    private float initialMoveSpeed;
+
     private bool isFreezed;
-    public bool canDash;
+    private bool canDash;
     private bool isDashing;
 
     [SerializeField] private float dashSpeed;
@@ -25,6 +27,7 @@ public class PlayerMovement : MovementController
     protected override void Start()
     {
         base.Start();
+        initialMoveSpeed = moveSpeed;
     }
 
     private void OnEnable()
@@ -96,8 +99,15 @@ public class PlayerMovement : MovementController
 
     public void ResetStats()
     {
+        moveSpeed = initialMoveSpeed;
         ResetActualSpeed();
         currentInputVector = Vector2.zero;
+    }
+
+    public void IncreaseMoveSpeed(float speed)
+    {
+        moveSpeed += speed;
+        actualSpeed = moveSpeed;
     }
 
 }

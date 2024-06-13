@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour, IPooledObject
+public class Laser : MonoBehaviour
 {
     // Visualise things
     private LineRenderer lineRenderer;
@@ -22,13 +22,6 @@ public class Laser : MonoBehaviour, IPooledObject
     // Sounds
     [SerializeField] private AudioClip hitSoundClip;
     [SerializeField] private AudioClip laserShootSoundClip;
-
-    // Pooled object
-    [SerializeField] private poolTags _tag;
-    public poolTags Tag
-    {
-        get { return _tag; }
-    }
 
     private void Awake()
     {

@@ -2,17 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.CullingGroup;
 
 public class UpgradesManager : MonoBehaviour
 {
     private List<UpgradeEntity> upgrades;
     public event Action<UpgradeEntity> UpgradeChoosen = delegate { };
 
-    private void Start()
-    {
-        GenerateUpgrades();
 
-        //StartCoroutine(test());
+    private void Awake()
+    {
+        GameManager.OnStateChanged += GameManagerOnStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnStateChanged -= GameManagerOnStateChanged;
+    }
+
+    public void GameManagerOnStateChanged(GameState state)
+    {
+        if (state == GameState.StartGame)
+        {
+            GenerateUpgrades();
+        }
+
+        if (state == GameState.UpgradeMenu)
+        {
+            SetUpgradeButtons();
+        }
     }
 
     private void GenerateUpgrades()
@@ -34,13 +52,6 @@ public class UpgradesManager : MonoBehaviour
         UpgradeEntity upgrade4 = new BaseWeaponUpgrade();
         upgrade4.OnUpgradeChoice += HandleUpgradeChoice;
         upgrades.Add(upgrade4);
-    }
-
-    public IEnumerator test()
-    {
-        yield return new WaitForSeconds(1);
-
-        SetUpgradeButtons();
     }
 
     private void SetUpgradeButtons()
@@ -106,7 +117,7 @@ public class UpgradesManager : MonoBehaviour
         {
             upgrades.Remove(upgrade);
         }
-        SetUpgradeButtons();
+        GameManager.Instance.ChangeState(GameState.Game);
     }
 
     private void HandleUpgradeChoice(UpgradeEntity upgrade)

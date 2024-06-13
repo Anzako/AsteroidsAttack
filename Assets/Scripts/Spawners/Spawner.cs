@@ -7,7 +7,7 @@ public class Spawner
         return ObjectPooler.Instance.SpawnObject(objectTag, position, rotation);
     }
 
-    public static GameObject SpawnAwayFromPlayerView(poolTags objectTag, int maxAttempts = 20)
+    public static GameObject SpawnAwayFromPlayerView(poolTags objectTag, int maxAttempts = 30)
     {
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {

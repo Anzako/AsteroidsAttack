@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healAmount: 2
   healUpSoundClip: {fileID: 8300000, guid: 7569ceb6721fa374d80fb82ab1ae0db4, type: 3}
-  _tag: 12
+  _tag: 11
 --- !u!54 &8302512933029553190
 Rigidbody:
   m_ObjectHideFlags: 0

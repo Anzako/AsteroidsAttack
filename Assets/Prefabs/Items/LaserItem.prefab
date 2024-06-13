@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52cd0bac18da792428a66f9cb773f025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tag: 14
-  weaponTag: 11
+  _tag: 13
+  weaponTag: 2
   weaponTime: 0
 --- !u!54 &8427792228171398481
 Rigidbody:

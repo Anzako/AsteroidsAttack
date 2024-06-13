@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
     // Weapons
-    private poolTags projectileTag = poolTags.playerProjectile;
-    private poolTags actualWeaponTag = poolTags.playerProjectile;
+    private weaponTag actualWeapon = weaponTag.basicWeapon;
+
     [SerializeField] private GameObject laser;
 
     private float bonusWeaponLifeTime = 10f;
@@ -38,37 +39,70 @@ public class WeaponController : MonoBehaviour
         if (bonusWeaponElapsedTime >= bonusWeaponLifeTime)
         {
             bonusWeaponEquiped = false;
-            actualWeaponTag = projectileTag;
+            actualWeapon = weaponTag.basicWeapon;
         }
     }
 
     public void Shoot()
     {
-        if (lastShootTime >= timeToShoot)
+        if (lastShootTime < timeToShoot) return;
+        
+        switch (actualWeapon)
         {
-            if (actualWeaponTag == poolTags.laser)
-            {
-                Instantiate(laser, projectileSpawnPoint);
-            } else
-            {
-                ObjectPooler.Instance.SpawnObject(actualWeaponTag, projectileSpawnPoint.position, transform.rotation);
-            }
-            
+            case weaponTag.basicWeapon:
+                ShootBasicWeapon();
+                break;
+            case weaponTag.laser:
+                ShootLaser();
+                break;
+            case weaponTag.rocket:
+                ShootRocket();
+                break;
+        }    
 
-            if (pAnimator != null)
-            {
-                pAnimator.SetTrigger("TrShoot");
-            }
-
-            lastShootTime = 0f;
+        if (pAnimator != null)
+        {
+            pAnimator.SetTrigger("TrShoot");
         }
+
+        lastShootTime = 0f;
+        
     }
 
-    public void ChangeWeapon(poolTags weaponTag)
+    private void ShootBasicWeapon()
     {
-        actualWeaponTag = weaponTag;
+        ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+    }
+
+    private void ShootLaser()
+    {
+        Instantiate(laser, projectileSpawnPoint);
+    }
+
+    private void ShootRocket()
+    {
+        ObjectPooler.Instance.SpawnObject(poolTags.rocket, projectileSpawnPoint.position, transform.rotation);
+    }
+
+    public void ResetStats()
+    {
+        bonusWeaponEquiped = false;
+        bonusWeaponElapsedTime = 0f;
+        actualWeapon = weaponTag.basicWeapon;
+    }
+
+    public void ChangeWeapon(weaponTag weaponTag)
+    {
+        actualWeapon = weaponTag;
         bonusWeaponElapsedTime = 0f;
         bonusWeaponEquiped = true;
     }
 
+}
+
+public enum weaponTag
+{
+    basicWeapon,
+    rocket,
+    laser,
 }

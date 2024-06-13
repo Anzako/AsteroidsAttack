@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         healthController.ResetStats();
         movementController.ResetStats();
+        weaponController.ResetStats();
     }
 
     public void Freeze(bool isFreeze)

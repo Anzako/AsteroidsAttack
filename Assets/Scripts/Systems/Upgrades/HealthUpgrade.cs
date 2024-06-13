@@ -14,7 +14,6 @@ public class HealthUpgrade : UpgradeEntity
 
     public override void UpgradeFunction()
     {
-        // do sth
         LevelManager.Instance.GetPlayerController().UpgradeHealth(healthValue);
         level += 1;
 

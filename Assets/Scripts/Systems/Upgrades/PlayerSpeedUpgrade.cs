@@ -6,18 +6,18 @@ public class PlayerSpeedUpgrade : UpgradeEntity
 {
     public override string upgradeText
     {
-        get { return "Speed upgrade"; }
+        get { return "Increase your speed"; }
     }
 
     private int level = 0;
+    private float speedAmount = 0.5f;
 
     public override void UpgradeFunction()
     {
-        // do sth
-        Debug.Log("Increase player speed by 2");
+        GameManager.GetPlayerController().GetComponent<PlayerMovement>().IncreaseMoveSpeed(speedAmount);
         level += 1;
 
-        if (level >= 3) { exhausted = true; }
+        if (level >= 2) { exhausted = true; }
 
         OnUpgradeChoice?.Invoke(this);
     }

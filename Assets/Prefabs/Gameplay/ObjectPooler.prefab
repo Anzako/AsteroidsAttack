@@ -68,10 +68,8 @@ MonoBehaviour:
   - poolTag: 10
     prefab: {fileID: 6070491148927718762, guid: 93eacc0583283c64297c6644c2332d70, type: 3}
   - poolTag: 11
-    prefab: {fileID: 1333237105907193973, guid: 8ad069c933fcc4a479f275c9389f066e, type: 3}
-  - poolTag: 12
     prefab: {fileID: 6605728360196588728, guid: d8ace25cd07b1da4b8768ba9dc83f1ed, type: 3}
-  - poolTag: 13
+  - poolTag: 12
     prefab: {fileID: 3571121717751638878, guid: c66250a5102a644429793c609f430fb2, type: 3}
-  - poolTag: 14
+  - poolTag: 13
     prefab: {fileID: 3571121717751638878, guid: bf240067ba9a444499d6d680dd662f4c, type: 3}

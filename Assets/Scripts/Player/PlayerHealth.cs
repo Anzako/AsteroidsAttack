@@ -49,7 +49,7 @@ public class PlayerHealth : HealthController, IHealable
 
     public void IncreaseHealth(int amount)
     {
-        SetMaxHealth(Health + amount);
+        SetMaxHealth(maxHealth + amount);
         SetHealthToMax();
     }
 

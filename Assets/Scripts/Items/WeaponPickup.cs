@@ -7,7 +7,7 @@ public class WeaponPickup : MonoBehaviour, IPooledObject
     [SerializeField] private poolTags _tag;
     public poolTags Tag { get { return _tag; } }
 
-    [SerializeField] private poolTags weaponTag;
+    [SerializeField] private weaponTag weaponTag;
     [SerializeField] private float weaponTime;
 
     private void OnCollisionEnter(Collision collision)
