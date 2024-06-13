@@ -8,10 +8,14 @@ public class PlayerHealth : HealthController, IHealable
     // Sounds
     [SerializeField] private AudioClip gettingHitSoundClip;
 
+    private int initialHealth;
+
     // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         Killed += LevelManager.Instance.EndGame;
+        initialHealth = GetMaxHealth();
     }
 
     public override void Damage(int damage)
@@ -36,5 +40,17 @@ public class PlayerHealth : HealthController, IHealable
     {
         AddHealth(healAmount);
         playerHUD.SetHealth(Health);
+    }
+
+    public void IncreaseHealth(int amount)
+    {
+        SetMaxHealth(Health + amount);
+        SetHealthToMax();
+    }
+
+    public void ResetStats()
+    {
+        SetMaxHealth(initialHealth);
+        SetHealthToMax();
     }
 }

@@ -10,7 +10,7 @@ public class HealthController : MonoBehaviour, IDamagable
     [SerializeField] private int maxHealth;
     [field: SerializeField] public int Health { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         SetHealthToMax();
     }
@@ -23,6 +23,16 @@ public class HealthController : MonoBehaviour, IDamagable
     public virtual void SetHealthToMax()
     {
         SetHealth(maxHealth);
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public void SetMaxHealth(int value)
+    {
+        maxHealth = value;
     }
 
     protected void AddHealth(int healthAmount)

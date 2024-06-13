@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class UI_InputWindow : MonoBehaviour
 {
-    private Button okButton;
-    private Button cancelButton;
-    private TMP_Text titleText;
     private TMP_InputField inputField;
     [SerializeField] private HighscoreTable highscoreTable;
 
@@ -17,9 +14,6 @@ public class UI_InputWindow : MonoBehaviour
 
     private void Awake()
     {
-        okButton = transform.Find("OKButton").GetComponent<Button>();
-        cancelButton = transform.Find("CancelButton").GetComponent<Button>();
-        titleText = transform.Find("TitleText").GetComponent<TMP_Text>();
         inputField = transform.Find("InputField").GetComponent<TMP_InputField>();
         
         inputField.characterLimit = characterLimit;

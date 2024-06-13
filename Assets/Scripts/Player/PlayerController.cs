@@ -12,14 +12,19 @@ public class PlayerController : MonoBehaviour
         gameObject.SetActive(true);
         HUDController.SetActive(true);
 
-        healthController.SetHealthToMax();
+        ResetStats();
     }
 
     public void DisablePlayer()
     {
         gameObject.SetActive(false);
         HUDController.SetActive(false);
-        movementController.ResetActualSpeed();
+    }
+
+    private void ResetStats()
+    {
+        healthController.ResetStats();
+        movementController.ResetStats();
     }
 
     public void Freeze(bool isFreeze)
@@ -30,6 +35,11 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         weaponController.Shoot();
+    }
+
+    public void UpgradeHealth(int value) 
+    { 
+        healthController.IncreaseHealth(value);
     }
 
 }

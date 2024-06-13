@@ -4,6 +4,8 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
+    // Find this object instead of setting them up
+    // Set up only UI object transform
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text scoreOnComboText;
@@ -65,8 +67,8 @@ public class UIController : MonoBehaviour
         healthSlider.gameObject.SetActive(isActive);
         waveText.gameObject.SetActive(isActive);
         asteroidsAmountText.gameObject.SetActive(isActive);
-        //comboText.gameObject.SetActive(isActive);
-        //scoreOnComboText.gameObject.SetActive(isActive);
+        comboText.gameObject.SetActive(isActive);
+        scoreOnComboText.gameObject.SetActive(isActive);
     }
 
 

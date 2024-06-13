@@ -103,6 +103,11 @@ public class LevelManager : Singleton<LevelManager>
         enemySpawner.SpawnEnemy();
     }
 
+    public PlayerController GetPlayerController()
+    {
+        return playerController;
+    }
+
     public Vector3 GetPlayerPosition()
     {
         return playerController.transform.position;

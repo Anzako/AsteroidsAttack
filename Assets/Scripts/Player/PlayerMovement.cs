@@ -94,4 +94,10 @@ public class PlayerMovement : MovementController
         isFreezed = isFreeze;
     }
 
+    public void ResetStats()
+    {
+        ResetActualSpeed();
+        currentInputVector = Vector2.zero;
+    }
+
 }

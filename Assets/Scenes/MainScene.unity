@@ -155,6 +155,10 @@ PrefabInstance:
       propertyPath: asteroidsAmountText
       value: 
       objectReference: {fileID: 780400218}
+    - target: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: maxHealth
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8085797481541249609, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -693,6 +697,23 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &1520090563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 271594138845195111, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
+  m_PrefabInstance: {fileID: 3514016353767676148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1520090566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520090563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4c9848716fcea409dd5b48a2cdc008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1530830076 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3650137960695365155, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
@@ -1343,6 +1364,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6966647689762023931, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7005260318623301936, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1629,7 +1654,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 271594138845195111, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1520090566}
   m_SourcePrefab: {fileID: 100100000, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
 --- !u!1001 &4124878995237087304
 PrefabInstance:

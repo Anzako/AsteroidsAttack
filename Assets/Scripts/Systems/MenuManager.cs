@@ -34,7 +34,7 @@ public class MenuManager : Singleton<MenuManager>
 
         // End game menu
         endGameUI.SetActive(state == GameState.EndGame);
-        scoreText.gameObject.SetActive(state == GameState.EndGame);
+
         if (state == GameState.EndGame) 
         {
             ScoreManager.Instance.ResetCombo();
