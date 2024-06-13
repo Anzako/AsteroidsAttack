@@ -77,8 +77,8 @@ public class LevelManager : Singleton<LevelManager>
         enemySpawner.DestroyAllEnemies();
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.playerProjectile);
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.rocket);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.laser);
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.healUpItem);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.laserItem);
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.rocketItem);
         ScoreManager.Instance.ResetScore();
     }

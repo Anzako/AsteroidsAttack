@@ -7,6 +7,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
     private AsteroidsSpawner spawner;
     [SerializeField] private AsteroidsHealth healthController;
     [SerializeField] private DropItems dropItems;
+    [SerializeField] private poolTags particleTag;
 
     public int damageAmount;
     public int score;
@@ -38,6 +39,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
         if (damagable != null)
         {
             damagable.Damage(damageAmount);
+            ObjectPooler.Instance.SpawnObject(particleTag, transform.position, transform.rotation);
             Destroy();
         }
     }
@@ -63,7 +65,6 @@ public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
 
     protected virtual void Destroy()
     {
-        // Here spawn particle system
         Drop();
         AsteroidsSpawner.Instance.OnAsteroidDestroy();
         ObjectPooler.Instance.ReturnObjectToPool(this.gameObject);

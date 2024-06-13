@@ -17,6 +17,7 @@ public class Laser : MonoBehaviour, IPooledObject
     public int damageAmount = 2;
     [SerializeField] private LayerMask enemyMask;
     private List<IDamagable> damagedObjects;
+    [SerializeField] private poolTags particleTag;
 
     // Sounds
     [SerializeField] private AudioClip hitSoundClip;
@@ -87,6 +88,7 @@ public class Laser : MonoBehaviour, IPooledObject
                 damagedObjects.Add(damagable);
                 SoundFXManager.Instance.PlaySoundFXClip(hitSoundClip, transform, 1f);
                 damagable.Damage(damageAmount);
+                ObjectPooler.Instance.SpawnObject(particleTag, hit.collider.transform.position, hit.collider.transform.rotation);
             }
         }
     }

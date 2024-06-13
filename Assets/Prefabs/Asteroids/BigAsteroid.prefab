@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthController: {fileID: 4260933094689136237}
   dropItems: {fileID: 4089710259088589386}
+  particleTag: 6
   damageAmount: 5
   score: 5
   _tag: 2

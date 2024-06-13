@@ -155,6 +155,10 @@ PrefabInstance:
       propertyPath: asteroidsAmountText
       value: 
       objectReference: {fileID: 1785772404}
+    - target: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8085797481541249609, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -793,63 +797,6 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
---- !u!1001 &1514434957
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1534234561323530830, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_Name
-      value: UFO
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162117705239404788, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
 --- !u!1 &1551930658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,6 +1475,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPooler
       objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.size
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 3760291266479619236, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1603,7 +1554,7 @@ PrefabInstance:
       objectReference: {fileID: 654914600}
     - target: {fileID: 4077314485361388170, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
       propertyPath: spawnAsteroids
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4077314485361388170, guid: 0d39d7154452a594eae9fb8d17b4c23f, type: 3}
       propertyPath: playerController
@@ -1829,4 +1780,3 @@ SceneRoots:
   - {fileID: 2083742929}
   - {fileID: 1007361073}
   - {fileID: 544646906}
-  - {fileID: 1514434957}

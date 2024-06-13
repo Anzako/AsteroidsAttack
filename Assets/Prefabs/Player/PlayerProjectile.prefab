@@ -76,7 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToDestroy: 5
   damageAmount: 2
-  particleTag: 6
+  particleTag: 8
   hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
   projectileShootSoundClip: {fileID: 8300000, guid: 77b96b6cb0ef6374993c092679fc20e8, type: 3}
   _tag: 7
@@ -275,7 +275,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.12190771, b: 1, a: 1}
+      key0: {r: 0, g: 0.47058824, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

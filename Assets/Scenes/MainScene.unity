@@ -1372,6 +1372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPooler
       objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.size
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3760291266479619236, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

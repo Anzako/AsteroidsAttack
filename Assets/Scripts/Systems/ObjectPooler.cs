@@ -119,7 +119,7 @@ public enum poolTags
     healUpAsteroid,
     enemy,
     enemyProjectile,
-    enemyProjectileParticle,
+    playerHitParticle,
     playerProjectile,
     playerProjectileParticle,
     rocket,
