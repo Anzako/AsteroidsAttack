@@ -7,8 +7,8 @@ public class LevelManager : Singleton<LevelManager>
     private AsteroidsSpawner asteroidsSpawner;
     private EnemySpawner enemySpawner;
 
-    [SerializeField] private PlayerController playerController;
-    [SerializeField] private UIController HUDController;
+    private PlayerController playerController;
+    private UIController playerHUD;
 
     private bool gameStarted = false;
     private int actualRound = 0;
@@ -25,6 +25,9 @@ public class LevelManager : Singleton<LevelManager>
         asteroidsSpawner = AsteroidsSpawner.Instance;
         gameManager = GameManager.Instance;
         enemySpawner = EnemySpawner.Instance;
+
+        playerController = GameManager.GetPlayerController();
+        playerHUD = playerController.GetComponent<UIController>();
     }
 
     private void Update()
@@ -62,8 +65,8 @@ public class LevelManager : Singleton<LevelManager>
         {
             asteroidsSpawner.SpawnAsteroids((actualRound + 1) * 2);
         }
-        
-        HUDController.SetWave(round + 1);
+
+        playerHUD.SetWave(round + 1);
     }
 
     public void RestartGame()

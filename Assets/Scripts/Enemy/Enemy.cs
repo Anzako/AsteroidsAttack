@@ -5,7 +5,6 @@ public class Enemy : MonoBehaviour, IPooledObject
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private EnemyMovement movementController;
     [SerializeField] private EnemyHealth healthController;
-    private Spawner spawner;
 
     // Shooting
     private float lastShootTime = 0;
@@ -28,7 +27,6 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     private void Start()
     {
-        spawner = Spawner.Instance;
         healthController.Killed += Destroy;
     }
 
@@ -62,7 +60,7 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     public void ShootProjectile()
     {
-        spawner.SpawnPoolObjectOnPosition(poolTags.enemyProjectile, projectileSpawnPoint.position, transform.rotation);
+        Spawner.SpawnPoolObjectOnPosition(poolTags.enemyProjectile, projectileSpawnPoint.position, transform.rotation);
         lastShootTime = 0;
     }
 

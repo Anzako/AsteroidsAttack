@@ -14,9 +14,14 @@ public class PlayerHealth : HealthController, IHealable
     protected override void Awake()
     {
         base.Awake();
-        Killed += LevelManager.Instance.EndGame;
         initialHealth = GetMaxHealth();
     }
+
+    private void Start()
+    {
+        Killed += LevelManager.Instance.EndGame;
+    }
+
 
     public override void Damage(int damage)
     {

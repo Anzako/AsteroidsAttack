@@ -75,7 +75,3 @@ MonoBehaviour:
     prefab: {fileID: 3571121717751638878, guid: c66250a5102a644429793c609f430fb2, type: 3}
   - poolTag: 14
     prefab: {fileID: 3571121717751638878, guid: bf240067ba9a444499d6d680dd662f4c, type: 3}
-  - poolTag: 15
-    prefab: {fileID: 9176677845774896716, guid: 4d0bd2ee6c91afa43be6fc9df2984a50, type: 3}
-  - poolTag: 14
-    prefab: {fileID: 3571121717751638878, guid: bf240067ba9a444499d6d680dd662f4c, type: 3}

@@ -45,7 +45,7 @@ public class UI_InputWindow : MonoBehaviour
         string text = inputField.text;
         if (!string.IsNullOrEmpty(text))
         {
-            highscoreTable.AddHighscoreEntry(ScoreManager.Instance.GetScore(), text);
+            highscoreTable.AddHighscoreEntry(ScoreManager.Instance.GetEndGameScore(), text);
         }
         
         Hide();

@@ -12,10 +12,13 @@ public class MenuManager : Singleton<MenuManager>
 
     // End game menu
     [SerializeField] private GameObject endGameUI;
-    [SerializeField] private TMP_Text scoreText;
 
-    private void Awake()
+    // Upgrade menu
+    [SerializeField] private GameObject upgradeMenu;
+
+    protected override void Awake()
     {
+        base.Awake();
         GameManager.OnStateChanged += GameManagerOnStateChanged;
     }
 
@@ -35,11 +38,8 @@ public class MenuManager : Singleton<MenuManager>
         // End game menu
         endGameUI.SetActive(state == GameState.EndGame);
 
-        if (state == GameState.EndGame) 
-        {
-            ScoreManager.Instance.ResetCombo();
-            SetScore();
-        }
+        // Upgrade menu
+        upgradeMenu.gameObject.SetActive(state == GameState.UpgradeMenu);
     }
 
     public void StartPressed()
@@ -65,11 +65,6 @@ public class MenuManager : Singleton<MenuManager>
     public void QuitButtonPressed()
     {
         Application.Quit();
-    }
-
-    public void SetScore()
-    {
-        scoreText.text = "Your Score: " + ScoreManager.Instance.GetScore();
     }
 
 }

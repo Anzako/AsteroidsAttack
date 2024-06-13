@@ -1,11 +1,14 @@
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : Singleton<ScoreManager>
 {
-    [SerializeField] private UIController UIController;
+    private UIController playerHUD;
 
-    public int Score;
+    [SerializeField] private TMP_Text scoreText;
+    public int score;
     private int scoreOnCombo;
+    private int endGameScore;
 
     public float comboDuration = 4f;
     public float comboDecayRate = 1f;
@@ -14,7 +17,30 @@ public class ScoreManager : Singleton<ScoreManager>
     public float comboTimer = 0f;
     private int enemiesKilled = 0;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        GameManager.OnStateChanged += GameManagerOnStateChanged;
+    }
 
+    private void Start()
+    {
+        playerHUD = GameManager.GetPlayerController().GetComponent<UIController>();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnStateChanged -= GameManagerOnStateChanged;
+    }
+
+    private void GameManagerOnStateChanged(GameState state)
+    {
+        if (state == GameState.EndGame)
+        {
+            ResetCombo();
+            SetEndGameScore();
+        }
+    }
 
     private void Update()
     {
@@ -26,13 +52,12 @@ public class ScoreManager : Singleton<ScoreManager>
                 ResetCombo();
             }
         }
-
     }
 
     public void AddScore(int score)
     {
         scoreOnCombo += score * currentCombo;
-        UIController.SetScoreOnCombo(scoreOnCombo);
+        playerHUD.SetScoreOnCombo(scoreOnCombo);
         
         enemiesKilled++;
         comboTimer = comboDuration;
@@ -52,13 +77,13 @@ public class ScoreManager : Singleton<ScoreManager>
         comboDecayRate = 1f;
 
         // Adding combo score to overall score
-        Score += scoreOnCombo;
+        score += scoreOnCombo;
         scoreOnCombo = 0;
 
         // Update UI
-        UIController.SetScore(Score);
-        UIController.SetScoreOnCombo(scoreOnCombo);
-        UIController.SetCombo(currentCombo);
+        playerHUD.SetScore(score);
+        playerHUD.SetScoreOnCombo(scoreOnCombo);
+        playerHUD.SetCombo(currentCombo);
     }
 
     private void IncreaseCombo()
@@ -66,20 +91,26 @@ public class ScoreManager : Singleton<ScoreManager>
         currentCombo += 1;
         comboDecayRate = 1f + (currentCombo - 2) / 10f;
         enemiesKilled = 0;
-        UIController.SetCombo(currentCombo);
+        playerHUD.SetCombo(currentCombo);
     }
 
     public void ResetScore()
     {
         ResetCombo();
 
-        Score = 0;
-        UIController.SetScore(Score);
+        score = 0;
+        playerHUD.SetScore(score);
     }
 
-    public int GetScore()
+    public int GetEndGameScore()
     {
-        return Score;
+        return endGameScore;
+    }
+
+    public void SetEndGameScore()
+    {
+        endGameScore = score;
+        scoreText.text = "Your Score: " + endGameScore;
     }
 
 }

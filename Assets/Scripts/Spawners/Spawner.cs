@@ -1,25 +1,13 @@
 using UnityEngine;
 
-public class Spawner : Singleton<Spawner>
+public class Spawner
 {
-    private ObjectPooler pooler;
-    private MetaBalls metaballs;
-    [SerializeField] private Transform playerTransform;
-
-    private void Start()
+    public static GameObject SpawnPoolObjectOnPosition(poolTags objectTag, Vector3 position, Quaternion rotation)
     {
-        pooler = ObjectPooler.Instance;
-        metaballs = MetaBalls.Instance;
+        return ObjectPooler.Instance.SpawnObject(objectTag, position, rotation);
     }
 
-    // Pool Objects
-    #region Pool Objects
-    public GameObject SpawnPoolObjectOnPosition(poolTags objectTag, Vector3 position, Quaternion rotation)
-    {
-        return pooler.SpawnObject(objectTag, position, rotation);
-    }
-
-    public GameObject SpawnAwayFromPlayerView(poolTags objectTag, int maxAttempts = 20)
+    public static GameObject SpawnAwayFromPlayerView(poolTags objectTag, int maxAttempts = 20)
     {
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
@@ -28,10 +16,11 @@ public class Spawner : Singleton<Spawner>
             Vector3 forceVector = MetaBalls.CalculateMetaballsNormal(spawnPosition);
 
             // Check if the spawn position is away from the player's view
+            Transform playerTransform = GameManager.GetPlayerController().transform;
             if (Vector3.Dot(forceVector, -playerTransform.up) >= 0)
             {
-                Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - metaballs.Position(randomMetaballID));
-                GameObject obj = pooler.SpawnObject(objectTag, spawnPosition, rotation);
+                Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - MetaBalls.Instance.Position(randomMetaballID));
+                GameObject obj = ObjectPooler.Instance.SpawnObject(objectTag, spawnPosition, rotation);
                 return obj;
             }
         }
@@ -39,19 +28,6 @@ public class Spawner : Singleton<Spawner>
         Debug.LogWarning("Cannot find position away from player view.");
         return null;
     }
-
-    #endregion
-
-    // Instance Objects
-    #region Objects
-    public GameObject SpawnGameObjectOnMetaball(GameObject spawnObject, int metaballID)
-    {
-        Vector3 spawnPosition = RandomPositionOnMetaball(metaballID);
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - metaballs.Position(metaballID));
-
-        return Instantiate(spawnObject, spawnPosition, rotation, gameObject.transform);
-    }
-    #endregion
 
     public static Vector3 RandomPositionOnMetaball(int metaballID, int maxAttempts = 10)
     {

@@ -4,17 +4,23 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    // Find this object instead of setting them up
-    // Set up only UI object transform
-    [SerializeField] private Slider healthSlider;
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text scoreOnComboText;
-    [SerializeField] private TMP_Text comboText;
-    [SerializeField] private TMP_Text waveText;
-    [SerializeField] private TMP_Text asteroidsAmountText;
+    [SerializeField] private GameObject userInterface;
+    private Slider healthSlider;
+    private TMP_Text scoreText;
+    private TMP_Text scoreOnComboText;
+    private TMP_Text comboText;
+    private TMP_Text waveText;
+    private TMP_Text asteroidsAmountText;
 
-    private void Start()
+    private void Awake()
     {
+        healthSlider = userInterface.transform.Find("HealthBar").GetComponent<Slider>();
+        scoreText = userInterface.transform.Find("Score").GetComponent<TMP_Text>();
+        scoreOnComboText = userInterface.transform.Find("ScoreOnCombo").GetComponent<TMP_Text>();
+        comboText = userInterface.transform.Find("Combo").GetComponent<TMP_Text>();
+        waveText = userInterface.transform.Find("Wave").GetComponent<TMP_Text>();
+        asteroidsAmountText = userInterface.transform.Find("AsteroidsLeft").GetComponent<TMP_Text>();
+
         scoreText.text = "Score: 0";
     }
 
@@ -63,12 +69,7 @@ public class UIController : MonoBehaviour
 
     public void SetActive(bool isActive) 
     {
-        scoreText.gameObject.SetActive(isActive);
-        healthSlider.gameObject.SetActive(isActive);
-        waveText.gameObject.SetActive(isActive);
-        asteroidsAmountText.gameObject.SetActive(isActive);
-        comboText.gameObject.SetActive(isActive);
-        scoreOnComboText.gameObject.SetActive(isActive);
+        userInterface.SetActive(isActive);
     }
 
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private LevelManager levelManager;
+    private LevelManager levelManager;
     [SerializeField] private Camera menuCamera;
     [SerializeField] private PlayerController playerController;
 
@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         ChangeState(GameState.Menu);
+        levelManager = LevelManager.Instance;
         OnStateChanged += GameManagerOnStateChanged;
     }
 
@@ -49,6 +50,9 @@ public class GameManager : Singleton<GameManager>
                 break;
             case GameState.InGameMenu:
                 HandleInGameMenu();
+                break;
+            case GameState.UpgradeMenu:
+                HandleUpgradeMenu();
                 break;
         }
 
@@ -89,6 +93,12 @@ public class GameManager : Singleton<GameManager>
         FreezeGame();
     }
 
+    private void HandleUpgradeMenu()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        FreezeGame();
+    }
+
     public void FreezeGame()
     {
         Time.timeScale = 0;
@@ -99,6 +109,11 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1;
         playerController.Freeze(false);
+    }
+
+    public static PlayerController GetPlayerController()
+    {
+        return Instance.playerController;
     }
 }
 
@@ -111,5 +126,6 @@ public enum GameState
     StartGame = 1,
     Game = 2,
     InGameMenu = 3,
-    EndGame = 4,
+    UpgradeMenu = 4,
+    EndGame = 5,
 }

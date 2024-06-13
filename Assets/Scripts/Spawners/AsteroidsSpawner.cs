@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 {
-    [SerializeField] private PlayerController pController;
-    [SerializeField] private Camera pCamera;
-    private Spawner spawner;
+    private PlayerController pController;
     private ObjectPooler pooler;
 
     private int asteroidsAmount = 0;
@@ -14,8 +12,8 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 
     private void Start()
     {
-        spawner = Spawner.Instance;
         pooler = ObjectPooler.Instance;
+        pController = GameManager.GetPlayerController();
 
         asteroidsTags = new List<poolTags>
         {
@@ -43,10 +41,9 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     private void SpawnRandomAsteroid()
     {
         poolTags randomAsteroidSize = asteroidsTags[Random.Range(0, asteroidsTags.Count)];
-        spawner.SpawnAwayFromPlayerView(randomAsteroidSize);
+        Spawner.SpawnAwayFromPlayerView(randomAsteroidSize);
 
         SetAsteroidsAmount(asteroidsAmount + 1);
-        //Spawner.Instance.SpawnAwayFromPlayerView(randomAsteroidSize, pCamera.transform.forward));
     }
 
     // Spawn asteroid close to destroyed one
@@ -64,7 +61,7 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 
     public GameObject SpawnAsteroid(poolTags size, Vector3 position, Quaternion rotation)
     {
-        GameObject asteroid = spawner.SpawnPoolObjectOnPosition(size, position, rotation);
+        GameObject asteroid = Spawner.SpawnPoolObjectOnPosition(size, position, rotation);
         SetAsteroidsAmount(asteroidsAmount + 1);
 
         return asteroid;
