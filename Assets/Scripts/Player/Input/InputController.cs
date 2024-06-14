@@ -9,6 +9,7 @@ public class InputController : MonoBehaviour
 
     private PlayerInput playerInput;
     private InputAction moveAction;
+    private InputAction shootAction;
 
     public float mousePos;
     [SerializeField] private float sensitivity;
@@ -19,6 +20,7 @@ public class InputController : MonoBehaviour
         movementController = GetComponent<PlayerMovement>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Movement"];
+        shootAction = playerInput.actions["Shoot"];
     }
 
     private void Start()
@@ -33,12 +35,14 @@ public class InputController : MonoBehaviour
 
         mousePos = Input.GetAxis("Mouse X") * sensitivity;
         movementController.SetMovementDirection(moveAction.ReadValue<Vector2>());
+
+        //if (shootAction.ReadValue<>)
     }
 
     public void OnLeftClick(InputAction.CallbackContext context)
     {
         if (gameManager.State != GameState.Game) return;
-        
+
         if (context.performed)
         {
             playerController.Shoot();

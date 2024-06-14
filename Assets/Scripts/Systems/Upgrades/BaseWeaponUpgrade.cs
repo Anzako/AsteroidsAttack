@@ -9,16 +9,17 @@ public class BaseWeaponUpgrade : UpgradeEntity
         get { return "Base weapon upgrade"; }
     }
 
-    private int level = 1;
+    private int level = 0;
 
     public override void UpgradeFunction()
     {
-        // do sth
-        Debug.Log("Base weapon upgrade");
+        GameManager.GetPlayerController().GetComponent<WeaponController>().UpgradeBasicWeapon();
 
-        // upgrade level up
         level += 1;
-        exhausted = true;
+        if (level >= 2)
+        {
+            exhausted = true;
+        }
 
         OnUpgradeChoice?.Invoke(this);
     }

@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0f1869626860740a1243600ea0ad55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 5
+  timeToDestroy: 3
   damageAmount: 2
   particleTag: 8
   hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}

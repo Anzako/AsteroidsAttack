@@ -49,7 +49,7 @@ public class UpgradesManager : MonoBehaviour
         upgrade3.OnUpgradeChoice += HandleUpgradeChoice;
         upgrades.Add(upgrade3);
 
-        UpgradeEntity upgrade4 = new BaseWeaponUpgrade();
+        UpgradeEntity upgrade4 = new ShootingSpeedUpgrade();
         upgrade4.OnUpgradeChoice += HandleUpgradeChoice;
         upgrades.Add(upgrade4);
     }

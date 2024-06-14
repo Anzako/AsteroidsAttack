@@ -8,8 +8,9 @@ public class WeaponController : MonoBehaviour
 {
     // Weapons
     private weaponTag actualWeapon = weaponTag.basicWeapon;
-
     [SerializeField] private GameObject laser;
+
+    private int basicWeaponLevel = 1;
 
     private float bonusWeaponLifeTime = 10f;
     private float bonusWeaponElapsedTime = 0f;
@@ -19,6 +20,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPoint;
 
     private float lastShootTime = 0;
+    private float initialTimeToShoot = 0.5f;
     public float timeToShoot = 0.5f;
 
     // Animation
@@ -71,7 +73,31 @@ public class WeaponController : MonoBehaviour
 
     private void ShootBasicWeapon()
     {
-        ObjectPooler.Instance.SpawnObject(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+        if (basicWeaponLevel == 1) 
+        {
+            Spawner.SpawnPoolObjectOnPosition(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+        } else if (basicWeaponLevel == 2)
+        {
+            float angle = 4;
+            GameObject projectile1 = Spawner.SpawnPoolObjectOnPosition(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+            projectile1.transform.RotateAround(projectile1.transform.position, projectile1.transform.up, angle);
+            GameObject projectile2 = Spawner.SpawnPoolObjectOnPosition(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+            projectile2.transform.RotateAround(projectile2.transform.position, projectile2.transform.up, -angle);
+        } else if (basicWeaponLevel == 3)
+        {
+            Spawner.SpawnPoolObjectOnPosition(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+
+            float angle = 5;
+            GameObject projectile1 = Spawner.SpawnPoolObjectOnPosition(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+            projectile1.transform.RotateAround(projectile1.transform.position, projectile1.transform.up, angle);
+            GameObject projectile2 = Spawner.SpawnPoolObjectOnPosition(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+            projectile2.transform.RotateAround(projectile2.transform.position, projectile2.transform.up, -angle);
+        } else
+        {
+            Spawner.SpawnPoolObjectOnPosition(poolTags.playerProjectile, projectileSpawnPoint.position, transform.rotation);
+            Debug.Log("Basic weapon error");
+        }
+                
     }
 
     private void ShootLaser()
@@ -89,6 +115,8 @@ public class WeaponController : MonoBehaviour
         bonusWeaponEquiped = false;
         bonusWeaponElapsedTime = 0f;
         actualWeapon = weaponTag.basicWeapon;
+        basicWeaponLevel = 1;
+        timeToShoot = initialTimeToShoot;
     }
 
     public void ChangeWeapon(weaponTag weaponTag)
@@ -96,6 +124,16 @@ public class WeaponController : MonoBehaviour
         actualWeapon = weaponTag;
         bonusWeaponElapsedTime = 0f;
         bonusWeaponEquiped = true;
+    }
+
+    public void UpgradeBasicWeapon()
+    {
+        basicWeaponLevel += 1;
+    }
+
+    public void IncreaseShootingSpeed(float time)
+    {
+        timeToShoot -= time;
     }
 
 }
