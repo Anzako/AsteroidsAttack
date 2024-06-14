@@ -20,7 +20,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPoint;
 
     private float lastShootTime = 0;
-    private float initialTimeToShoot = 0.5f;
+    private float initialTimeToShoot;
     public float timeToShoot = 0.5f;
 
     // Animation
@@ -29,6 +29,7 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         pAnimator = GetComponentInChildren<Animator>();
+        initialTimeToShoot = timeToShoot;
     }
 
     private void Update()

@@ -8,8 +8,9 @@ public class UI_InputWindow : MonoBehaviour
 {
     private TMP_InputField inputField;
     [SerializeField] private HighscoreTable highscoreTable;
+    [SerializeField] private GameObject submitButton;
 
-    private string validCharacters = "ABCDEFGHIJKLMNOPRSTUWYZXVQ1234567890";
+    private string validCharacters = "abcdefghijklmnoprstuwyzxvqABCDEFGHIJKLMNOPRSTUWYZXVQ1234567890";
     private int characterLimit = 8;
 
     private void Awake()
@@ -28,6 +29,7 @@ public class UI_InputWindow : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
+        inputField.text = "";
     }
 
     private void Hide()
@@ -46,6 +48,7 @@ public class UI_InputWindow : MonoBehaviour
         if (!string.IsNullOrEmpty(text))
         {
             highscoreTable.AddHighscoreEntry(ScoreManager.Instance.GetEndGameScore(), text);
+            submitButton.SetActive(false);
         }
         
         Hide();

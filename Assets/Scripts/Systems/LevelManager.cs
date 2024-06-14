@@ -63,8 +63,8 @@ public class LevelManager : Singleton<LevelManager>
 
         if (spawnAsteroids)
         {
-            //asteroidsSpawner.SpawnAsteroids((actualRound + 1) * 2);
-            asteroidsSpawner.SpawnAsteroids(1);
+            asteroidsSpawner.SpawnAsteroids((actualRound + 1) * 2);
+            //asteroidsSpawner.SpawnAsteroids(1);
         }
 
         playerHUD.SetWave(round + 1);
@@ -91,7 +91,11 @@ public class LevelManager : Singleton<LevelManager>
     {
         actualRound++;
 
-        gameManager.ChangeState(GameState.UpgradeMenu);
+        if (gameManager.State != GameState.EndGame)
+        {
+            gameManager.ChangeState(GameState.UpgradeMenu);
+        }
+        
         StartRound(actualRound);
     }
 

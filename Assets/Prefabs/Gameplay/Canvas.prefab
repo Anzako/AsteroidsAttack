@@ -3540,6 +3540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highscoreTable: {fileID: 6688953182519326429}
+  submitButton: {fileID: 1819888545370457521}
 --- !u!1 &4785308584696542713
 GameObject:
   m_ObjectHideFlags: 0

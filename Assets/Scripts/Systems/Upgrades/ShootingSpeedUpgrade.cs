@@ -10,7 +10,7 @@ public class ShootingSpeedUpgrade : UpgradeEntity
     }
 
     private int level = 0;
-    private float timeAmount = 0.05f;
+    private float timeAmount = 0.1f;
 
     public override void UpgradeFunction()
     {

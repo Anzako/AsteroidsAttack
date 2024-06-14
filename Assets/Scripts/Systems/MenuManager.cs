@@ -37,6 +37,7 @@ public class MenuManager : Singleton<MenuManager>
 
         // End game menu
         endGameUI.SetActive(state == GameState.EndGame);
+        endGameUI.transform.Find("SubmitButton").gameObject.SetActive(true);
 
         // Upgrade menu
         upgradeMenu.gameObject.SetActive(state == GameState.UpgradeMenu);
