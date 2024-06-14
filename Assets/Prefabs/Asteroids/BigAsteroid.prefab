@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   movementDirection: {x: 0, y: 1}
-  aboveGroundDistance: 0.3
+  aboveGroundDistance: 0.4
   rotationSpeed: 4
 --- !u!114 &8978048823640300672
 MonoBehaviour:
@@ -232,7 +232,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.7486968
+  m_Radius: 0.78
   m_Center: {x: -0.0076123774, y: 0.010276735, z: 0.019980878}
 --- !u!95 &4402710213546351130
 Animator:

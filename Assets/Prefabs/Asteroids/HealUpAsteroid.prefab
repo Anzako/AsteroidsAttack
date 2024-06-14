@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   movementDirection: {x: 0, y: 1}
-  aboveGroundDistance: 0.2
+  aboveGroundDistance: 0.3
   rotationSpeed: 4
 --- !u!114 &4260933094689136237
 MonoBehaviour:
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropableItems:
-  - dropableObject: 12
+  - dropableObject: 11
     droppingChance: 100
 --- !u!114 &8943950093217362736
 MonoBehaviour:
