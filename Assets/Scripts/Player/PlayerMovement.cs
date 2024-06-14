@@ -24,9 +24,8 @@ public class PlayerMovement : MovementController
     // Sounds
     [SerializeField] private AudioClip dashSoundClip;
 
-    protected override void Start()
+    private void Awake()
     {
-        base.Start();
         initialMoveSpeed = moveSpeed;
     }
 
@@ -73,7 +72,11 @@ public class PlayerMovement : MovementController
     {
         if (canDash)
         {
-            StartCoroutine(Dash());
+            if (movementDirection != Vector2.zero)
+            {
+                StartCoroutine(Dash());
+            }
+           
         }
     }
 

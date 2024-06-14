@@ -193,6 +193,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 463127082}
     m_Modifications:
+    - target: {fileID: 5372409946133155427, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: timeToShoot
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: waveText
       value: 

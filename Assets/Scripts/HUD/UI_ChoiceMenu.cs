@@ -10,8 +10,9 @@ public class UI_ChoiceMenu : Singleton<UI_ChoiceMenu>
     private Transform choiceButton2;
     private Transform choiceButton3;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         choiceButton1 = transform.Find("ChoiceButton1");
         choiceButton2 = transform.Find("ChoiceButton2");
         choiceButton3 = transform.Find("ChoiceButton3");

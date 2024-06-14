@@ -21,15 +21,19 @@ public class WeaponController : MonoBehaviour
 
     private float lastShootTime = 0;
     private float initialTimeToShoot;
-    public float timeToShoot = 0.5f;
+    [SerializeField] private float timeToShoot = 0.1f;
 
     // Animation
     private Animator pAnimator;
 
+    private void Awake()
+    {
+        initialTimeToShoot = timeToShoot;
+    }
+
     private void Start()
     {
         pAnimator = GetComponentInChildren<Animator>();
-        initialTimeToShoot = timeToShoot;
     }
 
     private void Update()
