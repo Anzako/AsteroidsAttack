@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour, IPooledObject
     private float lastShootTime = 0;
     public float timeToShoot = 2.0f;
     public float shootRange;
+    [SerializeField] private int projectileDamage = 2;
+    [SerializeField] private float shootinRange;
 
     public int score;
     public int crashDamage;
@@ -35,9 +37,14 @@ public class Enemy : MonoBehaviour, IPooledObject
     {
         lastShootTime += Time.deltaTime;
 
-        if (lastShootTime > timeToShoot && movementController.canShoot) 
+        Vector3 toPlayerVector = LevelManager.Instance.GetPlayerPosition() - transform.position;
+
+        if (toPlayerVector.magnitude < shootinRange)
         {
-            ShootProjectile();
+            if (lastShootTime > timeToShoot)
+            {
+                ShootProjectile();
+            }
         }
     }
 
@@ -60,7 +67,8 @@ public class Enemy : MonoBehaviour, IPooledObject
 
     public void ShootProjectile()
     {
-        Spawner.SpawnPoolObjectOnPosition(poolTags.enemyProjectile, projectileSpawnPoint.position, transform.rotation);
+        GameObject projectile = Spawner.SpawnPoolObjectOnPosition(poolTags.enemyProjectile, projectileSpawnPoint.position, transform.rotation);
+        projectile.GetComponent<Projectile>().damageAmount = projectileDamage;
         lastShootTime = 0;
     }
 

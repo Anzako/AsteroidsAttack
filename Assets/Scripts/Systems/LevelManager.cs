@@ -11,10 +11,16 @@ public class LevelManager : Singleton<LevelManager>
     private UIController playerHUD;
 
     private bool gameStarted = false;
-    private int actualRound = 0;
+    private int actualRound = 1;
     private float elapsedTime = 0;
     private float elapsedRoundTime = 0;
     public float timeToSpawnEnemy;
+
+    private int enemyLevel = 1;
+    private int spawningEnemiesAmount = 1;
+    private int asteroidsAmount;
+    private int asteroidsLevel;
+
 
     // Testing
     public bool spawnAsteroids = true;
@@ -48,26 +54,42 @@ public class LevelManager : Singleton<LevelManager>
     public void StartGame()
     {
         CleanScene();
-        MetaBalls.Instance.ResetMetaballsParameters();
+        
         gameStarted = true;
-        actualRound = 0;
+        actualRound = 1;
         elapsedTime = 0;
 
         playerSpawner.SpawnPlayer(); 
-        StartRound(actualRound);
+        StartRound();
     }
 
-    private void StartRound(int round)
+    private void StartRound()
     {
         elapsedRoundTime = 0;
 
         if (spawnAsteroids)
         {
-            asteroidsSpawner.SpawnAsteroids((actualRound + 1) * 2);
-            //asteroidsSpawner.SpawnAsteroids(1);
+            //asteroidsSpawner.SpawnAsteroids(asteroidsAmount);
+            asteroidsSpawner.SpawnAsteroids(1);
         }
 
-        playerHUD.SetWave(round + 1);
+        playerHUD.SetWave(actualRound);
+        OnRoundStart();
+    }
+
+    private void OnRoundStart()
+    {
+        asteroidsAmount = (actualRound + 1) * 2;
+        if (actualRound == 3)
+        {
+            spawningEnemiesAmount = 2;
+        }
+
+        if (actualRound == 5)
+        {
+            enemyLevel = 2;
+            spawningEnemiesAmount = 1;
+        }
     }
 
     public void RestartGame()
@@ -77,6 +99,10 @@ public class LevelManager : Singleton<LevelManager>
 
     public void CleanScene()
     {
+        spawningEnemiesAmount = 1;
+        enemyLevel = 1;
+
+        MetaBalls.Instance.ResetMetaballsParameters();
         asteroidsSpawner.DestroyAllAsteroids();
         enemySpawner.DestroyAllEnemies();
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.playerProjectile);
@@ -96,7 +122,7 @@ public class LevelManager : Singleton<LevelManager>
             gameManager.ChangeState(GameState.UpgradeMenu);
         }
         
-        StartRound(actualRound);
+        StartRound();
     }
 
     public void EndGame()
@@ -108,7 +134,10 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnEnemy()
     {
-        enemySpawner.SpawnEnemy();
+        for (int i = 0; i < spawningEnemiesAmount; i++)
+        {
+            enemySpawner.SpawnEnemy(enemyLevel);
+        }
     }
 
     public PlayerController GetPlayerController()

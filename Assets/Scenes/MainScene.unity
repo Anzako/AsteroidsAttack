@@ -2010,7 +2010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43324520514d52641997975107acae80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTag: 4
 --- !u!1 &1845715040 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5254253708479501047, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
@@ -2329,6 +2328,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: ObjectPooler
       objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[4].prefab
+      value: 
+      objectReference: {fileID: 1534234561323530830, guid: c2f34021e1e7e344989e131799ec146d, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[14].prefab
+      value: 
+      objectReference: {fileID: 1534234561323530830, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[15].prefab
+      value: 
+      objectReference: {fileID: 3571121717751638878, guid: bf240067ba9a444499d6d680dd662f4c, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[14].poolTag
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[15].poolTag
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 3760291266479619236, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2431,7 +2454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5c76031c2bf3541adeda1fcf656d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToSpawnEnemy: 15
+  timeToSpawnEnemy: 10
   spawnAsteroids: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -3,16 +3,24 @@ using static ObjectPooler;
 
 public class EnemySpawner : Singleton<EnemySpawner>
 {
-    [SerializeField] private poolTags enemyTag;
-
-    public void SpawnEnemy()
+    public void SpawnEnemy(int level)
     {
-        Spawner.SpawnAwayFromPlayerView(enemyTag);
+        switch (level)
+        {
+            case 1:
+                Spawner.SpawnAwayFromPlayerView(poolTags.ufoLVL1);
+                break;
+            case 2:
+                Spawner.SpawnAwayFromPlayerView(poolTags.ufoLVL2);
+                break;
+        }
+
     }
 
     public void DestroyAllEnemies()
     {
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.enemy);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.ufoLVL1);
+        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.ufoLVL2);
         ObjectPooler.Instance.ReturnObjectsToPool(poolTags.enemyProjectile);
     }
 

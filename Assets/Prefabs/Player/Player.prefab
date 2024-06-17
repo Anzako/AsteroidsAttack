@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.1, y: 0.12, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8085797481541249609}
@@ -636,12 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a785faf0dcc3bad4da0ad45444669598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
-  scoreText: {fileID: 0}
-  scoreOnComboText: {fileID: 0}
-  comboText: {fileID: 0}
-  waveText: {fileID: 0}
-  asteroidsAmountText: {fileID: 0}
+  userInterface: {fileID: 0}
 --- !u!114 &5691059295496667685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,10 +667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   movementDirection: {x: 0, y: 1}
-  aboveGroundDistance: 0.15
+  aboveGroundDistance: 0.2
   rotationSpeed: 2
   inputController: {fileID: 78416745642762997}
-  canDash: 0
   dashSpeed: 15
   dashingTime: 0.2
   dashingCooldown: 1

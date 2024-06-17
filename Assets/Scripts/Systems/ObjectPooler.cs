@@ -117,7 +117,7 @@ public enum poolTags
     mediumAsteroid = 1,
     bigAsteroid = 2,
     healUpAsteroid = 3,
-    enemy = 4,
+    ufoLVL1 = 4,
     enemyProjectile = 5,
     playerHitParticle = 6,
     playerProjectile = 7,
@@ -127,4 +127,5 @@ public enum poolTags
     healUpItem = 11,
     rocketItem = 12,
     laserItem = 13,
+    ufoLVL2 = 14,
 }

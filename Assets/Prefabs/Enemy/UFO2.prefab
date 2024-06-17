@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 840131932104424735}
   - component: {fileID: 5956442592941039845}
   m_Layer: 7
-  m_Name: UFO
+  m_Name: UFO2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,9 +54,11 @@ MonoBehaviour:
   healthController: {fileID: -6091714098982788124}
   timeToShoot: 2
   shootRange: 20
+  projectileDamage: 3
+  shootinRange: 8
   score: 5
   crashDamage: 4
-  _tag: 4
+  _tag: 14
 --- !u!114 &-6091714098982788124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e80724ade876248a174b7f7ed8ab2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 8
   <Health>k__BackingField: 0
 --- !u!114 &840131932104424735
 MonoBehaviour:
@@ -83,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c60a28a8248d6c468cefd0917913cd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 4
   movementDirection: {x: 0, y: 1}
   aboveGroundDistance: 0.3
   rotationSpeed: 2

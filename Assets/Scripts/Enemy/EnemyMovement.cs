@@ -7,7 +7,6 @@ public class EnemyMovement : MovementController
     [SerializeField] private float toMinPlayerDistance;
     [SerializeField] private float toMaxPlayerDistance;
     public bool isEnemyOnPlayerMetaball;
-    public bool canShoot;
 
     protected override void Start()
     {
@@ -43,20 +42,17 @@ public class EnemyMovement : MovementController
         if (toPlayerVector.magnitude <= toMinPlayerDistance)
         {
             movementDirection = new Vector2(0, -1);
-            canShoot = true;
         } 
         // Enemy moving to player
         else if (toPlayerVector.magnitude >= toMaxPlayerDistance)
         {
             movementDirection = new Vector2(0, 1);
-            canShoot = false;
         } 
         // Enemy in player range moving around player
         else
         {
             movementDirection = new Vector2(1, 0);
             actualSpeed = moveSpeed / 2;
-            canShoot = true;
         }
 
 
