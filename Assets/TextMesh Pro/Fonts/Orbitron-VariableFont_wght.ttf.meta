@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0bf3fb0b00fbfde46a6224751c79e12c
+guid: 8ff4a6e360593dc46aedea91ccfecb51
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Atures 500 PERSONAL USE ONLY
+  - Orbitron
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

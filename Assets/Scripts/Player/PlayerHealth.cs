@@ -27,7 +27,7 @@ public class PlayerHealth : HealthController, IHealable
     {
         base.Damage(damage);
         SoundFXManager.Instance.PlaySoundFXClip(gettingHitSoundClip, transform, 1f);
-        playerHUD.SetHealth(Health);
+        playerHUD.SetHealth(Health, maxHealth);
     }
 
     protected override void Kill()
@@ -38,13 +38,13 @@ public class PlayerHealth : HealthController, IHealable
     public override void SetHealthToMax()
     {
         base.SetHealthToMax();
-        playerHUD.SetMaxHealth(Health);
+        playerHUD.SetHealth(Health, maxHealth);
     }
 
     public void Heal(int healAmount)
     {
         AddHealth(healAmount);
-        playerHUD.SetHealth(Health);
+        playerHUD.SetHealth(Health, maxHealth);
     }
 
     public void IncreaseHealth(int amount)

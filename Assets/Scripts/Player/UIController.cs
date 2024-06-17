@@ -5,7 +5,7 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     [SerializeField] private GameObject userInterface;
-    private Slider healthSlider;
+    private Image healthSlider;
     private TMP_Text scoreText;
     private TMP_Text scoreOnComboText;
     private TMP_Text comboText;
@@ -14,41 +14,36 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        healthSlider = userInterface.transform.Find("HealthBar").GetComponent<Slider>();
+        healthSlider = userInterface.transform.Find("HealthBar").Find("Fill").GetComponent<Image>();
         scoreText = userInterface.transform.Find("Score").GetComponent<TMP_Text>();
         scoreOnComboText = userInterface.transform.Find("ScoreOnCombo").GetComponent<TMP_Text>();
         comboText = userInterface.transform.Find("Combo").GetComponent<TMP_Text>();
         waveText = userInterface.transform.Find("Wave").GetComponent<TMP_Text>();
         asteroidsAmountText = userInterface.transform.Find("AsteroidsLeft").GetComponent<TMP_Text>();
 
-        scoreText.text = "Score: 0";
+        scoreText.text = "0";
     }
 
     public void SetAsteroidsAmountText(int amount)
     {
-        asteroidsAmountText.text = "Asteroids: " + amount;
+        asteroidsAmountText.text = "Destroy: " + amount + " asteroids";
     }
 
     public void SetWave(int wave)
     {
-        waveText.text = "Wave " + wave;
+        waveText.text = "Wave: " + wave;
     }
 
-    public void SetMaxHealth(int health)
+    public void SetHealth(int health, int maxHealth)
     {
-        healthSlider.maxValue = health;
-        healthSlider.value = health;
-    }
-
-    public void SetHealth(int health)
-    {
-        healthSlider.value = health;
+        float healthValue = (float) health / maxHealth;
+        healthSlider.fillAmount = healthValue;
     }
 
 
     public void SetScore(int score)
     {
-        scoreText.text = GetScoreText(score);
+        scoreText.text = score.ToString();
     }
 
     public void SetScoreOnCombo(int score)
@@ -59,12 +54,6 @@ public class UIController : MonoBehaviour
     public void SetCombo(int value)
     {
         comboText.text = "x" + value;
-    }
-
-    private string GetScoreText(int score)
-    {
-        string text = "Score: " + score;
-        return text;
     }
 
     public void SetActive(bool isActive) 

@@ -7,7 +7,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     // Weapons
-    private weaponTag actualWeapon = weaponTag.basicWeapon;
+    private weaponTag actualWeapon;
     [SerializeField] private GameObject laser;
 
     private int basicWeaponLevel = 1;
