@@ -6,7 +6,7 @@ public class EnemyMovement : MovementController
     private LevelManager levelManager;
     [SerializeField] private float toMinPlayerDistance;
     [SerializeField] private float toMaxPlayerDistance;
-    public bool isEnemyOnPlayerMetaball;
+    private bool isEnemyOnPlayerMetaball;
 
     protected override void Start()
     {

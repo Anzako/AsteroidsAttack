@@ -18,3 +18,5 @@ MonoBehaviour:
   isEnemySpawning: 0
   spawningEnemiesAmount: 0
   timeToSpawnEnemy: 0
+  isBoss: 1
+  bossGameObject: {fileID: 1534234561323530830, guid: 6ba937b41f31600469b8a2c0c763fb04, type: 3}

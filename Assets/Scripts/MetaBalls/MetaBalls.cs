@@ -1,11 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MetaBalls : Singleton<MetaBalls>
 {
     const int threadGroupSize = 8;
     public ComputeShader metaballShader;
-    [SerializeField] public Metaball[] metaballs;
+    public List<Metaball> metaballs;
     public static int numberOfMetaballs;
+
+    public Transform bossBoxTransform;
+    public float bossBoxSize;
 
     public struct MetaballStruct
     {
@@ -18,27 +22,28 @@ public class MetaBalls : Singleton<MetaBalls>
 
     private void Start()
     {
-        numberOfMetaballs = metaballs.Length;
         CreateMetaballs();
-    }
-
-    private void CreateMetaballs()
-    {
-        metaballsStruct = new MetaballStruct[numberOfMetaballs];
-        for (int i = 0; i < numberOfMetaballs; i++)
-        {
-            metaballsStruct[i] = new MetaballStruct();
-        }
-
-        UpdateMetaballsStruct();
     }
 
     private void UpdateMetaballs()
     {
         foreach (Metaball metaball in metaballs)
         {
-            metaball.UpdatePosition();
+            metaball.UpdateMetaball();
         }
+        UpdateMetaballsStruct();
+    }
+
+    #region Marching Cubes Staff
+    private void CreateMetaballs()
+    {
+        numberOfMetaballs = metaballs.Count;
+        metaballsStruct = new MetaballStruct[numberOfMetaballs];
+        for (int i = 0; i < numberOfMetaballs; i++)
+        {
+            metaballsStruct[i] = new MetaballStruct();
+        }
+
         UpdateMetaballsStruct();
     }
 
@@ -77,6 +82,7 @@ public class MetaBalls : Singleton<MetaBalls>
         metaballShader.SetBuffer(0, "metaballs", metaballBuffer);
         metaballShader.SetInt("numberOfMetaballs", numberOfMetaballs);
     }
+    #endregion
 
     public Vector3 Position(int ID)
     {
@@ -94,6 +100,40 @@ public class MetaBalls : Singleton<MetaBalls>
         {
             metaball.ResetParameters();
         }
+    }
+
+    public void AddMetaball(Metaball metaball)
+    {
+        metaballs.Add(metaball);
+        CreateMetaballs();
+    }
+
+    // On Boss Start
+    public void MoveMetaballsToBossBox()
+    {
+        foreach (Metaball metaball in metaballs)
+        {
+            metaball.MoveToBox(bossBoxTransform.position, bossBoxSize);
+        }
+    }
+
+    // On Boss End
+    public void MoveMetaballsInMarchingBox()
+    {
+        foreach (Metaball metaball in metaballs)
+        {
+            metaball.MoveInMarchingBox();
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        
+        float center = bossBoxSize / 2;
+
+        Vector3 centerPos = bossBoxTransform.position + new Vector3(center, center, center);
+        Gizmos.DrawWireCube(centerPos, new Vector3(bossBoxSize, bossBoxSize, bossBoxSize));
     }
 
     #region Calculations

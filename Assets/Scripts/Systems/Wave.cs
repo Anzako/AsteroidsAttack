@@ -16,4 +16,6 @@ public class Wave : ScriptableObject
     public float timeToSpawnEnemy;
 
     // Boss
+    public bool isBoss;
+    public GameObject bossGameObject;
 }

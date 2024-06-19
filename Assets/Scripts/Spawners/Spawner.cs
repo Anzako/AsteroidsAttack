@@ -29,15 +29,54 @@ public class Spawner
         return null;
     }
 
+    public static SpawnPosition RandomSpawnPositionOnMetaball(Metaball metaball, int maxAttempts = 30)
+    {
+        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        {
+            Vector3 spawnPosition = RandomPositionOnMetaball(metaball);
+            Vector3 forceVector = MetaBalls.CalculateMetaballsNormal(spawnPosition);
+
+            // Check if the spawn position is away from the player's view
+            Transform playerTransform = GameManager.GetPlayerController().transform;
+            if (Vector3.Dot(forceVector, -playerTransform.up) >= 0)
+            {
+                Quaternion rotation = Quaternion.FromToRotation(Vector3.up, spawnPosition - metaball.Position);
+                return new SpawnPosition(spawnPosition, rotation);
+            }
+        }
+        
+        Debug.LogWarning("Cannot find position away from player view.");
+        return null;
+    }
+
     public static Vector3 RandomPositionOnMetaball(int metaballID, int maxAttempts = 10)
+    {
+        MetaBalls metaballs = MetaBalls.Instance;
+        float spawningDistance = 5f;
+
+        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        {
+            Vector3 spawnPosition = metaballs.Position(metaballID) + CalculateRandomVector3()
+                * (MetaBalls.CalculateActualRadius(metaballs.metaballs[metaballID]) + spawningDistance);
+
+            if (MetaBalls.CalculateScalarFieldValue(spawnPosition) < MarchingCubes.isoLevel)
+            {
+                return spawnPosition;
+            }
+        }
+
+        return Vector3.zero;
+    }
+
+    public static Vector3 RandomPositionOnMetaball(Metaball metaball, int maxAttempts = 10)
     {
         MetaBalls metaballs = MetaBalls.Instance;
         float spawningDistance = 3f;
 
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
-            Vector3 spawnPosition = metaballs.Position(metaballID) + CalculateRandomVector3()
-                * (MetaBalls.CalculateActualRadius(metaballs.metaballs[metaballID]) + spawningDistance);
+            Vector3 spawnPosition = metaball.Position + CalculateRandomVector3()
+                * (MetaBalls.CalculateActualRadius(metaball) + spawningDistance);
 
             if (MetaBalls.CalculateScalarFieldValue(spawnPosition) < MarchingCubes.isoLevel)
             {
@@ -57,4 +96,16 @@ public class Spawner
         return new Vector3(randX, randY, randZ).normalized;
     }
 
+}
+
+public class SpawnPosition
+{
+    public Vector3 position;
+    public Quaternion rotation;
+
+    public SpawnPosition(Vector3 position, Quaternion rotation)
+    {
+        this.position = position;
+        this.rotation = rotation;
+    }
 }

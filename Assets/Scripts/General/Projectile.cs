@@ -54,9 +54,14 @@ public class Projectile : MonoBehaviour, IPooledObject
 
     public void OnObjectSpawn()
     {
+        GetComponent<MovementController>().ResetActualSpeed();
         TrailRenderer trailRenderer = GetComponentInChildren<TrailRenderer>();
 
         if (trailRenderer != null) trailRenderer.Clear();
     }
 
+    public void SetSpeed(float speed)
+    {
+        GetComponent<MovementController>().SetSpeed(speed);
+    }
 }

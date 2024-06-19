@@ -85,4 +85,10 @@ public class MovementController : MonoBehaviour
         actualSpeed = moveSpeed;
     }
 
+    public void SetSpeed(float speed)
+    {
+        moveSpeed = speed;
+        actualSpeed = speed;
+    }
+
 }

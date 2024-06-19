@@ -25,6 +25,11 @@ public class LevelManager : Singleton<LevelManager>
     public int spawningEnemiesAmount = 1;
     public float timeToSpawnEnemy;
 
+    // Boss
+    [SerializeField] private Metaball boss1Metaball;
+    private bool isBossRound = false;
+    private bool bossSpawned = false;
+
     // Testing
     public bool spawnAsteroids = true;
 
@@ -46,6 +51,11 @@ public class LevelManager : Singleton<LevelManager>
         if (!gameStarted) return;
 
         elapsedTime += Time.deltaTime;
+
+        if (isBossRound && !bossSpawned)
+        {
+            SpawnBoss();
+        }
 
         // Check if enemy spawn in round
         if (!canEnemySpawn) return;
@@ -79,7 +89,8 @@ public class LevelManager : Singleton<LevelManager>
         {
             SetRoundVariables();
             SpawnAsteroids();
-        } else
+        } 
+        else
         {
             SpawnRandomAsteroids();
         }
@@ -93,17 +104,13 @@ public class LevelManager : Singleton<LevelManager>
         spawningEnemiesAmount = waves[actualRound - 1].spawningEnemiesAmount;
         timeToSpawnEnemy = waves[actualRound - 1].timeToSpawnEnemy;
     }
-
-    private void SpawnAsteroids()
+    
+    private void OnBossRound()
     {
-        asteroidsSpawner.SpawnSmallAsteroids(waves[actualRound - 1].smallAsteroidAmount);
-        asteroidsSpawner.SpawnMediumAsteroids(waves[actualRound - 1].mediumAsteroidAmount);
-        asteroidsSpawner.SpawnBigAsteroids(waves[actualRound - 1].bigAsteroidAmount);
-    }
-
-    private void SpawnRandomAsteroids()
-    {
-        asteroidsSpawner.SpawnRandomAsteroids(6);
+        MetaBalls.Instance.AddMetaball(boss1Metaball);
+        MetaBalls.Instance.MoveMetaballsToBossBox();
+        isBossRound = true;
+        bossSpawned = false;
     }
 
     public void RestartGame()
@@ -140,6 +147,18 @@ public class LevelManager : Singleton<LevelManager>
         StartRound();
     }
 
+    public void EndBossRound()
+    {
+        actualRound++;
+
+        if (gameManager.State != GameState.EndGame)
+        {
+            gameManager.ChangeState(GameState.UpgradeMenu);
+        }
+
+        StartRound();
+    }
+
     public void EndGame()
     {
         gameManager.ChangeState(GameState.EndGame);
@@ -147,6 +166,7 @@ public class LevelManager : Singleton<LevelManager>
     }
     #endregion
 
+    #region Spawning
     private void SpawnEnemy()
     {
         for (int i = 0; i < spawningEnemiesAmount; i++)
@@ -154,6 +174,38 @@ public class LevelManager : Singleton<LevelManager>
             enemySpawner.SpawnEnemy(enemyLevel);
         }
     }
+
+    private void SpawnBoss()
+    {
+        if (boss1Metaball.IsInsideMarchingBox())
+        {
+            Debug.Log("BOSS spawned");
+            SpawnPosition spawnPosition = Spawner.RandomSpawnPositionOnMetaball(boss1Metaball);
+            GameObject boss = Instantiate(waves[actualRound - 1].bossGameObject, spawnPosition.position, spawnPosition.rotation);
+            boss.GetComponent<EnemyHealth>().Killed += EndBossRound;
+            bossSpawned = true;
+        }
+    }
+
+    private void SpawnAsteroids()
+    {
+        asteroidsSpawner.SpawnSmallAsteroids(waves[actualRound - 1].smallAsteroidAmount);
+        asteroidsSpawner.SpawnMediumAsteroids(waves[actualRound - 1].mediumAsteroidAmount);
+        asteroidsSpawner.SpawnBigAsteroids(waves[actualRound - 1].bigAsteroidAmount);
+
+        if (waves[actualRound - 1].isBoss)
+        {
+            OnBossRound();
+        }
+    }
+
+    private void SpawnRandomAsteroids()
+    {
+        asteroidsSpawner.SpawnRandomAsteroids(6);
+    }
+    #endregion
+
+    #region Getters
 
     public PlayerController GetPlayerController()
     {
@@ -164,4 +216,5 @@ public class LevelManager : Singleton<LevelManager>
     {
         return playerController.transform.position;
     }
+    #endregion
 }
