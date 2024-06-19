@@ -389,6 +389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MarchingCubes
       objectReference: {fileID: 0}
+    - target: {fileID: 3735640425888004039, guid: f5c171056ba080447a4cdb08adbf4b6f, type: 3}
+      propertyPath: radius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5267554780387433435, guid: f5c171056ba080447a4cdb08adbf4b6f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -432,6 +436,14 @@ PrefabInstance:
     - target: {fileID: 6962079452254069715, guid: f5c171056ba080447a4cdb08adbf4b6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7039112786599587029, guid: f5c171056ba080447a4cdb08adbf4b6f, type: 3}
+      propertyPath: metaballs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831322339785052789, guid: f5c171056ba080447a4cdb08adbf4b6f, type: 3}
+      propertyPath: radius
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -665,6 +677,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d519deb41e7c35d46889ae818118a089, type: 3}
+--- !u!1 &570337503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 328e6db2aed0ed34792a98795f72c7bb, type: 3}
+  m_PrefabInstance: {fileID: 1621272032}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &601999915 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2598496783638676211, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
@@ -1737,13 +1754,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 328e6db2aed0ed34792a98795f72c7bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1621272036}
   m_SourcePrefab: {fileID: 100100000, guid: 328e6db2aed0ed34792a98795f72c7bb, type: 3}
 --- !u!4 &1621272033 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 328e6db2aed0ed34792a98795f72c7bb, type: 3}
   m_PrefabInstance: {fileID: 1621272032}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1621272036
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570337503}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 99cd6fd34a28fdc4fa345fee0a615a77, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1654144989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2476,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb5c76031c2bf3541adeda1fcf656d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waves:
+  - {fileID: 11400000, guid: 099529b121ef9d848bd1a5cc80573712, type: 2}
+  - {fileID: 11400000, guid: fef98c0febb682d4ea26792b571d8c35, type: 2}
+  - {fileID: 11400000, guid: c82443fef63b8fc40b6116db1cda4c32, type: 2}
+  canEnemySpawn: 1
+  enemyLevel: 1
+  spawningEnemiesAmount: 1
   timeToSpawnEnemy: 10
   spawnAsteroids: 1
 --- !u!1660057539 &9223372036854775807

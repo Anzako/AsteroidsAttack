@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : Singleton<LevelManager>
@@ -6,21 +7,23 @@ public class LevelManager : Singleton<LevelManager>
     private PlayerSpawner playerSpawner;
     private AsteroidsSpawner asteroidsSpawner;
     private EnemySpawner enemySpawner;
-
     private PlayerController playerController;
     private UIController playerHUD;
 
+    // Level variables
     private bool gameStarted = false;
     private int actualRound = 1;
     private float elapsedTime = 0;
     private float elapsedRoundTime = 0;
+
+    // Wave variables
+    [SerializeField] private List<Wave> waves;
+    private int normalWavesAmount;
+
+    public bool canEnemySpawn = true;
+    public int enemyLevel = 1;
+    public int spawningEnemiesAmount = 1;
     public float timeToSpawnEnemy;
-
-    private int enemyLevel = 1;
-    private int spawningEnemiesAmount = 1;
-    private int asteroidsAmount;
-    private int asteroidsLevel;
-
 
     // Testing
     public bool spawnAsteroids = true;
@@ -34,6 +37,8 @@ public class LevelManager : Singleton<LevelManager>
 
         playerController = GameManager.GetPlayerController();
         playerHUD = playerController.GetComponent<UIController>();
+
+        normalWavesAmount = waves.Count;
     }
 
     private void Update()
@@ -41,6 +46,9 @@ public class LevelManager : Singleton<LevelManager>
         if (!gameStarted) return;
 
         elapsedTime += Time.deltaTime;
+
+        // Check if enemy spawn in round
+        if (!canEnemySpawn) return;
         elapsedRoundTime += Time.deltaTime;
 
         if (elapsedRoundTime >= timeToSpawnEnemy)
@@ -67,29 +75,35 @@ public class LevelManager : Singleton<LevelManager>
     {
         elapsedRoundTime = 0;
 
-        if (spawnAsteroids)
+        if (normalWavesAmount > actualRound - 1)
         {
-            //asteroidsSpawner.SpawnAsteroids(asteroidsAmount);
-            asteroidsSpawner.SpawnAsteroids(1);
+            SetRoundVariables();
+            SpawnAsteroids();
+        } else
+        {
+            SpawnRandomAsteroids();
         }
 
         playerHUD.SetWave(actualRound);
-        OnRoundStart();
     }
 
-    private void OnRoundStart()
+    private void SetRoundVariables()
     {
-        asteroidsAmount = (actualRound + 1) * 2;
-        if (actualRound == 3)
-        {
-            spawningEnemiesAmount = 2;
-        }
+        canEnemySpawn = waves[actualRound - 1].isEnemySpawning;
+        spawningEnemiesAmount = waves[actualRound - 1].spawningEnemiesAmount;
+        timeToSpawnEnemy = waves[actualRound - 1].timeToSpawnEnemy;
+    }
 
-        if (actualRound == 5)
-        {
-            enemyLevel = 2;
-            spawningEnemiesAmount = 1;
-        }
+    private void SpawnAsteroids()
+    {
+        asteroidsSpawner.SpawnSmallAsteroids(waves[actualRound - 1].smallAsteroidAmount);
+        asteroidsSpawner.SpawnMediumAsteroids(waves[actualRound - 1].mediumAsteroidAmount);
+        asteroidsSpawner.SpawnBigAsteroids(waves[actualRound - 1].bigAsteroidAmount);
+    }
+
+    private void SpawnRandomAsteroids()
+    {
+        asteroidsSpawner.SpawnRandomAsteroids(6);
     }
 
     public void RestartGame()
@@ -101,6 +115,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         spawningEnemiesAmount = 1;
         enemyLevel = 1;
+        canEnemySpawn = false;
 
         MetaBalls.Instance.ResetMetaballsParameters();
         asteroidsSpawner.DestroyAllAsteroids();

@@ -32,7 +32,7 @@ public class Spawner
     public static Vector3 RandomPositionOnMetaball(int metaballID, int maxAttempts = 10)
     {
         MetaBalls metaballs = MetaBalls.Instance;
-        float spawningDistance = 1.5f;
+        float spawningDistance = 3f;
 
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {

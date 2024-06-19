@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfPoints: 15
-  aboveGroundDistance: 0.2
+  aboveGroundDistance: 0.25
   dissolveTime: 0.2
   damageAmount: 2
   enemyMask:
@@ -157,4 +157,3 @@ MonoBehaviour:
   particleTag: 8
   hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
   laserShootSoundClip: {fileID: 8300000, guid: ae2095fdd7df26e48903154f7b289ca8, type: 3}
-  _tag: 11

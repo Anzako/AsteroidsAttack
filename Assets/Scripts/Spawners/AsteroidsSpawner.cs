@@ -29,7 +29,32 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         if (asteroidsAmount == 0) { LevelManager.Instance.EndRound(); }
     }
 
-    public void SpawnAsteroids(int amount)
+    public void SpawnSmallAsteroids(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnAsteroid(poolTags.smallAsteroid);
+        }
+    }
+
+    public void SpawnMediumAsteroids(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnAsteroid(poolTags.mediumAsteroid);
+        }
+    }
+
+    public void SpawnBigAsteroids(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnAsteroid(poolTags.bigAsteroid);
+        }
+    }
+
+    #region Random Asteroid Spawning
+    public void SpawnRandomAsteroids(int amount)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -45,9 +70,10 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 
         SetAsteroidsAmount(asteroidsAmount + 1);
     }
+    #endregion
 
     // Spawn asteroid close to destroyed one
-    public void SpawnAsteroidOnDestroy(poolTags size, Transform transform)
+    public void SpawnAsteroidOnDestroy(poolTags asteroidTag, Transform transform)
     {
         float distanceOfSpawn = 0.5f;
         float randomAngle = Random.Range(0f, 360f);
@@ -55,16 +81,20 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         newTransform.RotateAround(newTransform.position, newTransform.up, randomAngle);
         newTransform.position += newTransform.forward * distanceOfSpawn;
 
-        SpawnAsteroid(size, newTransform.position, newTransform.rotation);
+        SpawnAsteroid(asteroidTag, newTransform.position, newTransform.rotation);
     }
 
-
-    public GameObject SpawnAsteroid(poolTags size, Vector3 position, Quaternion rotation)
+    public void SpawnAsteroid(poolTags asteroidTag)
     {
-        GameObject asteroid = Spawner.SpawnPoolObjectOnPosition(size, position, rotation);
-        SetAsteroidsAmount(asteroidsAmount + 1);
+        Spawner.SpawnAwayFromPlayerView(asteroidTag);
 
-        return asteroid;
+        SetAsteroidsAmount(asteroidsAmount + 1);
+    }
+
+    public void SpawnAsteroid(poolTags asteroidTag, Vector3 position, Quaternion rotation)
+    {
+        Spawner.SpawnPoolObjectOnPosition(asteroidTag, position, rotation);
+        SetAsteroidsAmount(asteroidsAmount + 1);
     }
 
     private void SetAsteroidsAmount(int amount)
@@ -82,15 +112,4 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         SetAsteroidsAmount(0);
     }
 
-    public void SpawnAsteroidInTime(float time)
-    {
-        StartCoroutine(WaitAndSpawn(time));
-    }
-
-    public IEnumerator WaitAndSpawn(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        SpawnRandomAsteroid();
-    }
 }
