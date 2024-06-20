@@ -9,6 +9,7 @@ public class UI_ChoiceMenu : Singleton<UI_ChoiceMenu>
     private Transform choiceButton1;
     private Transform choiceButton2;
     private Transform choiceButton3;
+    private Transform bossUpgradeButton;
 
     protected override void Awake()
     {
@@ -16,6 +17,7 @@ public class UI_ChoiceMenu : Singleton<UI_ChoiceMenu>
         choiceButton1 = transform.Find("ChoiceButton1");
         choiceButton2 = transform.Find("ChoiceButton2");
         choiceButton3 = transform.Find("ChoiceButton3");
+        bossUpgradeButton = transform.Find("BossUpgradeButton");
     }
 
     public void SetButton1(UpgradeEntity upgrade)
@@ -39,6 +41,13 @@ public class UI_ChoiceMenu : Singleton<UI_ChoiceMenu>
         choiceButton3.GetComponent<Button>().onClick.AddListener(upgrade.UpgradeFunction);
     }
 
+    public void SetUpgradeButton(UpgradeEntity upgrade)
+    {
+        bossUpgradeButton.GetComponentInChildren<TMP_Text>().text = upgrade.upgradeText;
+        bossUpgradeButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        bossUpgradeButton.GetComponent<Button>().onClick.AddListener(upgrade.UpgradeFunction);
+    }
+
     public void DisableButton1()
     {
         choiceButton1.gameObject.SetActive(false);
@@ -54,4 +63,28 @@ public class UI_ChoiceMenu : Singleton<UI_ChoiceMenu>
         choiceButton3.gameObject.SetActive(false);
     }
 
+    public void DisableBossUpgradeButton()
+    {
+        bossUpgradeButton.gameObject.SetActive(false);
+    }
+
+    public void EnableButton1()
+    {
+        choiceButton1.gameObject.SetActive(true);
+    }
+
+    public void EnableButton2()
+    {
+        choiceButton2.gameObject.SetActive(true);
+    }
+
+    public void EnableButton3()
+    {
+        choiceButton3.gameObject.SetActive(true);
+    }
+
+    public void EnableBossUpgradeButton()
+    {
+        bossUpgradeButton.gameObject.SetActive(true);
+    }
 }

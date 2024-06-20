@@ -36,6 +36,8 @@ Transform:
   - {fileID: 3432006487098802203}
   - {fileID: 4033370617638698500}
   - {fileID: 1007876342178526918}
+  - {fileID: 3106617026646735905}
+  - {fileID: 1608446938085568841}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6094888407640573580
@@ -71,7 +73,8 @@ MonoBehaviour:
   metaballs:
   - {fileID: 7831322339785052789}
   - {fileID: 3735640425888004039}
-  - {fileID: 1311063499515149068}
+  bossBoxTransform: {fileID: 1608446938085568841}
+  bossBoxSize: 10
 --- !u!33 &2657919632617604516
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -100,7 +103,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f167e8c68db367a499f22de8e29222c9, type: 2}
+  - {fileID: 2100000, guid: 82925cc824ed43042a05d3efb9a9cf53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,8 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startDirection: {x: 0, y: -1, z: 0.3}
   direction: {x: 0, y: 0, z: 0}
-  speed: 1
-  radius: 22
+  speed: 2
+  radius: 30
 --- !u!1 &3308127082964116905
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 3308127082964116905}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.2, y: 36.26, z: 13.01}
+  m_LocalPosition: {x: 29.74, y: 19.5, z: -24.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -214,10 +217,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d1e89c3676bbb4187a97da0dfacae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDirection: {x: -1, y: -0.5, z: 0.4}
+  startDirection: {x: 0, y: 0, z: 1}
   direction: {x: 0, y: 0, z: 0}
   speed: 2
   radius: 30
+--- !u!1 &4298097797025572218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1608446938085568841}
+  m_Layer: 6
+  m_Name: BossTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1608446938085568841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298097797025572218}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25, y: 27.5, z: 28.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6962079452254069715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5560111237499080466
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +296,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d1e89c3676bbb4187a97da0dfacae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startDirection: {x: 0, y: 0, z: 0}
+  startDirection: {x: 1, y: 1, z: 1}
   direction: {x: 0, y: 0, z: 0}
-  speed: 0
-  radius: 25
+  speed: 2
+  radius: 40
+--- !u!1 &6296791624503178684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3106617026646735905}
+  - component: {fileID: 2648631371696706114}
+  m_Layer: 0
+  m_Name: Metaball4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3106617026646735905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6296791624503178684}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 29.74, y: 19.5, z: -24.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6962079452254069715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2648631371696706114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6296791624503178684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d1e89c3676bbb4187a97da0dfacae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDirection: {x: 0, y: 0, z: 1}
+  direction: {x: 0, y: 0, z: 0}
+  speed: 2
+  radius: 30

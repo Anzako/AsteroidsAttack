@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce7bcb276d840f4eaaefc8ab150f874, type: 3}
   m_Name: Wave3
   m_EditorClassIdentifier: 
-  smallAsteroidAmount: 1
+  smallAsteroidAmount: 0
   mediumAsteroidAmount: 0
   bigAsteroidAmount: 0
   isEnemySpawning: 1
   spawningEnemiesAmount: 1
   timeToSpawnEnemy: 15
+  isBoss: 1
+  bossGameObject: {fileID: 1534234561323530830, guid: 6ba937b41f31600469b8a2c0c763fb04, type: 3}

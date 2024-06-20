@@ -109,7 +109,7 @@ public class MetaBalls : Singleton<MetaBalls>
     }
 
     // On Boss Start
-    public void MoveMetaballsToBossBox()
+    public void OnBossStart()
     {
         foreach (Metaball metaball in metaballs)
         {
@@ -118,7 +118,7 @@ public class MetaBalls : Singleton<MetaBalls>
     }
 
     // On Boss End
-    public void MoveMetaballsInMarchingBox()
+    public void OnBossEnd()
     {
         foreach (Metaball metaball in metaballs)
         {

@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
     private TMP_Text scoreOnComboText;
     private TMP_Text comboText;
     private TMP_Text waveText;
-    private TMP_Text asteroidsAmountText;
+    private TMP_Text taskText;
 
     private void Awake()
     {
@@ -19,14 +19,14 @@ public class UIController : MonoBehaviour
         scoreOnComboText = userInterface.transform.Find("ScoreOnCombo").GetComponent<TMP_Text>();
         comboText = userInterface.transform.Find("Combo").GetComponent<TMP_Text>();
         waveText = userInterface.transform.Find("Wave").GetComponent<TMP_Text>();
-        asteroidsAmountText = userInterface.transform.Find("AsteroidsLeft").GetComponent<TMP_Text>();
+        taskText = userInterface.transform.Find("TaskText").GetComponent<TMP_Text>();
 
         scoreText.text = "0";
     }
 
-    public void SetAsteroidsAmountText(int amount)
+    public void SetTaskText(string text)
     {
-        asteroidsAmountText.text = "Destroy: " + amount + " asteroids";
+        taskText.text = text;
     }
 
     public void SetWave(int wave)

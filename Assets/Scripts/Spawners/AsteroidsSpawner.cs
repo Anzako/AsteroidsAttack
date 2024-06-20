@@ -100,7 +100,9 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
     private void SetAsteroidsAmount(int amount)
     {
         asteroidsAmount = amount;
-        pController.GetComponent<UIController>().SetAsteroidsAmountText(amount);
+
+        string taskText = "Destroy asteroids: " + amount;
+        pController.GetComponent<UIController>().SetTaskText(taskText);
     }
 
     public void DestroyAllAsteroids()

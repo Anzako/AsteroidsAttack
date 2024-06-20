@@ -27,7 +27,6 @@ public class LevelManager : Singleton<LevelManager>
 
     // Boss
     [SerializeField] private Metaball boss1Metaball;
-    private bool isBossRound = false;
     private bool bossSpawned = false;
 
     // Testing
@@ -52,7 +51,7 @@ public class LevelManager : Singleton<LevelManager>
 
         elapsedTime += Time.deltaTime;
 
-        if (isBossRound && !bossSpawned)
+        if (isBossRound() && !bossSpawned)
         {
             SpawnBoss();
         }
@@ -108,9 +107,10 @@ public class LevelManager : Singleton<LevelManager>
     private void OnBossRound()
     {
         MetaBalls.Instance.AddMetaball(boss1Metaball);
-        MetaBalls.Instance.MoveMetaballsToBossBox();
-        isBossRound = true;
+        MetaBalls.Instance.OnBossStart();
         bossSpawned = false;
+
+        playerHUD.SetTaskText("Kill the boss");
     }
 
     public void RestartGame()
@@ -137,25 +137,17 @@ public class LevelManager : Singleton<LevelManager>
 
     public void EndRound()
     {
-        actualRound++;
+        gameManager.ChangeState(GameState.UpgradeMenu);
 
-        if (gameManager.State != GameState.EndGame)
+        if (isBossRound())
         {
-            gameManager.ChangeState(GameState.UpgradeMenu);
+            MetaBalls.Instance.OnBossEnd();
         }
-        
-        StartRound();
     }
 
-    public void EndBossRound()
+    public void OnNewRound()
     {
         actualRound++;
-
-        if (gameManager.State != GameState.EndGame)
-        {
-            gameManager.ChangeState(GameState.UpgradeMenu);
-        }
-
         StartRound();
     }
 
@@ -182,7 +174,7 @@ public class LevelManager : Singleton<LevelManager>
             Debug.Log("BOSS spawned");
             SpawnPosition spawnPosition = Spawner.RandomSpawnPositionOnMetaball(boss1Metaball);
             GameObject boss = Instantiate(waves[actualRound - 1].bossGameObject, spawnPosition.position, spawnPosition.rotation);
-            boss.GetComponent<EnemyHealth>().Killed += EndBossRound;
+            boss.GetComponent<EnemyHealth>().Killed += EndRound;
             bossSpawned = true;
         }
     }
@@ -215,6 +207,15 @@ public class LevelManager : Singleton<LevelManager>
     public Vector3 GetPlayerPosition()
     {
         return playerController.transform.position;
+    }
+
+    public bool isBossRound()
+    {
+        if (waves.Count > actualRound - 1)
+        {
+            return waves[actualRound - 1].isBoss;
+        }
+        return false;
     }
     #endregion
 }

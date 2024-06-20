@@ -7,7 +7,7 @@ public class UpgradesManager : MonoBehaviour
 {
     private List<UpgradeEntity> upgrades;
     public event Action<UpgradeEntity> UpgradeChoosen = delegate { };
-
+    private UpgradeEntity bossUpgrade1;
 
     private void Awake()
     {
@@ -28,7 +28,14 @@ public class UpgradesManager : MonoBehaviour
 
         if (state == GameState.UpgradeMenu)
         {
-            SetUpgradeButtons();
+            if (LevelManager.Instance.isBossRound())
+            {
+                SetBossUpgradeButton();
+            } 
+            else
+            {
+                SetUpgradeButtons();
+            }
         }
     }
 
@@ -51,10 +58,27 @@ public class UpgradesManager : MonoBehaviour
         UpgradeEntity upgrade4 = new ShootingSpeedUpgrade();
         upgrade4.OnUpgradeChoice += HandleUpgradeChoice;
         upgrades.Add(upgrade4);
+
+        bossUpgrade1 = new BaseWeaponUpgrade();
+        bossUpgrade1.OnUpgradeChoice += HandleBossUpgradeChoice;
+    }
+
+    private void SetBossUpgradeButton()
+    {
+        UI_ChoiceMenu.Instance.DisableButton1();
+        UI_ChoiceMenu.Instance.DisableButton2();
+        UI_ChoiceMenu.Instance.DisableButton3();
+        UI_ChoiceMenu.Instance.EnableBossUpgradeButton();
+        UI_ChoiceMenu.Instance.SetUpgradeButton(bossUpgrade1);
     }
 
     private void SetUpgradeButtons()
     {
+        UI_ChoiceMenu.Instance.DisableBossUpgradeButton();
+        UI_ChoiceMenu.Instance.EnableButton1();
+        UI_ChoiceMenu.Instance.EnableButton2();
+        UI_ChoiceMenu.Instance.EnableButton3();
+
         if (upgrades.Count > 3)
         {
             List<UpgradeEntity> randomUpgrades = GetRandomUpgrades();
@@ -110,6 +134,12 @@ public class UpgradesManager : MonoBehaviour
         UpgradeChoosen -= OnUpgradeChoice;
     }
 
+    private void OnBossUpgradeChosen()
+    {
+        GameManager.Instance.ChangeState(GameState.Game);
+        LevelManager.Instance.OnNewRound();
+    }
+
     private void OnUpgradeChoice(UpgradeEntity upgrade)
     {
         if (upgrade.exhausted)
@@ -117,11 +147,18 @@ public class UpgradesManager : MonoBehaviour
             upgrades.Remove(upgrade);
         }
         GameManager.Instance.ChangeState(GameState.Game);
+        LevelManager.Instance.OnNewRound();
     }
 
     private void HandleUpgradeChoice(UpgradeEntity upgrade)
     {
         UpgradeChoosen(upgrade);
+    }
+
+    private void HandleBossUpgradeChoice(UpgradeEntity upgrade)
+    {
+        OnBossUpgradeChosen();
+        Debug.Log("ONBOSSUPGRADECHOSEN");
     }
 }
 
