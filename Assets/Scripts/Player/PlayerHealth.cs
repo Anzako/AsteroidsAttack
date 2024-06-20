@@ -6,6 +6,10 @@ public class PlayerHealth : HealthController, IHealable
     [SerializeField] private UIController playerHUD;
     public bool immortal = false;
 
+    // Shield
+    private bool isShield;
+    [SerializeField] private GameObject shieldObject;
+
     // Sounds
     [SerializeField] private AudioClip gettingHitSoundClip;
 
@@ -26,6 +30,14 @@ public class PlayerHealth : HealthController, IHealable
 
     public override void Damage(int damage)
     {
+        if (isShield)
+        {
+            isShield = false;
+            SoundFXManager.Instance.PlaySoundFXClip(gettingHitSoundClip, transform, 1f);
+            shieldObject.SetActive(false);
+            return;
+        }
+
         if (!immortal)
         {
             base.Damage(damage);
@@ -60,7 +72,15 @@ public class PlayerHealth : HealthController, IHealable
 
     public void ResetStats()
     {
+        immortal = false;
+        isShield = false;
         SetMaxHealth(initialHealth);
         SetHealthToMax();
+    }
+
+    public void AddShield()
+    {
+        isShield = true;
+        shieldObject.SetActive(true);
     }
 }

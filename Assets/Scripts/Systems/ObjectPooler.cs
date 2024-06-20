@@ -128,4 +128,5 @@ public enum poolTags
     rocketItem = 12,
     laserItem = 13,
     ufoLVL2 = 14,
+    shieldItem = 15,
 }

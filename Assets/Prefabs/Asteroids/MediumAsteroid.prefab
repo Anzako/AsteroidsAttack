@@ -124,7 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419e1e8299f63da49ac2deb0490df477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropableItems: []
+  dropableItems:
+  - dropableObject: 13
+    droppingChance: 20
+  - dropableObject: 15
+    droppingChance: 20
 --- !u!1001 &3305380119533746767
 PrefabInstance:
   m_ObjectHideFlags: 0

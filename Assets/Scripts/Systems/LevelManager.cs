@@ -137,7 +137,10 @@ public class LevelManager : Singleton<LevelManager>
 
     public void EndRound()
     {
-        gameManager.ChangeState(GameState.UpgradeMenu);
+        if (gameManager.State != GameState.EndGame)
+        {
+            gameManager.ChangeState(GameState.UpgradeMenu);
+        }
 
         if (isBossRound())
         {
