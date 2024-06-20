@@ -126,9 +126,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropableItems:
   - dropableObject: 13
-    droppingChance: 20
+    droppingChance: 10
   - dropableObject: 15
-    droppingChance: 20
+    droppingChance: 10
+  - dropableObject: 12
+    droppingChance: 10
 --- !u!1001 &3305380119533746767
 PrefabInstance:
   m_ObjectHideFlags: 0

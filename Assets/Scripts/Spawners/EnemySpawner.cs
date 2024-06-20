@@ -17,11 +17,4 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
     }
 
-    public void DestroyAllEnemies()
-    {
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.ufoLVL1);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.ufoLVL2);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.enemyProjectile);
-    }
-
 }

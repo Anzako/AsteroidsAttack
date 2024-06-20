@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Wave2
   m_EditorClassIdentifier: 
   smallAsteroidAmount: 2
-  mediumAsteroidAmount: 0
+  mediumAsteroidAmount: 3
   bigAsteroidAmount: 0
   isEnemySpawning: 1
   spawningEnemiesAmount: 1
   timeToSpawnEnemy: 15
+  isBoss: 0
+  bossGameObject: {fileID: 0}

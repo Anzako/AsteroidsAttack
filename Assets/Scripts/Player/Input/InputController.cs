@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,17 @@ public class InputController : MonoBehaviour
         movementController = GetComponent<PlayerMovement>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Movement"];
+        GameManager.OnStateChanged += HandleGameStateChange;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnStateChanged -= HandleGameStateChange;
+    }
+
+    public void HandleGameStateChange(GameState gameState)
+    {
+        isShooting = false;
     }
 
     private void Start()
@@ -84,5 +96,10 @@ public class InputController : MonoBehaviour
                 gameManager.ChangeState(GameState.Game);
             }
         }
+    }
+
+    public void SetSensitivity(float value)
+    {
+        sensitivity = value;
     }
 }

@@ -83,6 +83,15 @@ public class ObjectPooler : Singleton<ObjectPooler>
         activeObjects[pool.poolTag].Remove(obj);
     }
 
+    public void ReturnAllObjectsToPool()
+    {
+        foreach (Pool pool in pools)
+        {
+            ReturnObjectsToPool(pool.poolTag);
+        }
+
+    }
+
     public void ReturnObjectsToPool(poolTags objectTag)
     {
         Pool pool = pools.Find(p => p.poolTag == objectTag);

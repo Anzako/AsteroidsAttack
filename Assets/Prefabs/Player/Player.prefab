@@ -5437,6 +5437,7 @@ MonoBehaviour:
   healthController: {fileID: 5691059295496667685}
   HUDController: {fileID: 5476350350173624902}
   weaponController: {fileID: 5372409946133155427}
+  playerCamera: {fileID: 8437133351225935583}
 --- !u!114 &78416745642762997
 MonoBehaviour:
   m_ObjectHideFlags: 0

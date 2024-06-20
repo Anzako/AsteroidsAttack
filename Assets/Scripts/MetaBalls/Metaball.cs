@@ -12,7 +12,7 @@ public class Metaball : MonoBehaviour
 
     private float marchingCubesSize;
     private Vector3 marchingCubesOffset;
-    private static float marchingCubesInnerBoxDistance = 4f;
+    private static float marchingCubesInnerBoxDistance = 6f;
 
     private bool isBossFight = false;
     private Vector3 bossBoxOffset;
@@ -35,8 +35,7 @@ public class Metaball : MonoBehaviour
         } 
         else
         {
-            float actualRadius = MetaBalls.CalculateActualRadius(this);
-            float distanceToBorder = actualRadius + marchingCubesInnerBoxDistance;
+            float distanceToBorder = MetaBalls.CalculateActualRadius(this) + marchingCubesInnerBoxDistance;
 
             CheckBoxCollision(marchingCubesOffset, marchingCubesSize, distanceToBorder);
             UpdatePosition();

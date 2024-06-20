@@ -105,13 +105,9 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         pController.GetComponent<UIController>().SetTaskText(taskText);
     }
 
-    public void DestroyAllAsteroids()
+    public void ResetAsteroidAmount()
     {
-        pooler.ReturnObjectsToPool(poolTags.smallAsteroid);
-        pooler.ReturnObjectsToPool(poolTags.mediumAsteroid);
-        pooler.ReturnObjectsToPool(poolTags.bigAsteroid);
-        pooler.ReturnObjectsToPool(poolTags.healUpAsteroid);
-        SetAsteroidsAmount(0);
+        asteroidsAmount = 0;
     }
 
 }

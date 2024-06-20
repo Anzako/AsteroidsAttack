@@ -124,14 +124,10 @@ public class LevelManager : Singleton<LevelManager>
         enemyLevel = 1;
         canEnemySpawn = false;
 
+        ObjectPooler.Instance.ReturnAllObjectsToPool();
+
         MetaBalls.Instance.ResetMetaballsParameters();
-        asteroidsSpawner.DestroyAllAsteroids();
-        enemySpawner.DestroyAllEnemies();
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.playerProjectile);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.rocket);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.healUpItem);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.laserItem);
-        ObjectPooler.Instance.ReturnObjectsToPool(poolTags.rocketItem);
+        asteroidsSpawner.ResetAsteroidAmount();
         ScoreManager.Instance.ResetScore();
     }
 

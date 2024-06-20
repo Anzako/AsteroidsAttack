@@ -6,6 +6,8 @@ public class MenuManager : Singleton<MenuManager>
 {
     // Main menu
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject settings;
+    [SerializeField] private GameObject credits;
 
     // In game menu
     [SerializeField] private GameObject inGameMenu;
@@ -31,6 +33,11 @@ public class MenuManager : Singleton<MenuManager>
     {
         // Menu
         mainMenu.SetActive(state == GameState.Menu);
+        if (state == GameState.Menu)
+        {
+            settings.SetActive(false);
+            credits.SetActive(false);
+        }
 
         // In game menu
         inGameMenu.SetActive(state == GameState.InGameMenu);
@@ -46,6 +53,18 @@ public class MenuManager : Singleton<MenuManager>
     public void StartPressed()
     {
         GameManager.Instance.ChangeState(GameState.StartGame);
+    }
+
+    public void SettingsButtonPressed()
+    {
+        mainMenu.SetActive(false);
+        settings.SetActive(true);
+    }
+
+    public void CreditsButtonPressed()
+    {
+        mainMenu.SetActive(false);
+        credits.SetActive(true);
     }
 
     public void RestartButtonPressed()
