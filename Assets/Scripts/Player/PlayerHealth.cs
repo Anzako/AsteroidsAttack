@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerHealth : HealthController, IHealable
 {
     [SerializeField] private UIController playerHUD;
+    public bool immortal = false;
 
     // Sounds
     [SerializeField] private AudioClip gettingHitSoundClip;
@@ -25,7 +26,11 @@ public class PlayerHealth : HealthController, IHealable
 
     public override void Damage(int damage)
     {
-        base.Damage(damage);
+        if (!immortal)
+        {
+            base.Damage(damage);
+        }
+       
         SoundFXManager.Instance.PlaySoundFXClip(gettingHitSoundClip, transform, 1f);
         playerHUD.SetHealth(Health, maxHealth);
     }

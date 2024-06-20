@@ -5,13 +5,17 @@ using UnityEngine.Windows;
 public class PlayerMovement : MovementController
 {
     [SerializeField] private InputController inputController;
+    [SerializeField] private PlayerHealth healthController;
+    [SerializeField] private ParticleSystem dashParticle;
 
     private float initialMoveSpeed;
 
     private bool isFreezed;
+
+    //Dash
+    private bool forwardDashUnlocked;
     private bool canDash;
     private bool isDashing;
-
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashingTime;
     [SerializeField] private float dashingCooldown;
@@ -70,9 +74,9 @@ public class PlayerMovement : MovementController
 
     public void DashPressed()
     {
-        if (canDash)
+        if (canDash && forwardDashUnlocked)
         {
-            if (movementDirection != Vector2.zero)
+            if (movementDirection != Vector2.zero && movementDirection.normalized.y == 1)
             {
                 StartCoroutine(Dash());
             }
@@ -86,9 +90,12 @@ public class PlayerMovement : MovementController
         isDashing = true;
         actualSpeed = dashSpeed;
         SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, transform, 1f);
+        healthController.immortal = true;
+        dashParticle.Play();
 
         yield return new WaitForSeconds(dashingTime);
         isDashing = false;
+        healthController.immortal = false; 
         ResetActualSpeed();
 
         yield return new WaitForSeconds(dashingCooldown);
@@ -105,6 +112,7 @@ public class PlayerMovement : MovementController
         moveSpeed = initialMoveSpeed;
         ResetActualSpeed();
         currentInputVector = Vector2.zero;
+        forwardDashUnlocked = false;
     }
 
     public void IncreaseMoveSpeed(float speed)
@@ -113,4 +121,8 @@ public class PlayerMovement : MovementController
         actualSpeed = moveSpeed;
     }
 
+    public void UnlockForwardDash()
+    {
+        forwardDashUnlocked = true;
+    }
 }

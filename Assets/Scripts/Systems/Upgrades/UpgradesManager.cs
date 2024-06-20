@@ -6,7 +6,6 @@ using UnityEngine;
 public class UpgradesManager : MonoBehaviour
 {
     private List<UpgradeEntity> upgrades;
-    public event Action<UpgradeEntity> UpgradeChoosen = delegate { };
     private UpgradeEntity bossUpgrade1;
 
     private void Awake()
@@ -59,7 +58,7 @@ public class UpgradesManager : MonoBehaviour
         upgrade4.OnUpgradeChoice += HandleUpgradeChoice;
         upgrades.Add(upgrade4);
 
-        bossUpgrade1 = new BaseWeaponUpgrade();
+        bossUpgrade1 = new ForwardDashUpgrade();
         bossUpgrade1.OnUpgradeChoice += HandleBossUpgradeChoice;
     }
 
@@ -124,23 +123,7 @@ public class UpgradesManager : MonoBehaviour
         return shuffledUpgrades.GetRange(0, count);
     }
 
-    private void OnEnable()
-    {
-        UpgradeChoosen += OnUpgradeChoice;
-    }
-
-    private void OnDisable()
-    {
-        UpgradeChoosen -= OnUpgradeChoice;
-    }
-
-    private void OnBossUpgradeChosen()
-    {
-        GameManager.Instance.ChangeState(GameState.Game);
-        LevelManager.Instance.OnNewRound();
-    }
-
-    private void OnUpgradeChoice(UpgradeEntity upgrade)
+    private void HandleUpgradeChoice(UpgradeEntity upgrade)
     {
         if (upgrade.exhausted)
         {
@@ -150,15 +133,10 @@ public class UpgradesManager : MonoBehaviour
         LevelManager.Instance.OnNewRound();
     }
 
-    private void HandleUpgradeChoice(UpgradeEntity upgrade)
-    {
-        UpgradeChoosen(upgrade);
-    }
-
     private void HandleBossUpgradeChoice(UpgradeEntity upgrade)
     {
-        OnBossUpgradeChosen();
-        Debug.Log("ONBOSSUPGRADECHOSEN");
+        GameManager.Instance.ChangeState(GameState.Game);
+        LevelManager.Instance.OnNewRound();
     }
 }
 

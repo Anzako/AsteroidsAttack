@@ -171,7 +171,6 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (boss1Metaball.IsInsideMarchingBox())
         {
-            Debug.Log("BOSS spawned");
             SpawnPosition spawnPosition = Spawner.RandomSpawnPositionOnMetaball(boss1Metaball);
             GameObject boss = Instantiate(waves[actualRound - 1].bossGameObject, spawnPosition.position, spawnPosition.rotation);
             boss.GetComponent<EnemyHealth>().Killed += EndRound;
