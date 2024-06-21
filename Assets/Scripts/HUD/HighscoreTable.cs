@@ -42,16 +42,11 @@ public class HighscoreTable : MonoBehaviour
             }
         }
 
-        int maxHighscoreEntries = 12;
+        int maxHighscoreEntries = 11;
         for (int i = 0; i < maxHighscoreEntries; i++)
         {
             CreateHighscoreEntryTransform(highscores.highscoreEntryList[i], entryContainer, highscoreEntryTransformList);
         }
-
-        /*foreach (HighscoreEntry highscoreEntry in highscores.highscoreEntryList)
-        {
-            CreateHighscoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
-        }*/
     }
 
     private void CreateHighscoreEntryTransform(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)

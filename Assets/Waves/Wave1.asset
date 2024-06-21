@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidLevel: 1
   smallAsteroidAmount: 3
-  mediumAsteroidAmount: 1
+  mediumAsteroidAmount: 2
   bigAsteroidAmount: 0
   isEnemySpawning: 0
   enemyLevel: 1

@@ -33,6 +33,7 @@ public class PlayerHealth : HealthController, IHealable
         if (isShield)
         {
             isShield = false;
+            playerHUD.SetShield(0);
             SoundFXManager.Instance.PlaySoundFXClip(gettingHitSoundClip, transform, 1f);
             shieldObject.SetActive(false);
             return;
@@ -81,6 +82,7 @@ public class PlayerHealth : HealthController, IHealable
     public void AddShield()
     {
         isShield = true;
+        playerHUD.SetShield(1);
         shieldObject.SetActive(true);
     }
 }

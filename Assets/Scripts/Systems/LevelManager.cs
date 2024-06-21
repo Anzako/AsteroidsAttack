@@ -141,7 +141,7 @@ public class LevelManager : Singleton<LevelManager>
     private void OnBossRound()
     {
         actualBoss += 1;
-        if (actualRound == 1)
+        if (actualBoss == 1)
         {
             MetaBalls.Instance.AddMetaball(boss1Metaball);
         }

@@ -9,6 +9,7 @@ public class WeaponController : MonoBehaviour
     // Weapons
     private weaponTag actualWeapon;
     [SerializeField] private GameObject laser;
+    [SerializeField] private UIController playerHUD;
 
     private int basicWeaponLevel = 1;
 
@@ -43,10 +44,24 @@ public class WeaponController : MonoBehaviour
         if (!bonusWeaponEquiped) return;
 
         bonusWeaponElapsedTime += Time.deltaTime;
+        UpdateWeaponsSlider();
         if (bonusWeaponElapsedTime >= bonusWeaponLifeTime)
         {
+            playerHUD.DisableWeaponSliders();
             bonusWeaponEquiped = false;
             actualWeapon = weaponTag.basicWeapon;
+        }
+    }
+
+    public void UpdateWeaponsSlider()
+    {
+        if (actualWeapon == weaponTag.laser)
+        {
+            playerHUD.SetLaser(bonusWeaponLifeTime - bonusWeaponElapsedTime, bonusWeaponLifeTime);
+        } 
+        else if (actualWeapon == weaponTag.rocket)
+        {
+            playerHUD.SetRocket(bonusWeaponLifeTime - bonusWeaponElapsedTime, bonusWeaponLifeTime);
         }
     }
 
@@ -127,6 +142,14 @@ public class WeaponController : MonoBehaviour
     public void ChangeWeapon(weaponTag weaponTag)
     {
         actualWeapon = weaponTag;
+        if (weaponTag == weaponTag.laser)
+        {
+            playerHUD.EnableLaserSlider();
+        } else if (weaponTag == weaponTag.rocket) 
+        { 
+            playerHUD.EnableRocketSlider(); 
+        }
+
         bonusWeaponElapsedTime = 0f;
         bonusWeaponEquiped = true;
     }
