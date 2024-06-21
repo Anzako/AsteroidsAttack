@@ -57,7 +57,7 @@ public class Spawner
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
             Vector3 spawnPosition = metaballs.Position(metaballID) + CalculateRandomVector3()
-                * (MetaBalls.CalculateActualRadius(metaballs.metaballs[metaballID]) + spawningDistance);
+                * (MetaBalls.CalculateActualRadius(metaballs.GetMetaball(metaballID)) + spawningDistance);
 
             if (MetaBalls.CalculateScalarFieldValue(spawnPosition) < MarchingCubes.isoLevel)
             {

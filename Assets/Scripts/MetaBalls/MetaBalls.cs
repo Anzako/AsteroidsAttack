@@ -5,7 +5,9 @@ public class MetaBalls : Singleton<MetaBalls>
 {
     const int threadGroupSize = 8;
     public ComputeShader metaballShader;
-    public List<Metaball> metaballs;
+    private List<Metaball> metaballs;
+    public Metaball startMetaball1;
+    public Metaball startMetaball2;
     public static int numberOfMetaballs;
 
     public Transform bossBoxTransform;
@@ -22,6 +24,11 @@ public class MetaBalls : Singleton<MetaBalls>
 
     private void Start()
     {
+        metaballs = new List<Metaball>
+        {
+            startMetaball1,
+            startMetaball2
+        };
         CreateMetaballs();
     }
 
@@ -100,6 +107,12 @@ public class MetaBalls : Singleton<MetaBalls>
         {
             metaball.ResetParameters();
         }
+        metaballs = new List<Metaball>
+        {
+            startMetaball1,
+            startMetaball2
+        };
+        CreateMetaballs();
     }
 
     public void AddMetaball(Metaball metaball)
@@ -134,6 +147,11 @@ public class MetaBalls : Singleton<MetaBalls>
 
         Vector3 centerPos = bossBoxTransform.position + new Vector3(center, center, center);
         Gizmos.DrawWireCube(centerPos, new Vector3(bossBoxSize, bossBoxSize, bossBoxSize));
+    }
+
+    public Metaball GetMetaball(int id)
+    {
+        return metaballs[id];
     }
 
     #region Calculations
