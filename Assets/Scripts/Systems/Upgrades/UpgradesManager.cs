@@ -7,7 +7,7 @@ public class UpgradesManager : MonoBehaviour
 {
     private List<UpgradeEntity> upgrades;
     private UpgradeEntity bossUpgrade1;
-
+    private UpgradeEntity bossUpgrade2;
     private void Awake()
     {
         GameManager.OnStateChanged += GameManagerOnStateChanged;
@@ -29,7 +29,7 @@ public class UpgradesManager : MonoBehaviour
         {
             if (LevelManager.Instance.isBossRound())
             {
-                SetBossUpgradeButton();
+                SetBossUpgradeButton(LevelManager.Instance.actualBoss);
             } 
             else
             {
@@ -60,15 +60,27 @@ public class UpgradesManager : MonoBehaviour
 
         bossUpgrade1 = new ForwardDashUpgrade();
         bossUpgrade1.OnUpgradeChoice += HandleBossUpgradeChoice;
+
+        bossUpgrade2 = new ForwardDashUpgrade();
+        bossUpgrade2.OnUpgradeChoice += HandleBossUpgradeChoice;
+        
     }
 
-    private void SetBossUpgradeButton()
+    private void SetBossUpgradeButton(int bossLevel)
     {
         UI_ChoiceMenu.Instance.DisableButton1();
         UI_ChoiceMenu.Instance.DisableButton2();
         UI_ChoiceMenu.Instance.DisableButton3();
         UI_ChoiceMenu.Instance.EnableBossUpgradeButton();
-        UI_ChoiceMenu.Instance.SetUpgradeButton(bossUpgrade1);
+
+        if (bossLevel == 1)
+        {
+            UI_ChoiceMenu.Instance.SetUpgradeButton(bossUpgrade1);
+        } else
+        {
+            UI_ChoiceMenu.Instance.SetUpgradeButton(bossUpgrade2);
+        }
+       
     }
 
     private void SetUpgradeButtons()

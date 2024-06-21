@@ -29,7 +29,7 @@ public class Spawner
         return null;
     }
 
-    public static SpawnPosition RandomSpawnPositionOnMetaball(Metaball metaball, int maxAttempts = 30)
+    public static SpawnPosition RandomSpawnPositionOnMetaball(Metaball metaball, int maxAttempts = 40)
     {
         for (int attempt = 0; attempt < maxAttempts; attempt++)
         {

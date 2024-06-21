@@ -21,4 +21,4 @@ MonoBehaviour:
   spawningEnemiesAmount: 1
   timeToSpawnEnemy: 10
   isBoss: 1
-  bossGameObject: {fileID: 0}
+  bossGameObject: {fileID: 1534234561323530830, guid: c0c9f2bbd36aa03499a55a453c7044fd, type: 3}

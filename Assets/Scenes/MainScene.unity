@@ -976,6 +976,17 @@ PrefabInstance:
       addedObject: {fileID: 1621272033}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f9a44fdc76517346bcf34a7d574b842, type: 3}
+--- !u!114 &1099844555 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2648631371696706114, guid: f5c171056ba080447a4cdb08adbf4b6f, type: 3}
+  m_PrefabInstance: {fileID: 371925540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23d1e89c3676bbb4187a97da0dfacae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1220708073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,6 +2263,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 725121484}
+    - target: {fileID: 4785308584696542713, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5299200539341405280, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2575,11 +2590,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c305eca49110ab4fa722b5c099d4e30, type: 2}
   - {fileID: 11400000, guid: b5d4b70f2625ca34986b3cf362949ac8, type: 2}
   - {fileID: 11400000, guid: 40a0e49bb78a6054bb730695d67799ec, type: 2}
+  - {fileID: 11400000, guid: 88f9a12f13a8fa54ba3b2b6b90944b38, type: 2}
   canEnemySpawn: 1
   enemyLevel: 1
   spawningEnemiesAmount: 1
   timeToSpawnEnemy: 10
   boss1Metaball: {fileID: 66091718}
+  boss2Metaball: {fileID: 1099844555}
+  actualBoss: 0
   spawnAsteroids: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

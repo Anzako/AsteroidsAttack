@@ -27,7 +27,10 @@ public class LevelManager : Singleton<LevelManager>
 
     // Boss
     [SerializeField] private Metaball boss1Metaball;
+    [SerializeField] private Metaball boss2Metaball;
     private bool bossSpawned = false;
+    private GameObject bossObject;
+    public int actualBoss;
 
     // Testing
     public bool spawnAsteroids = true;
@@ -137,7 +140,16 @@ public class LevelManager : Singleton<LevelManager>
     
     private void OnBossRound()
     {
-        MetaBalls.Instance.AddMetaball(boss1Metaball);
+        actualBoss += 1;
+        if (actualRound == 1)
+        {
+            MetaBalls.Instance.AddMetaball(boss1Metaball);
+        }
+        else
+        {
+            MetaBalls.Instance.AddMetaball(boss2Metaball);
+        }
+        
         MetaBalls.Instance.OnBossStart();
         bossSpawned = false;
 
@@ -151,6 +163,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void CleanScene()
     {
+        actualBoss = 0;
         spawningEnemiesAmount = 1;
         enemyLevel = 1;
         canEnemySpawn = false;
@@ -160,6 +173,11 @@ public class LevelManager : Singleton<LevelManager>
         MetaBalls.Instance.ResetMetaballsParameters();
         asteroidsSpawner.ResetAsteroidAmount();
         ScoreManager.Instance.ResetScore();
+
+        if (bossObject != null)
+        {
+            Destroy(bossObject);
+        }
     }
 
     public void EndRound()
@@ -199,19 +217,31 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnBoss()
     {
-        if (boss1Metaball.IsInsideMarchingBox())
+        if (actualBoss == 1)
         {
-            SpawnPosition spawnPosition = Spawner.RandomSpawnPositionOnMetaball(boss1Metaball);
-            GameObject boss = Instantiate(waves[actualRound - 1].bossGameObject, spawnPosition.position, spawnPosition.rotation);
-            boss.GetComponent<EnemyHealth>().Killed += EndRound;
-            bossSpawned = true;
+            if (boss1Metaball.IsInsideMarchingBox())
+            {
+                SpawnPosition spawnPosition = Spawner.RandomSpawnPositionOnMetaball(boss1Metaball);
+                bossObject = Instantiate(waves[actualRound - 1].bossGameObject, spawnPosition.position, spawnPosition.rotation);
+                bossObject.GetComponent<EnemyHealth>().Killed += EndRound;
+                bossSpawned = true;
+            }
+        } else
+        {
+            if (boss2Metaball.IsInsideMarchingBox())
+            {
+                SpawnPosition spawnPosition = Spawner.RandomSpawnPositionOnMetaball(boss2Metaball);
+                bossObject = Instantiate(waves[actualRound - 1].bossGameObject, spawnPosition.position, spawnPosition.rotation);
+                bossObject.GetComponent<EnemyHealth>().Killed += EndRound;
+                bossSpawned = true;
+            }
         }
+        
     }
 
     private void SpawnAsteroids()
     {
         int asteroidLevel = waves[actualRound - 1].asteroidLevel;
-        Debug.Log(asteroidLevel);
         asteroidsSpawner.SpawnSmallAsteroids(waves[actualRound - 1].smallAsteroidAmount, asteroidLevel);
         asteroidsSpawner.SpawnMediumAsteroids(waves[actualRound - 1].mediumAsteroidAmount, asteroidLevel);
         asteroidsSpawner.SpawnBigAsteroids(waves[actualRound - 1].bigAsteroidAmount, asteroidLevel);
