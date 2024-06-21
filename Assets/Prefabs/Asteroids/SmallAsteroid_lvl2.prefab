@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4260933094689136237}
   - component: {fileID: 4089710259088589386}
   m_Layer: 9
-  m_Name: SmallAsteroid
+  m_Name: SmallAsteroid_lvl2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   particleTag: 6
   damageAmount: 2
   score: 1
-  _tag: 0
+  _tag: 16
 --- !u!114 &4260933094689136237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c034e5d36abd854aa49d3d819083f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 4
   <Health>k__BackingField: 0
 --- !u!114 &4089710259088589386
 MonoBehaviour:

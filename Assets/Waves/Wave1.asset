@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce7bcb276d840f4eaaefc8ab150f874, type: 3}
   m_Name: Wave1
   m_EditorClassIdentifier: 
-  smallAsteroidAmount: 2
-  mediumAsteroidAmount: 0
+  asteroidLevel: 1
+  smallAsteroidAmount: 3
+  mediumAsteroidAmount: 1
   bigAsteroidAmount: 0
   isEnemySpawning: 0
+  enemyLevel: 1
   spawningEnemiesAmount: 0
   timeToSpawnEnemy: 0
   isBoss: 0

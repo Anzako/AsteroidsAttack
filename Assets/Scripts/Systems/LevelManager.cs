@@ -91,10 +91,40 @@ public class LevelManager : Singleton<LevelManager>
         } 
         else
         {
-            SpawnRandomAsteroids();
+            OnRandomRounds();
         }
 
         playerHUD.SetWave(actualRound);
+    }
+
+    private void OnRandomRounds()
+    {
+        asteroidsSpawner.SpawnRandomAsteroids(actualRound);
+        enemyLevel = 2;
+
+        if (actualRound < 10)
+        {
+            timeToSpawnEnemy = 15;
+            spawningEnemiesAmount = 2;
+        }
+
+        if (actualRound < 12)
+        {
+            timeToSpawnEnemy = 10;
+            spawningEnemiesAmount = 2;
+        }
+
+        if (actualRound < 14)
+        {
+            timeToSpawnEnemy = 15;
+            spawningEnemiesAmount = 3;
+        }
+
+        if (actualRound >= 14)
+        {
+            timeToSpawnEnemy = 15;
+            spawningEnemiesAmount = 4;
+        }
     }
 
     private void SetRoundVariables()
@@ -102,6 +132,7 @@ public class LevelManager : Singleton<LevelManager>
         canEnemySpawn = waves[actualRound - 1].isEnemySpawning;
         spawningEnemiesAmount = waves[actualRound - 1].spawningEnemiesAmount;
         timeToSpawnEnemy = waves[actualRound - 1].timeToSpawnEnemy;
+        enemyLevel = waves[actualRound - 1].enemyLevel;
     }
     
     private void OnBossRound()
@@ -179,9 +210,11 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SpawnAsteroids()
     {
-        asteroidsSpawner.SpawnSmallAsteroids(waves[actualRound - 1].smallAsteroidAmount);
-        asteroidsSpawner.SpawnMediumAsteroids(waves[actualRound - 1].mediumAsteroidAmount);
-        asteroidsSpawner.SpawnBigAsteroids(waves[actualRound - 1].bigAsteroidAmount);
+        int asteroidLevel = waves[actualRound - 1].asteroidLevel;
+        Debug.Log(asteroidLevel);
+        asteroidsSpawner.SpawnSmallAsteroids(waves[actualRound - 1].smallAsteroidAmount, asteroidLevel);
+        asteroidsSpawner.SpawnMediumAsteroids(waves[actualRound - 1].mediumAsteroidAmount, asteroidLevel);
+        asteroidsSpawner.SpawnBigAsteroids(waves[actualRound - 1].bigAsteroidAmount, asteroidLevel);
 
         if (waves[actualRound - 1].isBoss)
         {
@@ -189,10 +222,6 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    private void SpawnRandomAsteroids()
-    {
-        asteroidsSpawner.SpawnRandomAsteroids(6);
-    }
     #endregion
 
     #region Getters

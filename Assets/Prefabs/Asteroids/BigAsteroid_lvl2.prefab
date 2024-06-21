@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4260933094689136237}
   - component: {fileID: 4089710259088589386}
   m_Layer: 9
-  m_Name: BigAsteroid
+  m_Name: BigAsteroid_lvl2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   particleTag: 6
   damageAmount: 5
   score: 5
-  _tag: 2
+  _tag: 18
 --- !u!114 &4260933094689136237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c034e5d36abd854aa49d3d819083f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 4
   <Health>k__BackingField: 0
 --- !u!114 &4089710259088589386
 MonoBehaviour:
@@ -126,11 +126,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropableItems:
   - dropableObject: 13
-    droppingChance: 20
+    droppingChance: 25
   - dropableObject: 12
-    droppingChance: 20
+    droppingChance: 25
   - dropableObject: 15
-    droppingChance: 20
+    droppingChance: 25
 --- !u!1001 &8786135018950688961
 PrefabInstance:
   m_ObjectHideFlags: 0

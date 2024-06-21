@@ -122,9 +122,9 @@ public class ObjectPooler : Singleton<ObjectPooler>
 
 public enum poolTags
 {
-    smallAsteroid = 0,
-    mediumAsteroid = 1,
-    bigAsteroid = 2,
+    smallAsteroid_lvl1 = 0,
+    mediumAsteroid_lvl1 = 1,
+    bigAsteroid_lvl1 = 2,
     healUpAsteroid = 3,
     ufoLVL1 = 4,
     enemyProjectile = 5,
@@ -138,4 +138,7 @@ public enum poolTags
     laserItem = 13,
     ufoLVL2 = 14,
     shieldItem = 15,
+    smallAsteroid_lvl2 = 16,
+    mediumAsteroid_lvl2 = 17,
+    bigAsteroid_lvl2 = 18,
 }

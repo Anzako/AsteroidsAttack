@@ -17,9 +17,9 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
 
         asteroidsTags = new List<poolTags>
         {
-            poolTags.smallAsteroid,
-            poolTags.mediumAsteroid,
-            poolTags.bigAsteroid
+            poolTags.smallAsteroid_lvl2,
+            poolTags.mediumAsteroid_lvl2,
+            poolTags.bigAsteroid_lvl2
         };
     }
 
@@ -29,27 +29,48 @@ public class AsteroidsSpawner : Singleton<AsteroidsSpawner>
         if (asteroidsAmount == 0) { LevelManager.Instance.EndRound(); }
     }
 
-    public void SpawnSmallAsteroids(int amount)
+    public void SpawnSmallAsteroids(int amount, int level)
     {
         for (int i = 0; i < amount; i++)
         {
-            SpawnAsteroid(poolTags.smallAsteroid);
+            if (level == 1)
+            {
+                SpawnAsteroid(poolTags.smallAsteroid_lvl1);
+            } else if (level == 2)
+            {
+                SpawnAsteroid(poolTags.smallAsteroid_lvl2);
+            }
+            
         }
     }
 
-    public void SpawnMediumAsteroids(int amount)
+    public void SpawnMediumAsteroids(int amount, int level)
     {
         for (int i = 0; i < amount; i++)
         {
-            SpawnAsteroid(poolTags.mediumAsteroid);
+            if (level == 1)
+            {
+                SpawnAsteroid(poolTags.mediumAsteroid_lvl1);
+            }
+            else if (level == 2)
+            {
+                SpawnAsteroid(poolTags.mediumAsteroid_lvl2);
+            }
         }
     }
 
-    public void SpawnBigAsteroids(int amount)
+    public void SpawnBigAsteroids(int amount, int level)
     {
         for (int i = 0; i < amount; i++)
         {
-            SpawnAsteroid(poolTags.bigAsteroid);
+            if (level == 1)
+            {
+                SpawnAsteroid(poolTags.bigAsteroid_lvl1);
+            }
+            else if (level == 2)
+            {
+                SpawnAsteroid(poolTags.bigAsteroid_lvl2);
+            }
         }
     }
 

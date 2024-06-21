@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ce7bcb276d840f4eaaefc8ab150f874, type: 3}
-  m_Name: Wave2
+  m_Name: Wave6
   m_EditorClassIdentifier: 
-  asteroidLevel: 1
-  smallAsteroidAmount: 2
-  mediumAsteroidAmount: 3
-  bigAsteroidAmount: 0
+  asteroidLevel: 2
+  smallAsteroidAmount: 0
+  mediumAsteroidAmount: 0
+  bigAsteroidAmount: 3
   isEnemySpawning: 1
-  enemyLevel: 1
+  enemyLevel: 2
   spawningEnemiesAmount: 1
-  timeToSpawnEnemy: 15
+  timeToSpawnEnemy: 10
   isBoss: 0
   bossGameObject: {fileID: 0}

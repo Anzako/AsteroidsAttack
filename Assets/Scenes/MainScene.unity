@@ -2411,7 +2411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: pools.Array.size
-      value: 16
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: pools.Array.data[4].prefab
@@ -2428,7 +2428,19 @@ PrefabInstance:
     - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: pools.Array.data[16].prefab
       value: 
-      objectReference: {fileID: 1534234561323530830, guid: 54b436a5fc590f843bfa104e4b8dbdb1, type: 3}
+      objectReference: {fileID: 3956984001194437467, guid: f983ed56f91be724cb1041d3e84e2291, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[17].prefab
+      value: 
+      objectReference: {fileID: 3956984001194437467, guid: f45d2a443fd77c340a9489170dab178f, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[18].prefab
+      value: 
+      objectReference: {fileID: 3956984001194437467, guid: 2e61b8667c01c8c4a9b3b86542ebd125, type: 3}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[19].prefab
+      value: 
+      objectReference: {fileID: 3571121717751638878, guid: 5cf2b3abef03e224ebc4af18e4885436, type: 3}
     - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: pools.Array.data[14].poolTag
       value: 14
@@ -2439,7 +2451,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: pools.Array.data[16].poolTag
-      value: 14
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[17].poolTag
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[18].poolTag
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3151224986719203615, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
+      propertyPath: pools.Array.data[19].poolTag
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3760291266479619236, guid: 58c25bdb04ff0584b8298e729ef7154c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2547,6 +2571,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 099529b121ef9d848bd1a5cc80573712, type: 2}
   - {fileID: 11400000, guid: fef98c0febb682d4ea26792b571d8c35, type: 2}
   - {fileID: 11400000, guid: c82443fef63b8fc40b6116db1cda4c32, type: 2}
+  - {fileID: 11400000, guid: 28e7b12cfe208014b8dfeebc1e118e73, type: 2}
+  - {fileID: 11400000, guid: 2c305eca49110ab4fa722b5c099d4e30, type: 2}
+  - {fileID: 11400000, guid: b5d4b70f2625ca34986b3cf362949ac8, type: 2}
+  - {fileID: 11400000, guid: 40a0e49bb78a6054bb730695d67799ec, type: 2}
   canEnemySpawn: 1
   enemyLevel: 1
   spawningEnemiesAmount: 1

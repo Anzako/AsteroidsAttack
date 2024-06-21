@@ -48,22 +48,40 @@ public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
     {
         switch (Tag)
         {
-            case poolTags.bigAsteroid:
-                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
-                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
-                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid, this.transform);
+            case poolTags.bigAsteroid_lvl1:
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid_lvl1, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid_lvl1, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid_lvl1, this.transform);
                 break;
-            case poolTags.mediumAsteroid:
+            case poolTags.mediumAsteroid_lvl1:
                 int randomValue = Random.Range(0, 100);
                 if (randomValue < 20)
                 {
                     spawner.SpawnAsteroidOnDestroy(poolTags.healUpAsteroid, this.transform);
                 } else
                 {
-                    spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid, this.transform);
+                    spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid_lvl1, this.transform);
                 }
                 
-                spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid_lvl1, this.transform);
+                break;
+            case poolTags.bigAsteroid_lvl2:
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid_lvl2, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid_lvl2, this.transform);
+                spawner.SpawnAsteroidOnDestroy(poolTags.mediumAsteroid_lvl2, this.transform);
+                break;
+            case poolTags.mediumAsteroid_lvl2:
+                randomValue = Random.Range(0, 100);
+                if (randomValue < 20)
+                {
+                    spawner.SpawnAsteroidOnDestroy(poolTags.healUpAsteroid, this.transform);
+                }
+                else
+                {
+                    spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid_lvl2, this.transform);
+                }
+
+                spawner.SpawnAsteroidOnDestroy(poolTags.smallAsteroid_lvl2, this.transform);
                 break;
             default:
                 break;
