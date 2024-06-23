@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wave1
   m_EditorClassIdentifier: 
   asteroidLevel: 1
-  smallAsteroidAmount: 3
-  mediumAsteroidAmount: 2
+  smallAsteroidAmount: 2
+  mediumAsteroidAmount: 1
   bigAsteroidAmount: 0
   isEnemySpawning: 0
   enemyLevel: 1

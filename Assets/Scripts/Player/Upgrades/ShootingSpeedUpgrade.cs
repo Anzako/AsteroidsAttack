@@ -10,6 +10,7 @@ public class ShootingSpeedUpgrade : UpgradeEntity
     }
 
     private int level = 0;
+    private int maxLevel = 0;
     private float timeAmount = 0.1f;
 
     public override void UpgradeFunction()
@@ -17,7 +18,7 @@ public class ShootingSpeedUpgrade : UpgradeEntity
         GameManager.GetPlayerController().GetComponent<WeaponController>().IncreaseShootingSpeed(timeAmount);
         level += 1;
 
-        if (level >= 2) { exhausted = true; }
+        if (level >= maxLevel) { exhausted = true; }
 
         OnUpgradeChoice?.Invoke(this);
     }

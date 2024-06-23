@@ -7,13 +7,13 @@ public class PlayerMovement : MovementController
     [SerializeField] private InputController inputController;
     [SerializeField] private PlayerHealth healthController;
     [SerializeField] private ParticleSystem dashParticle;
-
-    private float initialMoveSpeed;
+    [SerializeField] private WeaponController weaponController;
 
     private bool isFreezed;
 
     //Dash
     private bool forwardDashUnlocked;
+    private bool backwardDashUnlocked;
     private bool canDash;
     private bool isDashing;
     [SerializeField] private float dashSpeed;
@@ -21,6 +21,7 @@ public class PlayerMovement : MovementController
     [SerializeField] private float dashingCooldown;
 
     // Smoothing movement
+    private float initialMoveSpeed;
     private Vector2 currentInputVector;
     private Vector2 smoothInputVelocity;
     [SerializeField] private float smoothInputSpeed = .2f;
@@ -31,13 +32,6 @@ public class PlayerMovement : MovementController
     private void Awake()
     {
         initialMoveSpeed = moveSpeed;
-    }
-
-    private void OnEnable()
-    {
-        canDash = true;
-        isDashing = false;
-        movementDirection = Vector2.zero;
     }
 
     protected override void Update()
@@ -74,17 +68,20 @@ public class PlayerMovement : MovementController
 
     public void DashPressed()
     {
-        if (canDash && forwardDashUnlocked)
+        if (canDash)
         {
-            if (movementDirection != Vector2.zero && movementDirection.normalized.y == 1)
+            if (movementDirection.normalized.y == 1 && forwardDashUnlocked)
             {
-                StartCoroutine(Dash());
+                StartCoroutine(ForwardDash());
             }
-           
+            else if (movementDirection.normalized.y == -1 && backwardDashUnlocked)
+            {
+                StartCoroutine(BackwardDash());
+            }
         }
     }
 
-    private IEnumerator Dash()
+    private IEnumerator ForwardDash()
     {
         canDash = false;
         isDashing = true;
@@ -102,6 +99,25 @@ public class PlayerMovement : MovementController
         canDash = true;
     }
 
+    private IEnumerator BackwardDash()
+    {
+        canDash = false;
+        isDashing = true;
+        actualSpeed = dashSpeed;
+        SoundFXManager.Instance.PlaySoundFXClip(dashSoundClip, transform, 1f);
+        healthController.immortal = true;
+        weaponController.ShootDashProjectile();
+        dashParticle.Play();
+
+        yield return new WaitForSeconds(dashingTime);
+        isDashing = false;
+        healthController.immortal = false;
+        ResetActualSpeed();
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
     public void Freeze(bool isFreeze)
     {
         isFreezed = isFreeze;
@@ -109,10 +125,14 @@ public class PlayerMovement : MovementController
 
     public void ResetStats()
     {
+        canDash = true;
+        isDashing = false;
+        movementDirection = Vector2.zero;
+        currentInputVector = Vector2.zero;
         moveSpeed = initialMoveSpeed;
         ResetActualSpeed();
-        currentInputVector = Vector2.zero;
         forwardDashUnlocked = false;
+        backwardDashUnlocked = false;
     }
 
     public void IncreaseMoveSpeed(float speed)
@@ -124,5 +144,10 @@ public class PlayerMovement : MovementController
     public void UnlockForwardDash()
     {
         forwardDashUnlocked = true;
+    }
+
+    public void UnlockBackwardDash()
+    {
+        backwardDashUnlocked = true;
     }
 }

@@ -5419,7 +5419,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &3719851685426429890
 MonoBehaviour:
@@ -5437,7 +5437,6 @@ MonoBehaviour:
   healthController: {fileID: 5691059295496667685}
   HUDController: {fileID: 5476350350173624902}
   weaponController: {fileID: 5372409946133155427}
-  playerCamera: {fileID: 8437133351225935583}
 --- !u!114 &78416745642762997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5587,7 +5586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c07420dd2fcc7142a7c1d5e2432c965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8
+  maxHealth: 6
   <Health>k__BackingField: 0
   playerHUD: {fileID: 5476350350173624902}
   immortal: 0
@@ -5612,6 +5611,7 @@ MonoBehaviour:
   inputController: {fileID: 78416745642762997}
   healthController: {fileID: 5691059295496667685}
   dashParticle: {fileID: 5032586098231852482}
+  weaponController: {fileID: 5372409946133155427}
   dashSpeed: 20
   dashingTime: 0.2
   dashingCooldown: 1
@@ -5630,5 +5630,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laser: {fileID: 1333237105907193973, guid: 8ad069c933fcc4a479f275c9389f066e, type: 3}
+  dashProjectile: {fileID: 694073047113383073, guid: 0da96259c491be849b84120c1898a125, type: 3}
+  playerHUD: {fileID: 5476350350173624902}
+  projectileSpawnGameObject: {fileID: 0}
   projectileSpawnPoint: {fileID: 8569031791132758089}
   timeToShoot: 0.8

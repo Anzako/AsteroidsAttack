@@ -41,11 +41,13 @@ public class MovementController : MonoBehaviour
         Debug.DrawRay(transform.position, potentialVector.normalized, Color.red);
 
         // Rotating object to new rotation depending on potential vector
+        float maxRotationStep = rotationSpeed * Time.deltaTime;
+        
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, potentialVector.normalized)
                 * transform.rotation;
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation,
-            Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, maxRotationStep);
 
+        // Moving object from / to ground
         float val = toGroundPotential - MetaBalls.CalculateScalarFieldValue(transform.position);
         transform.position -= gravityForce * val * potentialVector.normalized 
             - potentialVector.normalized * aboveGroundDistance;

@@ -8,6 +8,8 @@ public class UpgradesManager : MonoBehaviour
     private List<UpgradeEntity> upgrades;
     private UpgradeEntity bossUpgrade1;
     private UpgradeEntity bossUpgrade2;
+    public static bool upgradesExhausted = false;
+
     private void Awake()
     {
         GameManager.OnStateChanged += GameManagerOnStateChanged;
@@ -42,7 +44,7 @@ public class UpgradesManager : MonoBehaviour
     {
         upgrades = new List<UpgradeEntity>();
 
-        UpgradeEntity upgrade1 = new PlayerSpeedUpgrade();
+        /*UpgradeEntity upgrade1 = new PlayerSpeedUpgrade();
         upgrade1.OnUpgradeChoice += HandleUpgradeChoice;
         upgrades.Add(upgrade1);
 
@@ -56,12 +58,20 @@ public class UpgradesManager : MonoBehaviour
 
         UpgradeEntity upgrade4 = new ShootingSpeedUpgrade();
         upgrade4.OnUpgradeChoice += HandleUpgradeChoice;
-        upgrades.Add(upgrade4);
+        upgrades.Add(upgrade4);*/
+
+        UpgradeEntity upgrade5 = new LaserUpgrade();
+        upgrade5.OnUpgradeChoice += HandleUpgradeChoice;
+        upgrades.Add(upgrade5);
+
+        /*UpgradeEntity upgrade6 = new RocketUpgrade();
+        upgrade6.OnUpgradeChoice += HandleUpgradeChoice;
+        upgrades.Add(upgrade6);*/
 
         bossUpgrade1 = new ForwardDashUpgrade();
         bossUpgrade1.OnUpgradeChoice += HandleBossUpgradeChoice;
 
-        bossUpgrade2 = new ForwardDashUpgrade();
+        bossUpgrade2 = new BackwardDashUpgrade();
         bossUpgrade2.OnUpgradeChoice += HandleBossUpgradeChoice;
         
     }
@@ -140,6 +150,11 @@ public class UpgradesManager : MonoBehaviour
         if (upgrade.exhausted)
         {
             upgrades.Remove(upgrade);
+        }
+
+        if (upgrades.Count == 0)
+        {
+            upgradesExhausted = true;
         }
         GameManager.Instance.ChangeState(GameState.Game);
         LevelManager.Instance.OnNewRound();

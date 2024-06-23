@@ -9,7 +9,12 @@ public class WeaponController : MonoBehaviour
     // Weapons
     private weaponTag actualWeapon;
     [SerializeField] private GameObject laser;
+    [SerializeField] private GameObject upgradedLaser;
+    [SerializeField] private GameObject dashProjectile;
     [SerializeField] private UIController playerHUD;
+    private bool laserUpgraded;
+    private bool rocketUpgraded;
+    [SerializeField] private Transform projectileSpawnGameObject;
 
     private int basicWeaponLevel = 1;
 
@@ -122,12 +127,36 @@ public class WeaponController : MonoBehaviour
 
     private void ShootLaser()
     {
-        Instantiate(laser, projectileSpawnPoint);
+        if (!laserUpgraded)
+        {
+            Instantiate(laser, projectileSpawnPoint);
+        } else
+        {
+            Instantiate(upgradedLaser, projectileSpawnPoint);
+        }
     }
 
     private void ShootRocket()
     {
-        ObjectPooler.Instance.SpawnObject(poolTags.rocket, projectileSpawnPoint.position, transform.rotation);
+        Rocket rocket = ObjectPooler.Instance.SpawnObject(poolTags.rocket, projectileSpawnPoint.position, 
+            transform.rotation).GetComponent<Rocket>();
+
+        if (!rocketUpgraded)
+        {
+            rocket.hitDamageAmount = 2;
+            rocket.explosionDamageAmount = 2;
+            rocket.explosionRadius = 2;
+        } else
+        {
+            rocket.hitDamageAmount = 4;
+            rocket.explosionDamageAmount = 4;
+            rocket.explosionRadius = 3;
+        }
+    }
+
+    public void ShootDashProjectile()
+    {
+        Instantiate(dashProjectile, projectileSpawnPoint.position, projectileSpawnPoint.rotation, projectileSpawnGameObject);
     }
 
     public void ResetStats()
@@ -137,6 +166,8 @@ public class WeaponController : MonoBehaviour
         actualWeapon = weaponTag.basicWeapon;
         basicWeaponLevel = 1;
         timeToShoot = initialTimeToShoot;
+        laserUpgraded = false;
+        rocketUpgraded = false;
     }
 
     public void ChangeWeapon(weaponTag weaponTag)
@@ -157,6 +188,16 @@ public class WeaponController : MonoBehaviour
     public void UpgradeBasicWeapon()
     {
         basicWeaponLevel += 1;
+    }
+
+    public void UpgradeLaser()
+    {
+        laserUpgraded = true;
+    }
+
+    public void UpgradeRocket()
+    {
+        rocketUpgraded = true;
     }
 
     public void IncreaseShootingSpeed(float time)

@@ -10,14 +10,15 @@ public class PlayerSpeedUpgrade : UpgradeEntity
     }
 
     private int level = 0;
-    private float speedAmount = 0.5f;
+    private int maxLevel = 2;
+    private float speedAmount = 1f;
 
     public override void UpgradeFunction()
     {
         GameManager.GetPlayerController().GetComponent<PlayerMovement>().IncreaseMoveSpeed(speedAmount);
         level += 1;
 
-        if (level >= 2) { exhausted = true; }
+        if (level >= maxLevel) { exhausted = true; }
 
         OnUpgradeChoice?.Invoke(this);
     }

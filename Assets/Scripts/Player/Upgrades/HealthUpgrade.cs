@@ -6,10 +6,11 @@ public class HealthUpgrade : UpgradeEntity
 {
     public override string upgradeText
     {
-        get { return "Increase health by 2"; }
+        get { return "Increase your health"; }
     }
 
     private int level = 0;
+    private int maxLevel = 2;
     private int healthValue = 2;
 
     public override void UpgradeFunction()
@@ -17,7 +18,7 @@ public class HealthUpgrade : UpgradeEntity
         LevelManager.Instance.GetPlayerController().UpgradeHealth(healthValue);
         level += 1;
 
-        if (level >= 2) exhausted = true;
+        if (level >= maxLevel) exhausted = true;
 
         OnUpgradeChoice?.Invoke(this);
     }

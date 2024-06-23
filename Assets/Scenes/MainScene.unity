@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.1224627, g: 0.13803178, b: 0.27876115, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -194,17 +194,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 463127082}
     m_Modifications:
     - target: {fileID: 5372409946133155427, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: playerHUD
+      propertyPath: upgradedLaser
       value: 
-      objectReference: {fileID: 654914611}
+      objectReference: {fileID: 1333237105907193973, guid: 1b0aa5de6c221e244b0a7229c7ec8b8b, type: 3}
+    - target: {fileID: 5372409946133155427, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
+      propertyPath: projectileSpawnGameObject
+      value: 
+      objectReference: {fileID: 463127082}
     - target: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: userInterface
       value: 
       objectReference: {fileID: 996164802}
-    - target: {fileID: 5691059295496667685, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: maxHealth
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 8085797481541249609, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -696,17 +696,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b390e1f66a891e4ba55db058b3f112f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &654914611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5476350350173624902, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-  m_PrefabInstance: {fileID: 62318742}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654914592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a785faf0dcc3bad4da0ad45444669598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &666843221 stripped

@@ -7,7 +7,7 @@ public class Laser : MonoBehaviour
     // Visualise things
     private LineRenderer lineRenderer;
     private Material material;
-    [SerializeField] private int numberOfPoints = 10;
+    public int numberOfPoints;
     public float aboveGroundDistance = 0.2f;
     private Vector2 directionVector = new Vector2(0, 1);
     private int dissolveAmount = Shader.PropertyToID("_DissolveAmount");

@@ -184,7 +184,13 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (gameManager.State != GameState.EndGame)
         {
-            gameManager.ChangeState(GameState.UpgradeMenu);
+            if (UpgradesManager.upgradesExhausted)
+            {
+                OnNewRound();
+            } else
+            {
+                gameManager.ChangeState(GameState.UpgradeMenu);
+            }
         }
 
         if (isBossRound())

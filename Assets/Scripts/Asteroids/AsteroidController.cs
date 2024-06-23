@@ -55,7 +55,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject, IDropable
                 break;
             case poolTags.mediumAsteroid_lvl1:
                 int randomValue = Random.Range(0, 100);
-                if (randomValue < 20)
+                if (randomValue < 23)
                 {
                     spawner.SpawnAsteroidOnDestroy(poolTags.healUpAsteroid, this.transform);
                 } else
