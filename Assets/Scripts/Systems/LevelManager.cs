@@ -35,6 +35,11 @@ public class LevelManager : Singleton<LevelManager>
     // Testing
     public bool spawnAsteroids = true;
 
+    // Sounds
+    [SerializeField] private AudioClip bossSoundClip;
+    [SerializeField] private AudioClip newWaveSoundClip;
+    [SerializeField] private AudioClip ufoSpawnSoundClip;
+
     private void Start()
     {
         playerSpawner = PlayerSpawner.Instance;
@@ -86,6 +91,11 @@ public class LevelManager : Singleton<LevelManager>
     private void StartRound()
     {
         elapsedRoundTime = 0;
+        if (actualRound != 1)
+        {
+            SoundFXManager.Instance.PlaySoundFXClip(newWaveSoundClip, transform, 1f);
+        }
+        
 
         if (normalWavesAmount > actualRound - 1)
         {
@@ -219,6 +229,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             enemySpawner.SpawnEnemy(enemyLevel);
         }
+        SoundFXManager.Instance.PlaySoundFXClip(ufoSpawnSoundClip, transform, 1f);
     }
 
     private void SpawnBoss()
@@ -231,6 +242,7 @@ public class LevelManager : Singleton<LevelManager>
                 bossObject = Instantiate(waves[actualRound - 1].bossGameObject, spawnPosition.position, spawnPosition.rotation);
                 bossObject.GetComponent<EnemyHealth>().Killed += EndRound;
                 bossSpawned = true;
+                SoundFXManager.Instance.PlaySoundFXClip(bossSoundClip, transform, 1f);
             }
         } else
         {
@@ -240,6 +252,7 @@ public class LevelManager : Singleton<LevelManager>
                 bossObject = Instantiate(waves[actualRound - 1].bossGameObject, spawnPosition.position, spawnPosition.rotation);
                 bossObject.GetComponent<EnemyHealth>().Killed += EndRound;
                 bossSpawned = true;
+                SoundFXManager.Instance.PlaySoundFXClip(bossSoundClip, transform, 1f);
             }
         }
         

@@ -11,6 +11,9 @@ public class UI_ChoiceMenu : Singleton<UI_ChoiceMenu>
     private Transform choiceButton3;
     private Transform bossUpgradeButton;
 
+    // Sounds
+    [SerializeField] private AudioClip buttonPressedSoundClip;
+
     protected override void Awake()
     {
         base.Awake();
@@ -18,6 +21,19 @@ public class UI_ChoiceMenu : Singleton<UI_ChoiceMenu>
         choiceButton2 = transform.Find("ChoiceButton2");
         choiceButton3 = transform.Find("ChoiceButton3");
         bossUpgradeButton = transform.Find("BossUpgradeButton");
+
+        choiceButton1.GetComponent<Button>().onClick.AddListener(OnButtonPressed);
+        choiceButton2.GetComponent<Button>().onClick.AddListener(OnButtonPressed);
+        choiceButton3.GetComponent<Button>().onClick.AddListener(OnButtonPressed);
+        bossUpgradeButton.GetComponent<Button>().onClick.AddListener(OnButtonPressed);
+    }
+
+    private void OnDestroy()
+    {
+        choiceButton1.GetComponent<Button>().onClick.RemoveAllListeners();
+        choiceButton2.GetComponent<Button>().onClick.RemoveAllListeners();
+        choiceButton3.GetComponent<Button>().onClick.RemoveAllListeners();
+        bossUpgradeButton.GetComponent<Button>().onClick.RemoveAllListeners();
     }
 
     public void SetButton1(UpgradeEntity upgrade)
@@ -86,5 +102,10 @@ public class UI_ChoiceMenu : Singleton<UI_ChoiceMenu>
     public void EnableBossUpgradeButton()
     {
         bossUpgradeButton.gameObject.SetActive(true);
+    }
+
+    private void OnButtonPressed()
+    {
+        SoundFXManager.Instance.PlaySoundFXClip(buttonPressedSoundClip, transform, 1f);
     }
 }

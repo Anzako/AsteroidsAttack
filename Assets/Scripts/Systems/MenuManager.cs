@@ -18,6 +18,9 @@ public class MenuManager : Singleton<MenuManager>
     // Upgrade menu
     [SerializeField] private GameObject upgradeMenu;
 
+    // Sounds
+    [SerializeField] private AudioClip buttonPressedSoundClip;
+
     protected override void Awake()
     {
         base.Awake();
@@ -52,33 +55,39 @@ public class MenuManager : Singleton<MenuManager>
 
     public void StartPressed()
     {
+        OnButtonPressed();
         GameManager.Instance.ChangeState(GameState.StartGame);
     }
 
     public void SettingsButtonPressed()
     {
+        OnButtonPressed();
         mainMenu.SetActive(false);
         settings.SetActive(true);
     }
 
     public void CreditsButtonPressed()
     {
+        OnButtonPressed();
         mainMenu.SetActive(false);
         credits.SetActive(true);
     }
 
     public void RestartButtonPressed()
     {
+        OnButtonPressed();
         LevelManager.Instance.RestartGame();
     }
 
     public void ResumeGameButtonPressed()
     {
+        OnButtonPressed();
         GameManager.Instance.ChangeState(GameState.Game);
     }
 
     public void MainMenuButtonPressed()
     {
+        OnButtonPressed();
         GameManager.Instance.ChangeState(GameState.Menu);
     }
 
@@ -87,4 +96,8 @@ public class MenuManager : Singleton<MenuManager>
         Application.Quit();
     }
 
+    private void OnButtonPressed()
+    {
+        SoundFXManager.Instance.PlaySoundFXClip(buttonPressedSoundClip, transform, 1f);
+    }
 }

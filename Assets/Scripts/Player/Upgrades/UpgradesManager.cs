@@ -44,7 +44,7 @@ public class UpgradesManager : MonoBehaviour
     {
         upgrades = new List<UpgradeEntity>();
 
-        /*UpgradeEntity upgrade1 = new PlayerSpeedUpgrade();
+        UpgradeEntity upgrade1 = new PlayerSpeedUpgrade();
         upgrade1.OnUpgradeChoice += HandleUpgradeChoice;
         upgrades.Add(upgrade1);
 
@@ -58,15 +58,15 @@ public class UpgradesManager : MonoBehaviour
 
         UpgradeEntity upgrade4 = new ShootingSpeedUpgrade();
         upgrade4.OnUpgradeChoice += HandleUpgradeChoice;
-        upgrades.Add(upgrade4);*/
+        upgrades.Add(upgrade4);
 
         UpgradeEntity upgrade5 = new LaserUpgrade();
         upgrade5.OnUpgradeChoice += HandleUpgradeChoice;
         upgrades.Add(upgrade5);
 
-        /*UpgradeEntity upgrade6 = new RocketUpgrade();
+        UpgradeEntity upgrade6 = new RocketUpgrade();
         upgrade6.OnUpgradeChoice += HandleUpgradeChoice;
-        upgrades.Add(upgrade6);*/
+        upgrades.Add(upgrade6);
 
         bossUpgrade1 = new ForwardDashUpgrade();
         bossUpgrade1.OnUpgradeChoice += HandleBossUpgradeChoice;

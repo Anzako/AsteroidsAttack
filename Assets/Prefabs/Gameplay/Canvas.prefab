@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -1946,8 +1946,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -2666,8 +2666,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -4470,9 +4470,9 @@ RectTransform:
   - {fileID: 3198468071351874862}
   m_Father: {fileID: 8955335753491144661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -330, y: -330}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -300, y: -280}
   m_SizeDelta: {x: 386.4262, y: 72.4549}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4413109864376984993
@@ -6365,6 +6365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highscoreTable: {fileID: 6688953182519326429}
   submitButton: {fileID: 1819888545370457521}
+  buttonPressedSoundClip: {fileID: 8300000, guid: ed41a57f67e93234089e69ffac31609d, type: 3}
 --- !u!1 &4785308584696542713
 GameObject:
   m_ObjectHideFlags: 0
@@ -7270,9 +7271,9 @@ RectTransform:
   - {fileID: 2513988140615689636}
   m_Father: {fileID: 8955335753491144661}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 330, y: -330}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 300, y: -280}
   m_SizeDelta: {x: 386.4262, y: 72.4549}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2268340669218283709
@@ -9261,6 +9262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68a966fe9bbaea49a95210f3c4cb56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonPressedSoundClip: {fileID: 8300000, guid: ed41a57f67e93234089e69ffac31609d, type: 3}
 --- !u!1 &6985966968604955207
 GameObject:
   m_ObjectHideFlags: 0
@@ -11442,8 +11444,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0

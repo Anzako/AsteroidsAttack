@@ -194,10 +194,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 463127082}
     m_Modifications:
     - target: {fileID: 5372409946133155427, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
-      propertyPath: upgradedLaser
-      value: 
-      objectReference: {fileID: 1333237105907193973, guid: 1b0aa5de6c221e244b0a7229c7ec8b8b, type: 3}
-    - target: {fileID: 5372409946133155427, guid: 0485026fa28c3ae49864f1b934fc9574, type: 3}
       propertyPath: projectileSpawnGameObject
       value: 
       objectReference: {fileID: 463127082}
@@ -718,6 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 719359640}
   - component: {fileID: 719359641}
+  - component: {fileID: 719359642}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -752,7 +749,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -3517604979550879084, guid: 959c89373529bd04c8a4d2e75c92df12, type: 2}
   m_audioClip: {fileID: 8300000, guid: 01337aee8b635ea46aff01d3203ac4a2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -836,6 +833,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &719359642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719359639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d346d7287a226d341a12d980782e1d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic: {fileID: 8300000, guid: a7c82a2d2adb27b49b27104c7e6bd90e, type: 3}
+  gameMusic: {fileID: 8300000, guid: 7b9a9b32549145b4199f3b50ec9cf730, type: 3}
 --- !u!114 &725121484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +865,7 @@ MonoBehaviour:
   inGameMenu: {fileID: 938867687}
   endGameUI: {fileID: 666843221}
   upgradeMenu: {fileID: 689942705}
+  buttonPressedSoundClip: {fileID: 8300000, guid: ed41a57f67e93234089e69ffac31609d, type: 3}
 --- !u!1 &763737087 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 148464751257236110, guid: 4d1d85ab094f0d640a132c7916887d3d, type: 3}
@@ -2577,6 +2589,9 @@ MonoBehaviour:
   boss2Metaball: {fileID: 1099844555}
   actualBoss: 0
   spawnAsteroids: 1
+  bossSoundClip: {fileID: 8300000, guid: fca1e97fb23c56f4a9ae8c951b3bab4a, type: 3}
+  newWaveSoundClip: {fileID: 8300000, guid: f42797452249c3b4482d39af2850e9c8, type: 3}
+  ufoSpawnSoundClip: {fileID: 8300000, guid: d83847bbc80e11549b1b399f49c50090, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

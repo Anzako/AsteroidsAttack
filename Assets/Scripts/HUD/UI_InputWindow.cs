@@ -11,7 +11,10 @@ public class UI_InputWindow : MonoBehaviour
     [SerializeField] private GameObject submitButton;
 
     private string validCharacters = "abcdefghijklmnoprstuwyzxvqABCDEFGHIJKLMNOPRSTUWYZXVQ1234567890";
-    private int characterLimit = 8;
+    private int characterLimit = 12;
+
+    // Sounds
+    [SerializeField] private AudioClip buttonPressedSoundClip;
 
     private void Awake()
     {
@@ -30,6 +33,7 @@ public class UI_InputWindow : MonoBehaviour
     {
         gameObject.SetActive(true);
         inputField.text = "";
+        OnButtonPressed();
     }
 
     private void Hide()
@@ -39,6 +43,7 @@ public class UI_InputWindow : MonoBehaviour
 
     public void OnCancelButtonPressed()
     {
+        OnButtonPressed();
         Hide();
     }
 
@@ -50,7 +55,8 @@ public class UI_InputWindow : MonoBehaviour
             highscoreTable.AddHighscoreEntry(ScoreManager.Instance.GetEndGameScore(), text);
             submitButton.SetActive(false);
         }
-        
+
+        OnButtonPressed();
         Hide();
     }
 
@@ -63,5 +69,10 @@ public class UI_InputWindow : MonoBehaviour
         {
             return '\0';
         }
+    }
+
+    private void OnButtonPressed()
+    {
+        SoundFXManager.Instance.PlaySoundFXClip(buttonPressedSoundClip, transform, 1f);
     }
 }

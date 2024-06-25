@@ -10,6 +10,9 @@ public class WeaponPickup : MonoBehaviour, IPooledObject
     [SerializeField] private weaponTag weaponTag;
     [SerializeField] private float weaponTime;
 
+    // Sounds
+    [SerializeField] private AudioClip pickupSoundClip;
+
     private void OnCollisionEnter(Collision collision)
     {
         WeaponController playerWeapon = collision.gameObject.GetComponentInParent<WeaponController>();
@@ -17,6 +20,7 @@ public class WeaponPickup : MonoBehaviour, IPooledObject
         if (playerWeapon != null )
         {
             playerWeapon.ChangeWeapon(weaponTag);
+            SoundFXManager.Instance.PlaySoundFXClip(pickupSoundClip, transform, 1f);
             ObjectPooler.Instance.ReturnObjectToPool(gameObject);
         }
     }

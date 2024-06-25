@@ -156,4 +156,4 @@ MonoBehaviour:
     m_Bits: 640
   particleTag: 8
   hitSoundClip: {fileID: 8300000, guid: de77bac76ae487149a87c771a58e4e89, type: 3}
-  laserShootSoundClip: {fileID: 8300000, guid: ae2095fdd7df26e48903154f7b289ca8, type: 3}
+  laserShootSoundClip: {fileID: 8300000, guid: 755f582fffb93e848a67a1d40f9de85b, type: 3}

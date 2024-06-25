@@ -66,6 +66,7 @@ MonoBehaviour:
   _tag: 12
   weaponTag: 1
   weaponTime: 0
+  pickupSoundClip: {fileID: 8300000, guid: 48fad58d4b3fd034ea0cef9f4b97c829, type: 3}
 --- !u!54 &8427792228171398481
 Rigidbody:
   m_ObjectHideFlags: 0

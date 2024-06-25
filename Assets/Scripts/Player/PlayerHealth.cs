@@ -12,6 +12,7 @@ public class PlayerHealth : HealthController, IHealable
 
     // Sounds
     [SerializeField] private AudioClip gettingHitSoundClip;
+    [SerializeField] private AudioClip shieldHitSoundClip;
 
     private int initialHealth;
 
@@ -34,7 +35,7 @@ public class PlayerHealth : HealthController, IHealable
         {
             isShield = false;
             playerHUD.SetShield(0);
-            SoundFXManager.Instance.PlaySoundFXClip(gettingHitSoundClip, transform, 1f);
+            SoundFXManager.Instance.PlaySoundFXClip(shieldHitSoundClip, transform, 1f);
             shieldObject.SetActive(false);
             return;
         }
