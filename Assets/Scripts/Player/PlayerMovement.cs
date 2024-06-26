@@ -132,7 +132,7 @@ public class PlayerMovement : MovementController
         moveSpeed = initialMoveSpeed;
         ResetActualSpeed();
         forwardDashUnlocked = false;
-        backwardDashUnlocked = true;
+        backwardDashUnlocked = false;
     }
 
     public void IncreaseMoveSpeed(float speed)

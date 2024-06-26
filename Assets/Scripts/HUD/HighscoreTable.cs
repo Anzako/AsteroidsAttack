@@ -23,7 +23,7 @@ public class HighscoreTable : MonoBehaviour
     private void UpdateTable()
     {
         highscoreEntryTransformList = new List<Transform>();
-        string jsonString = PlayerPrefs.GetString("highscoreTable");
+        string jsonString = PlayerPrefs.GetString("highscoreTable5");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
         if (highscores == null) return;
 
@@ -69,7 +69,7 @@ public class HighscoreTable : MonoBehaviour
     {
         HighscoreEntry highscoreEntry = new HighscoreEntry { score = score, name = name };
 
-        string jsonString = PlayerPrefs.GetString("highscoreTable");
+        string jsonString = PlayerPrefs.GetString("highscoreTable5");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
 
         if (highscores == null)
@@ -80,7 +80,7 @@ public class HighscoreTable : MonoBehaviour
         highscores.highscoreEntryList.Add(highscoreEntry);
 
         string json = JsonUtility.ToJson(highscores);
-        PlayerPrefs.SetString("highscoreTable", json);
+        PlayerPrefs.SetString("highscoreTable5", json);
         PlayerPrefs.Save();
 
         DestroyTransforms();

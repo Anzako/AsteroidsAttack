@@ -96,7 +96,7 @@ MonoBehaviour:
   dropItems: {fileID: 4089710259088589386}
   particleTag: 6
   damageAmount: 2
-  score: 1
+  score: 20
   _tag: 16
 --- !u!114 &4260933094689136237
 MonoBehaviour:

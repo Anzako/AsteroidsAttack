@@ -91,6 +91,14 @@ public class MenuManager : Singleton<MenuManager>
         GameManager.Instance.ChangeState(GameState.Menu);
     }
 
+    public void BackToMenuButtonPressed()
+    {
+        OnButtonPressed();
+        mainMenu.SetActive(true);
+        settings.SetActive(false);
+        credits.SetActive(false);
+    }
+
     public void QuitButtonPressed()
     {
         Application.Quit();

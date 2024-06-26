@@ -10,6 +10,9 @@ public class ShieldPickup : MonoBehaviour, IPooledObject
         get { return _tag; } 
     }
 
+    // Sounds
+    [SerializeField] private AudioClip pickupSoundClip;
+
     private void OnCollisionEnter(Collision collision)
     {
         PlayerHealth playerHealth = collision.gameObject.GetComponentInParent<PlayerHealth>();
@@ -17,6 +20,7 @@ public class ShieldPickup : MonoBehaviour, IPooledObject
         if (playerHealth != null)
         {
             playerHealth.AddShield();
+            SoundFXManager.Instance.PlaySoundFXClip(pickupSoundClip, transform, 1f);
             ObjectPooler.Instance.ReturnObjectToPool(gameObject);
         }
     }

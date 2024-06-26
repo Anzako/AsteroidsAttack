@@ -95,8 +95,8 @@ MonoBehaviour:
   healthController: {fileID: 4260933094689136237}
   dropItems: {fileID: 4089710259088589386}
   particleTag: 6
-  damageAmount: 3
-  score: 3
+  damageAmount: 2
+  score: 20
   _tag: 1
 --- !u!114 &4260933094689136237
 MonoBehaviour:

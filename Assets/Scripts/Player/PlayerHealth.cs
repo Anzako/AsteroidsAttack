@@ -83,7 +83,7 @@ public class PlayerHealth : HealthController, IHealable
     public void AddShield()
     {
         isShield = true;
-        playerHUD.SetShield(1);
+        //playerHUD.SetShield(1);
         shieldObject.SetActive(true);
     }
 }

@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tag: 15
+  pickupSoundClip: {fileID: 8300000, guid: 48fad58d4b3fd034ea0cef9f4b97c829, type: 3}
 --- !u!1 &3898033183719826158
 GameObject:
   m_ObjectHideFlags: 0

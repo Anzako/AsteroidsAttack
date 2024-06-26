@@ -12,6 +12,7 @@ public class UI_InputWindow : MonoBehaviour
 
     private string validCharacters = "abcdefghijklmnoprstuwyzxvqABCDEFGHIJKLMNOPRSTUWYZXVQ1234567890";
     private int characterLimit = 12;
+    private bool highscoreAdded;
 
     // Sounds
     [SerializeField] private AudioClip buttonPressedSoundClip;
@@ -33,6 +34,7 @@ public class UI_InputWindow : MonoBehaviour
     {
         gameObject.SetActive(true);
         inputField.text = "";
+        highscoreAdded = false;
         OnButtonPressed();
     }
 
@@ -49,15 +51,23 @@ public class UI_InputWindow : MonoBehaviour
 
     public void OnOkButtonPressed()
     {
+        if (highscoreAdded) { Hide(); return; }
+
         string text = inputField.text;
-        if (!string.IsNullOrEmpty(text))
+        
+        if (text != null && text != "")
         {
+            highscoreAdded = true;
             highscoreTable.AddHighscoreEntry(ScoreManager.Instance.GetEndGameScore(), text);
             submitButton.SetActive(false);
         }
 
-        OnButtonPressed();
         Hide();
+    }
+
+    private void OnGUI()
+    {
+        
     }
 
     private char ValidateChar(string validCharacters, char addedChar)

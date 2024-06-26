@@ -125,7 +125,7 @@ MonoBehaviour:
   dropItems: {fileID: 8387716561909860571}
   particleTag: 6
   damageAmount: 2
-  score: 1
+  score: 10
   _tag: 3
 --- !u!1001 &5577728037427488893
 PrefabInstance:

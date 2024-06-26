@@ -81,7 +81,7 @@ MonoBehaviour:
   longRangeShootTime: 1
   longRangeTimeToDestroy: 4
   longRangeSpeed: 15
-  score: 100
+  score: 1000
   crashDamage: 4
 --- !u!114 &5635275044154329803
 MonoBehaviour:

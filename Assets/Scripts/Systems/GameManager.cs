@@ -64,6 +64,7 @@ public class GameManager : Singleton<GameManager>
         Cursor.lockState = CursorLockMode.None;
         playerController.DisablePlayer();
         menuCamera.gameObject.SetActive(true);
+        Time.timeScale = 1;
     }
 
     private void HandleStartGame()

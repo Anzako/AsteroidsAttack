@@ -96,7 +96,7 @@ MonoBehaviour:
   dropItems: {fileID: 4089710259088589386}
   particleTag: 6
   damageAmount: 3
-  score: 3
+  score: 40
   _tag: 17
 --- !u!114 &4260933094689136237
 MonoBehaviour:
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c034e5d36abd854aa49d3d819083f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 6
   <Health>k__BackingField: 0
 --- !u!114 &4089710259088589386
 MonoBehaviour:

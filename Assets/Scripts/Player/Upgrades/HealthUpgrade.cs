@@ -10,7 +10,7 @@ public class HealthUpgrade : UpgradeEntity
     }
 
     private int level = 0;
-    private int maxLevel = 2;
+    private int maxLevel = 3;
     private int healthValue = 2;
 
     public override void UpgradeFunction()

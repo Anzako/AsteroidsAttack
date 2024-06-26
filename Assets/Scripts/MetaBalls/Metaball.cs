@@ -12,7 +12,7 @@ public class Metaball : MonoBehaviour
 
     private float marchingCubesSize;
     private Vector3 marchingCubesOffset;
-    private static float marchingCubesInnerBoxDistance = 6f;
+    private static float marchingCubesInnerBoxDistance = 8f;
 
     private bool isBossFight = false;
     private Vector3 bossBoxOffset;
